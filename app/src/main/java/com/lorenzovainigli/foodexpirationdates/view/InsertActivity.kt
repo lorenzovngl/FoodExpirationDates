@@ -11,9 +11,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.di.AppModule
 import com.lorenzovainigli.foodexpirationdates.di.DaggerAppComponent
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
@@ -57,7 +59,7 @@ class InsertActivity : ComponentActivity() {
         Scaffold(
             topBar = {
                 TopAppBar(title = {
-                    Text(text = "Add item")
+                    Text(text = stringResource(id = R.string.add_item))
                 }) },
             floatingActionButtonPosition = FabPosition.End,
             content = { padding ->
@@ -68,7 +70,7 @@ class InsertActivity : ComponentActivity() {
                         TextField(
                             label = {
                                 Text(
-                                    text = "Food name",
+                                    text = stringResource(id = R.string.food_name),
                                     modifier = Modifier.fillMaxWidth()
                                 )
                             },
@@ -80,7 +82,7 @@ class InsertActivity : ComponentActivity() {
                         Spacer(modifier = Modifier.height(16.dp))
                         DatePicker(
                             title = {
-                                Text(text = "Expiration Date")
+                                Text(text = stringResource(id = R.string.expiration_date))
                             },
                             state = datePickerState
                         )
@@ -91,7 +93,7 @@ class InsertActivity : ComponentActivity() {
                                     .weight(0.5f)
                                     .padding(top = 8.dp, end = 4.dp)
                             ) {
-                                Text(text = "Cancel")
+                                Text(text = stringResource(id = R.string.cancel))
                             }
                             Button(
                                 modifier = Modifier
@@ -112,7 +114,7 @@ class InsertActivity : ComponentActivity() {
                                         } else {
                                             Toast.makeText(
                                                 activity,
-                                                "Please select a date",
+                                                R.string.please_select_a_date,
                                                 Toast.LENGTH_SHORT
                                             ).show()
                                         }
@@ -125,7 +127,7 @@ class InsertActivity : ComponentActivity() {
                                     }
                                 }
                             ) {
-                                Text(text = "Insert")
+                                Text(text = stringResource(id = R.string.insert))
                             }
                         }
                     }
@@ -150,6 +152,19 @@ class InsertActivity : ComponentActivity() {
     @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
     @Composable
     fun DialogInsertPreviewNight() {
+        FoodExpirationDatesTheme {
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = MaterialTheme.colorScheme.background
+            ) {
+                InsertLayout(null, null)
+            }
+        }
+    }
+
+    @Preview(locale = "it", showBackground = true)
+    @Composable
+    fun DialogInsertPreviewIT() {
         FoodExpirationDatesTheme {
             Surface(
                 modifier = Modifier.fillMaxSize(),

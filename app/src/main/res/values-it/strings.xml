@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Scadenze alimenti</string>
+    <string name="n_days_ago">%1$d giorni fa</string>
+    <string name="yesterday">Ieri</string>
+    <string name="today">Oggi</string>
+    <string name="tomorrow">Domani</string>
+    <string name="in_n_days">Tra %1$d giorni</string>
+    <string name="add_item">Aggiungi elemento</string>
+    <string name="food_name">Nome alimento</string>
+    <string name="expiration_date">Data di scadenza</string>
+    <string name="please_select_a_date">Per favore seleziona una data</string>
+    <string name="insert">Inserisci</string>
+    <string name="cancel">Cancella</string>
+</resources>

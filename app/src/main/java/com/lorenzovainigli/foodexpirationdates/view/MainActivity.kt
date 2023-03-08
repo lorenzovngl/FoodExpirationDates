@@ -55,7 +55,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun FoodCard(item: ExpirationDate, onClick: () -> Unit) {
-        val sdf = SimpleDateFormat("d MMM", Locale.ITALY)
+        val sdf = SimpleDateFormat("d MMM", Locale.getDefault())
         val today = Calendar.getInstance()
         val twoDaysAgo = Calendar.getInstance()
         twoDaysAgo.add(Calendar.DAY_OF_MONTH, -2)
@@ -69,13 +69,16 @@ class MainActivity : ComponentActivity() {
         val expiration =
             if (item.expirationDate < twoDaysAgo.time.time) {
                 val days = (today.time.time - item.expirationDate) / msInADay
-                "$days days ago"
-            } else if (item.expirationDate < yesterday.time.time) "Yesterday"
-            else if (item.expirationDate < today.time.time) "Today"
-            else if (item.expirationDate < tomorrow.time.time) "Tomorrow"
+                stringResource(R.string.n_days_ago, days)
+            } else if (item.expirationDate < yesterday.time.time)
+                stringResource(R.string.yesterday)
+            else if (item.expirationDate < today.time.time)
+                stringResource(R.string.today)
+            else if (item.expirationDate < tomorrow.time.time)
+                stringResource(R.string.tomorrow)
             else if (item.expirationDate < withinAWeek.time.time) {
                 val days = (item.expirationDate - today.time.time) / msInADay
-                "In $days days"
+                stringResource(R.string.in_n_days, days)
             } else sdf.format(item.expirationDate)
         val bgColor =
             if (item.expirationDate < today.time.time) Red700
@@ -245,7 +248,21 @@ class MainActivity : ComponentActivity() {
 
     @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
     @Composable
-    fun DefaultPreviewNight() {
+    fun PreviewNight() {
+        val items = getItemsForPreview()
+        FoodExpirationDatesTheme {
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = MaterialTheme.colorScheme.background
+            ) {
+                MainActivityLayout(items, null, null)
+            }
+        }
+    }
+
+    @Preview(locale = "it", showBackground = true)
+    @Composable
+    fun PreviewIT() {
         val items = getItemsForPreview()
         FoodExpirationDatesTheme {
             Surface(

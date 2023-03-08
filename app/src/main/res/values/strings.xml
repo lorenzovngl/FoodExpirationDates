@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">Food Expiration Dates</string>
+    <string name="app_name">Food Expirations</string>
+    <string name="n_days_ago">%1$d days ago</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="in_n_days">In %1$d days</string>
+    <string name="add_item">Add item</string>
+    <string name="food_name">Food name</string>
+    <string name="expiration_date">Expiration date</string>
+    <string name="please_select_a_date">Please select a date</string>
+    <string name="insert">Insert</string>
+    <string name="cancel">Cancel</string>
 </resources>
