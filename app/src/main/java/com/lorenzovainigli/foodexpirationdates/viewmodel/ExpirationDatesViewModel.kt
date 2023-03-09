@@ -15,12 +15,20 @@ class ExpirationDateViewModel @Inject constructor(
     ) : ViewModel() {
 
     private var expirationDates : Flow<List<ExpirationDate>> = flowOf(emptyList())
+    private var expirationDate : ExpirationDate? = null
 
     fun getDates(): Flow<List<ExpirationDate>> {
         viewModelScope.launch {
             expirationDates = repository.getAll()
         }
         return expirationDates
+    }
+
+    fun getDate(id: Int): ExpirationDate? {
+        viewModelScope.launch {
+            expirationDate = repository.getOne(id)
+        }
+        return expirationDate
     }
 
     fun addExpirationDate(expirationDate: ExpirationDate) {

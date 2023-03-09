@@ -13,6 +13,10 @@ class ExpirationDatesRepositoryImpl @Inject constructor(
         return expirationDateDao.getAll()
     }
 
+    override suspend fun getOne(id: Int): ExpirationDate {
+        return expirationDateDao.getOne(id)
+    }
+
     override suspend fun addExpirationDate(expirationDate: ExpirationDate) {
         expirationDateDao.insert(expirationDate)
     }

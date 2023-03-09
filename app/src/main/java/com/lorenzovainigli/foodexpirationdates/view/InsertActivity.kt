@@ -28,10 +28,12 @@ import java.util.*
 class InsertActivity : ComponentActivity() {
 
     private lateinit var activity: Activity
+    private var itemId: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity = this
+        itemId = intent.extras?.getInt("ITEM_ID")
         DaggerAppComponent.builder()
             .appModule(AppModule())
             .build()
@@ -54,12 +56,24 @@ class InsertActivity : ComponentActivity() {
         addExpirationDate: ((ExpirationDate) -> Unit)? = viewModel!!::addExpirationDate
     ) {
         val activity = (LocalContext.current as? Activity)
-        var foodName by remember { mutableStateOf("") }
-        val datePickerState = rememberDatePickerState()
+        val itemToEdit = itemId?.let { viewModel?.getDate(it) }
+        var foodNameToEdit = ""
+        var expDate: Long? = null
+        if (itemToEdit != null && viewModel != null) {
+            foodNameToEdit = itemToEdit.foodName
+            expDate = itemToEdit.expirationDate
+        }
+        var foodName by remember {
+           mutableStateOf(foodNameToEdit)
+        }
+        val datePickerState = rememberDatePickerState(expDate)
         Scaffold(
             topBar = {
                 TopAppBar(title = {
-                    Text(text = stringResource(id = R.string.add_item))
+                    if (itemToEdit != null)
+                        Text(text = stringResource(id = R.string.edit_item))
+                    else
+                        Text(text = stringResource(id = R.string.add_item))
                 }) },
             floatingActionButtonPosition = FabPosition.End,
             content = { padding ->
@@ -102,8 +116,12 @@ class InsertActivity : ComponentActivity() {
                                 onClick = {
                                     try {
                                         if (datePickerState.selectedDateMillis != null) {
+                                            var id = 0
+                                            if (itemToEdit != null && viewModel != null) {
+                                                id = itemId ?: 0
+                                            }
                                             val entry = ExpirationDate(
-                                                id = 0,
+                                                id = id,
                                                 foodName = foodName,
                                                 expirationDate = datePickerState.selectedDateMillis!!
                                             )
@@ -127,7 +145,10 @@ class InsertActivity : ComponentActivity() {
                                     }
                                 }
                             ) {
-                                Text(text = stringResource(id = R.string.insert))
+                                if (itemToEdit != null)
+                                    Text(text = stringResource(id = R.string.update))
+                                else
+                                    Text(text = stringResource(id = R.string.insert))
                             }
                         }
                     }

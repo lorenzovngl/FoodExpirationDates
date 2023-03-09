@@ -7,6 +7,8 @@ interface ExpirationDateRepository {
 
     suspend fun getAll(): Flow<List<ExpirationDate>>
 
+    suspend fun getOne(id: Int): ExpirationDate
+
     suspend fun addExpirationDate(expirationDate: ExpirationDate)
 
     suspend fun deleteExpirationDate(expirationDate: ExpirationDate)

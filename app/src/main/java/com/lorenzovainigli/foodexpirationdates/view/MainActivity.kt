@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun FoodCard(item: ExpirationDate, onClick: () -> Unit) {
+    fun FoodCard(item: ExpirationDate, onClickEdit: () -> Unit, onClickDelete: () -> Unit) {
         val sdf = SimpleDateFormat("d MMM", Locale.getDefault())
         val today = Calendar.getInstance()
         val twoDaysAgo = Calendar.getInstance()
@@ -78,7 +78,7 @@ class MainActivity : ComponentActivity() {
                 stringResource(R.string.tomorrow)
             else if (item.expirationDate < withinAWeek.time.time) {
                 val days = (item.expirationDate - today.time.time) / msInADay
-                stringResource(R.string.in_n_days, days)
+                stringResource(R.string.in_n_days, days + 1)
             } else sdf.format(item.expirationDate)
         val bgColor =
             if (item.expirationDate < today.time.time) Red700
@@ -112,7 +112,9 @@ class MainActivity : ComponentActivity() {
                     color = textColor,
                     modifier = Modifier
                         .weight(1f)
-                        .padding(4.dp), fontSize = 18.sp
+                        .padding(4.dp)
+                        .clickable(onClick = onClickEdit),
+                    fontSize = 18.sp
                 )
                 Text(
                     modifier = Modifier.padding(4.dp),
@@ -126,7 +128,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier
                         .size(20.dp)
                         .padding(start = 8.dp)
-                        .clickable(onClick = onClick)
+                        .clickable(onClick = onClickDelete)
                 )
             }
         }
@@ -169,11 +171,19 @@ class MainActivity : ComponentActivity() {
                         Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
                             if (items != null) {
                                 for (item in items) {
-                                    FoodCard(item) {
-                                        if (deleteExpirationDate != null) {
-                                            deleteExpirationDate(item)
+                                    FoodCard(
+                                        item = item,
+                                        onClickEdit = {
+                                            val intent = Intent(context, InsertActivity::class.java)
+                                            intent.putExtra("ITEM_ID", item.id)
+                                            context.startActivity(intent)
+                                        },
+                                        onClickDelete =  {
+                                            if (deleteExpirationDate != null) {
+                                                deleteExpirationDate(item)
+                                            }
                                         }
-                                    }
+                                    )
                                 }
                             }
                         }

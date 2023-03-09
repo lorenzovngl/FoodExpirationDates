@@ -6,9 +6,11 @@
     <string name="tomorrow">Tomorrow</string>
     <string name="in_n_days">In %1$d days</string>
     <string name="add_item">Add item</string>
+    <string name="edit_item">Edit item</string>
     <string name="food_name">Food name</string>
     <string name="expiration_date">Expiration date</string>
     <string name="please_select_a_date">Please select a date</string>
     <string name="insert">Insert</string>
+    <string name="update">Update</string>
     <string name="cancel">Cancel</string>
 </resources>
