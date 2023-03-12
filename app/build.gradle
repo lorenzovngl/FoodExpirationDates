@@ -16,8 +16,8 @@ android {
         applicationId "com.lorenzovainigli.foodexpirationdates"
         minSdk 24
         targetSdk 33
-        versionCode 1
-        versionName "0.1"
+        versionCode 2
+        versionName "0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -95,6 +95,8 @@ dependencies {
 
     implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.0-beta01"
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1"
+
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.28.0"
 
     // To use Kotlin annotation processing tool (kapt)
     kapt "androidx.room:room-compiler:$room_version"

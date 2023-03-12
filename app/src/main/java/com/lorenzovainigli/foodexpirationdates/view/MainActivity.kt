@@ -89,15 +89,16 @@ class MainActivity : ComponentActivity() {
             if (item.expirationDate < today.time.time) Color.White
             else if (item.expirationDate < tomorrow.time.time) Color.Black
             else if (item.expirationDate < withinAWeek.time.time) Color.Black
-            else MaterialTheme.colorScheme.onBackground
-        Box(
+            else MaterialTheme.colorScheme.onSurface
+        Surface(
             modifier = Modifier
                 .padding(4.dp)
+                .clip(RoundedCornerShape(10.dp)),
+            tonalElevation = 2.dp
         ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(10.dp))
                     .background(bgColor)
                     .padding(8.dp),
                 verticalAlignment = Alignment.CenterVertically
@@ -147,19 +148,41 @@ class MainActivity : ComponentActivity() {
             Surface(
                 modifier = Modifier
                     .fillMaxSize(),
-                color = MaterialTheme.colorScheme.background
+                color = MaterialTheme.colorScheme.surface
             ) {
                 Scaffold(
                     topBar = {
-                        TopAppBar(title = {
-                            Text(text = topBarTitle)
-                        })
+                        TopAppBar(
+                            modifier = Modifier
+                                .padding(bottom = 4.dp),
+                            title = {
+                                Text(
+                                    text = topBarTitle,
+                                    color = MaterialTheme.colorScheme.onPrimary
+                                )
+                            },
+                            /*actions = {
+                                IconButton(onClick = { *//* doSomething() *//* }) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Info,
+                                        contentDescription = "Info",
+                                        tint = MaterialTheme.colorScheme.onPrimary
+                                    )
+                                }
+                            },*/
+                            colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                                containerColor = MaterialTheme.colorScheme.primary
+                            )
+                        )
                     },
                     floatingActionButtonPosition = FabPosition.End,
                     floatingActionButton = {
-                        FloatingActionButton(onClick = {
-                            context.startActivity(Intent(context, InsertActivity::class.java))
-                        }) {
+                        FloatingActionButton(
+                            onClick = {
+                                context.startActivity(Intent(context, InsertActivity::class.java))
+                            },
+                            containerColor = MaterialTheme.colorScheme.secondary
+                        ) {
                             Icon(
                                 imageVector = Icons.Rounded.Add,
                                 contentDescription = null
@@ -178,7 +201,7 @@ class MainActivity : ComponentActivity() {
                                             intent.putExtra("ITEM_ID", item.id)
                                             context.startActivity(intent)
                                         },
-                                        onClickDelete =  {
+                                        onClickDelete = {
                                             if (deleteExpirationDate != null) {
                                                 deleteExpirationDate(item)
                                             }
@@ -193,7 +216,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    fun getItemsForPreview(): List<ExpirationDate> {
+    private fun getItemsForPreview(): List<ExpirationDate> {
         val items = ArrayList<ExpirationDate>()
         val cal = Calendar.getInstance()
         items.add(
@@ -245,7 +268,7 @@ class MainActivity : ComponentActivity() {
         FoodExpirationDatesTheme {
             Surface(
                 modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background
+                color = MaterialTheme.colorScheme.surface
             ) {
                 MainActivityLayout(
                     items = items,
