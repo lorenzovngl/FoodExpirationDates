@@ -181,7 +181,8 @@ class MainActivity : ComponentActivity() {
                             onClick = {
                                 context.startActivity(Intent(context, InsertActivity::class.java))
                             },
-                            containerColor = MaterialTheme.colorScheme.secondary
+                            containerColor = MaterialTheme.colorScheme.tertiary,
+                            contentColor = MaterialTheme.colorScheme.onTertiary
                         ) {
                             Icon(
                                 imageVector = Icons.Rounded.Add,

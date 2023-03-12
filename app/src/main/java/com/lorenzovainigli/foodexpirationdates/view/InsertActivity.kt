@@ -145,10 +145,10 @@ class InsertActivity : ComponentActivity() {
                                 modifier = Modifier
                                     .weight(0.5f)
                                     .padding(top = 8.dp, end = 4.dp),
-                                border = BorderStroke(1.dp, MaterialTheme.colorScheme.secondary),
+                                border = BorderStroke(1.dp, MaterialTheme.colorScheme.tertiary),
                                 colors = ButtonDefaults.buttonColors(
                                     containerColor = Color.Transparent,
-                                    contentColor = MaterialTheme.colorScheme.secondary
+                                    contentColor = MaterialTheme.colorScheme.tertiary
                                 ),
                             ) {
                                 Text(text = stringResource(id = R.string.cancel))
@@ -158,8 +158,8 @@ class InsertActivity : ComponentActivity() {
                                     .weight(0.5f)
                                     .padding(top = 8.dp, start = 4.dp),
                                 colors = ButtonDefaults.buttonColors(
-                                    containerColor = MaterialTheme.colorScheme.secondary,
-                                    contentColor = MaterialTheme.colorScheme.onSecondary
+                                    containerColor = MaterialTheme.colorScheme.tertiary,
+                                    contentColor = MaterialTheme.colorScheme.onTertiary
                                 ),
                                 onClick = {
                                     try {
