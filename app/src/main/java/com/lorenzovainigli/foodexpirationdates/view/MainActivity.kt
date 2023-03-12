@@ -104,7 +104,7 @@ class MainActivity : ComponentActivity() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.icons8_food_basket_96),
+                    painter = painterResource(id = R.drawable.icons8_cesto_96),
                     contentDescription = null,
                     modifier = Modifier.size(36.dp)
                 )
