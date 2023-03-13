@@ -28,6 +28,7 @@ import com.lorenzovainigli.foodexpirationdates.di.AppModule
 import com.lorenzovainigli.foodexpirationdates.di.DaggerAppComponent
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
+import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDateViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -77,16 +78,11 @@ class InsertActivity : ComponentActivity() {
         val datePickerState = rememberDatePickerState(expDate)
         Scaffold(
             topBar = {
-                TopAppBar(
-                    title = {
-                        Text(
-                            text = stringResource(
+                MyTopAppBar(
+                    title = stringResource(
                                 id = if (itemToEdit != null) R.string.edit_item
                                 else R.string.add_item
-                            ),
-                            color = MaterialTheme.colorScheme.onPrimary
-                        )
-                    },
+                    ),
                     navigationIcon = {
                         IconButton(onClick = { activity?.finish() }) {
                             Icon(
@@ -95,10 +91,7 @@ class InsertActivity : ComponentActivity() {
                                 tint = MaterialTheme.colorScheme.onPrimary
                             )
                         }
-                    },
-                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.primary
-                    )
+                    }
                 )
             },
             floatingActionButtonPosition = FabPosition.End,

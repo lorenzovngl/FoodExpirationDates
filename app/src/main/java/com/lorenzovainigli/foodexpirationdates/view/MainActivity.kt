@@ -7,32 +7,27 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.di.AppModule
 import com.lorenzovainigli.foodexpirationdates.di.DaggerAppComponent
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.ui.theme.*
+import com.lorenzovainigli.foodexpirationdates.view.composable.FoodCard
+import com.lorenzovainigli.foodexpirationdates.view.composable.MyBottomAppBar
+import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDateViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.min
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -53,95 +48,12 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    @Composable
-    fun FoodCard(item: ExpirationDate, onClickEdit: () -> Unit, onClickDelete: () -> Unit) {
-        val sdf = SimpleDateFormat("d MMM", Locale.getDefault())
-        val today = Calendar.getInstance()
-        val twoDaysAgo = Calendar.getInstance()
-        twoDaysAgo.add(Calendar.DAY_OF_MONTH, -2)
-        val yesterday = Calendar.getInstance()
-        yesterday.add(Calendar.DAY_OF_MONTH, -1)
-        val tomorrow = Calendar.getInstance()
-        tomorrow.add(Calendar.DAY_OF_MONTH, 1)
-        val withinAWeek = Calendar.getInstance()
-        withinAWeek.add(Calendar.DAY_OF_MONTH, 7)
-        val msInADay = (1000 * 60 * 60 * 24)
-        val expiration =
-            if (item.expirationDate < twoDaysAgo.time.time) {
-                val days = (today.time.time - item.expirationDate) / msInADay
-                stringResource(R.string.n_days_ago, days)
-            } else if (item.expirationDate < yesterday.time.time)
-                stringResource(R.string.yesterday)
-            else if (item.expirationDate < today.time.time)
-                stringResource(R.string.today)
-            else if (item.expirationDate < tomorrow.time.time)
-                stringResource(R.string.tomorrow)
-            else if (item.expirationDate < withinAWeek.time.time) {
-                val days = (item.expirationDate - today.time.time) / msInADay
-                stringResource(R.string.in_n_days, days + 1)
-            } else sdf.format(item.expirationDate)
-        val bgColor =
-            if (item.expirationDate < today.time.time) Red700
-            else if (item.expirationDate < tomorrow.time.time) Orange500
-            else if (item.expirationDate < withinAWeek.time.time) Yellow500
-            else Color.Transparent
-        val textColor =
-            if (item.expirationDate < today.time.time) Color.White
-            else if (item.expirationDate < tomorrow.time.time) Color.Black
-            else if (item.expirationDate < withinAWeek.time.time) Color.Black
-            else MaterialTheme.colorScheme.onSurface
-        Surface(
-            modifier = Modifier
-                .padding(4.dp)
-                .clip(RoundedCornerShape(10.dp)),
-            tonalElevation = 2.dp
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(bgColor)
-                    .padding(8.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.icons8_cesto_96),
-                    contentDescription = null,
-                    modifier = Modifier.size(36.dp)
-                )
-                Text(
-                    text = item.foodName,
-                    color = textColor,
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(4.dp)
-                        .clickable(onClick = onClickEdit),
-                    fontSize = 18.sp
-                )
-                Text(
-                    modifier = Modifier.padding(4.dp),
-                    color = textColor,
-                    text = expiration
-                )
-                Icon(
-                    tint = textColor,
-                    imageVector = Icons.Rounded.Delete,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(20.dp)
-                        .padding(start = 8.dp)
-                        .clickable(onClick = onClickDelete)
-                )
-            }
-        }
-    }
-
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun MainActivityLayout(
         items: List<ExpirationDate>? = null,
         viewModel: ExpirationDateViewModel? = viewModel(),
         deleteExpirationDate: ((ExpirationDate) -> Unit)? = viewModel!!::deleteExpirationDate,
-        topBarTitle: String = stringResource(id = R.string.app_name)
     ) {
         val context = LocalContext.current
         FoodExpirationDatesTheme {
@@ -152,28 +64,7 @@ class MainActivity : ComponentActivity() {
             ) {
                 Scaffold(
                     topBar = {
-                        TopAppBar(
-                            modifier = Modifier
-                                .padding(bottom = 4.dp),
-                            title = {
-                                Text(
-                                    text = topBarTitle,
-                                    color = MaterialTheme.colorScheme.onPrimary
-                                )
-                            },
-                            /*actions = {
-                                IconButton(onClick = { *//* doSomething() *//* }) {
-                                    Icon(
-                                        imageVector = Icons.Outlined.Info,
-                                        contentDescription = "Info",
-                                        tint = MaterialTheme.colorScheme.onPrimary
-                                    )
-                                }
-                            },*/
-                            colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                                containerColor = MaterialTheme.colorScheme.primary
-                            )
-                        )
+                        MyTopAppBar(title = stringResource(id = R.string.app_name))
                     },
                     floatingActionButtonPosition = FabPosition.End,
                     floatingActionButton = {
@@ -219,46 +110,19 @@ class MainActivity : ComponentActivity() {
 
     private fun getItemsForPreview(): List<ExpirationDate> {
         val items = ArrayList<ExpirationDate>()
-        val cal = Calendar.getInstance()
-        items.add(
-            ExpirationDate(
-                id = 0,
-                foodName = "Mozzarella",
-                expirationDate = cal.time.time
+        val foods = arrayOf("Eggs", "Cheese", "Milk", "Ham", "Butter", "Mushrooms", "Tomato")
+        val daysLeft = arrayOf(-1, 0, 1, 3, 7, 10, 30)
+        for (i in 0 until min(foods.size, daysLeft.size)){
+            val cal = Calendar.getInstance()
+            cal.add(Calendar.DATE, daysLeft[i])
+            items.add(
+                ExpirationDate(
+                    id = 0,
+                    foodName = foods[i],
+                    expirationDate = cal.time.time
+                )
             )
-        )
-        cal.add(Calendar.DATE, 1)
-        items.add(
-            ExpirationDate(
-                id = 0,
-                foodName = "Prosciutto",
-                expirationDate = cal.time.time
-            )
-        )
-        cal.add(Calendar.DATE, 2)
-        items.add(
-            ExpirationDate(
-                id = 0,
-                foodName = "Pancetta",
-                expirationDate = cal.time.time
-            )
-        )
-        cal.add(Calendar.DATE, 4)
-        items.add(
-            ExpirationDate(
-                id = 0,
-                foodName = "Tortellini",
-                expirationDate = cal.time.time
-            )
-        )
-        cal.add(Calendar.DATE, 7)
-        items.add(
-            ExpirationDate(
-                id = 0,
-                foodName = "Yogurt",
-                expirationDate = cal.time.time
-            )
-        )
+        }
         return items
     }
 
