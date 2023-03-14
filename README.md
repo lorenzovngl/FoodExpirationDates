@@ -8,7 +8,7 @@
 
 Food Expiration Dates is an open source Android application which helps people in managing their food stock.
 
-[![Download APK](https://img.shields.io/badge/Download%20APK-24292f?style=for-the-badge&logo=github)](https://github.com/lorenzovngl/FoodExpirationDates/releases/download/v0.2/FoodExpirationDates-0.2.apk)
+[![Download APK](https://img.shields.io/badge/Download%20APK-24292f?style=for-the-badge&logo=github)](https://github.com/lorenzovngl/FoodExpirationDates/releases/download/v0.3/FoodExpirationDates-0.3.apk)
 
 ## ✨ Features
 
