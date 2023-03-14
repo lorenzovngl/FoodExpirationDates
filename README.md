@@ -28,7 +28,7 @@ Food Expiration Dates is an open source Android application which helps people i
 
 - 🇺🇸 🇬🇧 English (default)
 - 🇮🇹 Italiano
-- 🇦🇪 Arabic by @abdulmuizz0903
+- 🇦🇪 Arabic by [Abdul Muizz](https://github.com/abdulmuizz0903)
 
 > New translations are welcome. If you want to add a new language to the app, please [open an issue](https://github.com/lorenzovngl/FoodExpirationDates/issues/new).
 
