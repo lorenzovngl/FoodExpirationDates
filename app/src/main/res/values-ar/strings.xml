@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">تواريخ انتهاء صلاحية الطعام</string>
+    <string name="app_name_short">انتهاء صلاحية الطعام</string>
+    <string name="n_days_ago">%1$d أيام مضت</string>
+    <string name="yesterday">أمس</string>
+    <string name="today">اليوم</string>
+    <string name="tomorrow">غداً</string>
+    <string name="in_n_days">  %1$d :ايام متبقية</string>
+    <string name="add_item">اضافة عنصر</string>
+    <string name="edit_item">تعديل عنصر</string>
+    <string name="food_name">اسم الغذاء</string>
+    <string name="expiration_date">تاريخ انتهاء الصلاحية</string>
+    <string name="please_select_a_date">الرجاء تحديد تاريخ</string>
+    <string name="insert">إدراج</string>
+    <string name="update">تحديث</string>
+    <string name="cancel">يلغي</string>
+</resources>
