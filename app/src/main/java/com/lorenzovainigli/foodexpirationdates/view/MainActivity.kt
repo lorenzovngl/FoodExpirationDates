@@ -22,7 +22,6 @@ import com.lorenzovainigli.foodexpirationdates.di.DaggerAppComponent
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.ui.theme.*
 import com.lorenzovainigli.foodexpirationdates.view.composable.FoodCard
-import com.lorenzovainigli.foodexpirationdates.view.composable.MyBottomAppBar
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDateViewModel
 import dagger.hilt.android.AndroidEntryPoint
