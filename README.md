@@ -6,7 +6,7 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/lorenzovngl/FoodExpirationDates?style=flat-square&label=Contributors)
 ![Pull request welcome](https://img.shields.io/badge/Pull%20request-Welcome-ff69b4?style=flat-square)
 
-[![Download APK](https://img.shields.io/badge/Download%20APK-24292f?style=for-the-badge&logo=github)](https://github.com/lorenzovngl/FoodExpirationDates/releases/download/v0.3/FoodExpirationDates-0.3.apk)
+[<img alt="Get it on GitHub" src="https://raw.githubusercontent.com/NeoApplications/Neo-Backup/main/badge_github.png" height="80"/>](https://github.com/lorenzovngl/FoodExpirationDates/releases/download/v0.3/FoodExpirationDates-0.3.apk)
 
 Have you ever forgotten to eat a food item before its expiration date? Throwing away food because it has expired is a practice to avoid if you want to reduce food waste.
 
