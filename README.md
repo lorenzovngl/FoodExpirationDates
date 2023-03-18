@@ -19,12 +19,10 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 
 ## 📱 Screenshots
 
-<img width="200px" src="screenshots/phone_en_main_activity.png">
-<img width="200px" src="screenshots/phone_en_insert_activity.png">
-<img width="200px" src="screenshots/phone_en_dark_main_activity.png">
-<img width="200px" src="screenshots/phone_en_dark_insert_activity.png">
-<img width="200px" src="screenshots/phone_en_dc_main_activity.png">
-<img width="200px" src="screenshots/phone_en_dc_insert_activity.png">
+| | | |
+|-|-|-|
+| <img width="200px" src="screenshots/phone_en_main_activity.png"> | <img width="200px" src="screenshots/phone_en_insert_activity.png"> | <img width="200px" src="screenshots/phone_en_dc_main_activity.png"> | 
+<img width="200px" src="screenshots/phone_en_dark_main_activity.png"> | <img width="200px" src="screenshots/phone_en_dark_insert_activity.png"> | <img width="200px" src="screenshots/phone_en_dc_insert_activity.png"> |
 
 ## 🛠️ Technologies
 
