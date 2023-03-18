@@ -1,19 +1,30 @@
 # Food Expiration Dates
 
-![GitHub](https://img.shields.io/github/license/lorenzovngl/FoodExpirationDates?style=flat-square)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/lorenzovngl/FoodExpirationDates?style=flat-square)
-![GitHub all releases](https://img.shields.io/github/downloads/lorenzovngl/FoodExpirationDates/total?style=flat-square)
-![GitHub contributors](https://img.shields.io/github/contributors/lorenzovngl/FoodExpirationDates?style=flat-square)
-![Pull request welcome](https://img.shields.io/badge/Pull%20request-welcome-ff69b4?style=flat-square)
-
-Food Expiration Dates is an open source Android application which helps people in managing their food stock.
+![GitHub](https://img.shields.io/github/license/lorenzovngl/FoodExpirationDates?style=flat-square&label=License)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/lorenzovngl/FoodExpirationDates?style=flat-square&label=Release)
+![GitHub all downloads](https://img.shields.io/github/downloads/lorenzovngl/FoodExpirationDates/total?style=flat-square&label=Downloads)
+![GitHub contributors](https://img.shields.io/github/contributors/lorenzovngl/FoodExpirationDates?style=flat-square&label=Contributors)
+![Pull request welcome](https://img.shields.io/badge/Pull%20request-Welcome-ff69b4?style=flat-square)
 
 [![Download APK](https://img.shields.io/badge/Download%20APK-24292f?style=for-the-badge&logo=github)](https://github.com/lorenzovngl/FoodExpirationDates/releases/download/v0.3/FoodExpirationDates-0.3.apk)
+
+Have you ever forgotten to eat a food item before its expiration date? Throwing away food because it has expired is a practice to avoid if you want to reduce food waste.
+
+This simple app helps you avoid forgetting to consume foods that are about to expire. Using it is simple: just record each food item along with its expiration date and you will always have a table reminding you which foods are going to expire!
 
 ## ✨ Features
 
 - Display a list of food with their expiration dates in ascending order of time.
 - Add, edit and delete items.
+
+## 📱 Screenshots
+
+<img width="200px" src="screenshots/phone_en_main_activity.png">
+<img width="200px" src="screenshots/phone_en_insert_activity.png">
+<img width="200px" src="screenshots/phone_en_dark_main_activity.png">
+<img width="200px" src="screenshots/phone_en_dark_insert_activity.png">
+<img width="200px" src="screenshots/phone_en_dc_main_activity.png">
+<img width="200px" src="screenshots/phone_en_dc_insert_activity.png">
 
 ## 🛠️ Technologies
 
