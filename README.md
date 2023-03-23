@@ -2,8 +2,8 @@
 
 ![GitHub](https://img.shields.io/github/license/lorenzovngl/FoodExpirationDates?style=flat-square&label=License)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/lorenzovngl/FoodExpirationDates?style=flat-square&label=Release)
-![GitHub all downloads](https://img.shields.io/github/downloads/lorenzovngl/FoodExpirationDates/total?style=flat-square&label=Downloads)
-![Google Play downloads](https://img.shields.io/endpoint?url=https%3A%2F%2Fgithub.com%2Florenzovngl%2FFoodExpirationDates%2Ftree%2Fmain%2Fshields%2Fdownloads-google-play.json)
+![Google Play downloads](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Fdownloads-google-play.json)
+![GitHub all downloads](https://img.shields.io/github/downloads/lorenzovngl/FoodExpirationDates/total?style=flat-square&label=Downloads&logo=github)
 ![GitHub contributors](https://img.shields.io/github/contributors/lorenzovngl/FoodExpirationDates?style=flat-square&label=Contributors)
 ![Pull request welcome](https://img.shields.io/badge/Pull%20request-Welcome-ff69b4?style=flat-square)
 <a href="https://gitmoji.dev">
