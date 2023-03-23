@@ -8,8 +8,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material3.*
@@ -101,6 +103,8 @@ class InsertActivity : ComponentActivity() {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
+                            .fillMaxHeight()
+                            .verticalScroll(rememberScrollState())
                             .padding(16.dp)
                     ) {
                         TextField(
