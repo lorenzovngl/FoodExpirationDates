@@ -2,6 +2,7 @@ package com.lorenzovainigli.foodexpirationdates.view
 
 import android.content.Intent
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,11 +21,14 @@ import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.di.AppModule
 import com.lorenzovainigli.foodexpirationdates.di.DaggerAppComponent
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
+import com.lorenzovainigli.foodexpirationdates.model.notification.NotificationScheduler
+import com.lorenzovainigli.foodexpirationdates.model.notification.ScheduledNotification
 import com.lorenzovainigli.foodexpirationdates.ui.theme.*
 import com.lorenzovainigli.foodexpirationdates.view.composable.FoodCard
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDateViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.LocalDateTime
 import java.util.*
 import kotlin.math.min
 
@@ -36,6 +40,17 @@ class MainActivity : ComponentActivity() {
         DaggerAppComponent.builder()
             .appModule(AppModule())
             .build()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val notificationScheduler = NotificationScheduler(this, this)
+            notificationScheduler.setup()
+            notificationScheduler.schedule(
+                ScheduledNotification(
+                    time = LocalDateTime.now().plusSeconds(10),
+                    title = "Hellooo",
+                    message = "I'm a scheduled notification!"
+                )
+            )
+        }
     }
 
     override fun onResume() {
