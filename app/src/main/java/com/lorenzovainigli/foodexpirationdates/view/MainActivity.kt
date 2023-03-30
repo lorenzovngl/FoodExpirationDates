@@ -7,14 +7,21 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.di.AppModule
@@ -47,7 +54,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun MainActivityLayout(
         items: List<ExpirationDate>? = null,
@@ -63,27 +69,47 @@ class MainActivity : ComponentActivity() {
             ) {
                 Scaffold(
                     topBar = {
-                        MyTopAppBar(title = stringResource(id = R.string.app_name))
+                        MyTopAppBar(
+                            title = stringResource(id = R.string.app_name),
+                            actions = {
+                                IconButton(onClick = {
+                                    context.startActivity(Intent(context, InfoActivity::class.java))
+                                }) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Info,
+                                        contentDescription = "Information",
+                                        tint = MaterialTheme.colorScheme.onPrimary
+                                    )
+                                }
+                            }
+                        )
                     },
                     floatingActionButtonPosition = FabPosition.End,
                     floatingActionButton = {
-                        FloatingActionButton(
-                            onClick = {
-                                context.startActivity(Intent(context, InsertActivity::class.java))
-                            },
-                            containerColor = MaterialTheme.colorScheme.tertiary,
-                            contentColor = MaterialTheme.colorScheme.onTertiary
-                        ) {
-                            Icon(
-                                imageVector = Icons.Rounded.Add,
-                                contentDescription = null
-                            )
+                        if (items != null && items.isNotEmpty()) {
+                            FloatingActionButton(
+                                onClick = {
+                                    context.startActivity(
+                                        Intent(
+                                            context,
+                                            InsertActivity::class.java
+                                        )
+                                    )
+                                },
+                                containerColor = MaterialTheme.colorScheme.tertiary,
+                                contentColor = MaterialTheme.colorScheme.onTertiary
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Rounded.Add,
+                                    contentDescription = null
+                                )
+                            }
                         }
                     }
                 ) { padding ->
-                    Column(Modifier.padding(padding)) {
-                        Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-                            if (items != null) {
+                    if (items != null && items.isNotEmpty()) {
+                        Column(Modifier.padding(padding)) {
+                            Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
                                 for (item in items) {
                                     FoodCard(
                                         item = item,
@@ -101,6 +127,50 @@ class MainActivity : ComponentActivity() {
                                 }
                             }
                         }
+                    } else {
+                        Column(
+                            modifier = Modifier
+                                .padding(padding)
+                                .fillMaxSize(),
+                            verticalArrangement = Arrangement.spacedBy(
+                                space = 16.dp,
+                                alignment = Alignment.CenterVertically
+                            ),
+                            horizontalAlignment = CenterHorizontally
+                        ) {
+                            Text(
+                                text = stringResource(id = R.string.no_items_found),
+                                style = MaterialTheme.typography.displaySmall,
+                                color = Color.Gray.copy(alpha = 0.5f),
+                                textAlign = TextAlign.Center
+                            )
+                            Text(
+                                text = stringResource(id = R.string.please_insert_one),
+                                textAlign = TextAlign.Center
+                            )
+                            Button(
+                                modifier = Modifier.size(50.dp),
+                                contentPadding = PaddingValues(0.dp),
+                                onClick = {
+                                    context.startActivity(
+                                        Intent(
+                                            context,
+                                            InsertActivity::class.java
+                                        )
+                                    )
+                                },
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = MaterialTheme.colorScheme.tertiary,
+                                    contentColor = MaterialTheme.colorScheme.onTertiary
+                                ),
+                                shape = CircleShape
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Rounded.Add,
+                                    contentDescription = null
+                                )
+                            }
+                        }
                     }
                 }
             }
@@ -113,7 +183,7 @@ class MainActivity : ComponentActivity() {
         if (lang == "it")
             foods = arrayOf("Uova", "Formaggio", "Latte", "Prosciutto", "Funghi", "Pomodori")
         val daysLeft = arrayOf(-1, 0, 1, 3, 7, 10, 30)
-        for (i in 0 until min(foods.size, daysLeft.size)){
+        for (i in 0 until min(foods.size, daysLeft.size)) {
             val cal = Calendar.getInstance()
             cal.add(Calendar.DATE, daysLeft[i])
             items.add(
@@ -172,4 +242,5 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
 }

@@ -89,7 +89,7 @@ class InsertActivity : ComponentActivity() {
                         IconButton(onClick = { activity?.finish() }) {
                             Icon(
                                 imageVector = Icons.Outlined.ArrowBack,
-                                contentDescription = "Back",
+                                contentDescription = stringResource(id = R.string.back),
                                 tint = MaterialTheme.colorScheme.onPrimary
                             )
                         }

@@ -15,4 +15,24 @@
     <string name="insert">Inserisci</string>
     <string name="update">Aggiorna</string>
     <string name="cancel">Cancella</string>
+    <string name="share">Condividi</string>
+    <string name="leave_a_star_on_github">Lascia una stella su GitHub</string>
+    <string name="write_a_review">Scrivi una recensione</string>
+    <string name="source_code">Codice sorgente</string>
+    <string name="features">Funzionalità</string>
+    <string name="support_this_project">Supporta questo progetto</string>
+    <string name="report_a_bug">Segnala un bug</string>
+    <string name="version_x">Versione %1$s</string>
+    <string name="app_description">%1$s è un progetto open source sviluppato da Lorenzo Vainigli e altri contributori.\nIl codice di questa applicazione è pubblicato con licenza MIT e disponibile su GitHub.</string>
+    <string name="about_this_app">Informazioni su questa app</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="back">Indietro</string>
+    <string name="no_items_found">Nessun elemento trovato</string>
+    <string name="please_insert_one">Per favore inserirne uno</string>
+
+    <string-array name="features">
+        <item>Visualizza un elenco con le date di scadenza degli alimenti in ordine crescente di tempo.</item>
+        <item>Aggiungi, modifica ed elimina elementi.</item>
+        <item>Notifiche (presto disponibili).</item>
+    </string-array>
 </resources>

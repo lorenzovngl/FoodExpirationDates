@@ -1,5 +1,6 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable
 
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -10,6 +11,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun MyTopAppBar(
     title: String,
+    actions: @Composable RowScope.() -> Unit = {},
     navigationIcon: @Composable () -> Unit = {}
 ) {
     TopAppBar(
@@ -21,6 +23,7 @@ fun MyTopAppBar(
                 color = MaterialTheme.colorScheme.onPrimary
             )
         },
+        actions = actions,
         navigationIcon = navigationIcon,
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primary
