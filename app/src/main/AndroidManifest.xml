@@ -27,6 +27,10 @@
         <activity
             android:name=".view.InsertActivity">
         </activity>
+        <activity
+            android:exported="true"
+            android:name=".view.InfoActivity">
+        </activity>
         <receiver android:name=".model.notification.AlarmReceiver" />
     </application>
 
