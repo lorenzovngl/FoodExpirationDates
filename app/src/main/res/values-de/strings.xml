@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Lebensmittelverfallsdatum</string>
+    <string name="app_name_short">Lebensmittelverfall</string>
+    <string name="n_days_ago">Vor %1$d Tag(en)</string>
+    <string name="yesterday">Gestern</string>
+    <string name="today">Heute</string>
+    <string name="tomorrow">Morgen</string>
+    <string name="in_n_days">In %1$d Tag(en)</string>
+    <string name="add_item">Eintrag hinzufügen</string>
+    <string name="edit_item">Eintrag bearbeiten</string>
+    <string name="food_name">Lebensmittelname</string>
+    <string name="expiration_date">Verfallsdatum</string>
+    <string name="please_select_a_date">Bitte Datum auswählen</string>
+    <string name="insert">Einfügen</string>
+    <string name="update">Aktualisieren</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="share">Teilen</string>
+    <string name="leave_a_star_on_github">Einen Stern auf GitHub hinterlassen</string>
+    <string name="write_a_review">Eine Rezension schreiben</string>
+    <string name="source_code">Quelltext</string>
+    <string name="features">Funktionen</string>
+    <string name="support_this_project">Dieses Projekt unterstützen</string>
+    <string name="report_a_bug">Fehler melden</string>
+    <string name="version_x">Version %1$s</string>
+    <string name="app_description">%1$s ist ein Open-Source-Projekt, das von Lorenzo Vainigli und anderen Mitwirkenden entwickelt wurde.\nDer Code dieser Anwendung wird unter der MIT-Lizenz veröffentlicht und ist auf GitHub verfügbar.</string>
+    <string name="about_this_app">Über diese App</string>
+    <string name="privacy_policy">Datenschutzbestimmungen</string>
+    <string name="back">Zurück</string>
+    <string name="no_items_found">Keine Einträge gefunden</string>
+    <string name="please_insert_one">Bitte eins einfügen</string>
+
+    <string-array name="features">
+        <item>Anzeige einer Liste mit Lebensmittelverfallsdaten in aufsteigender zeitlicher Reihenfolge.</item>
+        <item>Einträge hinzufügen, bearbeiten und löschen.</item>
+        <item>Benachrichtigungen (bald verfügbar).</item>
+    </string-array>
+</resources>
