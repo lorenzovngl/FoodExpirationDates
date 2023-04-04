@@ -52,6 +52,10 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 - [Material Design Icons](https://pictogrammers.com/library/mdi/)
 - [Icons8 Fluency Icons](https://icons8.it/icons/fluency)
 
+## 👥 Contributors
+
+![Contributors](https://contrib.rocks/image?repo=lorenzovngl/FoodExpirationDates)
+
 ## ⚖️ License
 
 ```
