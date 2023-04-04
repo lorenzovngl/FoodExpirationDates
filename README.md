@@ -44,6 +44,7 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 - 🇺🇸 🇬🇧 English (default)
 - 🇮🇹 Italiano
 - 🇦🇪 Arabic by [Abdul Muizz](https://github.com/abdulmuizz0903)
+- 🇩🇪 German by [Steve](https://github.com/uDEV2019)
 
 > New translations are welcome. If you want to add a new language to the app, please [open an issue](https://github.com/lorenzovngl/FoodExpirationDates/issues/new).
 
