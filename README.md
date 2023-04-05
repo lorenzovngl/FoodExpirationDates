@@ -55,7 +55,9 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 
 ## 👥 Contributors
 
-![Contributors](https://contrib.rocks/image?repo=lorenzovngl/FoodExpirationDates)
+<a href="https://github.com/lorenzovngl"><img src="https://avatars.githubusercontent.com/u/13767301?v=4" alt="@lorenzovngl" height="32" width="32"></a>
+<a href="https://github.com/abdulmuizz0903"><img src="https://avatars.githubusercontent.com/u/62702098?v=4" alt="@abdulmuizz0903" height="32" width="32"></a>
+<a href="https://github.com/uDEV2019"><img src="https://avatars.githubusercontent.com/u/51911097?v=4" alt="@uDEV2019" height="32" width="32"></a>
 
 ## ⚖️ License
 
