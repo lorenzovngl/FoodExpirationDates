@@ -41,13 +41,10 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 
 ## 🌐 Languages
 
-![English 100%](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fen.json) (default language)
-
-![Italian 100%](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fit.json)
-
-![Arabic 50%](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Far.json) by [Abdul Muizz](https://github.com/abdulmuizz0903)
-
-![German 100%](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fde.json) by [Steve](https://github.com/uDEV2019)
+- ![English 100%](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fen.json) (default language)
+- ![Italian 100%](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fit.json)
+- ![Arabic 50%](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Far.json) by [Abdul Muizz](https://github.com/abdulmuizz0903)
+- ![German 100%](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fde.json) by [Steve](https://github.com/uDEV2019)
 
 > New translations are welcome. If you want to add a new language to the app, please [open an issue](https://github.com/lorenzovngl/FoodExpirationDates/issues/new).
 
