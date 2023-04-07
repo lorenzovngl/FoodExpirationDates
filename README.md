@@ -45,6 +45,7 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 - ![Italian 100%](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fit.json)
 - ![Arabic 50%](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Far.json) by [Abdul Muizz](https://github.com/abdulmuizz0903)
 - ![German 100%](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fde.json) by [Steve](https://github.com/uDEV2019)
+- ![Hindi 100%](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fhi.json) by [Devpreyo Roy](https://github.com/devedroy)
 
 > New translations are welcome. If you want to add a new language to the app, please [open an issue](https://github.com/lorenzovngl/FoodExpirationDates/issues/new).
 
@@ -58,6 +59,7 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 <a href="https://github.com/lorenzovngl"><img src="https://avatars.githubusercontent.com/u/13767301?v=4" alt="@lorenzovngl" height="32" width="32"></a>
 <a href="https://github.com/abdulmuizz0903"><img src="https://avatars.githubusercontent.com/u/62702098?v=4" alt="@abdulmuizz0903" height="32" width="32"></a>
 <a href="https://github.com/uDEV2019"><img src="https://avatars.githubusercontent.com/u/51911097?v=4" alt="@uDEV2019" height="32" width="32"></a>
+<a href="https://github.com/devedroy"><img src="https://avatars.githubusercontent.com/u/44873540?v=4" alt="@devedroy" height="32" width="32"></a>
 
 ## ⚖️ License
 
