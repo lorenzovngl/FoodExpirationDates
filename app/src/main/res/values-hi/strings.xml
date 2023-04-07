@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">खाद्य सामग्री की समाप्ति तिथियाँ</string>
+    <string name="app_name_short">खाद्य सामग्री की समाप्ति</string>
+    <string name="n_days_ago">%1$d दिन पहले</string>
+    <string name="yesterday">कल</string>
+    <string name="today">आज</string>
+    <string name="tomorrow">कल</string>
+    <string name="in_n_days">%1$d दिनों में</string>
+    <string name="add_item">आइटम जोड़ें</string>
+    <string name="edit_item">आइटम संपादित करें</string>
+    <string name="food_name">खाद्य पदार्थ का नाम</string>
+    <string name="expiration_date">समाप्ति तिथि</string>
+    <string name="please_select_a_date">कृपया एक तिथि चुनें</string>
+    <string name="insert">डालें</string>
+    <string name="update">अपडेट करें</string>
+    <string name="cancel">रद्द करें</string>
+    <string name="share">शेयर करें</string>
+    <string name="leave_a_star_on_github">GitHub पर एक star छोड़ें</string>
+    <string name="write_a_review">एक समीक्षा लिखें</string>
+    <string name="source_code">स्रोत कोड</string>
+    <string name="features">विशेषताएं</string>
+    <string name="support_this_project">इस project का समर्थन करें</string>
+    <string name="report_a_bug">एक bug की रिपोर्ट करें</string>
+    <string name="version_x">%1$s संस्करण</string>
+    <string name="app_description">%1$s लोरेंजो वैनिग्ली और अन्य सहयोगियों द्वारा विकसित एक ओपन सोर्स परियोजना है।.\nइस एप्लिकेशन का कोड MIT लाइसेंस के तहत प्रकाशित किया गया है और GitHub पर उपलब्ध है।</string>
+    <string name="about_this_app">इस ऐप के बारे में जानें</string>
+    <string name="privacy_policy">गोपनीयता नीति</string>
+    <string name="back">वापस</string>
+    <string name="no_items_found">कोई आइटम नहीं मिला</string>
+    <string name="please_insert_one">कृपया एक इंसर्ट करें</string>
+
+    <string-array name="features">
+        <item>खाद्य समाप्ति तिथियों की सूची को समय के आरोहण के क्रम में प्रदर्शित करें।</item>
+        <item>आइटम जोड़ें, संपादित करें और हटाएं।</item>
+        <item>सूचनाएं (जल्द ही उपलब्ध होगी)।</item>
+    </string-array>
+</resources>
