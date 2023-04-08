@@ -49,14 +49,7 @@ class InsertActivity : ComponentActivity() {
             .appModule(AppModule())
             .build()
         setContent {
-            FoodExpirationDatesTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    InsertLayout()
-                }
-            }
+            InsertLayout()
         }
     }
 
@@ -66,179 +59,183 @@ class InsertActivity : ComponentActivity() {
         viewModel: ExpirationDateViewModel? = viewModel(),
         addExpirationDate: ((ExpirationDate) -> Unit)? = viewModel!!::addExpirationDate
     ) {
-        val activity = (LocalContext.current as? Activity)
-        val itemToEdit = itemId?.let { viewModel?.getDate(it) }
-        var foodNameToEdit = ""
-        var expDate: Long? = null
-        if (itemToEdit != null && viewModel != null) {
-            foodNameToEdit = itemToEdit.foodName
-            expDate = itemToEdit.expirationDate
-        }
-        var foodName by remember {
-            mutableStateOf(foodNameToEdit)
-        }
-        val datePickerState = rememberDatePickerState(expDate)
-        Scaffold(
-            topBar = {
-                MyTopAppBar(
-                    title = stringResource(
+        FoodExpirationDatesTheme {
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = MaterialTheme.colorScheme.background
+            ) {
+                val activity = (LocalContext.current as? Activity)
+                val itemToEdit = itemId?.let { viewModel?.getDate(it) }
+                var foodNameToEdit = ""
+                var expDate: Long? = null
+                if (itemToEdit != null && viewModel != null) {
+                    foodNameToEdit = itemToEdit.foodName
+                    expDate = itemToEdit.expirationDate
+                }
+                var foodName by remember {
+                    mutableStateOf(foodNameToEdit)
+                }
+                val datePickerState = rememberDatePickerState(expDate)
+                Scaffold(
+                    topBar = {
+                        MyTopAppBar(
+                            title = stringResource(
                                 id = if (itemToEdit != null) R.string.edit_item
                                 else R.string.add_item
-                    ),
-                    navigationIcon = {
-                        IconButton(onClick = { activity?.finish() }) {
-                            Icon(
-                                imageVector = Icons.Outlined.ArrowBack,
-                                contentDescription = stringResource(id = R.string.back),
-                                tint = MaterialTheme.colorScheme.onPrimary
-                            )
+                            ),
+                            navigationIcon = {
+                                IconButton(onClick = { activity?.finish() }) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.ArrowBack,
+                                        contentDescription = stringResource(id = R.string.back),
+                                        tint = MaterialTheme.colorScheme.onPrimary
+                                    )
+                                }
+                            }
+                        )
+                    },
+                    floatingActionButtonPosition = FabPosition.End,
+                    containerColor = MaterialTheme.colorScheme.background,
+                    content = { padding ->
+                        Column(Modifier.padding(padding)) {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .fillMaxHeight()
+                                    .verticalScroll(rememberScrollState())
+                                    .padding(16.dp)
+                            ) {
+                                TextField(
+                                    label = {
+                                        Text(
+                                            text = stringResource(id = R.string.food_name),
+                                            modifier = Modifier.fillMaxWidth()
+                                        )
+                                    },
+                                    value = foodName,
+                                    onValueChange = { newText ->
+                                        foodName = newText
+                                    },
+                                    singleLine = true,
+                                    keyboardOptions = KeyboardOptions(
+                                        capitalization = KeyboardCapitalization.Sentences
+                                    )
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Surface(
+                                    modifier = Modifier
+                                        .clip(RoundedCornerShape(4.dp)),
+                                    tonalElevation = 2.dp
+                                ) {
+                                    DatePicker(
+                                        title = {
+                                            Text(text = stringResource(id = R.string.expiration_date))
+                                        },
+                                        state = datePickerState
+                                    )
+                                }
+                                Row {
+                                    OutlinedButton(
+                                        onClick = { activity?.finish() },
+                                        modifier = Modifier
+                                            .weight(0.5f)
+                                            .padding(top = 8.dp, end = 4.dp),
+                                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.tertiary),
+                                        colors = ButtonDefaults.buttonColors(
+                                            containerColor = Color.Transparent,
+                                            contentColor = MaterialTheme.colorScheme.tertiary
+                                        ),
+                                    ) {
+                                        Text(text = stringResource(id = R.string.cancel))
+                                    }
+                                    Button(
+                                        modifier = Modifier
+                                            .weight(0.5f)
+                                            .padding(top = 8.dp, start = 4.dp),
+                                        colors = ButtonDefaults.buttonColors(
+                                            containerColor = MaterialTheme.colorScheme.tertiary,
+                                            contentColor = MaterialTheme.colorScheme.onTertiary
+                                        ),
+                                        onClick = {
+                                            try {
+                                                if (datePickerState.selectedDateMillis != null) {
+                                                    var id = 0
+                                                    if (itemToEdit != null && viewModel != null) {
+                                                        id = itemId ?: 0
+                                                    }
+                                                    val entry = ExpirationDate(
+                                                        id = id,
+                                                        foodName = foodName,
+                                                        expirationDate = datePickerState.selectedDateMillis!!
+                                                    )
+                                                    if (addExpirationDate != null) {
+                                                        addExpirationDate(entry)
+                                                    }
+                                                    activity?.finish()
+                                                } else {
+                                                    Toast.makeText(
+                                                        activity,
+                                                        R.string.please_select_a_date,
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
+                                                }
+                                            } catch (e: Exception) {
+                                                Toast.makeText(
+                                                    activity,
+                                                    e.message,
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                            }
+                                        }
+                                    ) {
+                                        if (itemToEdit != null)
+                                            Text(text = stringResource(id = R.string.update))
+                                        else
+                                            Text(text = stringResource(id = R.string.insert))
+                                    }
+                                }
+                            }
                         }
                     }
                 )
-            },
-            floatingActionButtonPosition = FabPosition.End,
-            containerColor = MaterialTheme.colorScheme.background,
-            content = { padding ->
-                Column(Modifier.padding(padding)) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .fillMaxHeight()
-                            .verticalScroll(rememberScrollState())
-                            .padding(16.dp)
-                    ) {
-                        TextField(
-                            label = {
-                                Text(
-                                    text = stringResource(id = R.string.food_name),
-                                    modifier = Modifier.fillMaxWidth()
-                                )
-                            },
-                            value = foodName,
-                            onValueChange = { newText ->
-                                foodName = newText
-                            },
-                            singleLine = true,
-                            keyboardOptions = KeyboardOptions(
-                                capitalization = KeyboardCapitalization.Sentences
-                            )
-                        )
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Surface(
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(4.dp)),
-                            tonalElevation = 2.dp
-                        ) {
-                            DatePicker(
-                                title = {
-                                    Text(text = stringResource(id = R.string.expiration_date))
-                                },
-                                state = datePickerState
-                            )
-                        }
-                        Row {
-                            OutlinedButton(
-                                onClick = { activity?.finish() },
-                                modifier = Modifier
-                                    .weight(0.5f)
-                                    .padding(top = 8.dp, end = 4.dp),
-                                border = BorderStroke(1.dp, MaterialTheme.colorScheme.tertiary),
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = Color.Transparent,
-                                    contentColor = MaterialTheme.colorScheme.tertiary
-                                ),
-                            ) {
-                                Text(text = stringResource(id = R.string.cancel))
-                            }
-                            Button(
-                                modifier = Modifier
-                                    .weight(0.5f)
-                                    .padding(top = 8.dp, start = 4.dp),
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = MaterialTheme.colorScheme.tertiary,
-                                    contentColor = MaterialTheme.colorScheme.onTertiary
-                                ),
-                                onClick = {
-                                    try {
-                                        if (datePickerState.selectedDateMillis != null) {
-                                            var id = 0
-                                            if (itemToEdit != null && viewModel != null) {
-                                                id = itemId ?: 0
-                                            }
-                                            val entry = ExpirationDate(
-                                                id = id,
-                                                foodName = foodName,
-                                                expirationDate = datePickerState.selectedDateMillis!!
-                                            )
-                                            if (addExpirationDate != null) {
-                                                addExpirationDate(entry)
-                                            }
-                                            activity?.finish()
-                                        } else {
-                                            Toast.makeText(
-                                                activity,
-                                                R.string.please_select_a_date,
-                                                Toast.LENGTH_SHORT
-                                            ).show()
-                                        }
-                                    } catch (e: Exception) {
-                                        Toast.makeText(
-                                            activity,
-                                            e.message,
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                    }
-                                }
-                            ) {
-                                if (itemToEdit != null)
-                                    Text(text = stringResource(id = R.string.update))
-                                else
-                                    Text(text = stringResource(id = R.string.insert))
-                            }
-                        }
-                    }
-                }
             }
-        )
+        }
     }
 
     @Preview(showBackground = true)
     @Composable
-    fun DialogInsertPreview() {
-        FoodExpirationDatesTheme {
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background
-            ) {
-                InsertLayout(null, null)
-            }
-        }
+    fun DefaultPreview() {
+        InsertLayout(null, null)
     }
 
-    @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
+    @Preview(name = "Dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
     @Composable
-    fun DialogInsertPreviewNight() {
-        FoodExpirationDatesTheme {
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background
-            ) {
-                InsertLayout(null, null)
-            }
-        }
+    fun PreviewDarkMode() {
+        DefaultPreview()
     }
 
-    @Preview(locale = "it", showBackground = true)
+    @Preview(name = "Italian", locale = "it", showBackground = true)
     @Composable
-    fun DialogInsertPreviewIT() {
-        FoodExpirationDatesTheme {
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background
-            ) {
-                InsertLayout(null, null)
-            }
-        }
+    fun PreviewItalian() {
+        DefaultPreview()
+    }
+
+    @Preview(name = "Arabic", locale = "ar", showBackground = true)
+    @Composable
+    fun PreviewArabic() {
+        DefaultPreview()
+    }
+
+    @Preview(name = "German", locale = "de", showBackground = true)
+    @Composable
+    fun PreviewGerman() {
+        DefaultPreview()
+    }
+
+    @Preview(name = "Hindi", locale = "hi", showBackground = true)
+    @Composable
+    fun PreviewHindi() {
+        DefaultPreview()
     }
 
 }

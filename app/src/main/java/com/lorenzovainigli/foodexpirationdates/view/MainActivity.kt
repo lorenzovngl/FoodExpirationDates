@@ -201,46 +201,41 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun DefaultPreview() {
         val items = getItemsForPreview()
-        FoodExpirationDatesTheme {
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.surface
-            ) {
-                MainActivityLayout(
-                    items = items,
-                    viewModel = null,
-                    deleteExpirationDate = null
-                )
-            }
-        }
+        MainActivityLayout(
+            items = items,
+            viewModel = null,
+            deleteExpirationDate = null
+        )
     }
 
-    @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
+    @Preview(name = "Dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
     @Composable
-    fun PreviewNight() {
-        val items = getItemsForPreview()
-        FoodExpirationDatesTheme {
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background
-            ) {
-                MainActivityLayout(items, null, null)
-            }
-        }
+    fun PreviewDarkMode() {
+        DefaultPreview()
     }
 
-    @Preview(locale = "it", showBackground = true)
+    @Preview(name = "Italian", locale = "it", showBackground = true)
     @Composable
-    fun PreviewIT() {
-        val items = getItemsForPreview()
-        FoodExpirationDatesTheme {
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background
-            ) {
-                MainActivityLayout(items, null, null)
-            }
-        }
+    fun PreviewItalian() {
+        DefaultPreview()
+    }
+
+    @Preview(name = "Arabic", locale = "ar", showBackground = true)
+    @Composable
+    fun PreviewArabic() {
+        DefaultPreview()
+    }
+
+    @Preview(name = "German", locale = "de", showBackground = true)
+    @Composable
+    fun PreviewGerman() {
+        DefaultPreview()
+    }
+
+    @Preview(name = "Hindi", locale = "hi", showBackground = true)
+    @Composable
+    fun PreviewHindi() {
+        DefaultPreview()
     }
 
 }
