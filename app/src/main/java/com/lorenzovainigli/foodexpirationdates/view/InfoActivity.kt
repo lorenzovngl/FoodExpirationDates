@@ -227,4 +227,10 @@ class InfoActivity : ComponentActivity() {
         InfoActivityLayout()
     }
 
+    @Preview(name = "Spanish", locale = "es", showBackground = true)
+    @Composable
+    fun PreviewSpanish() {
+        InfoActivityLayout()
+    }
+
 }

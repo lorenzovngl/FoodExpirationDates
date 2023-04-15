@@ -70,6 +70,8 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 
 [Icons8 Fluency Icons](https://icons8.it/icons/fluency)
 
+[Marquee by T8RIN](https://github.com/T8RIN/Marquee)
+
 ## 👥 Contributors
 
 <a href="https://github.com/lorenzovngl"><img src="https://avatars.githubusercontent.com/u/13767301?v=4" alt="@lorenzovngl" height="32" width="32"></a>

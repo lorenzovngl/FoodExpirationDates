@@ -238,4 +238,10 @@ class InsertActivity : ComponentActivity() {
         DefaultPreview()
     }
 
+    @Preview(name = "Spanish", locale = "es", showBackground = true)
+    @Composable
+    fun PreviewSpanish() {
+        DefaultPreview()
+    }
+
 }

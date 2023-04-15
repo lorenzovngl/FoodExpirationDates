@@ -238,4 +238,10 @@ class MainActivity : ComponentActivity() {
         DefaultPreview()
     }
 
+    @Preview(name = "Spanish", locale = "es", showBackground = true)
+    @Composable
+    fun PreviewSpanish() {
+        DefaultPreview()
+    }
+
 }

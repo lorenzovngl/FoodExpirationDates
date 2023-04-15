@@ -1,10 +1,14 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable
 
+import Marquee
+import MarqueeParams
+import androidx.compose.animation.core.LinearEasing
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -18,10 +22,21 @@ fun MyTopAppBar(
         modifier = Modifier
             .padding(bottom = 4.dp),
         title = {
-            Text(
-                text = title,
-                color = MaterialTheme.colorScheme.onPrimary
-            )
+            Marquee(
+                modifier = Modifier,
+                params = MarqueeParams(
+                    period = 7500,
+                    gradientEnabled = true,
+                    gradientEdgeColor = MaterialTheme.colorScheme.primary,
+                    direction = LocalLayoutDirection.current,
+                    easing = LinearEasing
+                )
+            ) {
+                Text(
+                    text = title,
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
+            }
         },
         actions = actions,
         navigationIcon = navigationIcon,
