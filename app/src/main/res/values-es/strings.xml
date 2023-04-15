@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fecha de Caducidad de los Alimentos</string>
+    <string name="app_name_short">Caducidad de los Alimentos</string>
+    <string name="n_days_ago">Hace %1$d días</string>
+    <string name="yesterday">Ayer</string>
+    <string name="today">Hoy</string>
+    <string name="tomorrow">Mañana</string>
+    <string name="in_n_days">En %1$d días</string>
+    <string name="add_item">Añadir artículo</string>
+    <string name="edit_item">Editar artículo</string>
+    <string name="food_name">Nombre del producto</string>
+    <string name="expiration_date">Fecha de caducidad</string>
+    <string name="please_select_a_date">Por favor, seleccione la fecha</string>
+    <string name="insert">Insertar</string>
+    <string name="update">Actualizar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="share">Compartir</string>
+    <string name="leave_a_star_on_github">Valóranos en GitHub</string>
+    <string name="write_a_review">Déjanos tu opinión</string>
+    <string name="source_code">Código Fuente</string>
+    <string name="features">Características</string>
+    <string name="support_this_project">Apoya este proyecto</string>
+    <string name="report_a_bug">Reportar un error</string>
+    <string name="version_x">Versión %1$s</string>
+    <string name="app_description">%1$s es un proyecto de código abierto desarrollado por Lorenzo Vainigli y otros contribuyentes.\nEl código de esta aplicación es publicado bajo las licencias MIT, disponible en GitHub.</string>
+    <string name="about_this_app">Sobre esta aplicación</string>
+    <string name="privacy_policy">Política de privacidad</string>
+    <string name="back">Atrás</string>
+    <string name="no_items_found">No se encontraron artículos</string>
+    <string name="please_insert_one">Por favor, agregue uno</string>
+
+    <string-array name="features">
+        <item>Muestra una lista con las fechas de caducidad de los alimentos, ordenadas cronológicamente de forma ascendente.</item>
+        <item>Añade, edita y elimina artículos.</item>
+        <item>Notificaciones (próximamente).</item>
+    </string-array>
+</resources>
