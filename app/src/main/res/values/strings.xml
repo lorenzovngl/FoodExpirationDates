@@ -28,6 +28,11 @@
     <string name="back">Back</string>
     <string name="no_items_found">No items found</string>
     <string name="please_insert_one">Please insert one</string>
+    <string name="settings">Settings</string>
+    <string name="date_format">Date format</string>
+    <string name="choose_the_date_format">Choose the date format</string>
+    <string name="locale_formats">Locale formats</string>
+    <string name="other_formats">Other formats</string>
 
     <string-array name="features">
         <item>Display a list with food expiration dates in ascending time order.</item>

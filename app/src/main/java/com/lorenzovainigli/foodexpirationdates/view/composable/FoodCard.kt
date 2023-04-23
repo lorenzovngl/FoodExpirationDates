@@ -19,11 +19,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lorenzovainigli.foodexpirationdates.R
+import com.lorenzovainigli.foodexpirationdates.model.DateFormatProvider
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.ui.theme.Orange500
 import com.lorenzovainigli.foodexpirationdates.ui.theme.Red700
@@ -33,7 +35,9 @@ import java.util.*
 
 @Composable
 fun FoodCard(item: ExpirationDate, onClickEdit: () -> Unit, onClickDelete: () -> Unit) {
-    val sdf = SimpleDateFormat("d MMM", Locale.getDefault())
+    val context = LocalContext.current
+    val dateFormat = DateFormatProvider.getUserDateFormat(context)
+    val sdf = SimpleDateFormat(dateFormat, Locale.getDefault())
     val today = Calendar.getInstance()
     val twoDaysAgo = Calendar.getInstance()
     twoDaysAgo.add(Calendar.DAY_OF_MONTH, -2)
