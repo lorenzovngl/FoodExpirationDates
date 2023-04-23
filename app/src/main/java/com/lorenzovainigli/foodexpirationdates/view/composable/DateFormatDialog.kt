@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,11 +27,14 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
+const val DateFormatDialog = "DateFormatDialog"
+
 @Composable
 fun DateFormatDialog(isDialogOpen: Boolean = true, onDismissRequest: () -> Unit = {}) {
     if (isDialogOpen) {
         Dialog(onDismissRequest = onDismissRequest) {
             Card(
+                modifier = Modifier.testTag(DateFormatDialog),
                 shape = RoundedCornerShape(10.dp),
                 elevation = CardDefaults.cardElevation(
                     defaultElevation = 8.dp
@@ -68,12 +72,14 @@ fun DateFormatDialog(isDialogOpen: Boolean = true, onDismissRequest: () -> Unit 
     }
 }
 
+const val DateFormatRow = "DateFormatRow"
+
 @Composable
 fun DateFormatRow(item: String, onDismissRequest: () -> Unit){
     val context = LocalContext.current
     val sdf = SimpleDateFormat(item, Locale.getDefault())
     ClickableText(
-        modifier = Modifier.padding(2.dp),
+        modifier = Modifier.padding(2.dp).testTag(DateFormatRow),
         text = AnnotatedString(sdf.format(Calendar.getInstance().time)),
         style = MaterialTheme.typography.headlineSmall.copy(color = MaterialTheme.colorScheme.onSurface),
         onClick = {

@@ -29,6 +29,7 @@
     <string name="back">Indietro</string>
     <string name="no_items_found">Nessun elemento trovato</string>
     <string name="please_insert_one">Per favore inserirne uno</string>
+    <string name="menu">Menù</string>
     <string name="settings">Impostazioni</string>
     <string name="date_format">Formato data</string>
     <string name="choose_the_date_format">Scegli il formato della data</string>
