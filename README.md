@@ -64,6 +64,29 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 
 > New translations are welcome. If you want to add a new language to the app, please [open an issue](https://github.com/lorenzovngl/FoodExpirationDates/issues/new).
 
+## 🏗️ Installation steps
+
+<div align="left">
+
+1. Clone the repository
+
+    ```bash
+    git clone https://github.com/lorenzovngl/FoodExpirationDates.git
+    ```
+
+2. Setup your Firebase project **or** disable the Firebase SDK in the app:
+
+   - Setup your Firebase project:
+
+      1. Create a Firebase project in [Firebase console](https://console.firebase.google.com/);
+      2. Get the file `google-services.json` as [explained here](https://support.google.com/firebase/answer/7015592#zippy=%2Cin-this-article:~:text=Get%20config%20file%20for%20your%20Android%20app) and put it in the project root.
+
+   - Set `firebaseEnabled = false` in [`build.gradle`](https://github.com/lorenzovngl/FoodExpirationDates/blob/main/build.gradle#L7) to disable the Firebase SDK in the app.
+
+3. Run the app!
+
+</div>
+
 ## 📚 Third Party
 
 [Material Design Icons](https://pictogrammers.com/library/mdi/)
