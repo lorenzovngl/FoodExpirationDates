@@ -55,14 +55,14 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 
 ## 🌐 Languages
 
-![English 100%](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fen.json)
-![Arabic 50%](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Far.json)
-![German 100%](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fde.json)
-![Hindi 100%](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fhi.json)
-![Italian 100%](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fit.json)
-![Spanish 100%](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fes.json)
+![English default](https://img.shields.io/badge/English-default-blue?style=flat-square)
+![Arabic 39%](https://img.shields.io/badge/Arabic-39%25-red?style=flat-square)
+![German 100%](https://img.shields.io/badge/German-100%25-brightgreen?style=flat-square)
+![Spanish 84%](https://img.shields.io/badge/Spanish-84%25-yellow?style=flat-square)
+![Hindi 84%](https://img.shields.io/badge/Hindi-84%25-yellow?style=flat-square)
+![Italian 100%](https://img.shields.io/badge/Italian-100%25-brightgreen?style=flat-square)
 
-> New translations are welcome. If you want to add a new language to the app, please [open an issue](https://github.com/lorenzovngl/FoodExpirationDates/issues/new).
+> New translations are welcome. If you want to add a new language to the app, or improve or review an existring one, please [open an issue](https://github.com/lorenzovngl/FoodExpirationDates/issues/new).
 
 ## 🏗️ Installation steps
 
