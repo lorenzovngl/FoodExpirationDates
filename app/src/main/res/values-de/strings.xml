@@ -28,7 +28,13 @@
     <string name="back">Zurück</string>
     <string name="no_items_found">Keine Einträge gefunden</string>
     <string name="please_insert_one">Bitte eins einfügen</string>
-
+    <string name="menu">Menü</string>
+    <string name="settings">Einstellungen</string>
+    <string name="date_format">Datumsformat</string>
+    <string name="choose_the_date_format">Das Datumsformat auswählen</string>
+    <string name="locale_formats">Lokale Formate</string>
+    <string name="other_formats">Andere Formate</string>
+    
     <string-array name="features">
         <item>Anzeige einer Liste mit Lebensmittelverfallsdaten in aufsteigender zeitlicher Reihenfolge.</item>
         <item>Einträge hinzufügen, bearbeiten und löschen.</item>
