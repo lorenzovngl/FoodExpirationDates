@@ -2,6 +2,7 @@ package com.lorenzovainigli.foodexpirationdates.view
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -194,6 +195,42 @@ class InfoActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    @Preview(name = "Dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
+    @Composable
+    fun PreviewDarkMode() {
+        InfoActivityLayout()
+    }
+
+    @Preview(name = "Italian", locale = "it", showBackground = true)
+    @Composable
+    fun PreviewItalian() {
+        InfoActivityLayout()
+    }
+
+    @Preview(name = "Arabic", locale = "ar", showBackground = true)
+    @Composable
+    fun PreviewArabic() {
+        InfoActivityLayout()
+    }
+
+    @Preview(name = "German", locale = "de", showBackground = true)
+    @Composable
+    fun PreviewGerman() {
+        InfoActivityLayout()
+    }
+
+    @Preview(name = "Hindi", locale = "hi", showBackground = true)
+    @Composable
+    fun PreviewHindi() {
+        InfoActivityLayout()
+    }
+
+    @Preview(name = "Spanish", locale = "es", showBackground = true)
+    @Composable
+    fun PreviewSpanish() {
+        InfoActivityLayout()
     }
 
 }

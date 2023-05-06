@@ -10,7 +10,6 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -22,11 +21,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Wallpapers
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.di.AppModule
 import com.lorenzovainigli.foodexpirationdates.di.DaggerAppComponent
+import com.lorenzovainigli.foodexpirationdates.view.composable.DropdownMenu
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.notification.NotificationScheduler
 import com.lorenzovainigli.foodexpirationdates.model.notification.ScheduledNotification
@@ -37,6 +38,7 @@ import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDateViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDateTime
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.min
 
 @AndroidEntryPoint
@@ -87,15 +89,7 @@ class MainActivity : ComponentActivity() {
                         MyTopAppBar(
                             title = stringResource(id = R.string.app_name),
                             actions = {
-                                IconButton(onClick = {
-                                    context.startActivity(Intent(context, InfoActivity::class.java))
-                                }) {
-                                    Icon(
-                                        imageVector = Icons.Outlined.Info,
-                                        contentDescription = "Information",
-                                        tint = MaterialTheme.colorScheme.onPrimary
-                                    )
-                                }
+                                DropdownMenu()
                             }
                         )
                     },
@@ -212,50 +206,54 @@ class MainActivity : ComponentActivity() {
         return items
     }
 
-    @Preview(showBackground = true)
+    @Preview(showBackground = true, wallpaper = Wallpapers.GREEN_DOMINATED_EXAMPLE)
     @Composable
     fun DefaultPreview() {
         val items = getItemsForPreview()
-        FoodExpirationDatesTheme {
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.surface
-            ) {
-                MainActivityLayout(
-                    items = items,
-                    viewModel = null,
-                    deleteExpirationDate = null
-                )
-            }
-        }
+        MainActivityLayout(
+            items = items,
+            viewModel = null,
+            deleteExpirationDate = null
+        )
     }
 
-    @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
+    @Preview(
+        name = "Dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true,
+        wallpaper = Wallpapers.GREEN_DOMINATED_EXAMPLE
+    )
     @Composable
-    fun PreviewNight() {
-        val items = getItemsForPreview()
-        FoodExpirationDatesTheme {
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background
-            ) {
-                MainActivityLayout(items, null, null)
-            }
-        }
+    fun PreviewDarkMode() {
+        DefaultPreview()
     }
 
-    @Preview(locale = "it", showBackground = true)
+    @Preview(name = "Italian", locale = "it", showBackground = true)
     @Composable
-    fun PreviewIT() {
-        val items = getItemsForPreview()
-        FoodExpirationDatesTheme {
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background
-            ) {
-                MainActivityLayout(items, null, null)
-            }
-        }
+    fun PreviewItalian() {
+        DefaultPreview()
+    }
+
+    @Preview(name = "Arabic", locale = "ar", showBackground = true)
+    @Composable
+    fun PreviewArabic() {
+        DefaultPreview()
+    }
+
+    @Preview(name = "German", locale = "de", showBackground = true)
+    @Composable
+    fun PreviewGerman() {
+        DefaultPreview()
+    }
+
+    @Preview(name = "Hindi", locale = "hi", showBackground = true)
+    @Composable
+    fun PreviewHindi() {
+        DefaultPreview()
+    }
+
+    @Preview(name = "Spanish", locale = "es", showBackground = true)
+    @Composable
+    fun PreviewSpanish() {
+        DefaultPreview()
     }
 
 }

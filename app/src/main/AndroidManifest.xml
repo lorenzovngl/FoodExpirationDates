@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 
     <application
         android:name=".App"
@@ -30,6 +31,9 @@
         <activity
             android:exported="true"
             android:name=".view.InfoActivity">
+        </activity>
+        <activity
+            android:name=".view.SettingsActivity">
         </activity>
         <receiver android:name=".model.notification.AlarmReceiver" />
     </application>
