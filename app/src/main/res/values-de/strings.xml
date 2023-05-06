@@ -40,4 +40,13 @@
         <item>Einträge hinzufügen, bearbeiten und löschen.</item>
         <item>Benachrichtigungen (bald verfügbar).</item>
     </string-array>
+    <string-array name="example_foods">
+        <item>Eier</item>
+        <item>Käse</item>
+        <item>Milch</item>
+        <item>Fleisch</item>
+        <item>Butter</item>
+        <item>Pilze</item>
+        <item>Tomaten</item>
+    </string-array>
 </resources>
