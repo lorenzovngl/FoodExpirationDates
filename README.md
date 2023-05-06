@@ -16,13 +16,13 @@
   />
 </a>
 
-<div align="left">
+</div>
 
 Have you ever forgotten to eat a food item before its expiration date? Throwing away food because it has expired is a practice to avoid if you want to reduce food waste.
 
 This simple app helps you avoid forgetting to consume foods that are about to expire. Using it is simple: just record each food item along with its expiration date and you will always have a table reminding you which foods are going to expire!
 
-</div>
+<div align="center">
 
 [<img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" height="80"/>](https://play.google.com/store/apps/details?id=com.lorenzovainigli.foodexpirationdates)
 [<img alt="Get it on GitHub" src="https://raw.githubusercontent.com/NeoApplications/Neo-Backup/main/badge_github.png" height="80"/>](https://github.com/lorenzovngl/FoodExpirationDates/releases)
@@ -30,43 +30,51 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 ![Google Play downloads](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Fdownloads-google-play.json)
 ![GitHub all downloads](https://img.shields.io/github/downloads/lorenzovngl/FoodExpirationDates/total?style=flat-square&label=Downloads&logo=github)
 
-## ✨ Features
+</div>
 
-<div align="left">
+## ✨ Features
 
 - Display a list of food with their expiration dates in ascending order of time.
 - Add, edit and delete items.
 - Notifications (available soon).
 
-</div>
-
 ## 📱 Screenshots
+
+<div align="center">
 
 | | | |
 |-|-|-|
 | <img width="200px" src="screenshots/phone_en_main_activity.png"> | <img width="200px" src="screenshots/phone_en_insert_activity.png"> | <img width="200px" src="screenshots/phone_en_dc_main_activity.png"> | 
 <img width="200px" src="screenshots/phone_en_dark_main_activity.png"> | <img width="200px" src="screenshots/phone_en_dark_insert_activity.png"> | <img width="200px" src="screenshots/phone_en_dc_insert_activity.png"> |
 
+</div>
+
 ## 🛠️ Technologies
+
+<div align="center">
 
 ![Android 33](https://img.shields.io/badge/Android%20SDK-33-3DDC84?style=for-the-badge&logo=android)
 ![Kotlin 1.8.0](https://img.shields.io/badge/Kotlin-1.8.20-A97BFF?&style=for-the-badge&logo=kotlin&logoColor=A97BFF)
 ![Jetpack Compose 1.3.3](https://img.shields.io/badge/Jetpack%20Compose-1.4.0-4285F4?style=for-the-badge&logo=Jetpack+Compose&logoColor=4285F4)
 
+</div>
+
 ## 🌐 Languages
 
+<div align="center">
+
 ![English default](https://img.shields.io/badge/English-default-blue?style=flat-square)
-![Arabic 39%](https://img.shields.io/badge/Arabic-39%25-red?style=flat-square)
-![German 100%](https://img.shields.io/badge/German-100%25-brightgreen?style=flat-square)
-![Spanish 84%](https://img.shields.io/badge/Spanish-84%25-yellow?style=flat-square)
-![Hindi 84%](https://img.shields.io/badge/Hindi-84%25-yellow?style=flat-square)
+![Arabic 33%](https://img.shields.io/badge/Arabic-33%25-red?style=flat-square)
+![German 84%](https://img.shields.io/badge/German-84%25-yellow?style=flat-square)
+![Hindi 71%](https://img.shields.io/badge/Hindi-71%25-orange?style=flat-square)
 ![Italian 100%](https://img.shields.io/badge/Italian-100%25-brightgreen?style=flat-square)
+![Spanish 71%](https://img.shields.io/badge/Spanish-71%25-orange?style=flat-square)
+
+</div>
 
 > New translations are welcome. If you want to add a new language to the app, or improve or review an existing one, please [open an issue](https://github.com/lorenzovngl/FoodExpirationDates/issues/new).
 
 ## 🏗️ Installation steps
-
-<div align="left">
 
 1. Clone the repository
 
@@ -85,15 +93,11 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 
 3. Run the app!
 
-</div>
-
 ## 📚 Third Party
 
-[Material Design Icons](https://pictogrammers.com/library/mdi/)
-
-[Icons8 Fluency Icons](https://icons8.it/icons/fluency)
-
-[Marquee by T8RIN](https://github.com/T8RIN/Marquee)
+- [Material Design Icons](https://pictogrammers.com/library/mdi/)
+- [Icons8 Fluency Icons](https://icons8.it/icons/fluency)
+- [Marquee by T8RIN](https://github.com/T8RIN/Marquee)
 
 ## 👥 Contributors
 
@@ -128,5 +132,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
-
-</div>

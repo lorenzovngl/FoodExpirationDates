@@ -41,4 +41,13 @@
         <item>Aggiungi, modifica ed elimina elementi.</item>
         <item>Notifiche (presto disponibili).</item>
     </string-array>
+    <string-array name="example_foods">
+        <item>Uova</item>
+        <item>Formaggio</item>
+        <item>Latte</item>
+        <item>Prosciutto</item>
+        <item>Burro</item>
+        <item>Funghi</item>
+        <item>Pomodori</item>
+    </string-array>
 </resources>

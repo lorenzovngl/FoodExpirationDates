@@ -80,7 +80,7 @@ class MainActivity : ComponentActivity() {
                     },
                     floatingActionButtonPosition = FabPosition.End,
                     floatingActionButton = {
-                        if (items != null && items.isNotEmpty()) {
+                        if (!items.isNullOrEmpty()) {
                             FloatingActionButton(
                                 onClick = {
                                     context.startActivity(
@@ -101,7 +101,7 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 ) { padding ->
-                    if (items != null && items.isNotEmpty()) {
+                    if (!items.isNullOrEmpty()) {
                         Column(Modifier.padding(padding)) {
                             Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
                                 for (item in items) {
@@ -171,11 +171,9 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun getItemsForPreview(lang: String = "en"): List<ExpirationDate> {
+    private fun getItemsForPreview(): List<ExpirationDate> {
         val items = ArrayList<ExpirationDate>()
-        var foods = arrayOf("Eggs", "Cheese", "Milk", "Ham", "Butter", "Mushrooms", "Tomato")
-        if (lang == "it")
-            foods = arrayOf("Uova", "Formaggio", "Latte", "Prosciutto", "Funghi", "Pomodori")
+        val foods = resources.getStringArray(R.array.example_foods)
         val daysLeft = arrayOf(-1, 0, 1, 3, 7, 10, 30)
         for (i in 0 until min(foods.size, daysLeft.size)) {
             val cal = Calendar.getInstance()

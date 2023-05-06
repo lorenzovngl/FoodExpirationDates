@@ -40,4 +40,13 @@
         <item>Add, edit and delete items.</item>
         <item>Notifications (available soon).</item>
     </string-array>
+    <string-array name="example_foods">
+        <item>Eggs</item>
+        <item>Cheese</item>
+        <item>Milk</item>
+        <item>Ham</item>
+        <item>Butter</item>
+        <item>Mushrooms</item>
+        <item>Tomato</item>
+    </string-array>
 </resources>
