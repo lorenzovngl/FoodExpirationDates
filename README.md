@@ -66,7 +66,7 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 ![English default](https://img.shields.io/badge/English-default-blue?style=flat-square)
 ![Arabic 33%](https://img.shields.io/badge/Arabic-33%25-red?style=flat-square)
 ![German 100%](https://img.shields.io/badge/German-100%25-brightgreen?style=flat-square)
-![Hindi 71%](https://img.shields.io/badge/Hindi-71%25-orange?style=flat-square)
+![Hindi 71%](https://img.shields.io/badge/Hindi-100%25-brightgreen?style=flat-square)
 ![Italian 100%](https://img.shields.io/badge/Italian-100%25-brightgreen?style=flat-square)
 ![Spanish 100%](https://img.shields.io/badge/Spanish-100%25-brightgreen?style=flat-square)
 
