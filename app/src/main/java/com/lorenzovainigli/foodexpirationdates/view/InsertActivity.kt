@@ -7,9 +7,9 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -17,7 +17,6 @@ import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -33,6 +32,8 @@ import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDateViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
@@ -68,7 +69,7 @@ class InsertActivity : ComponentActivity() {
                 val itemToEdit = itemId?.let { viewModel?.getDate(it) }
                 var foodNameToEdit = ""
                 var expDate: Long? = null
-                if (itemToEdit != null && viewModel != null) {
+                if (itemToEdit != null) {
                     foodNameToEdit = itemToEdit.foodName
                     expDate = itemToEdit.expirationDate
                 }
@@ -76,6 +77,9 @@ class InsertActivity : ComponentActivity() {
                     mutableStateOf(foodNameToEdit)
                 }
                 val datePickerState = rememberDatePickerState(expDate)
+                var isDialogOpen by remember {
+                    mutableStateOf(false)
+                }
                 Scaffold(
                     topBar = {
                         MyTopAppBar(
@@ -97,6 +101,44 @@ class InsertActivity : ComponentActivity() {
                     floatingActionButtonPosition = FabPosition.End,
                     containerColor = MaterialTheme.colorScheme.background,
                     content = { padding ->
+                        if (isDialogOpen) {
+                            DatePickerDialog(
+                                dismissButton = {
+                                    OutlinedButton(
+                                        onClick = { isDialogOpen = false },
+                                        border = BorderStroke(
+                                            1.dp,
+                                            MaterialTheme.colorScheme.tertiary
+                                        ),
+                                        colors = ButtonDefaults.buttonColors(
+                                            containerColor = Color.Transparent,
+                                            contentColor = MaterialTheme.colorScheme.tertiary
+                                        )
+                                    ) {
+                                        Text(text = stringResource(id = R.string.cancel))
+                                    }
+                                },
+                                confirmButton = {
+                                    Button(
+                                        onClick = { isDialogOpen = false },
+                                        colors = ButtonDefaults.buttonColors(
+                                            containerColor = MaterialTheme.colorScheme.tertiary,
+                                            contentColor = MaterialTheme.colorScheme.onTertiary
+                                        )
+                                    ) {
+                                        Text(text = stringResource(id = R.string.insert))
+                                    }
+                                },
+                                content = {
+                                    DatePicker(
+                                        state = datePickerState
+                                    )
+                                },
+                                onDismissRequest = {
+                                    isDialogOpen = false
+                                }
+                            )
+                        }
                         Column(Modifier.padding(padding)) {
                             Column(
                                 modifier = Modifier
@@ -122,25 +164,45 @@ class InsertActivity : ComponentActivity() {
                                     )
                                 )
                                 Spacer(modifier = Modifier.height(16.dp))
-                                Surface(
-                                    modifier = Modifier
-                                        .clip(RoundedCornerShape(4.dp)),
-                                    tonalElevation = 2.dp
-                                ) {
-                                    DatePicker(
-                                        title = {
-                                            Text(text = stringResource(id = R.string.expiration_date))
-                                        },
-                                        state = datePickerState
+                                TextField(
+                                    modifier = Modifier.clickable(onClick = {
+                                        isDialogOpen = true
+                                    }),
+                                    enabled = false,
+                                    label = {
+                                        Text(
+                                            text = stringResource(id = R.string.expiration_date),
+                                            modifier = Modifier.fillMaxWidth()
+                                        )
+                                    },
+                                    value = if (datePickerState.selectedDateMillis == null) "" else {
+                                        // TODO What kind of date format is the best here?
+                                        val dateFormat = (DateFormat.getDateInstance(
+                                            DateFormat.MEDIUM, Locale.getDefault()
+                                        ) as SimpleDateFormat).toLocalizedPattern()
+                                        val sdf = SimpleDateFormat(dateFormat, Locale.getDefault())
+                                        sdf.format(datePickerState.selectedDateMillis)
+                                    },
+                                    onValueChange = {},
+                                    colors = TextFieldDefaults.colors(
+                                        disabledTextColor = MaterialTheme.colorScheme.onSurface,
+                                        disabledLeadingIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        disabledTrailingIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        disabledLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        //For Icons
+                                        disabledPlaceholderColor = MaterialTheme.colorScheme.onSurfaceVariant,
                                     )
-                                }
+                                )
                                 Row {
                                     OutlinedButton(
                                         onClick = { activity?.finish() },
                                         modifier = Modifier
                                             .weight(0.5f)
                                             .padding(top = 8.dp, end = 4.dp),
-                                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.tertiary),
+                                        border = BorderStroke(
+                                            1.dp,
+                                            MaterialTheme.colorScheme.tertiary
+                                        ),
                                         colors = ButtonDefaults.buttonColors(
                                             containerColor = Color.Transparent,
                                             contentColor = MaterialTheme.colorScheme.tertiary
@@ -160,7 +222,7 @@ class InsertActivity : ComponentActivity() {
                                             try {
                                                 if (datePickerState.selectedDateMillis != null) {
                                                     var id = 0
-                                                    if (itemToEdit != null && viewModel != null) {
+                                                    if (itemToEdit != null) {
                                                         id = itemId ?: 0
                                                     }
                                                     val entry = ExpirationDate(
