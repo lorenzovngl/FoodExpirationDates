@@ -71,60 +71,63 @@ class InfoActivity : ComponentActivity() {
                     Column(
                         modifier = Modifier
                             .padding(padding)
-                            .padding(10.dp)
-                            .verticalScroll(rememberScrollState()),
-                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                            .verticalScroll(rememberScrollState())
                     ) {
-                        Text(
+                        Column(
                             modifier = Modifier
-                                .align(CenterHorizontally)
-                                .padding(top = 16.dp),
-                            text = stringResource(id = R.string.app_name),
-                            style = MaterialTheme.typography.headlineLarge,
-                            textAlign = TextAlign.Center
-                        )
-                        Text(
-                            modifier = Modifier.align(CenterHorizontally),
-                            style = MaterialTheme.typography.bodySmall,
-                            text = stringResource(
-                                id = R.string.version_x,
-                                BuildConfig.VERSION_NAME
-                            ),
-                            textAlign = TextAlign.Center
-                        )
-                        Text(
-                            modifier = Modifier.fillMaxWidth(),
-                            text = stringResource(
-                                id = R.string.app_description,
-                                stringResource(id = R.string.app_name)
+                                .padding(10.dp),
+                            verticalArrangement = Arrangement.spacedBy(16.dp)
+                        ) {
+                            Text(
+                                modifier = Modifier
+                                    .align(CenterHorizontally)
+                                    .padding(top = 16.dp),
+                                text = stringResource(id = R.string.app_name),
+                                style = MaterialTheme.typography.headlineLarge,
+                                textAlign = TextAlign.Center
                             )
-                        )
-                        TextIconButton(
-                            modifier = Modifier.align(CenterHorizontally),
-                            onClick = {
-                                uriHandler.openUri(
-                                    uri = "https://github.com/lorenzovngl/FoodExpirationDates"
+                            Text(
+                                modifier = Modifier.align(CenterHorizontally),
+                                style = MaterialTheme.typography.bodySmall,
+                                text = stringResource(
+                                    id = R.string.version_x,
+                                    BuildConfig.VERSION_NAME
+                                ),
+                                textAlign = TextAlign.Center
+                            )
+                            Text(
+                                modifier = Modifier.fillMaxWidth(),
+                                text = stringResource(
+                                    id = R.string.app_description,
+                                    stringResource(id = R.string.app_name)
                                 )
-                            },
-                            imagePainter = painterResource(id = R.drawable.github),
-                            contentDescription = stringResource(id = R.string.source_code),
-                            text = stringResource(id = R.string.source_code)
-                        )
-                        Text(
-                            modifier = Modifier.padding(top = 16.dp),
-                            text = stringResource(id = R.string.features),
-                            style = MaterialTheme.typography.headlineMedium,
-                            textAlign = TextAlign.Center
-                        )
-                        val sb = StringBuilder()
-                        stringArrayResource(id = R.array.features).map {
-                            sb.append("● ").append(it).append("\n")
-                        }
-                        Text(
-                            modifier = Modifier.fillMaxWidth(),
-                            text = sb.toString()
-                        )
-                        /*TextIconButton(
+                            )
+                            TextIconButton(
+                                modifier = Modifier.align(CenterHorizontally),
+                                onClick = {
+                                    uriHandler.openUri(
+                                        uri = "https://github.com/lorenzovngl/FoodExpirationDates"
+                                    )
+                                },
+                                imagePainter = painterResource(id = R.drawable.github),
+                                contentDescription = stringResource(id = R.string.source_code),
+                                text = stringResource(id = R.string.source_code)
+                            )
+                            Text(
+                                modifier = Modifier.padding(top = 16.dp),
+                                text = stringResource(id = R.string.features),
+                                style = MaterialTheme.typography.headlineMedium,
+                                textAlign = TextAlign.Center
+                            )
+                            val sb = StringBuilder()
+                            stringArrayResource(id = R.array.features).map {
+                                sb.append("  ● ").append(it).append("\n")
+                            }
+                            Text(
+                                modifier = Modifier.fillMaxWidth(),
+                                text = sb.toString()
+                            )
+                            /*TextIconButton(
                             modifier = Modifier.align(CenterHorizontally),
                             onClick = {
 
@@ -133,64 +136,65 @@ class InfoActivity : ComponentActivity() {
                             contentDescription = "Star",
                             text = stringResource(id = R.string.report_a_bug)
                         )*/
-                        Text(
-                            modifier = Modifier.padding(top = 16.dp),
-                            text = stringResource(id = R.string.support_this_project),
-                            style = MaterialTheme.typography.headlineMedium,
-                            textAlign = TextAlign.Center
-                        )
-                        TextIconButton(
-                            modifier = Modifier.align(CenterHorizontally),
-                            onClick = {
-                                uriHandler.openUri(
-                                    uri = "https://github.com/lorenzovngl/FoodExpirationDates"
-                                )
-                            },
-                            iconImageVector = Icons.Outlined.Star,
-                            contentDescription = stringResource(id = R.string.leave_a_star_on_github),
-                            text = stringResource(id = R.string.leave_a_star_on_github)
-                        )
-                        TextIconButton(
-                            modifier = Modifier.align(CenterHorizontally),
-                            onClick = {
-                                uriHandler.openUri(
-                                    uri = "https://play.google.com/store/apps/details?id=com.lorenzovainigli.foodexpirationdates"
-                                )
-                            },
-                            iconImageVector = Icons.Outlined.Edit,
-                            contentDescription = "Star",
-                            text = stringResource(id = R.string.write_a_review)
-                        )
-                        TextIconButton(
-                            modifier = Modifier.align(CenterHorizontally),
-                            onClick = {
-                                val sendIntent: Intent = Intent().apply {
-                                    action = Intent.ACTION_SEND
-                                    putExtra(
-                                        Intent.EXTRA_TEXT,
-                                        "https://play.google.com/store/apps/details?id=com.lorenzovainigli.foodexpirationdates"
+                            Text(
+                                modifier = Modifier.padding(top = 16.dp),
+                                text = stringResource(id = R.string.support_this_project),
+                                style = MaterialTheme.typography.headlineMedium,
+                                textAlign = TextAlign.Center
+                            )
+                            TextIconButton(
+                                modifier = Modifier.align(CenterHorizontally),
+                                onClick = {
+                                    uriHandler.openUri(
+                                        uri = "https://github.com/lorenzovngl/FoodExpirationDates"
                                     )
-                                    type = "text/plain"
+                                },
+                                iconImageVector = Icons.Outlined.Star,
+                                contentDescription = stringResource(id = R.string.leave_a_star_on_github),
+                                text = stringResource(id = R.string.leave_a_star_on_github)
+                            )
+                            TextIconButton(
+                                modifier = Modifier.align(CenterHorizontally),
+                                onClick = {
+                                    uriHandler.openUri(
+                                        uri = "https://play.google.com/store/apps/details?id=com.lorenzovainigli.foodexpirationdates"
+                                    )
+                                },
+                                iconImageVector = Icons.Outlined.Edit,
+                                contentDescription = "Star",
+                                text = stringResource(id = R.string.write_a_review)
+                            )
+                            TextIconButton(
+                                modifier = Modifier.align(CenterHorizontally),
+                                onClick = {
+                                    val sendIntent: Intent = Intent().apply {
+                                        action = Intent.ACTION_SEND
+                                        putExtra(
+                                            Intent.EXTRA_TEXT,
+                                            "https://play.google.com/store/apps/details?id=com.lorenzovainigli.foodexpirationdates"
+                                        )
+                                        type = "text/plain"
+                                    }
+                                    val shareIntent = Intent.createChooser(sendIntent, null)
+                                    context.startActivity(shareIntent)
+                                },
+                                iconImageVector = Icons.Outlined.Share,
+                                contentDescription = stringResource(id = R.string.share),
+                                text = stringResource(id = R.string.share)
+                            )
+                            ClickableText(
+                                modifier = Modifier
+                                    .align(CenterHorizontally)
+                                    .padding(top = 4.dp),
+                                text = AnnotatedString(text = stringResource(id = R.string.privacy_policy)),
+                                style = TextStyle.Default.copy(color = MaterialTheme.colorScheme.primary),
+                                onClick = {
+                                    uriHandler.openUri(
+                                        uri = "https://github.com/lorenzovngl/FoodExpirationDates/blob/main/privacy-policy.md"
+                                    )
                                 }
-                                val shareIntent = Intent.createChooser(sendIntent, null)
-                                context.startActivity(shareIntent)
-                            },
-                            iconImageVector = Icons.Outlined.Share,
-                            contentDescription = stringResource(id = R.string.share),
-                            text = stringResource(id = R.string.share)
-                        )
-                        ClickableText(
-                            modifier = Modifier
-                                .align(CenterHorizontally)
-                                .padding(top = 4.dp),
-                            text = AnnotatedString(text = stringResource(id = R.string.privacy_policy)),
-                            style = TextStyle.Default.copy(color = MaterialTheme.colorScheme.primary),
-                            onClick = {
-                                uriHandler.openUri(
-                                    uri = "https://github.com/lorenzovngl/FoodExpirationDates/blob/main/privacy-policy.md"
-                                )
-                            }
-                        )
+                            )
+                        }
                     }
                 }
             }

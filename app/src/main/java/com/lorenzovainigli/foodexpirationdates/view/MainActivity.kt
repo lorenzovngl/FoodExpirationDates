@@ -102,8 +102,15 @@ class MainActivity : ComponentActivity() {
                     }
                 ) { padding ->
                     if (!items.isNullOrEmpty()) {
-                        Column(Modifier.padding(padding)) {
-                            Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+                        Column(
+                            modifier = Modifier
+                                .padding(padding)
+                                .verticalScroll(rememberScrollState())
+                        ) {
+                            Column(
+                                modifier = Modifier
+                                    .padding(4.dp)
+                            ) {
                                 for (item in items) {
                                     FoodCard(
                                         item = item,
