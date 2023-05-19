@@ -12,6 +12,7 @@
     <string name="food_name">Nome alimento</string>
     <string name="expiration_date">Data di scadenza</string>
     <string name="please_select_a_date">Per favore seleziona una data</string>
+    <string name="please_enter_a_food_name">Si prega di inserire un nome alimento</string>
     <string name="insert">Inserisci</string>
     <string name="update">Aggiorna</string>
     <string name="cancel">Cancella</string>

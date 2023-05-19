@@ -11,6 +11,7 @@
     <string name="food_name">खाद्य पदार्थ का नाम</string>
     <string name="expiration_date">समाप्ति तिथि</string>
     <string name="please_select_a_date">कृपया एक तिथि चुनें</string>
+    <string name="please_enter_a_food_name">कृपया खाद्य पदार्थ का नाम दर्ज करें</string>
     <string name="insert">डालें</string>
     <string name="update">अपडेट करें</string>
     <string name="cancel">रद्द करें</string>
