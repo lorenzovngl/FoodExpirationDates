@@ -220,26 +220,30 @@ class InsertActivity : ComponentActivity() {
                                         ),
                                         onClick = {
                                             try {
-                                                if (datePickerState.selectedDateMillis != null) {
-                                                    var id = 0
-                                                    if (itemToEdit != null) {
-                                                        id = itemId ?: 0
+                                                if(foodName.isNotEmpty()) {
+                                                    if (datePickerState.selectedDateMillis != null) {
+                                                        var id = 0
+                                                        if (itemToEdit != null) {
+                                                            id = itemId ?: 0
+                                                        }
+                                                        val entry = ExpirationDate(
+                                                            id = id,
+                                                            foodName = foodName,
+                                                            expirationDate = datePickerState.selectedDateMillis!!
+                                                        )
+                                                        if (addExpirationDate != null) {
+                                                            addExpirationDate(entry)
+                                                        }
+                                                        activity?.finish()
+                                                    } else {
+                                                        Toast.makeText(
+                                                            activity,
+                                                            R.string.please_select_a_date,
+                                                            Toast.LENGTH_SHORT
+                                                        ).show()
                                                     }
-                                                    val entry = ExpirationDate(
-                                                        id = id,
-                                                        foodName = foodName,
-                                                        expirationDate = datePickerState.selectedDateMillis!!
-                                                    )
-                                                    if (addExpirationDate != null) {
-                                                        addExpirationDate(entry)
-                                                    }
-                                                    activity?.finish()
                                                 } else {
-                                                    Toast.makeText(
-                                                        activity,
-                                                        R.string.please_select_a_date,
-                                                        Toast.LENGTH_SHORT
-                                                    ).show()
+                                                    Toast.makeText(activity,R.string.please_enter_a_food_name,Toast.LENGTH_SHORT).show()
                                                 }
                                             } catch (e: Exception) {
                                                 Toast.makeText(

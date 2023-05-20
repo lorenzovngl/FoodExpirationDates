@@ -12,6 +12,7 @@
     <string name="food_name">Nombre del producto</string>
     <string name="expiration_date">Fecha de caducidad</string>
     <string name="please_select_a_date">Por favor, seleccione la fecha</string>
+    <string name="please_enter_a_food_name">Por favor ingrese un nombre del producto</string>
     <string name="insert">Insertar</string>
     <string name="update">Actualizar</string>
     <string name="cancel">Cancelar</string>
