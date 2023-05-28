@@ -29,6 +29,7 @@
     <string name="back">Atrás</string>
     <string name="no_items_found">No se encontraron artículos</string>
     <string name="please_insert_one">Por favor, agregue uno</string>
+    <string name="your_food_is_expiring">¡Tu comida está caducando!</string>
 
     <string-array name="features">
         <item>Muestra una lista con las fechas de caducidad de los alimentos, ordenadas cronológicamente de forma ascendente.</item>

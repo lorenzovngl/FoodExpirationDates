@@ -35,7 +35,10 @@
         <activity
             android:name=".view.SettingsActivity">
         </activity>
-        <receiver android:name=".model.notification.AlarmReceiver" />
+        <service
+            android:name=".model.worker.CheckExpirationsWorker"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
 
 </manifest>

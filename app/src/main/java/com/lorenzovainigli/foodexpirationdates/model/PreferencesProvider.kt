@@ -6,12 +6,14 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class DateFormatProvider {
+class PreferencesProvider {
 
     companion object {
 
         private const val sharedPrefsName = "shared_pref"
         private const val keyDateFormat = "date_format"
+        private const val keyNotificationTimeHour = "notification_time_hour"
+        private const val keyNotificationTimeMinute = "notification_time_minute"
         private val availLocaleDateFormats = arrayOf(DateFormat.SHORT, DateFormat.MEDIUM)
         private val availOtherDateFormats =
             arrayOf(
@@ -46,5 +48,20 @@ class DateFormatProvider {
                 .edit().putString(keyDateFormat, dateFormat).apply()
         }
 
+        fun getUserNotificationTimeHour(context: Context): Int {
+            return context.getSharedPreferences(sharedPrefsName, ComponentActivity.MODE_PRIVATE)
+                .getInt(keyNotificationTimeHour, 11)
+        }
+
+        fun getUserNotificationTimeMinute(context: Context): Int {
+            return context.getSharedPreferences(sharedPrefsName, ComponentActivity.MODE_PRIVATE)
+                .getInt(keyNotificationTimeMinute, 0)
+        }
+
+        fun setUserNotificationTime(context: Context, hour: Int, minute: Int) {
+            return context.getSharedPreferences(sharedPrefsName, ComponentActivity.MODE_PRIVATE)
+                .edit().putInt(keyNotificationTimeHour, hour)
+                .putInt(keyNotificationTimeMinute, minute).apply()
+        }
     }
 }
