@@ -12,6 +12,7 @@
     <string name="food_name">Nombre del producto</string>
     <string name="expiration_date">Fecha de caducidad</string>
     <string name="please_select_a_date">Por favor, seleccione la fecha</string>
+    <string name="please_enter_a_food_name">Por favor ingrese un nombre del producto</string>
     <string name="insert">Insertar</string>
     <string name="update">Actualizar</string>
     <string name="cancel">Cancelar</string>
@@ -30,10 +31,25 @@
     <string name="no_items_found">No se encontraron artículos</string>
     <string name="please_insert_one">Por favor, agregue uno</string>
     <string name="your_food_is_expiring">¡Tu comida está caducando!</string>
+    <string name="menu">Menú</string>
+    <string name="settings">Configuración</string>
+    <string name="date_format">Formato de Fecha</string>
+    <string name="choose_the_date_format">Selecciona el formato de Fecha</string>
+    <string name="locale_formats">Formatos locales</string>
+    <string name="other_formats">Otros formatos</string>
 
     <string-array name="features">
         <item>Muestra una lista con las fechas de caducidad de los alimentos, ordenadas cronológicamente de forma ascendente.</item>
         <item>Añade, edita y elimina artículos.</item>
         <item>Notificaciones (próximamente).</item>
+    </string-array>
+    <string-array name="example_foods">
+        <item>Huevos</item>
+        <item>Queso</item>
+        <item>Leche</item>
+        <item>Jamón</item>
+        <item>Mantequilla</item>
+        <item>Champiñones</item>
+        <item>Tomates</item>
     </string-array>
 </resources>

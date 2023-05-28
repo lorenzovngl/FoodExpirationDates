@@ -11,6 +11,7 @@
     <string name="food_name">खाद्य पदार्थ का नाम</string>
     <string name="expiration_date">समाप्ति तिथि</string>
     <string name="please_select_a_date">कृपया एक तिथि चुनें</string>
+    <string name="please_enter_a_food_name">कृपया खाद्य पदार्थ का नाम दर्ज करें</string>
     <string name="insert">डालें</string>
     <string name="update">अपडेट करें</string>
     <string name="cancel">रद्द करें</string>
@@ -28,10 +29,25 @@
     <string name="back">वापस</string>
     <string name="no_items_found">कोई आइटम नहीं मिला</string>
     <string name="please_insert_one">कृपया एक इंसर्ट करें</string>
+    <string name="menu">मेनू</string>
+    <string name="settings">सेटिंग्स</string>
+    <string name="date_format">तारीख का प्रारूप</string>
+    <string name="choose_the_date_format">तारीख का प्रारूप चुनें</string>
+    <string name="locale_formats">स्थानीय प्रारूप</string>
+    <string name="other_formats">अन्य प्रारूप</string>
 
     <string-array name="features">
         <item>खाद्य समाप्ति तिथियों की सूची को समय के आरोहण के क्रम में प्रदर्शित करें।</item>
         <item>आइटम जोड़ें, संपादित करें और हटाएं।</item>
         <item>सूचनाएं (जल्द ही उपलब्ध होगी)।</item>
+    </string-array>
+    <string-array name="example_foods">
+        <item>अंडे</item>
+        <item>पनीर</item>
+        <item>दूध</item>
+        <item>हैम</item>
+        <item>मक्खन</item>
+        <item>मशरूम</item>
+        <item>टमाटर</item>
     </string-array>
 </resources>

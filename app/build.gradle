@@ -20,8 +20,8 @@ android {
         applicationId "com.lorenzovainigli.foodexpirationdates"
         minSdk 24
         targetSdk 33
-        versionCode 10
-        versionName "0.8"
+        versionCode 11
+        versionName "0.8.1"
 
         archivesBaseName = "FoodExpirationDates-$versionName"
 

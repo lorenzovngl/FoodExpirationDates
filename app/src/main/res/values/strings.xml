@@ -11,6 +11,7 @@
     <string name="food_name">Food name</string>
     <string name="expiration_date">Expiration date</string>
     <string name="please_select_a_date">Please select a date</string>
+    <string name="please_enter_a_food_name">Please enter a food name</string>
     <string name="insert">Insert</string>
     <string name="update">Update</string>
     <string name="cancel">Cancel</string>
@@ -40,5 +41,14 @@
         <item>Display a list with food expiration dates in ascending time order.</item>
         <item>Add, edit and delete items.</item>
         <item>Notifications (available soon).</item>
+    </string-array>
+    <string-array name="example_foods">
+        <item>Eggs</item>
+        <item>Cheese</item>
+        <item>Milk</item>
+        <item>Ham</item>
+        <item>Butter</item>
+        <item>Mushrooms</item>
+        <item>Tomatoes</item>
     </string-array>
 </resources>

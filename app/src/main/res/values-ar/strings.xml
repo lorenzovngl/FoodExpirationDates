@@ -11,6 +11,7 @@
     <string name="food_name">اسم الغذاء</string>
     <string name="expiration_date">تاريخ انتهاء الصلاحية</string>
     <string name="please_select_a_date">الرجاء تحديد تاريخ</string>
+    <string name="please_enter_a_food_name">الرجاء إدخال اسم طعام</string>
     <string name="insert">إدراج</string>
     <string name="update">تحديث</string>
     <string name="cancel">يلغي</string>

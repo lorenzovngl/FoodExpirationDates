@@ -11,6 +11,7 @@
     <string name="food_name">Lebensmittelname</string>
     <string name="expiration_date">Verfallsdatum</string>
     <string name="please_select_a_date">Bitte Datum auswählen</string>
+    <string name="please_enter_a_food_name">Bitte geben Sie einen Lebensmittelnamen</string>
     <string name="insert">Einfügen</string>
     <string name="update">Aktualisieren</string>
     <string name="cancel">Abbrechen</string>
@@ -39,5 +40,14 @@
         <item>Anzeige einer Liste mit Lebensmittelverfallsdaten in aufsteigender zeitlicher Reihenfolge.</item>
         <item>Einträge hinzufügen, bearbeiten und löschen.</item>
         <item>Benachrichtigungen (bald verfügbar).</item>
+    </string-array>
+    <string-array name="example_foods">
+        <item>Eier</item>
+        <item>Käse</item>
+        <item>Milch</item>
+        <item>Fleisch</item>
+        <item>Butter</item>
+        <item>Pilze</item>
+        <item>Tomaten</item>
     </string-array>
 </resources>
