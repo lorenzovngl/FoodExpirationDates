@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.lorenzovainigli.foodexpirationdates.R
-import com.lorenzovainigli.foodexpirationdates.model.DateFormatProvider
+import com.lorenzovainigli.foodexpirationdates.model.PreferencesProvider
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -55,7 +55,7 @@ fun DateFormatDialog(isDialogOpen: Boolean = true, onDismissRequest: () -> Unit 
                         text = stringResource(id = R.string.locale_formats),
                         color = MaterialTheme.colorScheme.onSurface
                     )
-                    DateFormatProvider.getAvailLocaleDateFormats().forEach { item ->
+                    PreferencesProvider.getAvailLocaleDateFormats().forEach { item ->
                         DateFormatRow(item = item, onDismissRequest = onDismissRequest)
                     }
                     Text(
@@ -63,7 +63,7 @@ fun DateFormatDialog(isDialogOpen: Boolean = true, onDismissRequest: () -> Unit 
                         text = stringResource(id = R.string.other_formats),
                         color = MaterialTheme.colorScheme.onSurface
                     )
-                    DateFormatProvider.getAvailOtherDateFormats().forEach { item ->
+                    PreferencesProvider.getAvailOtherDateFormats().forEach { item ->
                         DateFormatRow(item = item, onDismissRequest = onDismissRequest)
                     }
                 }
@@ -83,7 +83,7 @@ fun DateFormatRow(item: String, onDismissRequest: () -> Unit){
         text = AnnotatedString(sdf.format(Calendar.getInstance().time)),
         style = MaterialTheme.typography.headlineSmall.copy(color = MaterialTheme.colorScheme.onSurface),
         onClick = {
-            DateFormatProvider.setUserDateFormat(context, item)
+            PreferencesProvider.setUserDateFormat(context, item)
             onDismissRequest()
         }
     )

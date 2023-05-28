@@ -35,6 +35,7 @@
     <string name="choose_the_date_format">Choose the date format</string>
     <string name="locale_formats">Locale formats</string>
     <string name="other_formats">Other formats</string>
+    <string name="your_food_is_expiring">Your food is expiring!</string>
 
     <string-array name="features">
         <item>Display a list with food expiration dates in ascending time order.</item>

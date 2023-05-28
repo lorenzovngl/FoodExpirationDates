@@ -36,6 +36,7 @@
     <string name="choose_the_date_format">Scegli il formato della data</string>
     <string name="locale_formats">Formati locali</string>
     <string name="other_formats">Altri formati</string>
+    <string name="your_food_is_expiring">Il tuo cibo sta scadendo!</string>
 
     <string-array name="features">
         <item>Visualizza un elenco con le date di scadenza degli alimenti in ordine crescente di tempo.</item>

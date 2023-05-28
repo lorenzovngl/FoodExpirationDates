@@ -119,6 +119,8 @@ dependencies {
     // To use Kotlin annotation processing tool (kapt)
     kapt "androidx.room:room-compiler:$room_version"
 
+    implementation "androidx.work:work-runtime-ktx:2.8.1"
+
     if (firebaseEnabled) {
         // Firebase
         // https://firebase.google.com/docs/android/setup#available-libraries
