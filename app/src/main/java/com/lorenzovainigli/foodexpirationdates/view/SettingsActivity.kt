@@ -30,6 +30,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TimePicker
 import androidx.compose.material3.rememberTimePickerState
@@ -50,6 +51,7 @@ import androidx.compose.ui.unit.dp
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.PreferencesProvider
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
+import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
 import com.lorenzovainigli.foodexpirationdates.view.composable.DateFormatDialog
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
 import java.text.SimpleDateFormat
@@ -84,10 +86,20 @@ class SettingsActivity : ComponentActivity() {
         var isNotificationTimeDialogOpened by remember {
             mutableStateOf(false)
         }
-        FoodExpirationDatesTheme {
+        var switchDarkThemeCheckedState by remember {
+            mutableStateOf(PreferencesProvider.getDarkTheme(context))
+        }
+        var switchDynamicColorsCheckedState by remember {
+            mutableStateOf(PreferencesProvider.getDynamicColors(context))
+        }
+        FoodExpirationDatesTheme(
+            darkTheme = switchDarkThemeCheckedState,
+            dynamicColor = switchDynamicColorsCheckedState
+        ) {
             Surface(
                 modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background
+                color = MaterialTheme.colorScheme.background,
+                tonalElevation = TonalElevation.level2()
             ) {
                 Scaffold(
                     topBar = {
@@ -98,7 +110,7 @@ class SettingsActivity : ComponentActivity() {
                                     Icon(
                                         imageVector = Icons.Outlined.ArrowBack,
                                         contentDescription = stringResource(id = R.string.back),
-                                        tint = MaterialTheme.colorScheme.onPrimary
+                                        tint = MaterialTheme.colorScheme.onSurface
                                     )
                                 }
                             }
@@ -212,6 +224,40 @@ class SettingsActivity : ComponentActivity() {
                                 style = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onSurface),
                                 onClick = {
                                     isNotificationTimeDialogOpened = true
+                                }
+                            )
+                        }
+                        Row {
+                            Text(
+                                text = "Dark theme",
+                                style = MaterialTheme.typography.titleLarge
+                            )
+                            Spacer(
+                                Modifier
+                                    .weight(1f)
+                                    .fillMaxHeight())
+                            Switch(
+                                checked = switchDarkThemeCheckedState,
+                                onCheckedChange = {
+                                    PreferencesProvider.setDarkTheme(context, it)
+                                    switchDarkThemeCheckedState = it
+                                }
+                            )
+                        }
+                        Row {
+                            Text(
+                                text = "Dynamic colors",
+                                style = MaterialTheme.typography.titleLarge
+                            )
+                            Spacer(
+                                Modifier
+                                    .weight(1f)
+                                    .fillMaxHeight())
+                            Switch(
+                                checked = switchDynamicColorsCheckedState,
+                                onCheckedChange = {
+                                    PreferencesProvider.setDynamicColors(context, it)
+                                    switchDynamicColorsCheckedState = it
                                 }
                             )
                         }

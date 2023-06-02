@@ -27,8 +27,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.di.AppModule
 import com.lorenzovainigli.foodexpirationdates.di.DaggerAppComponent
+import com.lorenzovainigli.foodexpirationdates.model.PreferencesProvider
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
+import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDateViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,10 +62,15 @@ class InsertActivity : ComponentActivity() {
         viewModel: ExpirationDateViewModel? = viewModel(),
         addExpirationDate: ((ExpirationDate) -> Unit)? = viewModel!!::addExpirationDate
     ) {
-        FoodExpirationDatesTheme {
+        val context = LocalContext.current
+        FoodExpirationDatesTheme(
+            darkTheme = PreferencesProvider.getDarkTheme(context),
+            dynamicColor = PreferencesProvider.getDynamicColors(context)
+        ) {
             Surface(
                 modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background
+                color = MaterialTheme.colorScheme.background,
+                tonalElevation = TonalElevation.level2()
             ) {
                 val activity = (LocalContext.current as? Activity)
                 val itemToEdit = itemId?.let { viewModel?.getDate(it) }
@@ -92,7 +99,7 @@ class InsertActivity : ComponentActivity() {
                                     Icon(
                                         imageVector = Icons.Outlined.ArrowBack,
                                         contentDescription = stringResource(id = R.string.back),
-                                        tint = MaterialTheme.colorScheme.onPrimary
+                                        tint = MaterialTheme.colorScheme.onSurface
                                     )
                                 }
                             }

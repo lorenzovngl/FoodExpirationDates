@@ -14,6 +14,8 @@ class PreferencesProvider {
         private const val keyDateFormat = "date_format"
         private const val keyNotificationTimeHour = "notification_time_hour"
         private const val keyNotificationTimeMinute = "notification_time_minute"
+        private const val darkTheme = "dark_theme"
+        private const val dynamicColors = "dynamic_colors"
         private val availLocaleDateFormats = arrayOf(DateFormat.SHORT, DateFormat.MEDIUM)
         private val availOtherDateFormats =
             arrayOf(
@@ -62,6 +64,26 @@ class PreferencesProvider {
             return context.getSharedPreferences(sharedPrefsName, ComponentActivity.MODE_PRIVATE)
                 .edit().putInt(keyNotificationTimeHour, hour)
                 .putInt(keyNotificationTimeMinute, minute).apply()
+        }
+
+        fun getDarkTheme(context: Context): Boolean {
+            return context.getSharedPreferences(sharedPrefsName, ComponentActivity.MODE_PRIVATE)
+                .getBoolean(darkTheme, false)
+        }
+
+        fun setDarkTheme(context: Context, darkThemeEnabled: Boolean) {
+            return context.getSharedPreferences(sharedPrefsName, ComponentActivity.MODE_PRIVATE)
+                .edit().putBoolean(darkTheme, darkThemeEnabled).apply()
+        }
+
+        fun getDynamicColors(context: Context): Boolean {
+            return context.getSharedPreferences(sharedPrefsName, ComponentActivity.MODE_PRIVATE)
+                .getBoolean(dynamicColors, false)
+        }
+
+        fun setDynamicColors(context: Context, dynamicColorsEnabled: Boolean) {
+            return context.getSharedPreferences(sharedPrefsName, ComponentActivity.MODE_PRIVATE)
+                .edit().putBoolean(dynamicColors, dynamicColorsEnabled).apply()
         }
     }
 }

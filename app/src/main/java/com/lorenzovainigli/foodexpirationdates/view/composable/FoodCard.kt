@@ -29,6 +29,7 @@ import com.lorenzovainigli.foodexpirationdates.model.PreferencesProvider
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.ui.theme.Orange500
 import com.lorenzovainigli.foodexpirationdates.ui.theme.Red700
+import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
 import com.lorenzovainigli.foodexpirationdates.ui.theme.Yellow500
 import java.text.SimpleDateFormat
 import java.util.*
@@ -63,20 +64,20 @@ fun FoodCard(item: ExpirationDate, onClickEdit: () -> Unit, onClickDelete: () ->
             stringResource(R.string.in_n_days, days + 1)
         } else sdf.format(item.expirationDate)
     val bgColor =
-        if (item.expirationDate < today.time.time) Red700
-        else if (item.expirationDate < tomorrow.time.time) Orange500
-        else if (item.expirationDate < withinAWeek.time.time) Yellow500
+        if (item.expirationDate < today.time.time) Red700.copy(alpha = .8f)
+        else if (item.expirationDate < tomorrow.time.time) Orange500.copy(alpha = .8f)
+        else if (item.expirationDate < withinAWeek.time.time) Yellow500.copy(alpha = .8f)
         else Color.Transparent
     val textColor =
-        if (item.expirationDate < today.time.time) Color.White
-        else if (item.expirationDate < tomorrow.time.time) Color.Black
-        else if (item.expirationDate < withinAWeek.time.time) Color.Black
+        if (item.expirationDate < today.time.time) Color.White.copy(alpha = .9f)
+        else if (item.expirationDate < tomorrow.time.time) Color.Black.copy(alpha = .9f)
+        else if (item.expirationDate < withinAWeek.time.time) Color.Black.copy(alpha = .9f)
         else MaterialTheme.colorScheme.onSurface
     Surface(
         modifier = Modifier
             .padding(4.dp)
             .clip(RoundedCornerShape(10.dp)),
-        tonalElevation = 2.dp
+        tonalElevation = TonalElevation.level5()
     ) {
         Row(
             modifier = Modifier

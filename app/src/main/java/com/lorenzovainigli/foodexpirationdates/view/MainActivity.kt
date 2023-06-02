@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -26,6 +28,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -33,7 +36,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -54,6 +59,7 @@ import com.lorenzovainigli.foodexpirationdates.model.PreferencesProvider
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.worker.CheckExpirationsWorker
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
+import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
 import com.lorenzovainigli.foodexpirationdates.view.composable.DropdownMenu
 import com.lorenzovainigli.foodexpirationdates.view.composable.FoodCard
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
@@ -95,16 +101,32 @@ class MainActivity : ComponentActivity() {
         if (viewModel != null) {
             scheduleDailyCheckOfExpirations(viewModel.getDates())
         }
-        FoodExpirationDatesTheme {
+        FoodExpirationDatesTheme(
+            darkTheme = PreferencesProvider.getDarkTheme(context),
+            dynamicColor = PreferencesProvider.getDynamicColors(context)
+        ) {
             Surface(
                 modifier = Modifier
                     .fillMaxSize(),
-                color = MaterialTheme.colorScheme.surface
+                color = MaterialTheme.colorScheme.surface,
+                tonalElevation = TonalElevation.level2()
             ) {
                 Scaffold(
                     topBar = {
                         MyTopAppBar(
                             title = stringResource(id = R.string.app_name),
+                            navigationIcon = {
+                                Image(
+                                    modifier = Modifier
+                                        .padding(horizontal = 7.dp)
+                                        .size(48.dp)
+                                        //.clip(RoundedCornerShape(20))
+                                        .background(MaterialTheme.colorScheme.surfaceColorAtElevation(TonalElevation.level2())),
+                                    painter = painterResource(id = R.drawable.fed_icon),
+                                    contentDescription = null,
+                                    contentScale = ContentScale.Crop
+                                )
+                            },
                             actions = {
                                 DropdownMenu()
                             }
@@ -122,8 +144,8 @@ class MainActivity : ComponentActivity() {
                                         )
                                     )
                                 },
-                                containerColor = MaterialTheme.colorScheme.tertiary,
-                                contentColor = MaterialTheme.colorScheme.onTertiary
+                                containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                                contentColor = MaterialTheme.colorScheme.onTertiaryContainer
                             ) {
                                 Icon(
                                     imageVector = Icons.Rounded.Add,
@@ -143,20 +165,31 @@ class MainActivity : ComponentActivity() {
                                 modifier = Modifier
                                     .padding(4.dp)
                             ) {
-                                for (item in items) {
-                                    FoodCard(
-                                        item = item,
-                                        onClickEdit = {
-                                            val intent = Intent(context, InsertActivity::class.java)
-                                            intent.putExtra("ITEM_ID", item.id)
-                                            context.startActivity(intent)
-                                        },
-                                        onClickDelete = {
-                                            if (deleteExpirationDate != null) {
-                                                deleteExpirationDate(item)
+                                if (!BuildConfig.DEBUG){
+                                    for (item in getItemsForPreview()){
+                                        FoodCard(
+                                            item = item,
+                                            onClickEdit = {},
+                                            onClickDelete = {}
+                                        )
+                                    }
+                                } else {
+                                    for (item in items) {
+                                        FoodCard(
+                                            item = item,
+                                            onClickEdit = {
+                                                val intent =
+                                                    Intent(context, InsertActivity::class.java)
+                                                intent.putExtra("ITEM_ID", item.id)
+                                                context.startActivity(intent)
+                                            },
+                                            onClickDelete = {
+                                                if (deleteExpirationDate != null) {
+                                                    deleteExpirationDate(item)
+                                                }
                                             }
-                                        }
-                                    )
+                                        )
+                                    }
                                 }
                             }
                         }

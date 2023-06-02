@@ -68,7 +68,7 @@ fun DropdownMenu() {
         Icon(
             imageVector = Icons.Outlined.MoreVert,
             contentDescription = stringResource(id = R.string.menu),
-            tint = MaterialTheme.colorScheme.onPrimary
+            tint = MaterialTheme.colorScheme.onSurface
         )
     }
     DropdownMenu(

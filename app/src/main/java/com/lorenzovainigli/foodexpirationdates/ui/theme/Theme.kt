@@ -6,6 +6,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val LightColors = lightColorScheme(
@@ -77,7 +78,7 @@ private val DarkColors = darkColorScheme(
 fun FoodExpirationDatesTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -90,12 +91,11 @@ fun FoodExpirationDatesTheme(
     }
 
     val systemUiController = rememberSystemUiController()
-    val useDarkIcons = isSystemInDarkTheme()
+    //val useDarkIcons = isSystemInDarkTheme()
 
     SideEffect {
         systemUiController.setSystemBarsColor(
-            color = colorScheme.primary,
-            darkIcons = useDarkIcons
+            color = colorScheme.surfaceColorAtElevation(3.dp)
         )
     }
 
