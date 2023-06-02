@@ -89,7 +89,7 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
       1. Create a Firebase project in [Firebase console](https://console.firebase.google.com/);
       2. Get the file `google-services.json` as [explained here](https://support.google.com/firebase/answer/7015592#zippy=%2Cin-this-article:~:text=Get%20config%20file%20for%20your%20Android%20app) and put it in the project root.
 
-   - Set `firebaseEnabled = false` in [`build.gradle`](https://github.com/lorenzovngl/FoodExpirationDates/blob/main/build.gradle#L7) to disable the Firebase SDK in the app.
+   - Set `val firebaseEnabled = false` in [`build.gradle.kts`](https://github.com/lorenzovngl/FoodExpirationDates/blob/main/build.gradle.kts#L6) and in [`app/build.gradle.kts`](https://github.com/lorenzovngl/FoodExpirationDates/blob/main/app/build.gradle.kts#L8) to disable the Firebase SDK in the app.
 
 3. Run the app!
 
