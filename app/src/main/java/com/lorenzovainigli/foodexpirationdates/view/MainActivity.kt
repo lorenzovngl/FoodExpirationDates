@@ -3,7 +3,6 @@ package com.lorenzovainigli.foodexpirationdates.view
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -44,12 +43,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.Wallpapers
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.workDataOf
 import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.di.AppModule
@@ -57,7 +51,6 @@ import com.lorenzovainigli.foodexpirationdates.di.DaggerAppComponent
 import com.lorenzovainigli.foodexpirationdates.model.NotificationManager
 import com.lorenzovainigli.foodexpirationdates.model.PreferencesProvider
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
-import com.lorenzovainigli.foodexpirationdates.model.worker.CheckExpirationsWorker
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
 import com.lorenzovainigli.foodexpirationdates.view.composable.DropdownMenu
@@ -65,10 +58,7 @@ import com.lorenzovainigli.foodexpirationdates.view.composable.FoodCard
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDateViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
 import java.util.Calendar
-import java.util.concurrent.TimeUnit
 import kotlin.math.min
 
 @AndroidEntryPoint
@@ -98,9 +88,6 @@ class MainActivity : ComponentActivity() {
         deleteExpirationDate: ((ExpirationDate) -> Unit)? = viewModel!!::deleteExpirationDate,
     ) {
         val context = LocalContext.current
-        if (viewModel != null) {
-            scheduleDailyCheckOfExpirations(viewModel.getDates())
-        }
         FoodExpirationDatesTheme(
             darkTheme = PreferencesProvider.getDarkTheme(context),
             dynamicColor = PreferencesProvider.getDynamicColors(context)
@@ -241,98 +228,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-
-    private fun scheduleDailyCheckOfExpirations(dates: Flow<List<ExpirationDate>>) {
-        lifecycleScope.launch {
-            val sb = StringBuilder()
-            dates.collect { list ->
-                val today = Calendar.getInstance()
-                val twoDaysAgo = Calendar.getInstance()
-                twoDaysAgo.add(Calendar.DAY_OF_MONTH, -2)
-                val yesterday = Calendar.getInstance()
-                yesterday.add(Calendar.DAY_OF_MONTH, -1)
-                val tomorrow = Calendar.getInstance()
-                tomorrow.add(Calendar.DAY_OF_MONTH, 1)
-                val msInADay = (1000 * 60 * 60 * 24)
-                val filteredList = list.filter {
-                    it.expirationDate < tomorrow.time.time
-                }
-                if (filteredList.isEmpty()){
-                    return@collect
-                }
-                filteredList.map {
-                    sb.append(it.foodName).append(" (")
-                    if (it.expirationDate < twoDaysAgo.time.time) {
-                        val days = (today.time.time - it.expirationDate) / msInADay
-                        sb.append(getString(R.string.n_days_ago, days))
-                    } else if (it.expirationDate < yesterday.time.time)
-                        sb.append(getString(R.string.yesterday).lowercase())
-                    else if (it.expirationDate < today.time.time){
-                        sb.append(getString(R.string.today).lowercase())
-                    } else {
-                        sb.append(getString(R.string.tomorrow).lowercase())
-                    }
-                    sb.append("), ")
-                }
-                val currentTime = Calendar.getInstance()
-                val dueTime = Calendar.getInstance().apply {
-                    set(Calendar.HOUR_OF_DAY, PreferencesProvider.getUserNotificationTimeHour(
-                        applicationContext))
-                    set(Calendar.MINUTE, PreferencesProvider.getUserNotificationTimeMinute(
-                        applicationContext))
-                    set(Calendar.SECOND, 0)
-                }
-                if (currentTime > dueTime)
-                    dueTime.add(Calendar.DAY_OF_MONTH, 1)
-                var message = ""
-                if (sb.toString().length > 2)
-                    message = sb.toString().substring(0, sb.toString().length - 2) + "."
-                val inputData = workDataOf("message" to message)
-                val initialDelay = dueTime.timeInMillis - currentTime.timeInMillis
-                val formattedTime = formatTimeDifference(initialDelay)
-                if (BuildConfig.DEBUG) {
-                    Toast.makeText(
-                        applicationContext,
-                        "Notification in $formattedTime",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                val workRequest = PeriodicWorkRequestBuilder<CheckExpirationsWorker>(
-                    1, TimeUnit.DAYS
-                )
-                    .setInputData(inputData)
-                    .setInitialDelay(initialDelay, TimeUnit.MILLISECONDS)
-                    .build()
-                WorkManager.getInstance(applicationContext)
-                    .enqueueUniquePeriodicWork(
-                        CheckExpirationsWorker.workerID,
-                        ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE,
-                        workRequest
-                    )
-            }
-        }
-    }
-
-    private fun formatTimeDifference(timeDifference: Long): String {
-        val days = TimeUnit.MILLISECONDS.toDays(timeDifference)
-        val hours = TimeUnit.MILLISECONDS.toHours(timeDifference) % 24
-        val minutes = TimeUnit.MILLISECONDS.toMinutes(timeDifference) % 60
-        val seconds = TimeUnit.MILLISECONDS.toSeconds(timeDifference) % 60
-        val formattedTime = StringBuilder()
-        if (days > 0) {
-            formattedTime.append("$days day${if (days > 1) "s" else ""} ")
-        }
-        if (hours > 0) {
-            formattedTime.append("$hours hour${if (hours > 1) "s" else ""} ")
-        }
-        if (minutes > 0) {
-            formattedTime.append("$minutes minute${if (minutes > 1) "s" else ""} ")
-        }
-        if (seconds > 0) {
-            formattedTime.append("$seconds second${if (seconds > 1) "s" else ""} ")
-        }
-        return formattedTime.toString().trim()
     }
 
     private fun getItemsForPreview(): List<ExpirationDate> {

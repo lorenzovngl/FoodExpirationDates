@@ -115,6 +115,8 @@ dependencies {
     kapt("com.google.dagger:dagger-compiler:$daggerVersion")
     implementation("com.google.dagger:hilt-android:$daggerVersion")
     kapt("com.google.dagger:hilt-compiler:$daggerVersion")
+    implementation("androidx.hilt:hilt-common:1.0.0")
+    implementation("androidx.hilt:hilt-work:1.0.0")
 
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")

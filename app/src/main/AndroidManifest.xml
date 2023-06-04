@@ -35,6 +35,11 @@
         <activity
             android:name=".view.SettingsActivity">
         </activity>
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            tools:node="remove">
+        </provider>
         <service
             android:name=".model.worker.CheckExpirationsWorker"
             android:exported="false"
