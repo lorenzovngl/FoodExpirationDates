@@ -53,7 +53,7 @@ import com.lorenzovainigli.foodexpirationdates.model.PreferencesProvider
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
-import com.lorenzovainigli.foodexpirationdates.view.composable.DropdownMenu
+import com.lorenzovainigli.foodexpirationdates.view.composable.MainMenu
 import com.lorenzovainigli.foodexpirationdates.view.composable.FoodCard
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDateViewModel
@@ -108,14 +108,18 @@ class MainActivity : ComponentActivity() {
                                         .padding(horizontal = 7.dp)
                                         .size(48.dp)
                                         //.clip(RoundedCornerShape(20))
-                                        .background(MaterialTheme.colorScheme.surfaceColorAtElevation(TonalElevation.level2())),
+                                        .background(
+                                            MaterialTheme.colorScheme.surfaceColorAtElevation(
+                                                TonalElevation.level2()
+                                            )
+                                        ),
                                     painter = painterResource(id = R.drawable.fed_icon),
                                     contentDescription = null,
                                     contentScale = ContentScale.Crop
                                 )
                             },
                             actions = {
-                                DropdownMenu()
+                                MainMenu()
                             }
                         )
                     },
