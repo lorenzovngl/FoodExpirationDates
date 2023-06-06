@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,19 +20,17 @@ import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TimePicker
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -42,7 +39,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -90,7 +86,7 @@ class SettingsActivity : ComponentActivity() {
         val notificationTimeHour = PreferencesProvider.getUserNotificationTimeHour(context)
         val notificationTimeMinute = PreferencesProvider.getUserNotificationTimeMinute(context)
         val timePickerState = rememberTimePickerState(notificationTimeHour, notificationTimeMinute, true)
-        var isNotificationTimeDialogOpened by remember {
+        var isNotificationTimeBottomSheetOpen by remember {
             mutableStateOf(false)
         }
         var switchDarkThemeCheckedState by remember {
@@ -132,41 +128,11 @@ class SettingsActivity : ComponentActivity() {
                             isDateFormatDialogOpened = false
                         }
                     )
-                    if (isNotificationTimeDialogOpened) {
-                        DatePickerDialog(
-                            dismissButton = {
-                                OutlinedButton(
-                                    onClick = { isNotificationTimeDialogOpened = false },
-                                    border = BorderStroke(
-                                        1.dp,
-                                        MaterialTheme.colorScheme.tertiary
-                                    ),
-                                    colors = ButtonDefaults.buttonColors(
-                                        containerColor = Color.Transparent,
-                                        contentColor = MaterialTheme.colorScheme.tertiary
-                                    )
-                                ) {
-                                    Text(text = stringResource(id = R.string.cancel))
-                                }
-                            },
-                            confirmButton = {
-                                Button(
-                                    onClick = {
-                                        PreferencesProvider.setUserNotificationTime(
-                                            context,
-                                            timePickerState.hour, timePickerState.minute
-                                        )
-                                        scheduleDailyNotification(timePickerState.hour, timePickerState.minute)
-                                        isNotificationTimeDialogOpened = false
-                                    },
-                                    colors = ButtonDefaults.buttonColors(
-                                        containerColor = MaterialTheme.colorScheme.tertiary,
-                                        contentColor = MaterialTheme.colorScheme.onTertiary
-                                    )
-                                ) {
-                                    Text(text = stringResource(id = R.string.insert))
-                                }
-                            },
+                    if (isNotificationTimeBottomSheetOpen) {
+                        ModalBottomSheet(
+                            sheetState = rememberModalBottomSheetState(
+                                skipPartiallyExpanded = true
+                            ),
                             content = {
                                 Column(
                                     modifier = Modifier
@@ -179,7 +145,12 @@ class SettingsActivity : ComponentActivity() {
                                 }
                             },
                             onDismissRequest = {
-                                isNotificationTimeDialogOpened = false
+                                PreferencesProvider.setUserNotificationTime(
+                                    context,
+                                    timePickerState.hour, timePickerState.minute
+                                )
+                                scheduleDailyNotification(timePickerState.hour, timePickerState.minute)
+                                isNotificationTimeBottomSheetOpen = false
                             }
                         )
                     }
@@ -231,7 +202,7 @@ class SettingsActivity : ComponentActivity() {
                                 text = AnnotatedString(text),
                                 style = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onSurface),
                                 onClick = {
-                                    isNotificationTimeDialogOpened = true
+                                    isNotificationTimeBottomSheetOpen = true
                                 }
                             )
                         }

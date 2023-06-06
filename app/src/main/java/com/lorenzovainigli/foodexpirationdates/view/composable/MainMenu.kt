@@ -60,11 +60,11 @@ fun getMenuItems(): List<MenuItem> {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainMenu() {
-    var isDropdownOpen by remember {
+    var isBottomSheetOpen by remember {
         mutableStateOf(false)
     }
     IconButton(onClick = {
-        isDropdownOpen = true
+        isBottomSheetOpen = true
     }) {
         Icon(
             imageVector = Icons.Outlined.MoreVert,
@@ -72,9 +72,9 @@ fun MainMenu() {
             tint = MaterialTheme.colorScheme.onSurface
         )
     }
-    if (isDropdownOpen) {
+    if (isBottomSheetOpen) {
         ModalBottomSheet(onDismissRequest = {
-            isDropdownOpen = false
+            isBottomSheetOpen = false
         }) {
             val list = getMenuItems()
             // adding each menu item
@@ -97,7 +97,7 @@ fun MainMenu() {
                     },
                     onClick = {
                         menuItem.action()
-                        isDropdownOpen = false
+                        isBottomSheetOpen = false
                     },
                     enabled = true
                 )
