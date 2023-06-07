@@ -9,12 +9,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
@@ -29,6 +32,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
@@ -40,7 +44,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment.Companion.CenterEnd
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.compose.ui.Alignment.Companion.CenterStart
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -93,14 +99,26 @@ class SettingsActivity : ComponentActivity() {
         var isNotificationTimeDialogOpened by remember {
             mutableStateOf(false)
         }
-        var switchDarkThemeCheckedState by remember {
+//        var switchDarkThemeCheckedState by remember {
+//            mutableStateOf(PreferencesProvider.getDarkTheme(context))
+//        }
+        var radioButtonDarkThemeState by remember {
+            mutableStateOf(listOf("On","Off","System"))
+        }
+        var curRadioButton by remember {
+            mutableStateOf("System")
+        }
+        var darkThemeState by remember {
             mutableStateOf(PreferencesProvider.getDarkTheme(context))
+        }
+        var isSystemtheme by remember {
+            mutableStateOf(true)
         }
         var switchDynamicColorsCheckedState by remember {
             mutableStateOf(PreferencesProvider.getDynamicColors(context))
         }
         FoodExpirationDatesTheme(
-            darkTheme = switchDarkThemeCheckedState,
+            darkTheme = if (isSystemtheme) isSystemInDarkTheme() else darkThemeState ,
             dynamicColor = switchDynamicColorsCheckedState
         ) {
             Surface(
@@ -238,19 +256,93 @@ class SettingsActivity : ComponentActivity() {
                         Row {
                             Text(
                                 text = "Dark theme",
-                                style = MaterialTheme.typography.titleLarge
+                                style = MaterialTheme.typography.headlineSmall
                             )
-                            Spacer(
-                                Modifier
-                                    .weight(1f)
-                                    .fillMaxHeight())
-                            Switch(
-                                checked = switchDarkThemeCheckedState,
-                                onCheckedChange = {
-                                    PreferencesProvider.setDarkTheme(context, it)
-                                    switchDarkThemeCheckedState = it
+                        }
+                        radioButtonDarkThemeState.forEach {
+                            Box(modifier = Modifier.fillMaxWidth()) {
+                            Text(
+                                text = it,
+                                style = MaterialTheme.typography.titleMedium,
+                                modifier = Modifier.align(CenterStart)
+                            )
+                            RadioButton(selected = it == curRadioButton, onClick = {
+                                curRadioButton = it
+                                if (curRadioButton == "On"){
+                                    PreferencesProvider.setDarkTheme(context,true)
+                                    darkThemeState = true
+                                    isSystemtheme = false
                                 }
-                            )
+                                if (curRadioButton == "Off"){
+                                    PreferencesProvider.setDarkTheme(context,false)
+                                    darkThemeState = false
+                                    isSystemtheme = false
+                                }
+                                if (curRadioButton == "System"){
+                                    isSystemtheme = true
+//                                    PreferencesProvider.setDarkTheme(context,
+//                                    it is not working because it is composable function and this can only invoke by composable function
+//                                        isSystemInDarkTheme()
+//                                    )
+                                }
+
+                            }, modifier = Modifier.align(alignment = CenterEnd))
+                        }
+//                        Row {
+//                            Text(
+//                                text = "Dark theme",
+//                                style = MaterialTheme.typography.headlineSmall
+//                            )
+//                        }
+//                        Box(modifier = Modifier.fillMaxWidth()) {
+//                            Text(
+//                                text = "On",
+//                                style = MaterialTheme.typography.titleMedium,
+//                                modifier = Modifier.align(CenterStart)
+//                            )
+//                            RadioButton(selected = radioButtonDarkThemeState == "on", onClick = {
+//                                PreferencesProvider.setDarkTheme(context,true)
+//                                darkThemeState = true
+//                                radioButtonDarkThemeState = "on"
+//
+//                            }, modifier = Modifier.align(alignment = CenterEnd))
+//                        }
+//                        Box(modifier = Modifier.fillMaxWidth()) {
+//                            Text(
+//                                text = "Off",
+//                                style = MaterialTheme.typography.titleMedium,
+//                                modifier = Modifier.align(CenterStart)
+//                            )
+//                            RadioButton(selected = true, onClick = { }, modifier = Modifier.align(alignment = CenterEnd))
+//                        }
+//                        Row(modifier = Modifier.align(Alignment.Start)) {
+//
+//                            Box(modifier = Modifier.fillMaxWidth()) {
+//                                Text(
+//                                    text = "System default",
+//                                    style = MaterialTheme.typography.titleMedium,
+//                                    modifier = Modifier.align(CenterStart)
+//                                )
+//                                RadioButton(selected = false, onClick = { }, modifier = Modifier.align(alignment = CenterEnd))
+//                            }
+//                        }
+
+//                        Row {
+//                            Text(
+//                                text = "Dark theme",
+//                                style = MaterialTheme.typography.titleLarge
+//                            )
+//                            Spacer(
+//                                Modifier
+//                                    .weight(1f)
+//                                    .fillMaxHeight())
+//                            Switch(
+//                                checked = switchDarkThemeCheckedState,
+//                                onCheckedChange = {
+//                                    PreferencesProvider.setDarkTheme(context, it)
+//                                    switchDarkThemeCheckedState = it
+//                                }
+//                            )
                         }
                         Row {
                             Text(
@@ -269,6 +361,7 @@ class SettingsActivity : ComponentActivity() {
                                 }
                             )
                         }
+
                     }
                 }
             }
