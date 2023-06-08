@@ -95,6 +95,12 @@ class SettingsActivity : ComponentActivity() {
         var switchDynamicColorsCheckedState by remember {
             mutableStateOf(PreferencesProvider.getDynamicColors(context))
         }
+        var darkThemeBtnTxt by remember {
+            mutableStateOf(listOf("Dark", "System", "Light"))
+        }
+        var curSelectedThemeTxt by remember {
+            mutableStateOf("System")
+        }
         FoodExpirationDatesTheme(
             darkTheme = switchDarkThemeCheckedState,
             dynamicColor = switchDynamicColorsCheckedState
@@ -206,6 +212,36 @@ class SettingsActivity : ComponentActivity() {
                                 }
                             )
                         }
+                        Text(
+                            text = "Theme",
+                            style = MaterialTheme.typography.titleLarge
+                        )
+                        Row {
+
+                            darkThemeBtnTxt.forEach {
+                                Spacer(modifier = Modifier.fillMaxHeight()
+                                    .weight(0.1f))
+                                if (it == curSelectedThemeTxt){
+                                    Button(onClick = {
+                                        curSelectedThemeTxt = it
+                                    },
+                                    ){
+                                        Text(text = it)
+                                    }
+                                } else {
+                                    OutlinedButton(onClick = {
+                                        curSelectedThemeTxt = it },
+                                    ){
+                                        Text(text = it)
+                                    }
+                                }
+
+                                Spacer(modifier = Modifier.fillMaxHeight()
+                                    .weight(0.1f))
+                            }
+                        }
+
+
                         Row {
                             Text(
                                 text = "Dark theme",
