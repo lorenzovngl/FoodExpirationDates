@@ -2,6 +2,7 @@ package com.lorenzovainigli.foodexpirationdates.model
 
 import android.content.Context
 import androidx.activity.ComponentActivity
+import java.lang.Exception
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -27,6 +28,11 @@ class PreferencesProvider {
                 "d/MM",
                 "d/MM/yyyy"
             )
+        enum class OnOffSystem(val label: String) {
+            ON("On"),
+            SYSTEM("System"),
+            OFF("Off")
+        }
 
         fun getAvailLocaleDateFormats(): List<String> {
             return availLocaleDateFormats.map {
@@ -66,24 +72,34 @@ class PreferencesProvider {
                 .putInt(keyNotificationTimeMinute, minute).apply()
         }
 
-        fun getDarkTheme(context: Context): Boolean {
-            return context.getSharedPreferences(sharedPrefsName, ComponentActivity.MODE_PRIVATE)
-                .getBoolean(darkTheme, false)
+        fun getDarkTheme(context: Context): Int {
+            try {
+                return context.getSharedPreferences(sharedPrefsName, ComponentActivity.MODE_PRIVATE)
+                    .getInt(darkTheme, OnOffSystem.SYSTEM.ordinal)
+            } catch (e: Exception){
+                e.printStackTrace()
+            }
+            return OnOffSystem.SYSTEM.ordinal
         }
 
-        fun setDarkTheme(context: Context, darkThemeEnabled: Boolean) {
+        fun setDarkTheme(context: Context, darkThemeSetting: OnOffSystem) {
             return context.getSharedPreferences(sharedPrefsName, ComponentActivity.MODE_PRIVATE)
-                .edit().putBoolean(darkTheme, darkThemeEnabled).apply()
+                .edit().putInt(darkTheme, darkThemeSetting.ordinal).apply()
         }
 
-        fun getDynamicColors(context: Context): Boolean {
+        fun getDynamicColors(context: Context): Int {
+            try {
             return context.getSharedPreferences(sharedPrefsName, ComponentActivity.MODE_PRIVATE)
-                .getBoolean(dynamicColors, false)
+                .getInt(dynamicColors, OnOffSystem.SYSTEM.ordinal)
+            } catch (e: Exception){
+                e.printStackTrace()
+            }
+            return OnOffSystem.SYSTEM.ordinal
         }
 
-        fun setDynamicColors(context: Context, dynamicColorsEnabled: Boolean) {
+        fun setDynamicColors(context: Context, dynamicColorsSetting: OnOffSystem) {
             return context.getSharedPreferences(sharedPrefsName, ComponentActivity.MODE_PRIVATE)
-                .edit().putBoolean(dynamicColors, dynamicColorsEnabled).apply()
+                .edit().putInt(dynamicColors, dynamicColorsSetting.ordinal).apply()
         }
     }
 }

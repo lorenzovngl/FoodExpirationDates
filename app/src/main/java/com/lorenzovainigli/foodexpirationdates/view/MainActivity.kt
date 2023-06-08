@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -89,8 +90,16 @@ class MainActivity : ComponentActivity() {
     ) {
         val context = LocalContext.current
         FoodExpirationDatesTheme(
-            darkTheme = PreferencesProvider.getDarkTheme(context),
-            dynamicColor = PreferencesProvider.getDynamicColors(context)
+            darkTheme = when (PreferencesProvider.getDarkTheme(context)){
+                PreferencesProvider.Companion.OnOffSystem.ON.ordinal -> true
+                PreferencesProvider.Companion.OnOffSystem.OFF.ordinal -> false
+                else -> isSystemInDarkTheme()
+            },
+            dynamicColor = when (PreferencesProvider.getDynamicColors(context)){
+                PreferencesProvider.Companion.OnOffSystem.ON.ordinal -> true
+                PreferencesProvider.Companion.OnOffSystem.OFF.ordinal -> false
+                else -> false
+            }
         ) {
             Surface(
                 modifier = Modifier
