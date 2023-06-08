@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,14 +21,15 @@ import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TimePicker
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -85,19 +87,28 @@ class SettingsActivity : ComponentActivity() {
         }
         val notificationTimeHour = PreferencesProvider.getUserNotificationTimeHour(context)
         val notificationTimeMinute = PreferencesProvider.getUserNotificationTimeMinute(context)
-        val timePickerState = rememberTimePickerState(notificationTimeHour, notificationTimeMinute, true)
+        val timePickerState =
+            rememberTimePickerState(notificationTimeHour, notificationTimeMinute, true)
         var isNotificationTimeBottomSheetOpen by remember {
             mutableStateOf(false)
         }
-        var switchDarkThemeCheckedState by remember {
+        var darkThemeState by remember {
             mutableStateOf(PreferencesProvider.getDarkTheme(context))
         }
-        var switchDynamicColorsCheckedState by remember {
+        var dynamicColorsState by remember {
             mutableStateOf(PreferencesProvider.getDynamicColors(context))
         }
         FoodExpirationDatesTheme(
-            darkTheme = switchDarkThemeCheckedState,
-            dynamicColor = switchDynamicColorsCheckedState
+            darkTheme = when (darkThemeState) {
+                PreferencesProvider.Companion.OnOffSystem.ON.ordinal -> true
+                PreferencesProvider.Companion.OnOffSystem.OFF.ordinal -> false
+                else -> isSystemInDarkTheme()
+            },
+            dynamicColor = when (dynamicColorsState) {
+                PreferencesProvider.Companion.OnOffSystem.ON.ordinal -> true
+                PreferencesProvider.Companion.OnOffSystem.OFF.ordinal -> false
+                else -> false
+            }
         ) {
             Surface(
                 modifier = Modifier.fillMaxSize(),
@@ -149,7 +160,10 @@ class SettingsActivity : ComponentActivity() {
                                     context,
                                     timePickerState.hour, timePickerState.minute
                                 )
-                                scheduleDailyNotification(timePickerState.hour, timePickerState.minute)
+                                scheduleDailyNotification(
+                                    timePickerState.hour,
+                                    timePickerState.minute
+                                )
                                 isNotificationTimeBottomSheetOpen = false
                             }
                         )
@@ -169,7 +183,8 @@ class SettingsActivity : ComponentActivity() {
                             Spacer(
                                 Modifier
                                     .weight(1f)
-                                    .fillMaxHeight())
+                                    .fillMaxHeight()
+                            )
                             ClickableText(
                                 modifier = Modifier.testTag(stringResource(id = R.string.date_format)),
                                 text = AnnotatedString(sdf.format(Calendar.getInstance().time)),
@@ -187,13 +202,14 @@ class SettingsActivity : ComponentActivity() {
                             Spacer(
                                 Modifier
                                     .weight(1f)
-                                    .fillMaxHeight())
+                                    .fillMaxHeight()
+                            )
                             var text = ""
-                            if (timePickerState.hour < 10){
+                            if (timePickerState.hour < 10) {
                                 text += "0"
                             }
                             text = timePickerState.hour.toString() + ":"
-                            if (timePickerState.minute < 10){
+                            if (timePickerState.minute < 10) {
                                 text += "0"
                             }
                             text += timePickerState.minute.toString()
@@ -206,39 +222,81 @@ class SettingsActivity : ComponentActivity() {
                                 }
                             )
                         }
+                        Text(
+                            text = "Theme",
+                            style = MaterialTheme.typography.titleLarge
+                        )
                         Row {
-                            Text(
-                                text = "Dark theme",
-                                style = MaterialTheme.typography.titleLarge
-                            )
-                            Spacer(
-                                Modifier
-                                    .weight(1f)
-                                    .fillMaxHeight())
-                            Switch(
-                                checked = switchDarkThemeCheckedState,
-                                onCheckedChange = {
-                                    PreferencesProvider.setDarkTheme(context, it)
-                                    switchDarkThemeCheckedState = it
+                            PreferencesProvider.Companion.OnOffSystem.values().forEach {
+                                Spacer(
+                                    modifier = Modifier
+                                        .fillMaxHeight()
+                                        .weight(0.1f)
+                                )
+                                if (it.ordinal == darkThemeState) {
+                                    Button(onClick = {}) {
+                                        Text(
+                                            text = when (it){
+                                                PreferencesProvider.Companion.OnOffSystem.OFF -> "Light"
+                                                PreferencesProvider.Companion.OnOffSystem.ON -> "Dark"
+                                                else -> it.label
+                                            }
+                                        )
+                                    }
+                                } else {
+                                    OutlinedButton(
+                                        onClick = {
+                                            darkThemeState = it.ordinal
+                                            PreferencesProvider.setDarkTheme(context, it)
+                                        },
+                                    ) {
+                                        Text(
+                                            text = when (it){
+                                                PreferencesProvider.Companion.OnOffSystem.OFF -> "Light"
+                                                PreferencesProvider.Companion.OnOffSystem.ON -> "Dark"
+                                                else -> it.label
+                                            }
+                                        )
+                                    }
                                 }
-                            )
+                                Spacer(
+                                    modifier = Modifier
+                                        .fillMaxHeight()
+                                        .weight(0.1f)
+                                )
+                            }
                         }
+                        Text(
+                            text = "Dynamic colors",
+                            style = MaterialTheme.typography.titleLarge
+                        )
                         Row {
-                            Text(
-                                text = "Dynamic colors",
-                                style = MaterialTheme.typography.titleLarge
-                            )
-                            Spacer(
-                                Modifier
-                                    .weight(1f)
-                                    .fillMaxHeight())
-                            Switch(
-                                checked = switchDynamicColorsCheckedState,
-                                onCheckedChange = {
-                                    PreferencesProvider.setDynamicColors(context, it)
-                                    switchDynamicColorsCheckedState = it
+                            PreferencesProvider.Companion.OnOffSystem.values().forEach {
+                                Spacer(
+                                    modifier = Modifier
+                                        .fillMaxHeight()
+                                        .weight(0.1f)
+                                )
+                                if (it.ordinal == dynamicColorsState) {
+                                    Button(onClick = {}) {
+                                        Text(text = it.label)
+                                    }
+                                } else {
+                                    OutlinedButton(
+                                        onClick = {
+                                            dynamicColorsState = it.ordinal
+                                            PreferencesProvider.setDynamicColors(context, it)
+                                        },
+                                    ) {
+                                        Text(text = it.label)
+                                    }
                                 }
-                            )
+                                Spacer(
+                                    modifier = Modifier
+                                        .fillMaxHeight()
+                                        .weight(0.1f)
+                                )
+                            }
                         }
                     }
                 }

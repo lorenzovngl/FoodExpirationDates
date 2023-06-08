@@ -8,6 +8,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
@@ -64,8 +65,16 @@ class InsertActivity : ComponentActivity() {
     ) {
         val context = LocalContext.current
         FoodExpirationDatesTheme(
-            darkTheme = PreferencesProvider.getDarkTheme(context),
-            dynamicColor = PreferencesProvider.getDynamicColors(context)
+            darkTheme = when (PreferencesProvider.getDarkTheme(context)){
+                PreferencesProvider.Companion.OnOffSystem.ON.ordinal -> true
+                PreferencesProvider.Companion.OnOffSystem.OFF.ordinal -> false
+                else -> isSystemInDarkTheme()
+            },
+            dynamicColor = when (PreferencesProvider.getDynamicColors(context)){
+                PreferencesProvider.Companion.OnOffSystem.ON.ordinal -> true
+                PreferencesProvider.Companion.OnOffSystem.OFF.ordinal -> false
+                else -> false
+            }
         ) {
             Surface(
                 modifier = Modifier.fillMaxSize(),

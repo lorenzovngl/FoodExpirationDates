@@ -6,6 +6,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
@@ -50,8 +51,16 @@ class InfoActivity : ComponentActivity() {
         val activity = (LocalContext.current as? Activity)
         val uriHandler = LocalUriHandler.current
         FoodExpirationDatesTheme(
-            darkTheme = PreferencesProvider.getDarkTheme(context),
-            dynamicColor = PreferencesProvider.getDynamicColors(context)
+            darkTheme = when (PreferencesProvider.getDarkTheme(context)){
+                PreferencesProvider.Companion.OnOffSystem.ON.ordinal -> true
+                PreferencesProvider.Companion.OnOffSystem.OFF.ordinal -> false
+                else -> isSystemInDarkTheme()
+            },
+            dynamicColor = when (PreferencesProvider.getDynamicColors(context)){
+                PreferencesProvider.Companion.OnOffSystem.ON.ordinal -> true
+                PreferencesProvider.Companion.OnOffSystem.OFF.ordinal -> false
+                else -> false
+            }
         ) {
             Surface(
                 modifier = Modifier.fillMaxSize(),
