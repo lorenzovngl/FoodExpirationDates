@@ -95,11 +95,7 @@ class MainActivity : ComponentActivity() {
                 PreferencesProvider.Companion.OnOffSystem.OFF.ordinal -> false
                 else -> isSystemInDarkTheme()
             },
-            dynamicColor = when (PreferencesProvider.getDynamicColors(context)){
-                PreferencesProvider.Companion.OnOffSystem.ON.ordinal -> true
-                PreferencesProvider.Companion.OnOffSystem.OFF.ordinal -> false
-                else -> false
-            }
+            dynamicColor = PreferencesProvider.getDynamicColors(context)
         ) {
             Surface(
                 modifier = Modifier

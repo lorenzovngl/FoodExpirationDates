@@ -87,19 +87,19 @@ class PreferencesProvider {
                 .edit().putInt(darkTheme, darkThemeSetting.ordinal).apply()
         }
 
-        fun getDynamicColors(context: Context): Int {
+        fun getDynamicColors(context: Context): Boolean {
             try {
             return context.getSharedPreferences(sharedPrefsName, ComponentActivity.MODE_PRIVATE)
-                .getInt(dynamicColors, OnOffSystem.SYSTEM.ordinal)
+                .getBoolean(dynamicColors, false)
             } catch (e: Exception){
                 e.printStackTrace()
             }
-            return OnOffSystem.SYSTEM.ordinal
+            return false
         }
 
-        fun setDynamicColors(context: Context, dynamicColorsSetting: OnOffSystem) {
+        fun setDynamicColors(context: Context, dynamicColorsEnabled: Boolean) {
             return context.getSharedPreferences(sharedPrefsName, ComponentActivity.MODE_PRIVATE)
-                .edit().putInt(dynamicColors, dynamicColorsSetting.ordinal).apply()
+                .edit().putBoolean(dynamicColors, dynamicColorsEnabled).apply()
         }
     }
 }

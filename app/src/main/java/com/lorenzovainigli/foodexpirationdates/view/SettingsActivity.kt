@@ -30,6 +30,7 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TimePicker
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -104,11 +105,7 @@ class SettingsActivity : ComponentActivity() {
                 PreferencesProvider.Companion.OnOffSystem.OFF.ordinal -> false
                 else -> isSystemInDarkTheme()
             },
-            dynamicColor = when (dynamicColorsState) {
-                PreferencesProvider.Companion.OnOffSystem.ON.ordinal -> true
-                PreferencesProvider.Companion.OnOffSystem.OFF.ordinal -> false
-                else -> false
-            }
+            dynamicColor = dynamicColorsState
         ) {
             Surface(
                 modifier = Modifier.fillMaxSize(),
@@ -267,38 +264,22 @@ class SettingsActivity : ComponentActivity() {
                                 )
                             }
                         }
-                        Text(
-                            text = "Dynamic colors",
-                            style = MaterialTheme.typography.titleLarge
-                        )
                         Row {
-                            PreferencesProvider.Companion.OnOffSystem.values().forEach {
-                                Spacer(
-                                    modifier = Modifier
-                                        .fillMaxHeight()
-                                        .weight(0.1f)
-                                )
-                                if (it.ordinal == dynamicColorsState) {
-                                    Button(onClick = {}) {
-                                        Text(text = it.label)
-                                    }
+                            Text(
+                                text = "Dynamic colors",
+                                style = MaterialTheme.typography.titleLarge
+                            )
+                            Spacer(
+                                Modifier
+                                    .weight(1f)
+                                    .fillMaxHeight())
+                            Switch(
+                                checked = dynamicColorsState,
+                                onCheckedChange = {
+                                    PreferencesProvider.setDynamicColors(context, it)
+                                    dynamicColorsState = it
                                 }
-                                if (it.ordinal != dynamicColorsState){
-                                    OutlinedButton(
-                                        onClick = {
-                                            dynamicColorsState = it.ordinal
-                                            PreferencesProvider.setDynamicColors(context, it)
-                                        },
-                                    ) {
-                                        Text(text = it.label)
-                                    }
-                                }
-                                Spacer(
-                                    modifier = Modifier
-                                        .fillMaxHeight()
-                                        .weight(0.1f)
-                                )
-                            }
+                            )
                         }
                     }
                 }
