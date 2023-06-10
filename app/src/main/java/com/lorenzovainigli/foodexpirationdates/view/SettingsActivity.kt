@@ -243,7 +243,8 @@ class SettingsActivity : ComponentActivity() {
                                             }
                                         )
                                     }
-                                } else {
+                                }
+                                if(it.ordinal != darkThemeState){
                                     OutlinedButton(
                                         onClick = {
                                             darkThemeState = it.ordinal
@@ -281,7 +282,8 @@ class SettingsActivity : ComponentActivity() {
                                     Button(onClick = {}) {
                                         Text(text = it.label)
                                     }
-                                } else {
+                                }
+                                if (it.ordinal != dynamicColorsState){
                                     OutlinedButton(
                                         onClick = {
                                             dynamicColorsState = it.ordinal
