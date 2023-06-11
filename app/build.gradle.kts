@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -23,7 +25,7 @@ android {
         versionCode = 12
         versionName = "1.0"
 
-        //archivesBaseName = "FoodExpirationDates-$versionName"
+        archivesName.set("FoodExpirationDates-$versionName")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
