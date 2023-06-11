@@ -5,7 +5,6 @@
 # Food Expiration Dates
 
 ![GitHub](https://img.shields.io/github/license/lorenzovngl/FoodExpirationDates?style=flat-square&label=License)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/lorenzovngl/FoodExpirationDates?style=flat-square&label=Release)
 ![GitHub contributors](https://img.shields.io/github/contributors/lorenzovngl/FoodExpirationDates?style=flat-square&label=Contributors)
 ![Languages](https://img.shields.io/badge/Languages-6-orange?style=flat-square)
 ![Pull requests welcome](https://img.shields.io/badge/Pull%20requests-Welcome-ff69b4?style=flat-square)
@@ -23,6 +22,9 @@ Have you ever forgotten to eat a food item before its expiration date? Throwing 
 This simple app helps you avoid forgetting to consume foods that are about to expire. Using it is simple: just record each food item along with its expiration date and you will always have a table reminding you which foods are going to expire!
 
 <div align="center">
+
+![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/lorenzovngl/FoodExpirationDates?include_prereleases&label=Pre-release&style=flat-square)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/lorenzovngl/FoodExpirationDates?style=flat-square&label=Release)
 
 [<img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" height="80"/>](https://play.google.com/store/apps/details?id=com.lorenzovainigli.foodexpirationdates)
 [<img alt="Get it on GitHub" src="https://raw.githubusercontent.com/NeoApplications/Neo-Backup/main/badge_github.png" height="80"/>](https://github.com/lorenzovngl/FoodExpirationDates/releases)
