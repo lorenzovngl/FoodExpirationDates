@@ -27,8 +27,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.lorenzovainigli.foodexpirationdates.R
-import com.lorenzovainigli.foodexpirationdates.view.InfoActivity
-import com.lorenzovainigli.foodexpirationdates.view.SettingsActivity
+import com.lorenzovainigli.foodexpirationdates.view.activity.InfoActivity
+import com.lorenzovainigli.foodexpirationdates.view.activity.SettingsActivity
 
 data class MenuItem(
     val label: String,

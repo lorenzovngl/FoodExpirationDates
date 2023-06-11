@@ -1,4 +1,4 @@
-package com.lorenzovainigli.foodexpirationdates.view
+package com.lorenzovainigli.foodexpirationdates.view.activity
 
 import android.content.Intent
 import android.content.res.Configuration
