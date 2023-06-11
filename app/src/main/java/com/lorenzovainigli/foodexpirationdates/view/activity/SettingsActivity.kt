@@ -185,7 +185,7 @@ class SettingsActivity : ComponentActivity() {
                             )
                         }
                         SettingsItem(
-                            label = "Notification time"
+                            label = stringResource(R.string.notification_time)
                         ){
                             var text = ""
                             if (timePickerState.hour < 10) {
@@ -206,7 +206,7 @@ class SettingsActivity : ComponentActivity() {
                             )
                         }
                         SettingsItem(
-                            label = "Theme"
+                            label = stringResource(R.string.theme)
                         ){
                             PreferencesProvider.Companion.OnOffSystem.values().forEach {
                                 Spacer(
@@ -249,7 +249,7 @@ class SettingsActivity : ComponentActivity() {
                             }
                         }
                         SettingsItem(
-                            label = "Dynamic colors"
+                            label = stringResource(R.string.dynamic_colors)
                         ){
                             Spacer(
                                 Modifier

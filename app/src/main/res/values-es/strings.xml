@@ -37,11 +37,17 @@
     <string name="choose_the_date_format">Selecciona el formato de Fecha</string>
     <string name="locale_formats">Formatos locales</string>
     <string name="other_formats">Otros formatos</string>
+    <string name="notification_time">Hora de notificación</string>
+    <string name="dynamic_colors">Colores dinámicos</string>
+    <string name="theme">Tema</string>
+    <string name="light">Claro</string>
+    <string name="system">Sistema</string>
+    <string name="dark">Oscuro</string>
 
     <string-array name="features">
         <item>Muestra una lista con las fechas de caducidad de los alimentos, ordenadas cronológicamente de forma ascendente.</item>
         <item>Añade, edita y elimina artículos.</item>
-        <item>Notificaciones (próximamente).</item>
+        <item>Notificaciones.</item>
     </string-array>
     <string-array name="example_foods">
         <item>Huevos</item>

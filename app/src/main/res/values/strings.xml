@@ -36,11 +36,17 @@
     <string name="locale_formats">Locale formats</string>
     <string name="other_formats">Other formats</string>
     <string name="your_food_is_expiring">Your food is expiring!</string>
+    <string name="notification_time">Notification time</string>
+    <string name="dynamic_colors">Dynamic colors</string>
+    <string name="theme">Theme</string>
+    <string name="light">Light</string>
+    <string name="system">System</string>
+    <string name="dark">Dark</string>
 
     <string-array name="features">
         <item>Display a list with food expiration dates in ascending time order.</item>
         <item>Add, edit and delete items.</item>
-        <item>Notifications (available soon).</item>
+        <item>Notifications.</item>
     </string-array>
     <string-array name="example_foods">
         <item>Eggs</item>

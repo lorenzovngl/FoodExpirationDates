@@ -39,7 +39,7 @@
     <string-array name="features">
         <item>खाद्य समाप्ति तिथियों की सूची को समय के आरोहण के क्रम में प्रदर्शित करें।</item>
         <item>आइटम जोड़ें, संपादित करें और हटाएं।</item>
-        <item>सूचनाएं (जल्द ही उपलब्ध होगी)।</item>
+        <item>सूचनाएं।</item>
     </string-array>
     <string-array name="example_foods">
         <item>अंडे</item>

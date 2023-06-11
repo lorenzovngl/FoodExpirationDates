@@ -35,11 +35,18 @@
     <string name="choose_the_date_format">Das Datumsformat auswählen</string>
     <string name="locale_formats">Lokale Formate</string>
     <string name="other_formats">Andere Formate</string>
-    
+    <string name="your_food_is_expiring">Ihre Lebensmittel verfallen!</string>
+    <string name="notification_time">Zeitpunkt der Benachrichtigung</string>
+    <string name="dynamic_colors">Dynamische Farben</string>
+    <string name="theme">Thema</string>
+    <string name="light">Übersichtlich</string>
+    <string name="system">System</string>
+    <string name="dark">Dunkel</string>
+
     <string-array name="features">
         <item>Anzeige einer Liste mit Lebensmittelverfallsdaten in aufsteigender zeitlicher Reihenfolge.</item>
         <item>Einträge hinzufügen, bearbeiten und löschen.</item>
-        <item>Benachrichtigungen (bald verfügbar).</item>
+        <item>Benachrichtigungen.</item>
     </string-array>
     <string-array name="example_foods">
         <item>Eier</item>
