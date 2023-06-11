@@ -11,7 +11,6 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -59,6 +58,7 @@ import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
 import com.lorenzovainigli.foodexpirationdates.view.composable.DateFormatDialog
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
+import com.lorenzovainigli.foodexpirationdates.view.composable.SettingsItem
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -172,35 +172,21 @@ class SettingsActivity : ComponentActivity() {
                             .verticalScroll(rememberScrollState()),
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
-                        Row {
-                            Text(
-                                text = stringResource(id = R.string.date_format),
-                                style = MaterialTheme.typography.titleLarge
-                            )
-                            Spacer(
-                                Modifier
-                                    .weight(1f)
-                                    .fillMaxHeight()
-                            )
+                        SettingsItem(
+                            label = stringResource(id = R.string.date_format)
+                        ){
                             ClickableText(
                                 modifier = Modifier.testTag(stringResource(id = R.string.date_format)),
                                 text = AnnotatedString(sdf.format(Calendar.getInstance().time)),
-                                style = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onSurface),
+                                style = MaterialTheme.typography.headlineMedium.copy(color = MaterialTheme.colorScheme.onSurface),
                                 onClick = {
                                     isDateFormatDialogOpened = true
                                 }
                             )
                         }
-                        Row {
-                            Text(
-                                text = "Notification time",
-                                style = MaterialTheme.typography.titleLarge
-                            )
-                            Spacer(
-                                Modifier
-                                    .weight(1f)
-                                    .fillMaxHeight()
-                            )
+                        SettingsItem(
+                            label = "Notification time"
+                        ){
                             var text = ""
                             if (timePickerState.hour < 10) {
                                 text += "0"
@@ -213,17 +199,15 @@ class SettingsActivity : ComponentActivity() {
                             ClickableText(
                                 modifier = Modifier.testTag("Notification time"),
                                 text = AnnotatedString(text),
-                                style = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onSurface),
+                                style = MaterialTheme.typography.headlineMedium.copy(color = MaterialTheme.colorScheme.onSurface),
                                 onClick = {
                                     isNotificationTimeBottomSheetOpen = true
                                 }
                             )
                         }
-                        Text(
-                            text = "Theme",
-                            style = MaterialTheme.typography.titleLarge
-                        )
-                        Row {
+                        SettingsItem(
+                            label = "Theme"
+                        ){
                             PreferencesProvider.Companion.OnOffSystem.values().forEach {
                                 Spacer(
                                     modifier = Modifier
@@ -264,11 +248,9 @@ class SettingsActivity : ComponentActivity() {
                                 )
                             }
                         }
-                        Row {
-                            Text(
-                                text = "Dynamic colors",
-                                style = MaterialTheme.typography.titleLarge
-                            )
+                        SettingsItem(
+                            label = "Dynamic colors"
+                        ){
                             Spacer(
                                 Modifier
                                     .weight(1f)
