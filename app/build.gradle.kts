@@ -23,7 +23,7 @@ android {
         minSdk = 24
         targetSdk = 33
         versionCode = 12
-        versionName = "1.0"
+        versionName = "1.0-beta1"
 
         archivesName.set("FoodExpirationDates-$versionName")
 
