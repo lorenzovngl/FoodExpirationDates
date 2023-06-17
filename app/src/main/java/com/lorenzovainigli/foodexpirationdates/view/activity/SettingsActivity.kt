@@ -94,15 +94,15 @@ class SettingsActivity : ComponentActivity() {
             mutableStateOf(false)
         }
         var darkThemeState by remember {
-            mutableStateOf(PreferencesProvider.getDarkTheme(context))
+            mutableStateOf(PreferencesProvider.getThemeMode(context))
         }
         var dynamicColorsState by remember {
             mutableStateOf(PreferencesProvider.getDynamicColors(context))
         }
         FoodExpirationDatesTheme(
             darkTheme = when (darkThemeState) {
-                PreferencesProvider.Companion.OnOffSystem.ON.ordinal -> true
-                PreferencesProvider.Companion.OnOffSystem.OFF.ordinal -> false
+                PreferencesProvider.Companion.ThemeMode.LIGHT.ordinal -> false
+                PreferencesProvider.Companion.ThemeMode.DARK.ordinal -> true
                 else -> isSystemInDarkTheme()
             },
             dynamicColor = dynamicColorsState
@@ -208,7 +208,7 @@ class SettingsActivity : ComponentActivity() {
                         SettingsItem(
                             label = stringResource(R.string.theme)
                         ){
-                            PreferencesProvider.Companion.OnOffSystem.values().forEach {
+                            PreferencesProvider.Companion.ThemeMode.values().forEach {
                                 Spacer(
                                     modifier = Modifier
                                         .fillMaxHeight()
@@ -217,11 +217,7 @@ class SettingsActivity : ComponentActivity() {
                                 if (it.ordinal == darkThemeState) {
                                     Button(onClick = {}) {
                                         Text(
-                                            text = when (it){
-                                                PreferencesProvider.Companion.OnOffSystem.OFF -> "Light"
-                                                PreferencesProvider.Companion.OnOffSystem.ON -> "Dark"
-                                                else -> it.label
-                                            }
+                                            text = getString(it.label)
                                         )
                                     }
                                 }
@@ -229,15 +225,11 @@ class SettingsActivity : ComponentActivity() {
                                     OutlinedButton(
                                         onClick = {
                                             darkThemeState = it.ordinal
-                                            PreferencesProvider.setDarkTheme(context, it)
+                                            PreferencesProvider.setThemeMode(context, it)
                                         },
                                     ) {
                                         Text(
-                                            text = when (it){
-                                                PreferencesProvider.Companion.OnOffSystem.OFF -> "Light"
-                                                PreferencesProvider.Companion.OnOffSystem.ON -> "Dark"
-                                                else -> it.label
-                                            }
+                                            text = getString(it.label)
                                         )
                                     }
                                 }

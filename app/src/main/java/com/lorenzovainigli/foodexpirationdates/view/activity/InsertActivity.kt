@@ -65,9 +65,9 @@ class InsertActivity : ComponentActivity() {
     ) {
         val context = LocalContext.current
         FoodExpirationDatesTheme(
-            darkTheme = when (PreferencesProvider.getDarkTheme(context)){
-                PreferencesProvider.Companion.OnOffSystem.ON.ordinal -> true
-                PreferencesProvider.Companion.OnOffSystem.OFF.ordinal -> false
+            darkTheme = when (PreferencesProvider.getThemeMode(context)){
+                PreferencesProvider.Companion.ThemeMode.LIGHT.ordinal -> false
+                PreferencesProvider.Companion.ThemeMode.DARK.ordinal -> true
                 else -> isSystemInDarkTheme()
             },
             dynamicColor = PreferencesProvider.getDynamicColors(context)

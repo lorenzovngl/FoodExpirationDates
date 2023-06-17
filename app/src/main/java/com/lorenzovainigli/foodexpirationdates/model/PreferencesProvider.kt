@@ -2,6 +2,7 @@ package com.lorenzovainigli.foodexpirationdates.model
 
 import android.content.Context
 import androidx.activity.ComponentActivity
+import com.lorenzovainigli.foodexpirationdates.R
 import java.lang.Exception
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -15,7 +16,7 @@ class PreferencesProvider {
         private const val keyDateFormat = "date_format"
         private const val keyNotificationTimeHour = "notification_time_hour"
         private const val keyNotificationTimeMinute = "notification_time_minute"
-        private const val darkTheme = "dark_theme"
+        private const val themeMode = "theme_mode"
         private const val dynamicColors = "dynamic_colors"
         private val availLocaleDateFormats = arrayOf(DateFormat.SHORT, DateFormat.MEDIUM)
         private val availOtherDateFormats =
@@ -28,10 +29,10 @@ class PreferencesProvider {
                 "d/MM",
                 "d/MM/yyyy"
             )
-        enum class OnOffSystem(val label: String) {
-            ON("On"),
-            SYSTEM("System"),
-            OFF("Off")
+        enum class ThemeMode(val label: Int) {
+            LIGHT(R.string.light),
+            SYSTEM(R.string.system),
+            DARK(R.string.dark)
         }
 
         fun getAvailLocaleDateFormats(): List<String> {
@@ -72,19 +73,19 @@ class PreferencesProvider {
                 .putInt(keyNotificationTimeMinute, minute).apply()
         }
 
-        fun getDarkTheme(context: Context): Int {
+        fun getThemeMode(context: Context): Int {
             try {
                 return context.getSharedPreferences(sharedPrefsName, ComponentActivity.MODE_PRIVATE)
-                    .getInt(darkTheme, OnOffSystem.SYSTEM.ordinal)
+                    .getInt(themeMode, ThemeMode.SYSTEM.ordinal)
             } catch (e: Exception){
                 e.printStackTrace()
             }
-            return OnOffSystem.SYSTEM.ordinal
+            return ThemeMode.SYSTEM.ordinal
         }
 
-        fun setDarkTheme(context: Context, darkThemeSetting: OnOffSystem) {
+        fun setThemeMode(context: Context, themeMode: ThemeMode) {
             return context.getSharedPreferences(sharedPrefsName, ComponentActivity.MODE_PRIVATE)
-                .edit().putInt(darkTheme, darkThemeSetting.ordinal).apply()
+                .edit().putInt(this.themeMode, themeMode.ordinal).apply()
         }
 
         fun getDynamicColors(context: Context): Boolean {
