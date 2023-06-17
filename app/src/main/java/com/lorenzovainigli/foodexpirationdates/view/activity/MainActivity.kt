@@ -45,7 +45,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.Wallpapers
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.di.AppModule
 import com.lorenzovainigli.foodexpirationdates.di.DaggerAppComponent
@@ -161,31 +160,21 @@ class MainActivity : ComponentActivity() {
                                 modifier = Modifier
                                     .padding(4.dp)
                             ) {
-                                if (!BuildConfig.DEBUG){
-                                    for (item in getItemsForPreview()){
-                                        FoodCard(
-                                            item = item,
-                                            onClickEdit = {},
-                                            onClickDelete = {}
-                                        )
-                                    }
-                                } else {
-                                    for (item in items) {
-                                        FoodCard(
-                                            item = item,
-                                            onClickEdit = {
-                                                val intent =
-                                                    Intent(context, InsertActivity::class.java)
-                                                intent.putExtra("ITEM_ID", item.id)
-                                                context.startActivity(intent)
-                                            },
-                                            onClickDelete = {
-                                                if (deleteExpirationDate != null) {
-                                                    deleteExpirationDate(item)
-                                                }
+                                for (item in items) {
+                                    FoodCard(
+                                        item = item,
+                                        onClickEdit = {
+                                            val intent =
+                                                Intent(context, InsertActivity::class.java)
+                                            intent.putExtra("ITEM_ID", item.id)
+                                            context.startActivity(intent)
+                                        },
+                                        onClickDelete = {
+                                            if (deleteExpirationDate != null) {
+                                                deleteExpirationDate(item)
                                             }
-                                        )
-                                    }
+                                        }
+                                    )
                                 }
                             }
                         }
