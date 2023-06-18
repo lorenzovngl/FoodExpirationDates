@@ -11,6 +11,8 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -19,10 +21,11 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -53,8 +56,8 @@ import com.lorenzovainigli.foodexpirationdates.model.PreferencesProvider
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
-import com.lorenzovainigli.foodexpirationdates.view.composable.MainMenu
 import com.lorenzovainigli.foodexpirationdates.view.composable.FoodCard
+import com.lorenzovainigli.foodexpirationdates.view.composable.MainMenu
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDateViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -127,25 +130,37 @@ class MainActivity : ComponentActivity() {
                             }
                         )
                     },
-                    floatingActionButtonPosition = FabPosition.End,
-                    floatingActionButton = {
+                    bottomBar = {
                         if (!items.isNullOrEmpty()) {
-                            FloatingActionButton(
-                                onClick = {
-                                    context.startActivity(
-                                        Intent(
-                                            context,
-                                            InsertActivity::class.java
+                            BottomAppBar {
+                                Row(
+                                    modifier = Modifier.padding(start = 8.dp, end = 8.dp)
+                                ) {
+                                    Spacer(Modifier.weight(1f))
+                                    FloatingActionButton(
+                                        onClick = {
+                                            context.startActivity(
+                                                Intent(
+                                                    context,
+                                                    InsertActivity::class.java
+                                                )
+                                            )
+                                        },
+                                        containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                                        contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                                        elevation = FloatingActionButtonDefaults.elevation(
+                                            defaultElevation = 2.dp,
+                                            pressedElevation = 0.dp,
+                                            focusedElevation = 2.dp,
+                                            hoveredElevation = 2.dp
                                         )
-                                    )
-                                },
-                                containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-                                contentColor = MaterialTheme.colorScheme.onTertiaryContainer
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Rounded.Add,
-                                    contentDescription = null
-                                )
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Rounded.Add,
+                                            contentDescription = null
+                                        )
+                                    }
+                                }
                             }
                         }
                     }
