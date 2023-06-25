@@ -5,9 +5,7 @@
 # Food Expiration Dates
 
 ![GitHub](https://img.shields.io/github/license/lorenzovngl/FoodExpirationDates?style=flat-square&label=License)
-![GitHub contributors](https://img.shields.io/github/contributors/lorenzovngl/FoodExpirationDates?style=flat-square&label=Contributors)
 ![Languages](https://img.shields.io/badge/Languages-6-orange?style=flat-square)
-![Pull requests welcome](https://img.shields.io/badge/Pull%20requests-Welcome-ff69b4?style=flat-square)
 <a href="https://gitmoji.dev">
   <img
     src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square"
