@@ -15,4 +15,46 @@
     <string name="insert">إدراج</string>
     <string name="update">تحديث</string>
     <string name="cancel">يلغي</string>
+    <string name="share">يشارك</string>
+    <string name="leave_a_star_on_github">اترك نجمة على جيثب</string>
+    <string name="write_a_review">أكتب مراجعة</string>
+    <string name="source_code">مصدر الرمز</string>
+    <string name="features">سمات</string>
+    <string name="support_this_project">ادعم هذا المشروع</string>
+    <string name="report_a_bug">الإبلاغ عن خطأ</string>
+    <string name="version_x">الإصدار٪ 1 $ s</string>
+    <string name="app_description">٪ 1 $ s هو مشروع مفتوح المصدر تم تطويره بواسطة Lorenzo Vainigli ومساهمين آخرين. \ n تم نشر رمز هذا التطبيق بموجب ترخيص MIT ومتوفر على GitHub.</string>
+    <string name="about_this_app">عن هذا التطبيق</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="back">خلف</string>
+    <string name="no_items_found">لم يتم العثور على العناصر</string>
+    <string name="please_insert_one">الرجاء إدخال واحد</string>
+    <string name="menu">قائمة طعام</string>
+    <string name="settings">إعدادات</string>
+    <string name="date_format">صيغة التاريخ</string>
+    <string name="choose_the_date_format">اختر تنسيق التاريخ</string>
+    <string name="locale_formats">تنسيقات اللغة</string>
+    <string name="other_formats">تنسيقات أخرى</string>
+    <string name="your_food_is_expiring">طعامك على وشك الانتهاء!</string>
+    <string name="notification_time">وقت الإخطار</string>
+    <string name="dynamic_colors">ألوان ديناميكية</string>
+    <string name="theme">سمة</string>
+    <string name="light">ضوء</string>
+    <string name="system">نظام</string>
+    <string name="dark">مظلم</string>
+
+    <string-array name="features">
+        <item>اعرض قائمة بتواريخ انتهاء صلاحية الطعام بترتيب زمني تصاعدي.</item>
+        <item>إضافة وتحرير وحذف العناصر.</item>
+        <item>إشعارات.</item>
+    </string-array>
+    <string-array name="example_foods">
+        <item>بيض</item>
+        <item>جبنه</item>
+        <item>لبن</item>
+        <item>لحم خنزير</item>
+        <item>سمنة</item>
+        <item>الفطر</item>
+        <item>طماطم</item>
+    </string-array>
 </resources>
