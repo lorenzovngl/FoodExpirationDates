@@ -83,7 +83,7 @@ android {
 
 dependencies {
 
-    val kotlinVersion = "1.8.21"
+    val kotlinVersion = "1.9.0"
     val daggerVersion = "2.46.1"
     val roomVersion = "2.5.1"
 
