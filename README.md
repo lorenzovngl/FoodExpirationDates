@@ -111,28 +111,16 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 <a href="https://github.com/Quadropo"><img src="https://avatars.githubusercontent.com/u/130368846?v=4" alt="@Quadropo" height="32" width="32"></a>
 <a href="https://github.com/bhavesh100"><img src="https://avatars.githubusercontent.com/u/90559083?v=4" alt="@bhavesh100" height="32" width="32"></a>
 
-## ⚖️ License
+## ❤️ Support
 
-```
-MIT License
+*Building software is awesome, making it open source is even more so. However, this requires dedication, efforts, and time. If you use this software or find it valuable, please support my commitment in developing and maintaining this project through one or more of the following methods:*
 
-Copyright (c) 2023 Lorenzo Vainigli
+- *Follow me on [GitHub](https://github.com/lorenzovngl), [Twitter](https://twitter.com/lorenzovngl_dev) or [LinkedIn](https://www.linkedin.com/in/lorenzovainigli/).*
+- *Share or star the project.*
+- *[Make a donation](https://www.paypal.com/donate/?hosted_button_id=LX8P6X75XF65A).*
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+*Your support would be very precious for me.*
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+*Thank you,*
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
+*Lorenzo*
