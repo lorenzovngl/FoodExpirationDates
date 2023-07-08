@@ -110,6 +110,7 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 <a href="https://github.com/devedroy"><img src="https://avatars.githubusercontent.com/u/44873540?v=4" alt="@devedroy" height="32" width="32"></a>
 <a href="https://github.com/Quadropo"><img src="https://avatars.githubusercontent.com/u/130368846?v=4" alt="@Quadropo" height="32" width="32"></a>
 <a href="https://github.com/bhavesh100"><img src="https://avatars.githubusercontent.com/u/90559083?v=4" alt="@bhavesh100" height="32" width="32"></a>
+<a href="https://github.com/Rick-AB"><img src="https://avatars.githubusercontent.com/u/54624799?v=4" alt="@Rick-AB" height="32" width="32"></a>
 
 ## ❤️ Support
 
