@@ -4,6 +4,8 @@
 
 # Food Expiration Dates
 
+[![Author](https://img.shields.io/badge/Author-lorenzovngl-white?style=flat-square)](https://github.com/lorenzovngl)
+![GitHub last commit](https://img.shields.io/github/last-commit/lorenzovngl/FoodExpirationDates?label=Last%20commit&style=flat-square)
 ![GitHub](https://img.shields.io/github/license/lorenzovngl/FoodExpirationDates?style=flat-square&label=License)
 ![Languages](https://img.shields.io/badge/Languages-6-orange?style=flat-square)
 <a href="https://gitmoji.dev">
@@ -36,7 +38,7 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 
 - Display a list of food with their expiration dates in ascending order of time.
 - Add, edit and delete items.
-- Notifications (available soon).
+- Notifications.
 
 ## 📱 Screenshots
 
@@ -44,8 +46,8 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 
 | | | |
 |-|-|-|
-| <img width="200px" src="screenshots/phone_en_main_activity.png"> | <img width="200px" src="screenshots/phone_en_insert_activity.png"> | <img width="200px" src="screenshots/phone_en_dc_main_activity.png"> | 
-<img width="200px" src="screenshots/phone_en_dark_main_activity.png"> | <img width="200px" src="screenshots/phone_en_dark_insert_activity.png"> | <img width="200px" src="screenshots/phone_en_dc_insert_activity.png"> |
+| <img width="200px" src="screenshots/en/screen_1.png"> | <img width="200px" src="screenshots/en/screen_2.png"> | <img width="200px" src="screenshots/en/screen_3.png"> | 
+<img width="200px" src="screenshots/en/screen_4.png"> | <img width="200px" src="screenshots/en/screen_5.png"> | <img width="200px" src="screenshots/en/screen_8.png"> |
 
 </div>
 
