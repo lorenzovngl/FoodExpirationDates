@@ -84,7 +84,7 @@ android {
 dependencies {
 
     val kotlinVersion = "1.8.21"
-    val daggerVersion = "2.46.1"
+    val daggerVersion = "2.47"
     val roomVersion = "2.5.1"
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
