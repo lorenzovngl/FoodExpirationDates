@@ -67,12 +67,11 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 <div align="center">
 
 ![English default](https://img.shields.io/badge/English-default-blue?style=flat-square)
-![Arabic 30%](https://img.shields.io/badge/Arabic-30%25-red?style=flat-square)
+![Arabic 100%](https://img.shields.io/badge/Arabic-100%25-brightgreen?style=flat-square)
 ![German 100%](https://img.shields.io/badge/German-100%25-brightgreen?style=flat-square)
 ![Hindi 86%](https://img.shields.io/badge/Hindi-86%25-yellow?style=flat-square)
 ![Italian 100%](https://img.shields.io/badge/Italian-100%25-brightgreen?style=flat-square)
 ![Spanish 100%](https://img.shields.io/badge/Spanish-100%25-brightgreen?style=flat-square)
-
 </div>
 
 > New translations are welcome. If you want to add a new language to the app, or improve or review an existing one, please [open an issue](https://github.com/lorenzovngl/FoodExpirationDates/issues/new).
