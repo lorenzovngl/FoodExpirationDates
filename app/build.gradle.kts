@@ -16,12 +16,12 @@ apply(plugin = "com.google.dagger.hilt.android")
 
 android {
     namespace = "com.lorenzovainigli.foodexpirationdates"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.lorenzovainigli.foodexpirationdates"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 14
         versionName = "1.0"
 
@@ -69,7 +69,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.7"
+        kotlinCompilerExtensionVersion = "1.4.8"
     }
     packaging {
         resources {
@@ -83,7 +83,7 @@ android {
 
 dependencies {
 
-    val kotlinVersion = "1.8.21"
+    val kotlinVersion = "1.8.22"
     val daggerVersion = "2.47"
     val roomVersion = "2.5.1"
 

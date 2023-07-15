@@ -56,9 +56,9 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 
 <div align="center">
 
-![Android 33](https://img.shields.io/badge/Android%20SDK-33-3DDC84?style=for-the-badge&logo=android)
-![Kotlin 1.8.0](https://img.shields.io/badge/Kotlin-1.8.21-A97BFF?&style=for-the-badge&logo=kotlin&logoColor=A97BFF)
-![Jetpack Compose 1.3.3](https://img.shields.io/badge/Jetpack%20Compose-1.4.3-4285F4?style=for-the-badge&logo=Jetpack+Compose&logoColor=4285F4)
+![Android 34](https://img.shields.io/badge/Android%20SDK-34-3DDC84?style=for-the-badge&logo=android)
+![Kotlin 1.8.22](https://img.shields.io/badge/Kotlin-1.8.22-A97BFF?&style=for-the-badge&logo=kotlin&logoColor=A97BFF)
+![Jetpack Compose 1.4.8](https://img.shields.io/badge/Jetpack%20Compose-1.4.8-4285F4?style=for-the-badge&logo=Jetpack+Compose&logoColor=4285F4)
 
 </div>
 
