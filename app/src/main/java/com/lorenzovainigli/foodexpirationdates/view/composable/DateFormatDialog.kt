@@ -1,6 +1,5 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
@@ -17,12 +16,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.PreferencesProvider
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
+import com.lorenzovainigli.foodexpirationdates.view.preview.DefaultPreviews
+import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -89,9 +89,10 @@ fun DateFormatRow(item: String, onDismissRequest: () -> Unit){
     )
 }
 
-@Preview
+@DefaultPreviews
+@LanguagePreviews
 @Composable
-fun DefaultPreview(){
+fun DateFormatDialogPreview(){
     FoodExpirationDatesTheme {
         Surface(
             color = MaterialTheme.colorScheme.surface
@@ -99,40 +100,4 @@ fun DefaultPreview(){
             DateFormatDialog()
         }
     }
-}
-
-@Preview(name = "Dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
-@Composable
-fun PreviewDarkMode() {
-    DefaultPreview()
-}
-
-@Preview(name = "Italian", locale = "it", showBackground = true)
-@Composable
-fun PreviewItalian() {
-    DefaultPreview()
-}
-
-@Preview(name = "Arabic", locale = "ar", showBackground = true)
-@Composable
-fun PreviewArabic() {
-    DefaultPreview()
-}
-
-@Preview(name = "German", locale = "de", showBackground = true)
-@Composable
-fun PreviewGerman() {
-    DefaultPreview()
-}
-
-@Preview(name = "Hindi", locale = "hi", showBackground = true)
-@Composable
-fun PreviewHindi() {
-    DefaultPreview()
-}
-
-@Preview(name = "Spanish", locale = "es", showBackground = true)
-@Composable
-fun PreviewSpanish() {
-    DefaultPreview()
 }

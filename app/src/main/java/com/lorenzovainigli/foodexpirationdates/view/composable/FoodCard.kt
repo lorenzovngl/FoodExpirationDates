@@ -21,6 +21,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,6 +32,8 @@ import com.lorenzovainigli.foodexpirationdates.ui.theme.Orange500
 import com.lorenzovainigli.foodexpirationdates.ui.theme.Red700
 import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
 import com.lorenzovainigli.foodexpirationdates.ui.theme.Yellow500
+import com.lorenzovainigli.foodexpirationdates.view.preview.DefaultPreviews
+import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -116,4 +119,19 @@ fun FoodCard(item: ExpirationDate, onClickEdit: () -> Unit, onClickDelete: () ->
             )
         }
     }
+}
+
+@DefaultPreviews
+@LanguagePreviews
+@Composable
+fun FoodCardPreview() {
+    FoodCard(
+        item = ExpirationDate(
+            id = 0,
+            foodName = stringArrayResource(id = R.array.example_foods)[0],
+            expirationDate = Calendar.getInstance().time.time
+        ),
+        onClickEdit = {},
+        onClickDelete = {}
+    )
 }

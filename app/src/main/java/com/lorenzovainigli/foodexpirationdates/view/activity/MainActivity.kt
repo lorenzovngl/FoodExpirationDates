@@ -59,6 +59,7 @@ import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
 import com.lorenzovainigli.foodexpirationdates.view.composable.FoodCard
 import com.lorenzovainigli.foodexpirationdates.view.composable.MainMenu
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
+import com.lorenzovainigli.foodexpirationdates.view.preview.DevicePreviews
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDateViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
@@ -262,6 +263,7 @@ class MainActivity : ComponentActivity() {
     }
 
     @Preview(showBackground = true, wallpaper = Wallpapers.GREEN_DOMINATED_EXAMPLE)
+    @DevicePreviews
     @Composable
     fun DefaultPreview() {
         val items = getItemsForPreview()
