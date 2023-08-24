@@ -7,12 +7,7 @@ plugins {
     id("dagger.hilt.android.plugin")
 }
 
-val firebaseEnabled = true
-if (firebaseEnabled) {
-    apply(plugin = "com.google.firebase.crashlytics")
-    apply(plugin = "com.google.gms.google-services")
-}
-apply(plugin = "com.google.dagger.hilt.android")
+var firebaseEnabled = true
 
 android {
     namespace = "com.lorenzovainigli.foodexpirationdates"
@@ -58,6 +53,21 @@ android {
             isDebuggable = true
         }
     }
+
+    flavorDimensions += "version"
+    productFlavors {
+        create("full") {
+            dimension = "version"
+            firebaseEnabled = true
+        }
+        create("foss"){
+            dimension = "version"
+            applicationIdSuffix = ".foss"
+            versionNameSuffix = "-foss"
+            firebaseEnabled = false
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -131,12 +141,17 @@ dependencies {
 
     implementation("androidx.work:work-runtime-ktx:2.8.1")
 
-    if (firebaseEnabled) {
-        // Firebase
-        // https://firebase.google.com/docs/android/setup#available-libraries
-        implementation(platform("com.google.firebase:firebase-bom:31.3.0"))
-        implementation("com.google.firebase:firebase-analytics-ktx")
-        implementation("com.google.firebase:firebase-crashlytics-ktx")
-    }
+    // Firebase
+    // https://firebase.google.com/docs/android/setup#available-libraries
+    "fullImplementation"(platform("com.google.firebase:firebase-bom:31.3.0"))
+    "fullImplementation"("com.google.firebase:firebase-analytics-ktx")
+    "fullImplementation"("com.google.firebase:firebase-crashlytics-ktx")
 
 }
+
+if (firebaseEnabled){
+    apply(plugin = "com.google.firebase.crashlytics")
+    apply(plugin = "com.google.gms.google-services")
+}
+
+apply(plugin = "com.google.dagger.hilt.android")
