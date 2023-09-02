@@ -25,7 +25,7 @@
     <string name="report_a_bug">Segnala un bug</string>
     <string name="version_x">Versione %1$s</string>
     <string name="app_description">%1$s è un progetto open source sviluppato da Lorenzo Vainigli e altri contributori.\nIl codice di questa applicazione è pubblicato con licenza MIT e disponibile su GitHub.</string>
-    <string name="about_this_app">Informazioni su questa app</string>
+    <string name="about_this_app">Informazioni app</string>
     <string name="privacy_policy">Privacy policy</string>
     <string name="back">Indietro</string>
     <string name="no_items_found">Nessun elemento trovato</string>

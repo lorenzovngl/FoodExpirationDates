@@ -31,7 +31,6 @@ import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.PreferencesProvider
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
-import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
 import com.lorenzovainigli.foodexpirationdates.view.composable.TextIconButton
 
@@ -60,8 +59,7 @@ class InfoActivity : ComponentActivity() {
         ) {
             Surface(
                 modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background,
-                tonalElevation = TonalElevation.level2()
+                color = MaterialTheme.colorScheme.background
             ) {
                 Scaffold(
                     topBar = {
@@ -242,7 +240,7 @@ class InfoActivity : ComponentActivity() {
         InfoActivityLayout()
     }
 
-    @Preview(name = "Spanish", locale = "es", showBackground = true)
+    @Preview(name = "Japanese", locale = "ja", showBackground = true)
     @Composable
     fun PreviewSpanish() {
         InfoActivityLayout()

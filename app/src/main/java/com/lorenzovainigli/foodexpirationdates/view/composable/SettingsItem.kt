@@ -32,7 +32,7 @@ fun SettingsItem(
         modifier = Modifier
             .wrapContentSize()
             .clip(RoundedCornerShape(20))
-            .background(MaterialTheme.colorScheme.surfaceColorAtElevation(TonalElevation.level5()))
+            .background(MaterialTheme.colorScheme.surfaceColorAtElevation(TonalElevation.level1()))
             .padding(12.dp)
     ) {
         Text(

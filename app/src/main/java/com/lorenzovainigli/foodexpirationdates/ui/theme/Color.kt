@@ -66,6 +66,9 @@ val md_theme_dark_scrim = Color(0xFF000000)
 
 val seed = Color(0xFFEA7D10)
 
-val Red700 = Color(0xFFD32F2F)
-val Orange500 = Color(0xFFFF9800)
-val Yellow500 = Color(0xFFFFEB3B)
+val LightRed = Color(255, 80, 80, 220)
+val DarkRed = Color(180, 0, 0, 220)
+val LightOrange = Color(255, 127, 80, 220)
+val DarkOrange = Color(220, 110, 0, 220)
+val LightYellow = Color(255, 255, 100, 220)
+val DarkYellow = Color(230, 230, 0, 220)

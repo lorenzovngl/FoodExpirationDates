@@ -102,6 +102,7 @@ fun MainMenu() {
                     enabled = true
                 )
             }
+            Spacer(modifier = Modifier.padding(18.dp))
         }
     }
 }

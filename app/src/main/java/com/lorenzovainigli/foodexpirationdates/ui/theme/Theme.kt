@@ -6,7 +6,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val LightColors = lightColorScheme(
@@ -95,7 +94,7 @@ fun FoodExpirationDatesTheme(
 
     SideEffect {
         systemUiController.setSystemBarsColor(
-            color = colorScheme.surfaceColorAtElevation(3.dp)
+            color = colorScheme.surface
         )
     }
 

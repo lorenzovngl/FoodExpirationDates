@@ -6,13 +6,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -20,21 +17,27 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
@@ -44,6 +47,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.Wallpapers
 import androidx.compose.ui.unit.dp
@@ -57,11 +61,11 @@ import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
 import com.lorenzovainigli.foodexpirationdates.view.composable.FoodCard
-import com.lorenzovainigli.foodexpirationdates.view.composable.MainMenu
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
 import com.lorenzovainigli.foodexpirationdates.view.preview.DevicePreviews
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDateViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.util.Calendar
 import kotlin.math.min
 
@@ -89,22 +93,23 @@ class MainActivity : ComponentActivity() {
     fun MainActivityLayout(
         items: List<ExpirationDate>? = null,
         viewModel: ExpirationDateViewModel? = viewModel(),
+        addExpirationDate: ((ExpirationDate) -> Unit) = viewModel!!::addExpirationDate,
         deleteExpirationDate: ((ExpirationDate) -> Unit)? = viewModel!!::deleteExpirationDate,
     ) {
         val context = LocalContext.current
+        val isInDarkTheme = when (PreferencesProvider.getThemeMode(context)){
+            PreferencesProvider.Companion.ThemeMode.LIGHT.ordinal -> false
+            PreferencesProvider.Companion.ThemeMode.DARK.ordinal -> true
+            else -> isSystemInDarkTheme()
+        }
         FoodExpirationDatesTheme(
-            darkTheme = when (PreferencesProvider.getThemeMode(context)){
-                PreferencesProvider.Companion.ThemeMode.LIGHT.ordinal -> false
-                PreferencesProvider.Companion.ThemeMode.DARK.ordinal -> true
-                else -> isSystemInDarkTheme()
-            },
+            darkTheme = isInDarkTheme,
             dynamicColor = PreferencesProvider.getDynamicColors(context)
         ) {
             Surface(
                 modifier = Modifier
                     .fillMaxSize(),
-                color = MaterialTheme.colorScheme.surface,
-                tonalElevation = TonalElevation.level2()
+                color = MaterialTheme.colorScheme.background
             ) {
                 Scaffold(
                     topBar = {
@@ -114,55 +119,94 @@ class MainActivity : ComponentActivity() {
                                 Image(
                                     modifier = Modifier
                                         .padding(horizontal = 7.dp)
-                                        .size(48.dp)
-                                        //.clip(RoundedCornerShape(20))
-                                        .background(
-                                            MaterialTheme.colorScheme.surfaceColorAtElevation(
-                                                TonalElevation.level2()
-                                            )
-                                        ),
+                                        .size(48.dp),
                                     painter = painterResource(id = R.drawable.fed_icon),
                                     contentDescription = null,
                                     contentScale = ContentScale.Crop
                                 )
-                            },
-                            actions = {
-                                MainMenu()
                             }
                         )
                     },
                     bottomBar = {
-                        if (!items.isNullOrEmpty()) {
-                            BottomAppBar {
-                                Row(
-                                    modifier = Modifier.padding(start = 8.dp, end = 8.dp)
-                                ) {
-                                    Spacer(Modifier.weight(1f))
-                                    FloatingActionButton(
-                                        onClick = {
-                                            context.startActivity(
-                                                Intent(
-                                                    context,
-                                                    InsertActivity::class.java
-                                                )
-                                            )
-                                        },
-                                        containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-                                        contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
-                                        elevation = FloatingActionButtonDefaults.elevation(
-                                            defaultElevation = 2.dp,
-                                            pressedElevation = 0.dp,
-                                            focusedElevation = 2.dp,
-                                            hoveredElevation = 2.dp
-                                        )
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Rounded.Add,
-                                            contentDescription = null
-                                        )
-                                    }
+                        NavigationBar(
+                            tonalElevation = TonalElevation.level0()
+                        ) {
+                            NavigationBarItem(
+                                selected = false,
+                                onClick = {
+                                    context.startActivity(Intent(context, InfoActivity::class.java))
+                                },
+                                label = {
+                                    Text(
+                                        text = stringResource(id = R.string.about_this_app),
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
+                                    )
+                                },
+                                icon = {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Info,
+                                        contentDescription = stringResource(id = R.string.about_this_app),
+                                        tint = MaterialTheme.colorScheme.onSurface
+                                    )
                                 }
+                            )
+                            if (!items.isNullOrEmpty()) {
+                                NavigationBarItem(
+                                    selected = false,
+                                    onClick = {},
+                                    icon = {
+                                        Button(
+                                            modifier = Modifier
+                                                .size(50.dp),
+                                            contentPadding = PaddingValues(0.dp),
+                                            onClick = {
+                                                context.startActivity(
+                                                    Intent(
+                                                        context,
+                                                        InsertActivity::class.java
+                                                    )
+                                                )
+                                            },
+                                            colors = ButtonDefaults.buttonColors(
+                                                containerColor = MaterialTheme.colorScheme.tertiary,
+                                                contentColor = MaterialTheme.colorScheme.onTertiary
+                                            ),
+                                            shape = CircleShape
+                                        ) {
+                                            Icon(
+                                                imageVector = Icons.Rounded.Add,
+                                                contentDescription = null
+                                            )
+                                        }
+                                    }
+                                )
                             }
+                            NavigationBarItem(
+                                selected = false,
+                                onClick = {
+                                    context.startActivity(
+                                        Intent(
+                                            context,
+                                            SettingsActivity::class.java
+                                        )
+                                    )
+                                },
+                                label = {
+                                    Text(
+                                        text = stringResource(id = R.string.settings),
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
+                                    )
+                                },
+                                icon = {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Settings,
+                                        contentDescription = stringResource(id = R.string.settings),
+                                        tint = MaterialTheme.colorScheme.onSurface
+                                    )
+                                }
+                            )
                         }
                     }
                 ) { padding ->
@@ -189,7 +233,8 @@ class MainActivity : ComponentActivity() {
                                             if (deleteExpirationDate != null) {
                                                 deleteExpirationDate(item)
                                             }
-                                        }
+                                        },
+                                        isInDarkTheme = isInDarkTheme
                                     )
                                 }
                             }

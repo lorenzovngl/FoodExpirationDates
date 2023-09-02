@@ -3,13 +3,21 @@ package com.lorenzovainigli.foodexpirationdates.view.composable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Delete
+import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -28,17 +36,26 @@ import androidx.compose.ui.unit.sp
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.PreferencesProvider
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
-import com.lorenzovainigli.foodexpirationdates.ui.theme.Orange500
-import com.lorenzovainigli.foodexpirationdates.ui.theme.Red700
+import com.lorenzovainigli.foodexpirationdates.ui.theme.DarkOrange
+import com.lorenzovainigli.foodexpirationdates.ui.theme.LightRed
+import com.lorenzovainigli.foodexpirationdates.ui.theme.DarkRed
+import com.lorenzovainigli.foodexpirationdates.ui.theme.DarkYellow
+import com.lorenzovainigli.foodexpirationdates.ui.theme.LightOrange
+import com.lorenzovainigli.foodexpirationdates.ui.theme.LightYellow
 import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
-import com.lorenzovainigli.foodexpirationdates.ui.theme.Yellow500
 import com.lorenzovainigli.foodexpirationdates.view.preview.DefaultPreviews
 import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Locale
 
 @Composable
-fun FoodCard(item: ExpirationDate, onClickEdit: () -> Unit, onClickDelete: () -> Unit) {
+fun FoodCard(
+    item: ExpirationDate,
+    onClickEdit: () -> Unit,
+    onClickDelete: () -> Unit,
+    isInDarkTheme: Boolean = false
+) {
     val context = LocalContext.current
     val dateFormat = PreferencesProvider.getUserDateFormat(context)
     val sdf = SimpleDateFormat(dateFormat, Locale.getDefault())
@@ -67,9 +84,12 @@ fun FoodCard(item: ExpirationDate, onClickEdit: () -> Unit, onClickDelete: () ->
             stringResource(R.string.in_n_days, days + 1)
         } else sdf.format(item.expirationDate)
     val bgColor =
-        if (item.expirationDate < today.time.time) Red700.copy(alpha = .8f)
-        else if (item.expirationDate < tomorrow.time.time) Orange500.copy(alpha = .8f)
-        else if (item.expirationDate < withinAWeek.time.time) Yellow500.copy(alpha = .8f)
+        if (item.expirationDate < today.time.time)
+            if (isInDarkTheme) LightRed else DarkRed
+        else if (item.expirationDate < tomorrow.time.time)
+            if (isInDarkTheme) LightOrange else DarkOrange
+        else if (item.expirationDate < withinAWeek.time.time)
+            if (isInDarkTheme) LightYellow else DarkYellow
         else Color.Transparent
     val textColor =
         if (item.expirationDate < today.time.time) Color.White.copy(alpha = .9f)
@@ -99,7 +119,7 @@ fun FoodCard(item: ExpirationDate, onClickEdit: () -> Unit, onClickDelete: () ->
                 color = textColor,
                 modifier = Modifier
                     .weight(1f)
-                    .padding(4.dp)
+                    .padding(8.dp)
                     .clickable(onClick = onClickEdit),
                 fontSize = 18.sp
             )
@@ -108,15 +128,24 @@ fun FoodCard(item: ExpirationDate, onClickEdit: () -> Unit, onClickDelete: () ->
                 color = textColor,
                 text = expiration
             )
-            Icon(
-                tint = textColor,
-                imageVector = Icons.Rounded.Delete,
-                contentDescription = null,
+            Button(
                 modifier = Modifier
-                    .size(20.dp)
                     .padding(start = 8.dp)
-                    .clickable(onClick = onClickDelete)
-            )
+                    .width(32.dp)
+                    .height(32.dp),
+                contentPadding = PaddingValues(0.dp),
+                onClick = onClickDelete,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.background,
+                    contentColor = MaterialTheme.colorScheme.error
+                ),
+                shape = CircleShape
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Delete,
+                    contentDescription = null
+                )
+            }
         }
     }
 }
@@ -125,13 +154,21 @@ fun FoodCard(item: ExpirationDate, onClickEdit: () -> Unit, onClickDelete: () ->
 @LanguagePreviews
 @Composable
 fun FoodCardPreview() {
-    FoodCard(
-        item = ExpirationDate(
-            id = 0,
-            foodName = stringArrayResource(id = R.array.example_foods)[0],
-            expirationDate = Calendar.getInstance().time.time
-        ),
-        onClickEdit = {},
-        onClickDelete = {}
-    )
+    val expirations = intArrayOf(0, 1, 7)
+    Column {
+        for (i in 0..2) {
+            val expirationDate = Calendar.getInstance()
+            expirationDate.add(Calendar.DAY_OF_MONTH, expirations[i])
+            FoodCard(
+                item = ExpirationDate(
+                    id = 0,
+                    foodName = stringArrayResource(id = R.array.example_foods)[i],
+                    expirationDate = expirationDate.time.time
+                ),
+                onClickEdit = {},
+                onClickDelete = {},
+                isInDarkTheme = isSystemInDarkTheme()
+            )
+        }
+    }
 }

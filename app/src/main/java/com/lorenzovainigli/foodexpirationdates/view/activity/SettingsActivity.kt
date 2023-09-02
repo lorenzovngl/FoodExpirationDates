@@ -55,7 +55,6 @@ import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.PreferencesProvider
 import com.lorenzovainigli.foodexpirationdates.model.worker.CheckExpirationsWorker
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
-import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
 import com.lorenzovainigli.foodexpirationdates.view.composable.DateFormatDialog
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
 import com.lorenzovainigli.foodexpirationdates.view.composable.SettingsItem
@@ -109,8 +108,7 @@ class SettingsActivity : ComponentActivity() {
         ) {
             Surface(
                 modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background,
-                tonalElevation = TonalElevation.level2()
+                color = MaterialTheme.colorScheme.background
             ) {
                 Scaffold(
                     topBar = {
