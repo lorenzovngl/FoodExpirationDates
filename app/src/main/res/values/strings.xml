@@ -42,6 +42,8 @@
     <string name="light">Light</string>
     <string name="system">System</string>
     <string name="dark">Dark</string>
+    <string name="x_deleted">%1$s deleted</string>
+    <string name="undo">Undo</string>
 
     <string-array name="features">
         <item>Display a list with food expiration dates in ascending time order.</item>

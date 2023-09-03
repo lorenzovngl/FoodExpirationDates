@@ -42,6 +42,8 @@
     <string name="light">Hell</string>
     <string name="system">System</string>
     <string name="dark">Dunkel</string>
+    <string name="x_deleted">%1$s gelöscht</string>
+    <string name="undo">Abbrechen</string>
 
     <string-array name="features">
         <item>Anzeige einer Liste mit Lebensmittelverfallsdaten in aufsteigender zeitlicher Reihenfolge.</item>

@@ -43,6 +43,8 @@
     <string name="light">Chiaro</string>
     <string name="system">Sistema</string>
     <string name="dark">Scuro</string>
+    <string name="x_deleted">%1$s eliminato</string>
+    <string name="undo">Annulla</string>
 
     <string-array name="features">
         <item>Visualizza un elenco con le date di scadenza degli alimenti in ordine crescente di tempo.</item>

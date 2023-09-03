@@ -111,7 +111,10 @@ class MainActivity : ComponentActivity() {
                     .fillMaxSize(),
                 color = MaterialTheme.colorScheme.background
             ) {
+                val snackbarHostState = remember { SnackbarHostState() }
+                val scope = rememberCoroutineScope()
                 Scaffold(
+                    snackbarHost = { SnackbarHost(snackbarHostState) },
                     topBar = {
                         MyTopAppBar(
                             title = stringResource(id = R.string.app_name),
@@ -231,6 +234,20 @@ class MainActivity : ComponentActivity() {
                                         },
                                         onClickDelete = {
                                             if (deleteExpirationDate != null) {
+                                                scope.launch {
+                                                    val snackbarResult =
+                                                        snackbarHostState.showSnackbar(
+                                                            message = resources.getString(R.string.x_deleted, item.foodName),
+                                                            actionLabel = resources.getString(R.string.undo),
+                                                            duration = SnackbarDuration.Short
+                                                        )
+                                                    when (snackbarResult) {
+                                                        SnackbarResult.ActionPerformed -> {
+                                                            addExpirationDate(item)
+                                                        }
+                                                        else -> {}
+                                                    }
+                                                }
                                                 deleteExpirationDate(item)
                                             }
                                         },

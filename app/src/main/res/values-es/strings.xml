@@ -43,6 +43,8 @@
     <string name="light">Claro</string>
     <string name="system">Sistema</string>
     <string name="dark">Oscuro</string>
+    <string name="x_deleted">%1$s eliminado</string>
+    <string name="undo">Cancelar</string>
 
     <string-array name="features">
         <item>Muestra una lista con las fechas de caducidad de los alimentos, ordenadas cronológicamente de forma ascendente.</item>
