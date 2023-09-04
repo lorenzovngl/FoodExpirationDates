@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.org.jetbrains.kotlin.android)
     id("kotlin-kapt")
     alias(libs.plugins.com.google.dagger.hilt.android)
+    alias(libs.plugins.app.cash.paparazzi)
 }
 
 var firebaseEnabled = true
