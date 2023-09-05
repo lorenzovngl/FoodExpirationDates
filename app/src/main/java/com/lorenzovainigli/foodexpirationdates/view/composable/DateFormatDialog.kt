@@ -25,7 +25,6 @@ import com.lorenzovainigli.foodexpirationdates.view.preview.DefaultPreviews
 import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Locale
 
 const val DateFormatDialog = "DateFormatDialog"
 
@@ -77,7 +76,7 @@ const val DateFormatRow = "DateFormatRow"
 @Composable
 fun DateFormatRow(item: String, onDismissRequest: () -> Unit){
     val context = LocalContext.current
-    val sdf = SimpleDateFormat(item, Locale.getDefault())
+    val sdf = SimpleDateFormat(item, context.resources.configuration.locales[0])
     ClickableText(
         modifier = Modifier.padding(2.dp).testTag(DateFormatRow),
         text = AnnotatedString(sdf.format(Calendar.getInstance().time)),

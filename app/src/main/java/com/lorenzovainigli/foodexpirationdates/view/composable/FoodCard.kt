@@ -29,7 +29,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -37,17 +36,17 @@ import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.PreferencesProvider
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.ui.theme.DarkOrange
-import com.lorenzovainigli.foodexpirationdates.ui.theme.LightRed
 import com.lorenzovainigli.foodexpirationdates.ui.theme.DarkRed
 import com.lorenzovainigli.foodexpirationdates.ui.theme.DarkYellow
 import com.lorenzovainigli.foodexpirationdates.ui.theme.LightOrange
+import com.lorenzovainigli.foodexpirationdates.ui.theme.LightRed
 import com.lorenzovainigli.foodexpirationdates.ui.theme.LightYellow
 import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
+import com.lorenzovainigli.foodexpirationdates.view.composable.activity.getItemsForPreview
 import com.lorenzovainigli.foodexpirationdates.view.preview.DefaultPreviews
 import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Locale
 
 @Composable
 fun FoodCard(
@@ -58,7 +57,7 @@ fun FoodCard(
 ) {
     val context = LocalContext.current
     val dateFormat = PreferencesProvider.getUserDateFormat(context)
-    val sdf = SimpleDateFormat(dateFormat, Locale.getDefault())
+    val sdf = SimpleDateFormat(dateFormat, context.resources.configuration.locales[0])
     val today = Calendar.getInstance()
     val twoDaysAgo = Calendar.getInstance()
     twoDaysAgo.add(Calendar.DAY_OF_MONTH, -2)
@@ -154,16 +153,14 @@ fun FoodCard(
 @LanguagePreviews
 @Composable
 fun FoodCardPreview() {
-    val expirations = intArrayOf(0, 1, 7)
+    val items = getItemsForPreview(LocalContext.current)
     Column {
-        for (i in 0..2) {
-            val expirationDate = Calendar.getInstance()
-            expirationDate.add(Calendar.DAY_OF_MONTH, expirations[i])
+        items.forEach {
             FoodCard(
                 item = ExpirationDate(
                     id = 0,
-                    foodName = stringArrayResource(id = R.array.example_foods)[i],
-                    expirationDate = expirationDate.time.time
+                    foodName = it.foodName,
+                    expirationDate = it.expirationDate
                 ),
                 onClickEdit = {},
                 onClickDelete = {},

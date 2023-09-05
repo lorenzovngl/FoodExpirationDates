@@ -20,21 +20,17 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
-import androidx.compose.material3.TimePicker
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
@@ -46,11 +42,12 @@ import com.lorenzovainigli.foodexpirationdates.model.PreferencesProvider
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.composable.DateFormatDialog
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
+import com.lorenzovainigli.foodexpirationdates.view.composable.NotificationTimeBottomSheet
 import com.lorenzovainigli.foodexpirationdates.view.composable.SettingsItem
 import com.lorenzovainigli.foodexpirationdates.view.preview.DefaultPreviews
+import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Locale
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -61,7 +58,7 @@ fun SettingsActivityLayout(
     val context = LocalContext.current
     val activity = (LocalContext.current as? Activity)
     var dateFormat = PreferencesProvider.getUserDateFormat(context)
-    var sdf = SimpleDateFormat(dateFormat, Locale.getDefault())
+    var sdf = SimpleDateFormat(dateFormat, context.resources.configuration.locales[0])
     var isDateFormatDialogOpened by remember {
         mutableStateOf(false)
     }
@@ -110,26 +107,13 @@ fun SettingsActivityLayout(
                     isDialogOpen = isDateFormatDialogOpened,
                     onDismissRequest = {
                         dateFormat = PreferencesProvider.getUserDateFormat(context)
-                        sdf = SimpleDateFormat(dateFormat, Locale.getDefault())
+                        sdf = SimpleDateFormat(dateFormat, context.resources.configuration.locales[0])
                         isDateFormatDialogOpened = false
                     }
                 )
                 if (isNotificationTimeBottomSheetOpen) {
-                    ModalBottomSheet(
-                        sheetState = rememberModalBottomSheetState(
-                            skipPartiallyExpanded = true
-                        ),
-                        content = {
-                            Column(
-                                modifier = Modifier
-                                    .align(Alignment.CenterHorizontally)
-                                    .padding(4.dp)
-                            ) {
-                                TimePicker(
-                                    state = timePickerState
-                                )
-                            }
-                        },
+                    NotificationTimeBottomSheet(
+                        timePickerState = timePickerState,
                         onDismissRequest = {
                             PreferencesProvider.setUserNotificationTime(
                                 context,
@@ -243,7 +227,8 @@ fun SettingsActivityLayout(
 
 @RequiresApi(Build.VERSION_CODES.O)
 @DefaultPreviews
+@LanguagePreviews
 @Composable
 fun SettingsActivityLayoutPreview() {
-    SettingsActivityLayout(null)
+    SettingsActivityLayout()
 }
