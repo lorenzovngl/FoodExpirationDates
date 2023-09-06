@@ -5,6 +5,8 @@
 # Food Expiration Dates
 
 [![Author](https://img.shields.io/badge/Author-lorenzovngl-white?style=flat-square)](https://github.com/lorenzovngl)
+
+![GitHub Workflow (Android CI)](https://img.shields.io/github/actions/workflow/status/lorenzovngl/FoodExpirationDates/.github%2Fworkflows%2Fandroid.yml?style=flat-square&label=Build)
 ![GitHub last commit](https://img.shields.io/github/last-commit/lorenzovngl/FoodExpirationDates?label=Last%20commit&style=flat-square)
 ![GitHub](https://img.shields.io/github/license/lorenzovngl/FoodExpirationDates?style=flat-square&label=License)
 ![Languages](https://img.shields.io/badge/Languages-7-orange?style=flat-square)
