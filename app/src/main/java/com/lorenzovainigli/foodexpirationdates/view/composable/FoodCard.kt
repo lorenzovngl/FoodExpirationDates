@@ -33,7 +33,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lorenzovainigli.foodexpirationdates.R
-import com.lorenzovainigli.foodexpirationdates.model.PreferencesProvider
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.ui.theme.DarkOrange
 import com.lorenzovainigli.foodexpirationdates.ui.theme.DarkRed
@@ -56,7 +56,7 @@ fun FoodCard(
     isInDarkTheme: Boolean = false
 ) {
     val context = LocalContext.current
-    val dateFormat = PreferencesProvider.getUserDateFormat(context)
+    val dateFormat = PreferencesRepository.getUserDateFormat(context)
     val sdf = SimpleDateFormat(dateFormat, context.resources.configuration.locales[0])
     val today = Calendar.getInstance()
     val twoDaysAgo = Calendar.getInstance()

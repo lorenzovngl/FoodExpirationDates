@@ -1,4 +1,4 @@
-package com.lorenzovainigli.foodexpirationdates.model
+package com.lorenzovainigli.foodexpirationdates.model.repository
 
 import android.content.Context
 import androidx.activity.ComponentActivity
@@ -8,7 +8,7 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class PreferencesProvider {
+class PreferencesRepository {
 
     companion object {
 
@@ -85,7 +85,7 @@ class PreferencesProvider {
 
         fun setThemeMode(context: Context, themeMode: ThemeMode) {
             return context.getSharedPreferences(sharedPrefsName, ComponentActivity.MODE_PRIVATE)
-                .edit().putInt(this.themeMode, themeMode.ordinal).apply()
+                .edit().putInt(Companion.themeMode, themeMode.ordinal).apply()
         }
 
         fun getDynamicColors(context: Context): Boolean {

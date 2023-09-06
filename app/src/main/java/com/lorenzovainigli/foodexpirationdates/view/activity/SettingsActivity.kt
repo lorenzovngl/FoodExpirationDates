@@ -12,9 +12,11 @@ import androidx.work.WorkManager
 import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.model.worker.CheckExpirationsWorker
 import com.lorenzovainigli.foodexpirationdates.view.composable.activity.SettingsActivityLayout
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
 
+@AndroidEntryPoint
 class SettingsActivity : ComponentActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)

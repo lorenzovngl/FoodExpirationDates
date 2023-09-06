@@ -1,6 +1,7 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable.activity
 
 import android.app.Activity
+import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
@@ -35,6 +36,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -48,13 +50,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lorenzovainigli.foodexpirationdates.R
-import com.lorenzovainigli.foodexpirationdates.model.PreferencesProvider
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
 import com.lorenzovainigli.foodexpirationdates.view.preview.DevicePreviews
 import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
-import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDateViewModel
+import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDatesViewModel
+import com.lorenzovainigli.foodexpirationdates.viewmodel.PreferencesViewModel
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -62,18 +65,24 @@ import java.util.Locale
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InsertActivityLayout(
+    context: Context = LocalContext.current,
     itemId: Int? = null,
-    viewModel: ExpirationDateViewModel? = viewModel(),
+    viewModel: ExpirationDatesViewModel? = viewModel(),
+    prefsViewModel: PreferencesViewModel? = viewModel(),
     addExpirationDate: ((ExpirationDate) -> Unit)? = viewModel!!::addExpirationDate
 ) {
-    val context = LocalContext.current
+    val darkThemeState = prefsViewModel?.getThemeMode(context)?.collectAsState()?.value
+        ?: PreferencesRepository.Companion.ThemeMode.SYSTEM
+    val dynamicColorsState = prefsViewModel?.getDynamicColors(context)?.collectAsState()?.value
+        ?: false
+    val isInDarkTheme = when (darkThemeState) {
+        PreferencesRepository.Companion.ThemeMode.LIGHT.ordinal -> false
+        PreferencesRepository.Companion.ThemeMode.DARK.ordinal -> true
+        else -> isSystemInDarkTheme()
+    }
     FoodExpirationDatesTheme(
-        darkTheme = when (PreferencesProvider.getThemeMode(context)){
-            PreferencesProvider.Companion.ThemeMode.LIGHT.ordinal -> false
-            PreferencesProvider.Companion.ThemeMode.DARK.ordinal -> true
-            else -> isSystemInDarkTheme()
-        },
-        dynamicColor = PreferencesProvider.getDynamicColors(context)
+        darkTheme = isInDarkTheme,
+        dynamicColor = dynamicColorsState
     ) {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -289,5 +298,9 @@ fun InsertActivityLayout(
 @LanguagePreviews
 @Composable
 fun InsertActivityLayoutPreview() {
-    InsertActivityLayout(null, null)
+    InsertActivityLayout(
+        context = LocalContext.current,
+        itemId = null,
+        viewModel = null
+    )
 }

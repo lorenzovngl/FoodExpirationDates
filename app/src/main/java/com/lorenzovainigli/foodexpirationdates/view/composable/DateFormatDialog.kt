@@ -1,5 +1,6 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable
 
+import android.content.Context
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
@@ -19,7 +20,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.lorenzovainigli.foodexpirationdates.R
-import com.lorenzovainigli.foodexpirationdates.model.PreferencesProvider
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.preview.DefaultPreviews
 import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
@@ -29,7 +30,11 @@ import java.util.Calendar
 const val DateFormatDialog = "DateFormatDialog"
 
 @Composable
-fun DateFormatDialog(isDialogOpen: Boolean = true, onDismissRequest: () -> Unit = {}) {
+fun DateFormatDialog(
+    isDialogOpen: Boolean = true,
+    onDismissRequest: () -> Unit = {},
+    onClickDate: (Context, String) -> Unit = { _, _ -> }
+) {
     if (isDialogOpen) {
         Dialog(onDismissRequest = onDismissRequest) {
             Card(
@@ -54,16 +59,24 @@ fun DateFormatDialog(isDialogOpen: Boolean = true, onDismissRequest: () -> Unit 
                         text = stringResource(id = R.string.locale_formats),
                         color = MaterialTheme.colorScheme.onSurface
                     )
-                    PreferencesProvider.getAvailLocaleDateFormats().forEach { item ->
-                        DateFormatRow(item = item, onDismissRequest = onDismissRequest)
+                    PreferencesRepository.getAvailLocaleDateFormats().forEach { item ->
+                        DateFormatRow(
+                            item = item,
+                            onDismissRequest = onDismissRequest,
+                            onClick = onClickDate
+                        )
                     }
                     Text(
                         modifier = Modifier.padding(top = 8.dp, bottom = 4.dp),
                         text = stringResource(id = R.string.other_formats),
                         color = MaterialTheme.colorScheme.onSurface
                     )
-                    PreferencesProvider.getAvailOtherDateFormats().forEach { item ->
-                        DateFormatRow(item = item, onDismissRequest = onDismissRequest)
+                    PreferencesRepository.getAvailOtherDateFormats().forEach { item ->
+                        DateFormatRow(
+                            item = item,
+                            onDismissRequest = onDismissRequest,
+                            onClick = onClickDate
+                        )
                     }
                 }
             }
@@ -74,7 +87,11 @@ fun DateFormatDialog(isDialogOpen: Boolean = true, onDismissRequest: () -> Unit 
 const val DateFormatRow = "DateFormatRow"
 
 @Composable
-fun DateFormatRow(item: String, onDismissRequest: () -> Unit){
+fun DateFormatRow(
+    item: String,
+    onDismissRequest: () -> Unit,
+    onClick: (Context, String) -> Unit
+){
     val context = LocalContext.current
     val sdf = SimpleDateFormat(item, context.resources.configuration.locales[0])
     ClickableText(
@@ -82,7 +99,7 @@ fun DateFormatRow(item: String, onDismissRequest: () -> Unit){
         text = AnnotatedString(sdf.format(Calendar.getInstance().time)),
         style = MaterialTheme.typography.headlineSmall.copy(color = MaterialTheme.colorScheme.onSurface),
         onClick = {
-            PreferencesProvider.setUserDateFormat(context, item)
+            onClick(context, item)
             onDismissRequest()
         }
     )

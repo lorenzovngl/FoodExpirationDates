@@ -1,6 +1,7 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable.activity
 
 import android.app.Activity
+import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -27,6 +28,7 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -37,8 +39,9 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lorenzovainigli.foodexpirationdates.R
-import com.lorenzovainigli.foodexpirationdates.model.PreferencesProvider
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.composable.DateFormatDialog
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
@@ -46,6 +49,7 @@ import com.lorenzovainigli.foodexpirationdates.view.composable.NotificationTimeB
 import com.lorenzovainigli.foodexpirationdates.view.composable.SettingsItem
 import com.lorenzovainigli.foodexpirationdates.view.preview.DefaultPreviews
 import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
+import com.lorenzovainigli.foodexpirationdates.viewmodel.PreferencesViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
@@ -53,32 +57,37 @@ import java.util.Calendar
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsActivityLayout(
+    context: Context = LocalContext.current,
+    prefsViewModel: PreferencesViewModel? = viewModel(),
     scheduleDailyNotification: ((Int, Int) -> Unit)? = null
 ) {
-    val context = LocalContext.current
-    val activity = (LocalContext.current as? Activity)
-    var dateFormat = PreferencesProvider.getUserDateFormat(context)
+    val activity = (context as? Activity)
+
+    val darkThemeState = prefsViewModel?.getThemeMode(context)?.collectAsState()?.value
+        ?: PreferencesRepository.Companion.ThemeMode.SYSTEM.ordinal
+    val dynamicColorsState = prefsViewModel?.getDynamicColors(context)?.collectAsState()?.value
+        ?: false
+
+    val dateFormat = prefsViewModel?.getDateFormat(context)?.collectAsState()?.value
+        ?: PreferencesRepository.getAvailOtherDateFormats()[0]
     var sdf = SimpleDateFormat(dateFormat, context.resources.configuration.locales[0])
     var isDateFormatDialogOpened by remember {
         mutableStateOf(false)
     }
-    val notificationTimeHour = PreferencesProvider.getUserNotificationTimeHour(context)
-    val notificationTimeMinute = PreferencesProvider.getUserNotificationTimeMinute(context)
+
+    val notificationTimeHour = prefsViewModel?.getNotificationTimeHour(context)?.collectAsState()?.value
+        ?: 11
+    val notificationTimeMinute = prefsViewModel?.getNotificationTimeMinute(context)?.collectAsState()?.value
+        ?: 0
     val timePickerState =
         rememberTimePickerState(notificationTimeHour, notificationTimeMinute, true)
     var isNotificationTimeBottomSheetOpen by remember {
         mutableStateOf(false)
     }
-    var darkThemeState by remember {
-        mutableStateOf(PreferencesProvider.getThemeMode(context))
-    }
-    var dynamicColorsState by remember {
-        mutableStateOf(PreferencesProvider.getDynamicColors(context))
-    }
     FoodExpirationDatesTheme(
         darkTheme = when (darkThemeState) {
-            PreferencesProvider.Companion.ThemeMode.LIGHT.ordinal -> false
-            PreferencesProvider.Companion.ThemeMode.DARK.ordinal -> true
+            PreferencesRepository.Companion.ThemeMode.LIGHT.ordinal -> false
+            PreferencesRepository.Companion.ThemeMode.DARK.ordinal -> true
             else -> isSystemInDarkTheme()
         },
         dynamicColor = dynamicColorsState
@@ -103,19 +112,21 @@ fun SettingsActivityLayout(
                     )
                 }
             ) { padding ->
-                DateFormatDialog(
-                    isDialogOpen = isDateFormatDialogOpened,
-                    onDismissRequest = {
-                        dateFormat = PreferencesProvider.getUserDateFormat(context)
-                        sdf = SimpleDateFormat(dateFormat, context.resources.configuration.locales[0])
-                        isDateFormatDialogOpened = false
-                    }
-                )
+                prefsViewModel?.let {
+                    DateFormatDialog(
+                        isDialogOpen = isDateFormatDialogOpened,
+                        onDismissRequest = {
+                            sdf = SimpleDateFormat(dateFormat, context.resources.configuration.locales[0])
+                            isDateFormatDialogOpened = false
+                        },
+                        onClickDate = it::setDateFormat
+                    )
+                }
                 if (isNotificationTimeBottomSheetOpen) {
                     NotificationTimeBottomSheet(
                         timePickerState = timePickerState,
                         onDismissRequest = {
-                            PreferencesProvider.setUserNotificationTime(
+                            prefsViewModel?.setNotificationTime(
                                 context,
                                 timePickerState.hour, timePickerState.minute
                             )
@@ -172,7 +183,7 @@ fun SettingsActivityLayout(
                     SettingsItem(
                         label = stringResource(R.string.theme)
                     ){
-                        PreferencesProvider.Companion.ThemeMode.values().forEach {
+                        PreferencesRepository.Companion.ThemeMode.values().forEach {
                             Spacer(
                                 modifier = Modifier
                                     .fillMaxHeight()
@@ -188,8 +199,7 @@ fun SettingsActivityLayout(
                             if(it.ordinal != darkThemeState){
                                 OutlinedButton(
                                     onClick = {
-                                        darkThemeState = it.ordinal
-                                        PreferencesProvider.setThemeMode(context, it)
+                                        prefsViewModel?.setThemeMode(context, it)
                                     },
                                 ) {
                                     Text(
@@ -214,8 +224,7 @@ fun SettingsActivityLayout(
                         Switch(
                             checked = dynamicColorsState,
                             onCheckedChange = {
-                                PreferencesProvider.setDynamicColors(context, it)
-                                dynamicColorsState = it
+                                prefsViewModel?.setDynamicColors(context, it)
                             }
                         )
                     }

@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.lorenzovainigli.foodexpirationdates.model.AppDatabase
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDatesRepositoryImpl
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,13 +26,15 @@ class AppModule {
         ).allowMainThreadQueries().build()
     }
 
-//    @Provides
-//    @Singleton
-//    fun expirationDatesDao(database: AppDatabase): ExpirationDatesDao = database.expirationDatesDao
-
     @Provides
     @Singleton
     fun provideExpirationDateRepository(database: AppDatabase): ExpirationDateRepository {
         return ExpirationDatesRepositoryImpl(database.expirationDatesDao)
+    }
+
+    @Provides
+    @Singleton
+    fun providePreferencesRepository(): PreferencesRepository {
+        return PreferencesRepository()
     }
 }

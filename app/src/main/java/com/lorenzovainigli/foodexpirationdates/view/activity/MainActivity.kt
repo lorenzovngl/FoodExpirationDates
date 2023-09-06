@@ -10,7 +10,7 @@ import com.lorenzovainigli.foodexpirationdates.di.AppModule
 import com.lorenzovainigli.foodexpirationdates.di.DaggerAppComponent
 import com.lorenzovainigli.foodexpirationdates.model.NotificationManager
 import com.lorenzovainigli.foodexpirationdates.view.composable.activity.MainActivityLayout
-import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDateViewModel
+import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDatesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,9 +27,13 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         setContent {
-            val viewModel: ExpirationDateViewModel = viewModel()
-            val dates by viewModel.getDates().collectAsState(emptyList())
-            MainActivityLayout(dates)
+            val viewModel: ExpirationDatesViewModel = viewModel()
+            val items by viewModel.getDates().collectAsState(emptyList())
+            MainActivityLayout(
+                context = this,
+                items = items,
+                viewModel = viewModel
+            )
         }
     }
 

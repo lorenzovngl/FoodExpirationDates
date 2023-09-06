@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ExpirationDateViewModel @Inject constructor(
+class ExpirationDatesViewModel @Inject constructor(
     private val repository: ExpirationDateRepository
     ) : ViewModel() {
 

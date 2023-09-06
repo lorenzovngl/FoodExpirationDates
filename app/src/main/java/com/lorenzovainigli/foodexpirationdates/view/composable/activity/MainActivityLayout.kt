@@ -31,6 +31,7 @@ import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -47,8 +48,8 @@ import androidx.compose.ui.tooling.preview.Wallpapers
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lorenzovainigli.foodexpirationdates.R
-import com.lorenzovainigli.foodexpirationdates.model.PreferencesProvider
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
 import com.lorenzovainigli.foodexpirationdates.view.activity.InfoActivity
@@ -57,27 +58,33 @@ import com.lorenzovainigli.foodexpirationdates.view.activity.SettingsActivity
 import com.lorenzovainigli.foodexpirationdates.view.composable.FoodCard
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
 import com.lorenzovainigli.foodexpirationdates.view.preview.DevicePreviews
-import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDateViewModel
+import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDatesViewModel
+import com.lorenzovainigli.foodexpirationdates.viewmodel.PreferencesViewModel
 import kotlinx.coroutines.launch
 import java.util.Calendar
 import kotlin.math.min
 
 @Composable
 fun MainActivityLayout(
+    context: Context = LocalContext.current,
+    viewModel: ExpirationDatesViewModel? = viewModel(),
+    prefsViewModel: PreferencesViewModel? = viewModel(),
     items: List<ExpirationDate>? = null,
-    viewModel: ExpirationDateViewModel? = viewModel(),
     addExpirationDate: ((ExpirationDate) -> Unit)? = viewModel!!::addExpirationDate,
-    deleteExpirationDate: ((ExpirationDate) -> Unit)? = viewModel!!::deleteExpirationDate,
+    deleteExpirationDate: ((ExpirationDate) -> Unit)? = viewModel!!::deleteExpirationDate
 ) {
-    val context = LocalContext.current
-    val isInDarkTheme = when (PreferencesProvider.getThemeMode(context)){
-        PreferencesProvider.Companion.ThemeMode.LIGHT.ordinal -> false
-        PreferencesProvider.Companion.ThemeMode.DARK.ordinal -> true
+    val darkThemeState = prefsViewModel?.getThemeMode(context)?.collectAsState()?.value
+        ?: PreferencesRepository.Companion.ThemeMode.SYSTEM
+    val dynamicColorsState = prefsViewModel?.getDynamicColors(context)?.collectAsState()?.value
+        ?: false
+    val isInDarkTheme = when (darkThemeState) {
+        PreferencesRepository.Companion.ThemeMode.LIGHT.ordinal -> false
+        PreferencesRepository.Companion.ThemeMode.DARK.ordinal -> true
         else -> isSystemInDarkTheme()
     }
     FoodExpirationDatesTheme(
         darkTheme = isInDarkTheme,
-        dynamicColor = PreferencesProvider.getDynamicColors(context)
+        dynamicColor = dynamicColorsState
     ) {
         Surface(
             modifier = Modifier
@@ -210,7 +217,10 @@ fun MainActivityLayout(
                                             scope.launch {
                                                 val snackbarResult =
                                                     snackbarHostState.showSnackbar(
-                                                        message = context.resources.getString(R.string.x_deleted, item.foodName),
+                                                        message = context.resources.getString(
+                                                            R.string.x_deleted,
+                                                            item.foodName
+                                                        ),
                                                         actionLabel = context.resources.getString(R.string.undo),
                                                         duration = SnackbarDuration.Short
                                                     )
@@ -220,6 +230,7 @@ fun MainActivityLayout(
                                                             addExpirationDate(item)
                                                         }
                                                     }
+
                                                     else -> {}
                                                 }
                                             }
@@ -307,7 +318,6 @@ fun MainActivityLayoutPreview() {
     val items = getItemsForPreview(context)
     MainActivityLayout(
         items = items,
-        viewModel = null,
         addExpirationDate = null,
         deleteExpirationDate = null
     )

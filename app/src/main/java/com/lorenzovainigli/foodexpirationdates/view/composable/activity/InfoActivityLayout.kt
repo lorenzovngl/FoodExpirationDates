@@ -1,6 +1,7 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable.activity
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -23,6 +24,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -33,29 +35,38 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.R
-import com.lorenzovainigli.foodexpirationdates.model.PreferencesProvider
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
 import com.lorenzovainigli.foodexpirationdates.view.composable.TextIconButton
 import com.lorenzovainigli.foodexpirationdates.view.preview.DefaultPreviews
+import com.lorenzovainigli.foodexpirationdates.view.preview.DevicePreviews
+import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
+import com.lorenzovainigli.foodexpirationdates.viewmodel.PreferencesViewModel
 
 @Composable
-@Preview
-fun InfoActivityLayout() {
-    val context = LocalContext.current
-    val activity = (LocalContext.current as? Activity)
+fun InfoActivityLayout(
+    context: Context = LocalContext.current,
+    prefsViewModel: PreferencesViewModel? = viewModel()
+) {
+    val activity = (context as? Activity)
     val uriHandler = LocalUriHandler.current
+    val darkThemeState = prefsViewModel?.getThemeMode(context)?.collectAsState()?.value
+        ?: PreferencesRepository.Companion.ThemeMode.SYSTEM
+    val dynamicColorsState = prefsViewModel?.getDynamicColors(context)?.collectAsState()?.value
+        ?: false
+    val isInDarkTheme = when (darkThemeState) {
+        PreferencesRepository.Companion.ThemeMode.LIGHT.ordinal -> false
+        PreferencesRepository.Companion.ThemeMode.DARK.ordinal -> true
+        else -> isSystemInDarkTheme()
+    }
     FoodExpirationDatesTheme(
-        darkTheme = when (PreferencesProvider.getThemeMode(context)){
-            PreferencesProvider.Companion.ThemeMode.LIGHT.ordinal -> false
-            PreferencesProvider.Companion.ThemeMode.DARK.ordinal -> true
-            else -> isSystemInDarkTheme()
-        },
-        dynamicColor = PreferencesProvider.getDynamicColors(context)
+        darkTheme = isInDarkTheme,
+        dynamicColor = dynamicColorsState
     ) {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -211,7 +222,9 @@ fun InfoActivityLayout() {
 }
 
 @DefaultPreviews
+@DevicePreviews
+@LanguagePreviews
 @Composable
-fun PreviewDarkMode() {
+fun InfoActivityLayoutPreview() {
     InfoActivityLayout()
 }

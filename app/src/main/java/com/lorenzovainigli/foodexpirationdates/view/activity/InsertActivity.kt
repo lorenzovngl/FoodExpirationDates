@@ -22,7 +22,10 @@ class InsertActivity : ComponentActivity() {
             .appModule(AppModule())
             .build()
         setContent {
-            InsertActivityLayout(itemId = itemId)
+            InsertActivityLayout(
+                context = this,
+                itemId = itemId
+            )
         }
     }
 
