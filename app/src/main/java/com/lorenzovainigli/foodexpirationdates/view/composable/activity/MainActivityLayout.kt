@@ -7,6 +7,8 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -135,35 +137,34 @@ fun MainActivityLayout(
                             }
                         )
                         if (!items.isNullOrEmpty()) {
-                            NavigationBarItem(
-                                selected = false,
-                                onClick = {},
-                                icon = {
-                                    Button(
-                                        modifier = Modifier
-                                            .size(50.dp),
-                                        contentPadding = PaddingValues(0.dp),
-                                        onClick = {
-                                            context.startActivity(
-                                                Intent(
-                                                    context,
-                                                    InsertActivity::class.java
-                                                )
+                            Row(
+                                modifier = Modifier.fillMaxHeight(),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Button(
+                                    modifier = Modifier
+                                        .size(56.dp),
+                                    contentPadding = PaddingValues(0.dp),
+                                    onClick = {
+                                        context.startActivity(
+                                            Intent(
+                                                context,
+                                                InsertActivity::class.java
                                             )
-                                        },
-                                        colors = ButtonDefaults.buttonColors(
-                                            containerColor = MaterialTheme.colorScheme.tertiary,
-                                            contentColor = MaterialTheme.colorScheme.onTertiary
-                                        ),
-                                        shape = CircleShape
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Rounded.Add,
-                                            contentDescription = null
                                         )
-                                    }
+                                    },
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = MaterialTheme.colorScheme.tertiary,
+                                        contentColor = MaterialTheme.colorScheme.onTertiary
+                                    ),
+                                    shape = CircleShape
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Rounded.Add,
+                                        contentDescription = null
+                                    )
                                 }
-                            )
+                            }
                         }
                         NavigationBarItem(
                             selected = false,
@@ -318,6 +319,8 @@ fun MainActivityLayoutPreview() {
     val items = getItemsForPreview(context)
     MainActivityLayout(
         items = items,
+        viewModel = null,
+        prefsViewModel = null,
         addExpirationDate = null,
         deleteExpirationDate = null
     )
