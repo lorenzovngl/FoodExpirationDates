@@ -17,16 +17,19 @@ import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material.icons.outlined.Star
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
@@ -48,6 +51,7 @@ import com.lorenzovainigli.foodexpirationdates.view.preview.DevicePreviews
 import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
 import com.lorenzovainigli.foodexpirationdates.viewmodel.PreferencesViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InfoActivityLayout(
     context: Context = LocalContext.current,
@@ -72,7 +76,9 @@ fun InfoActivityLayout(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
+            val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
             Scaffold(
+                modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
                 topBar = {
                     MyTopAppBar(
                         title = stringResource(id = R.string.about_this_app),
@@ -81,10 +87,11 @@ fun InfoActivityLayout(
                                 Icon(
                                     imageVector = Icons.Outlined.ArrowBack,
                                     contentDescription = stringResource(id = R.string.back),
-                                    tint = MaterialTheme.colorScheme.onSurface
+                                    tint = MaterialTheme.colorScheme.primary
                                 )
                             }
-                        }
+                        },
+                        scrollBehavior = scrollBehavior
                     )
                 }
             ) { padding ->

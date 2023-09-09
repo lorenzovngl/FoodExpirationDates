@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -21,6 +22,7 @@ import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -32,13 +34,18 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -66,6 +73,7 @@ import kotlinx.coroutines.launch
 import java.util.Calendar
 import kotlin.math.min
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainActivityLayout(
     context: Context = LocalContext.current,
@@ -95,25 +103,38 @@ fun MainActivityLayout(
         ) {
             val snackbarHostState = remember { SnackbarHostState() }
             val scope = rememberCoroutineScope()
+            val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
             Scaffold(
+                modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
                 snackbarHost = { SnackbarHost(snackbarHostState) },
                 topBar = {
                     MyTopAppBar(
                         title = stringResource(id = R.string.app_name),
                         navigationIcon = {
-                            Image(
-                                modifier = Modifier
-                                    .padding(horizontal = 7.dp)
-                                    .size(48.dp),
-                                painter = painterResource(id = R.drawable.fed_icon),
-                                contentDescription = null,
-                                contentScale = ContentScale.Crop
-                            )
-                        }
+                            Box {
+                                Image(
+                                    modifier = Modifier
+                                        .padding(horizontal = 7.dp)
+                                        .size(48.dp),
+                                    painter = painterResource(id = R.drawable.fed_icon),
+                                    contentDescription = null,
+                                    contentScale = ContentScale.Crop,
+                                    colorFilter = ColorFilter.tint(
+                                        color = MaterialTheme.colorScheme.primary,
+                                        blendMode = BlendMode.SrcAtop
+                                    )
+                                )
+                            }
+                        },
+                        scrollBehavior = scrollBehavior
                     )
                 },
                 bottomBar = {
                     NavigationBar(
+                        modifier = Modifier.shadow(
+                            elevation = 16.dp,
+                            spotColor = MaterialTheme.colorScheme.primary
+                        ),
                         tonalElevation = TonalElevation.level0()
                     ) {
                         NavigationBarItem(
@@ -125,14 +146,15 @@ fun MainActivityLayout(
                                 Text(
                                     text = stringResource(id = R.string.about_this_app),
                                     maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
+                                    overflow = TextOverflow.Ellipsis,
+                                    color = MaterialTheme.colorScheme.primary
                                 )
                             },
                             icon = {
                                 Icon(
                                     imageVector = Icons.Outlined.Info,
                                     contentDescription = stringResource(id = R.string.about_this_app),
-                                    tint = MaterialTheme.colorScheme.onSurface
+                                    tint = MaterialTheme.colorScheme.primary
                                 )
                             }
                         )
@@ -180,14 +202,15 @@ fun MainActivityLayout(
                                 Text(
                                     text = stringResource(id = R.string.settings),
                                     maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
+                                    overflow = TextOverflow.Ellipsis,
+                                    color =  MaterialTheme.colorScheme.primary
                                 )
                             },
                             icon = {
                                 Icon(
                                     imageVector = Icons.Outlined.Settings,
                                     contentDescription = stringResource(id = R.string.settings),
-                                    tint = MaterialTheme.colorScheme.onSurface
+                                    tint = MaterialTheme.colorScheme.primary
                                 )
                             }
                         )
