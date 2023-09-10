@@ -38,7 +38,10 @@ class PreferencesViewModel @Inject constructor(): ViewModel() {
 
     fun setDateFormat(context: Context, format: String) {
         viewModelScope.launch {
-            PreferencesRepository.setUserDateFormat(context, format)
+            PreferencesRepository.setUserDateFormat(
+                context = context,
+                dateFormat = format
+            )
         }
         _dateFormat.value = format
     }
@@ -59,7 +62,11 @@ class PreferencesViewModel @Inject constructor(): ViewModel() {
 
     fun setNotificationTime(context: Context, hour: Int, minute: Int) {
         viewModelScope.launch {
-            PreferencesRepository.setUserNotificationTime(context, hour, minute)
+            PreferencesRepository.setUserNotificationTime(
+                context = context,
+                hour = hour,
+                minute = minute
+            )
         }
         _notificationTimeHour.value = hour
         _notificationTimeMinute.value = minute
@@ -73,7 +80,10 @@ class PreferencesViewModel @Inject constructor(): ViewModel() {
     }
     fun setThemeMode(context: Context, theme: PreferencesRepository.Companion.ThemeMode) {
         viewModelScope.launch {
-            PreferencesRepository.setThemeMode(context, theme)
+            PreferencesRepository.setThemeMode(
+                context = context,
+                themeMode = theme
+            )
         }
         _themeMode.value = theme.ordinal
     }
@@ -87,7 +97,10 @@ class PreferencesViewModel @Inject constructor(): ViewModel() {
 
     fun setDynamicColors(context: Context, colors: Boolean) {
         viewModelScope.launch {
-            PreferencesRepository.setDynamicColors(context, colors)
+            PreferencesRepository.setDynamicColors(
+                context = context,
+                dynamicColorsEnabled = colors
+            )
         }
         _dynamicColors.value = colors
     }

@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "expiration_dates")
 data class ExpirationDate(
-    @PrimaryKey(autoGenerate = true) val id: Int,
-    @ColumnInfo(name = "food_name") val foodName: String,
-    @ColumnInfo(name = "expiration_date") val expirationDate: Long,
+    @PrimaryKey(autoGenerate = true) var id: Int,
+    @ColumnInfo(name = "food_name") var foodName: String,
+    @ColumnInfo(name = "expiration_date") var expirationDate: Long,
 )
