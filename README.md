@@ -49,11 +49,10 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 
 <div align="center">
 
-| | | |
-|-|-|-|
-| <img width="200px" src="screenshots/en/screen_1.png"> | <img width="200px" src="screenshots/en/screen_2.png"> | <img width="200px" src="screenshots/en/screen_3.png"> | 
-<img width="200px" src="screenshots/en/screen_4.png"> | <img width="200px" src="screenshots/en/screen_5.png"> | <img width="200px" src="screenshots/en/screen_8.png"> |
-
+| | | | |
+|-|-|-|-|
+| <img width="150px" src="screenshots/screenshot_ScreenshotEnglish_screen1MainActivity.png"> | <img width="150px" src="screenshots/screenshot_ScreenshotEnglish_screen2InsertActivity.png"> | <img width="150px" src="screenshots/screenshot_ScreenshotEnglish_screen3SettingsActivity.png"> | <img width="150px" src="screenshots/screenshot_ScreenshotEnglish_screen4InfoActivity.png"> |
+<img width="150px" src="screenshots/screenshot.night_ScreenshotEnglishNight_screen1MainActivity.png"> | <img width="150px" src="screenshots/screenshot.night_ScreenshotEnglishNight_screen2InsertActivity.png"> | <img width="150px" src="screenshots/screenshot.night_ScreenshotEnglishNight_screen3SettingsActivity.png"> | <img width="150px" src="screenshots/screenshot.night_ScreenshotEnglishNight_screen4InfoActivity.png"> |
 </div>
 
 ## 🛠️ Technologies
