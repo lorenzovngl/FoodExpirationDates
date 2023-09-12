@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.com.google.devtools.ksp)
 }
 
+// Set firebaseEnabled = false for foss build
 var firebaseEnabled = true
 
 android {
@@ -103,6 +104,7 @@ dependencies {
     androidTestImplementation(libs.test.core.ktx)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.androidx.uiautomator)
 
     // Jetpack Compose
     // https://developer.android.com/jetpack/compose/bom
@@ -146,8 +148,8 @@ dependencies {
 }
 
 if (firebaseEnabled){
-    apply(plugin = "com.google.firebase.crashlytics")
     apply(plugin = "com.google.gms.google-services")
+    apply(plugin = "com.google.firebase.crashlytics")
 }
 
 apply(plugin = "com.google.dagger.hilt.android")
