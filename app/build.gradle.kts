@@ -61,13 +61,11 @@ android {
     productFlavors {
         create("full") {
             dimension = "version"
-            firebaseEnabled = true
         }
         create("foss"){
             dimension = "version"
             applicationIdSuffix = ".foss"
             versionNameSuffix = "-foss"
-            firebaseEnabled = false
         }
     }
 
