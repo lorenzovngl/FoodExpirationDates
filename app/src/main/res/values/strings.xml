@@ -44,6 +44,13 @@
     <string name="dark">Dark</string>
     <string name="x_deleted">%1$s deleted</string>
     <string name="undo">Undo</string>
+    <string name ="normal">Normal</string>
+    <string name ="bold">Bold</string>
+    <string name ="extra_bold">Extra Bold</string>
+    <string name ="ui_settings">UI Settings</string>
+    <string name ="custom_ui">Custom UI</string>
+    <string name ="top_bar_font_weight">Top Bar Font Weight</string>
+
 
     <string-array name="features">
         <item>Display a list with food expiration dates in ascending time order.</item>

@@ -17,6 +17,7 @@ class PreferencesRepository {
         const val keyNotificationTimeHour = "notification_time_hour"
         const val keyNotificationTimeMinute = "notification_time_minute"
         const val keyThemeMode = "theme_mode"
+        const val keyTopBarFont = "top_bar_font"
         const val keyDynamicColors = "dynamic_colors"
         private val availLocaleDateFormats = arrayOf(DateFormat.SHORT, DateFormat.MEDIUM)
         private val availOtherDateFormats =
@@ -33,6 +34,12 @@ class PreferencesRepository {
             LIGHT(R.string.light),
             SYSTEM(R.string.system),
             DARK(R.string.dark)
+        }
+
+        enum class TopBarFont(val label: Int) {
+            NORMAL(R.string.normal),
+            BOLD(R.string.bold),
+            EXTRA_BOLD(R.string.extra_bold)
         }
 
         fun getAvailLocaleDateFormats(): List<String> {
@@ -111,6 +118,28 @@ class PreferencesRepository {
         ) {
             return context.getSharedPreferences(sharedPrefs, ComponentActivity.MODE_PRIVATE)
                 .edit().putInt(keyThemeMode, themeMode.ordinal).apply()
+        }
+
+        fun getTopBarFont(
+            context: Context,
+            sharedPrefs: String = sharedPrefsName,
+        ): Int{
+            try {
+                return context.getSharedPreferences(sharedPrefs, ComponentActivity.MODE_PRIVATE)
+                    .getInt(keyTopBarFont,TopBarFont.NORMAL.ordinal)
+            } catch (e: Exception){
+                e.printStackTrace()
+            }
+            return TopBarFont.NORMAL.ordinal
+        }
+
+        fun setTopBarFont(
+            context: Context,
+            sharedPrefs: String = sharedPrefsName,
+            topBarFont: TopBarFont
+        ) {
+            return context.getSharedPreferences(sharedPrefs, ComponentActivity.MODE_PRIVATE)
+                .edit().putInt(keyTopBarFont, topBarFont.ordinal).apply()
         }
 
         fun getDynamicColors(

@@ -2,6 +2,7 @@ package com.lorenzovainigli.foodexpirationdates.view.composable.activity
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -45,6 +46,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
+import com.lorenzovainigli.foodexpirationdates.view.activity.UISettingsActivity
 import com.lorenzovainigli.foodexpirationdates.view.composable.DateFormatDialog
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
 import com.lorenzovainigli.foodexpirationdates.view.composable.NotificationTimeBottomSheet
@@ -233,6 +235,19 @@ fun SettingsActivityLayout(
                             }
                         )
                     }
+                    SettingsItem(
+                        label = stringResource(R.string.ui_settings)
+                    ){
+                        OutlinedButton(
+                            onClick = {
+                                val intent = Intent(context, UISettingsActivity::class.java)
+                                context.startActivity(intent)
+                            }
+                        ) {
+                            Text(text = stringResource(R.string.custom_ui))
+                        }
+                    }
+
                 }
             }
         }

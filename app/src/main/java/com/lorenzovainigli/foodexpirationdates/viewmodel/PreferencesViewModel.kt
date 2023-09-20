@@ -25,9 +25,11 @@ class PreferencesViewModel @Inject constructor(): ViewModel() {
 
     private var _themeMode = MutableStateFlow(0)
     private var themeMode = _themeMode.asStateFlow()
-
     private var _dynamicColors = MutableStateFlow(false)
     private var dynamicColors = _dynamicColors.asStateFlow()
+
+    private var _topBarFont = MutableStateFlow(0)
+    private var topbarFont = _topBarFont.asStateFlow()
 
     fun getDateFormat(context: Context): StateFlow<String> {
         viewModelScope.launch {
@@ -86,6 +88,23 @@ class PreferencesViewModel @Inject constructor(): ViewModel() {
             )
         }
         _themeMode.value = theme.ordinal
+    }
+
+    fun getTopBarFont(context: Context):StateFlow<Int> {
+        viewModelScope.launch {
+            _topBarFont.value  = PreferencesRepository.getTopBarFont(context)
+        }
+        return topbarFont
+    }
+
+    fun setTopBarFont(context: Context, topBarFont: PreferencesRepository.Companion.TopBarFont) {
+        viewModelScope.launch {
+            PreferencesRepository.setTopBarFont(
+                context = context,
+                topBarFont = topBarFont
+            )
+        }
+        _topBarFont.value = topBarFont.ordinal
     }
 
     fun getDynamicColors(context: Context): StateFlow<Boolean> {
