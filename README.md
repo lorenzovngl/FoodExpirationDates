@@ -89,7 +89,7 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
     git clone https://github.com/lorenzovngl/FoodExpirationDates.git
     ```
 
-2. Setup your Firebase project as described below **or** switch to the `foss` build variant to disable the Firebase SDK in the app.
+2. Setup your Firebase project as described below **or** set `buildFoss = true` in [build.gradle.kts](https://github.com/lorenzovngl/FoodExpirationDates/blob/main/app/build.gradle.kts#L12) and switch to the `foss` build variant to disable the Firebase SDK in the app.
 
    - Setup your Firebase project:
 

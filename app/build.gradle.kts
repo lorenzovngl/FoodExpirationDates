@@ -9,8 +9,7 @@ plugins {
     alias(libs.plugins.com.google.devtools.ksp)
 }
 
-// Set firebaseEnabled = false for foss build
-var firebaseEnabled = true
+var buildFoss = false
 
 android {
     namespace = "com.lorenzovainigli.foodexpirationdates"
@@ -62,10 +61,12 @@ android {
         create("full") {
             dimension = "version"
         }
-        create("foss"){
-            dimension = "version"
-            applicationIdSuffix = ".foss"
-            versionNameSuffix = "-foss"
+        if (buildFoss) {
+            create("foss") {
+                dimension = "version"
+                applicationIdSuffix = ".foss"
+                versionNameSuffix = "-foss"
+            }
         }
     }
 
@@ -145,7 +146,7 @@ dependencies {
 
 }
 
-if (firebaseEnabled){
+if (!buildFoss){
     apply(plugin = "com.google.gms.google-services")
     apply(plugin = "com.google.firebase.crashlytics")
 }
