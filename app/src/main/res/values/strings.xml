@@ -48,8 +48,9 @@
     <string name ="bold">Bold</string>
     <string name ="extra_bold">Extra Bold</string>
     <string name ="ui_settings">UI Settings</string>
-    <string name ="custom_ui">Custom UI</string>
     <string name ="top_bar_font_weight">Top Bar Font Weight</string>
+    <string name ="behaviour">Behaviour</string>
+    <string name ="appearance">Appearance</string>
 
 
     <string-array name="features">
