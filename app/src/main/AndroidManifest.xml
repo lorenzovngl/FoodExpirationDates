@@ -35,9 +35,6 @@
         <activity
             android:name=".view.activity.SettingsActivity">
         </activity>
-        <activity
-            android:name=".view.activity.UISettingsActivity">
-        </activity>
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"

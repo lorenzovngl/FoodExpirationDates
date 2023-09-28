@@ -2,7 +2,6 @@ package com.lorenzovainigli.foodexpirationdates.view.composable.activity
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -46,7 +45,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
-import com.lorenzovainigli.foodexpirationdates.view.activity.UISettingsActivity
 import com.lorenzovainigli.foodexpirationdates.view.composable.DateFormatDialog
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
 import com.lorenzovainigli.foodexpirationdates.view.composable.NotificationTimeBottomSheet
@@ -71,6 +69,8 @@ fun SettingsActivityLayout(
         ?: PreferencesRepository.Companion.ThemeMode.SYSTEM.ordinal
     val dynamicColorsState = prefsViewModel?.getDynamicColors(context)?.collectAsState()?.value
         ?: false
+    val topBarFontState = prefsViewModel?.getTopBarFont(context)?.collectAsState()?.value
+        ?: PreferencesRepository.Companion.TopBarFont.NORMAL.ordinal
 
     val dateFormat = prefsViewModel?.getDateFormat(context)?.collectAsState()?.value
         ?: PreferencesRepository.getAvailOtherDateFormats()[0]
@@ -154,6 +154,10 @@ fun SettingsActivityLayout(
                         .verticalScroll(rememberScrollState()),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
+                    Text(
+                        text = stringResource(R.string.behaviour),
+                        style = MaterialTheme.typography.labelLarge
+                    )
                     SettingsItem(
                         label = stringResource(id = R.string.date_format)
                     ){
@@ -187,6 +191,10 @@ fun SettingsActivityLayout(
                             }
                         )
                     }
+                    Text(
+                        text = stringResource(R.string.appearance),
+                        style = MaterialTheme.typography.labelLarge
+                    )
                     SettingsItem(
                         label = stringResource(R.string.theme)
                     ){
@@ -236,18 +244,34 @@ fun SettingsActivityLayout(
                         )
                     }
                     SettingsItem(
-                        label = stringResource(R.string.ui_settings)
-                    ){
-                        OutlinedButton(
-                            onClick = {
-                                val intent = Intent(context, UISettingsActivity::class.java)
-                                context.startActivity(intent)
+                        label = stringResource(R.string.top_bar_font_weight)
+                    ) {
+                        PreferencesRepository.Companion.TopBarFont.values().forEach { topBarFont->
+                            Spacer(
+                                modifier = Modifier
+                                    .fillMaxHeight()
+                                    .weight(0.1f)
+                            )
+                            if (topBarFont.ordinal == topBarFontState) {
+                                Button(onClick = {}) {
+                                    Text(
+                                        text = context.getString(topBarFont.label)
+                                    )
+                                }
                             }
-                        ) {
-                            Text(text = stringResource(R.string.custom_ui))
+                            if (topBarFont.ordinal != topBarFontState) {
+                                OutlinedButton(
+                                    onClick = {
+                                        prefsViewModel?.setTopBarFont(context, topBarFont)
+                                    },
+                                ) {
+                                    Text(
+                                        text = context.getString(topBarFont.label)
+                                    )
+                                }
+                            }
                         }
                     }
-
                 }
             }
         }
