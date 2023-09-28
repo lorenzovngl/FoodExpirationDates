@@ -252,19 +252,19 @@ fun SettingsActivityLayout(
                                     .fillMaxHeight()
                                     .weight(0.1f)
                             )
-                            if (topBarFont.ordinal == topBarFontState) {
-                                Button(onClick = {}) {
-                                    Text(
-                                        text = context.getString(topBarFont.label)
-                                    )
-                                }
-                            }
                             if (topBarFont.ordinal != topBarFontState) {
                                 OutlinedButton(
                                     onClick = {
                                         prefsViewModel?.setTopBarFont(context, topBarFont)
                                     },
                                 ) {
+                                    Text(
+                                        text = context.getString(topBarFont.label)
+                                    )
+                                }
+                            }
+                            if (topBarFont.ordinal == topBarFontState) {
+                                Button(onClick = {}) {
                                     Text(
                                         text = context.getString(topBarFont.label)
                                     )
