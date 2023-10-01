@@ -123,7 +123,8 @@ fun InsertActivityLayout(
                                 )
                             }
                         },
-                        scrollBehavior = scrollBehavior
+                        scrollBehavior = scrollBehavior,
+                        prefsViewModel = prefsViewModel
                     )
                 },
                 floatingActionButtonPosition = FabPosition.End,

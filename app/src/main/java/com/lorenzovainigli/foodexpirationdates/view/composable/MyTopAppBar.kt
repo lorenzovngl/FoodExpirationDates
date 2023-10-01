@@ -13,7 +13,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.viewmodel.PreferencesViewModel
@@ -25,7 +24,7 @@ fun MyTopAppBar(
     actions: @Composable RowScope.() -> Unit = {},
     navigationIcon: @Composable () -> Unit = {},
     scrollBehavior: TopAppBarScrollBehavior? = null,
-    prefsViewModel: PreferencesViewModel? = viewModel()
+    prefsViewModel: PreferencesViewModel? = null
 ) {
     val context = LocalContext.current
     val topBarFontState = prefsViewModel?.getTopBarFont(context)?.collectAsState()?.value

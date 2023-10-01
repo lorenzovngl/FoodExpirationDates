@@ -91,7 +91,8 @@ fun InfoActivityLayout(
                                 )
                             }
                         },
-                        scrollBehavior = scrollBehavior
+                        scrollBehavior = scrollBehavior,
+                        prefsViewModel = prefsViewModel
                     )
                 }
             ) { padding ->

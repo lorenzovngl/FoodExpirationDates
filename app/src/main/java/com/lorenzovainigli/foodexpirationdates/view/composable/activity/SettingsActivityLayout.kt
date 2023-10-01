@@ -115,7 +115,8 @@ fun SettingsActivityLayout(
                                 )
                             }
                         },
-                        scrollBehavior = scrollBehavior
+                        scrollBehavior = scrollBehavior,
+                        prefsViewModel = prefsViewModel
                     )
                 }
             ) { padding ->

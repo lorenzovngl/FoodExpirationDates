@@ -126,7 +126,8 @@ fun MainActivityLayout(
                                 )
                             }
                         },
-                        scrollBehavior = scrollBehavior
+                        scrollBehavior = scrollBehavior,
+                        prefsViewModel = prefsViewModel
                     )
                 },
                 bottomBar = {
