@@ -247,7 +247,8 @@ fun ContributorsList(
             textAlign = TextAlign.Center
         )
         Text(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth()
+                .padding(top = 16.dp, bottom = 8.dp),
             text = stringResource(id = R.string.contributors_list_subtitle)
         )
         Text(
