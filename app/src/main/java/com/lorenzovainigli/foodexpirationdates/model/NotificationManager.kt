@@ -1,6 +1,7 @@
 package com.lorenzovainigli.foodexpirationdates.model
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -17,7 +18,8 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
-import com.lorenzovainigli.foodexpirationdates.BuildConfig
+import com.google.android.datatransport.BuildConfig
+
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
 import com.lorenzovainigli.foodexpirationdates.model.worker.ExpiryNotificationWorker
@@ -72,6 +74,7 @@ class NotificationManager(
                 requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         }
+        @SuppressLint("MissingPermission")
         fun sendNotification(context: Context, title: String, message: String) {
             if (permissionGranted) {
                 val notificationBuilder = NotificationCompat.Builder(context, channelId)

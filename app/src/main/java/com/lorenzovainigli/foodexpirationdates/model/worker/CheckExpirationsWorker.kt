@@ -11,6 +11,7 @@ import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.lorenzovainigli.foodexpirationdates.R
+import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
 import com.lorenzovainigli.foodexpirationdates.view.activity.MainActivity
 import kotlinx.coroutines.flow.first
 import java.util.Calendar
