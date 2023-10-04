@@ -12,4 +12,9 @@ interface ExpirationDateRepository {
     suspend fun addExpirationDate(expirationDate: ExpirationDate)
 
     suspend fun deleteExpirationDate(expirationDate: ExpirationDate)
+
+    fun getItemsExpiringWithinOneDay(
+        currentTimeMillis: Long,
+        nextDayMillis: Long
+    ): Flow<List<ExpirationDate>>
 }

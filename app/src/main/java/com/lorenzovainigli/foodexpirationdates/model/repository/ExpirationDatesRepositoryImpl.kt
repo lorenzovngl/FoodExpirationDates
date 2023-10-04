@@ -9,6 +9,7 @@ class ExpirationDatesRepositoryImpl @Inject constructor(
     private val expirationDateDao: ExpirationDatesDao
     ) : ExpirationDateRepository {
 
+
     override suspend fun getAll(): Flow<List<ExpirationDate>> {
         return expirationDateDao.getAll()
     }
@@ -23,5 +24,12 @@ class ExpirationDatesRepositoryImpl @Inject constructor(
 
     override suspend fun deleteExpirationDate(expirationDate: ExpirationDate) {
         expirationDateDao.delete(expirationDate)
+    }
+
+    override fun getItemsExpiringWithinOneDay(
+        currentTimeMillis: Long,
+        nextDayMillis: Long,
+    ): Flow<List<ExpirationDate>> {
+        TODO("Not yet implemented")
     }
 }

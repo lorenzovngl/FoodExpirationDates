@@ -9,7 +9,7 @@ plugins {
     alias(libs.plugins.com.google.devtools.ksp)
 }
 
-var buildFoss = false
+var buildFoss = true
 
 android {
     namespace = "com.lorenzovainigli.foodexpirationdates"
