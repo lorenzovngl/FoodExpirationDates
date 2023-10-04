@@ -44,6 +44,13 @@
     <string name="dark">Dunkel</string>
     <string name="x_deleted">%1$s gelöscht</string>
     <string name="undo">Abbrechen</string>
+    <string name="normal">Normal</string>
+    <string name="bold">Fett</string>
+    <string name="extra_bold">Extrafett</string>
+    <string name="ui_settings">Benutzeroberfläche</string>
+    <string name="top_bar_font_weight">Schriftstärke in der oberen Leiste</string>
+    <string name="behaviour">Verhalten</string>
+    <string name="appearance">Aussehen</string>
 
     <string-array name="features">
         <item>Anzeige einer Liste mit Lebensmittelverfallsdaten in aufsteigender zeitlicher Reihenfolge.</item>
