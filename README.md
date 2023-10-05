@@ -107,13 +107,14 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 
 ## 👥 Contributors
 
-<a href="https://github.com/lorenzovngl"><img src="https://avatars.githubusercontent.com/u/13767301?v=4" alt="@lorenzovngl" height="32" width="32"></a>
-<a href="https://github.com/abdulmuizz0903"><img src="https://avatars.githubusercontent.com/u/62702098?v=4" alt="@abdulmuizz0903" height="32" width="32"></a>
-<a href="https://github.com/uDEV2019"><img src="https://avatars.githubusercontent.com/u/51911097?v=4" alt="@uDEV2019" height="32" width="32"></a>
-<a href="https://github.com/devedroy"><img src="https://avatars.githubusercontent.com/u/44873540?v=4" alt="@devedroy" height="32" width="32"></a>
-<a href="https://github.com/Quadropo"><img src="https://avatars.githubusercontent.com/u/130368846?v=4" alt="@Quadropo" height="32" width="32"></a>
-<a href="https://github.com/bhavesh100"><img src="https://avatars.githubusercontent.com/u/90559083?v=4" alt="@bhavesh100" height="32" width="32"></a>
-<a href="https://github.com/Rick-AB"><img src="https://avatars.githubusercontent.com/u/54624799?v=4" alt="@Rick-AB" height="32" width="32"></a>
+<a href="https://github.com/lorenzovngl"><img src="https://avatars.githubusercontent.com/lorenzovngl" alt="@lorenzovngl" height="32" width="32"></a>
+<a href="https://github.com/abdulmuizz0903"><img src="https://avatars.githubusercontent.com/abdulmuizz0903" alt="@abdulmuizz0903" height="32" width="32"></a>
+<a href="https://github.com/uDEV2019"><img src="https://avatars.githubusercontent.com/uDEV2019" alt="@uDEV2019" height="32" width="32"></a>
+<a href="https://github.com/devedroy"><img src="https://avatars.githubusercontent.com/devedroy" alt="@devedroy" height="32" width="32"></a>
+<a href="https://github.com/Quadropo"><img src="https://avatars.githubusercontent.com/Quadropo" alt="@Quadropo" height="32" width="32"></a>
+<a href="https://github.com/bhavesh100"><img src="https://avatars.githubusercontent.com/bhavesh100" alt="@bhavesh100" height="32" width="32"></a>
+<a href="https://github.com/Rick-AB"><img src="https://avatars.githubusercontent.com/Rick-AB" alt="@Rick-AB" height="32" width="32"></a>
+<a href="https://github.com/DeKaN"><img src="https://avatars.githubusercontent.com/DeKaN" alt="@DeKaN" height="32" width="32"></a>
 
 ## ❤️ Support
 

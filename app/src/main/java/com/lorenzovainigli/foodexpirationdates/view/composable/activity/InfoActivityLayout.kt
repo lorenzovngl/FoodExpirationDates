@@ -164,7 +164,6 @@ fun InfoActivityLayout(
                         contentDescription = "Star",
                         text = stringResource(id = R.string.report_a_bug)
                     )*/
-                        ContributorsList()
                         Text(
                             modifier = Modifier.padding(top = 16.dp),
                             text = stringResource(id = R.string.support_this_project),
@@ -211,6 +210,7 @@ fun InfoActivityLayout(
                             contentDescription = stringResource(id = R.string.share),
                             text = stringResource(id = R.string.share)
                         )
+                        ContributorsList()
                         ClickableText(
                             modifier = Modifier
                                 .align(Alignment.CenterHorizontally)
