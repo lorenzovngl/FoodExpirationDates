@@ -26,6 +26,8 @@
     <string name="app_description">%1$s is an open source project developed by Lorenzo Vainigli and other contributors.\nThe code of this application is published under the MIT license and available on GitHub.</string>
     <string name="about_this_app">About this app</string>
     <string name="privacy_policy">Privacy policy</string>
+    <string name="contributors_list_title">Contributors</string>
+    <string name="contributors_list_subtitle">Thanks to these awesome people for contributing to the development of this app.</string>
     <string name="back">Back</string>
     <string name="no_items_found">No items found</string>
     <string name="please_insert_one">Please insert one</string>

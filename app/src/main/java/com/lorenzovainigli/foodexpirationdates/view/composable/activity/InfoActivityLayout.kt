@@ -27,6 +27,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -42,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.R
+import com.lorenzovainigli.foodexpirationdates.model.contributors
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
@@ -68,6 +70,8 @@ fun InfoActivityLayout(
         PreferencesRepository.Companion.ThemeMode.DARK.ordinal -> true
         else -> isSystemInDarkTheme()
     }
+    val features = stringArrayResource(id = R.array.features)
+        .joinToString(separator = "\n") { it.asListItem() }
     FoodExpirationDatesTheme(
         darkTheme = isInDarkTheme,
         dynamicColor = dynamicColorsState
@@ -147,13 +151,9 @@ fun InfoActivityLayout(
                             style = MaterialTheme.typography.headlineMedium,
                             textAlign = TextAlign.Center
                         )
-                        val sb = StringBuilder()
-                        stringArrayResource(id = R.array.features).map {
-                            sb.append("  ● ").append(it).append("\n")
-                        }
                         Text(
                             modifier = Modifier.fillMaxWidth(),
-                            text = sb.toString()
+                            text = features
                         )
                         /*TextIconButton(
                         modifier = Modifier.align(CenterHorizontally),
@@ -164,6 +164,7 @@ fun InfoActivityLayout(
                         contentDescription = "Star",
                         text = stringResource(id = R.string.report_a_bug)
                     )*/
+                        ContributorsList()
                         Text(
                             modifier = Modifier.padding(top = 16.dp),
                             text = stringResource(id = R.string.support_this_project),
@@ -229,10 +230,48 @@ fun InfoActivityLayout(
     }
 }
 
+@Composable
+fun ContributorsList(
+    modifier: Modifier = Modifier
+) {
+    val contributorsText = remember {
+        contributors.joinToString(separator = "\n") {
+            "${it.name} (@${it.username})".asListItem()
+        }
+    }
+    Column(modifier = modifier.fillMaxWidth()) {
+        Text(
+            modifier = Modifier.padding(top = 16.dp),
+            text = stringResource(id = R.string.contributors_list_title),
+            style = MaterialTheme.typography.headlineMedium,
+            textAlign = TextAlign.Center
+        )
+        Text(
+            modifier = Modifier.fillMaxWidth()
+                .padding(top = 16.dp, bottom = 8.dp),
+            text = stringResource(id = R.string.contributors_list_subtitle)
+        )
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = contributorsText
+        )
+    }
+}
+
+private fun String.asListItem() = "  ● $this"
+
 @DefaultPreviews
 @DevicePreviews
 @LanguagePreviews
 @Composable
 fun InfoActivityLayoutPreview() {
     InfoActivityLayout()
+}
+
+@DefaultPreviews
+@DevicePreviews
+@LanguagePreviews
+@Composable
+fun ContributorsListPreview() {
+    ContributorsList()
 }
