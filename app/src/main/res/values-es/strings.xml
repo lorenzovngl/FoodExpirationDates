@@ -27,6 +27,8 @@
     <string name="app_description">%1$s es un proyecto de código abierto desarrollado por Lorenzo Vainigli y otros contribuyentes.\nEl código de esta aplicación es publicado bajo las licencias MIT, disponible en GitHub.</string>
     <string name="about_this_app">Sobre esta aplicación</string>
     <string name="privacy_policy">Política de privacidad</string>
+    <string name="contributors_list_title">Contribuidores</string>
+    <string name="contributors_list_subtitle">Estas son las personas que han contribuido al desarrollo de esta aplicación.</string>
     <string name="back">Atrás</string>
     <string name="no_items_found">No se encontraron artículos</string>
     <string name="please_insert_one">Por favor, agregue uno</string>
@@ -45,6 +47,12 @@
     <string name="dark">Oscuro</string>
     <string name="x_deleted">%1$s eliminado</string>
     <string name="undo">Cancelar</string>
+    <string name="normal">Normal</string>
+    <string name="bold">Negrita</string>
+    <string name="extra_bold">Negrita extra</string>
+    <string name="top_bar_font_style">Estilo de fuente de la barra superior</string>
+    <string name="behaviour">Comportamiento</string>
+    <string name="appearance">Apariencia</string>
 
     <string-array name="features">
         <item>Muestra una lista con las fechas de caducidad de los alimentos, ordenadas cronológicamente de forma ascendente.</item>

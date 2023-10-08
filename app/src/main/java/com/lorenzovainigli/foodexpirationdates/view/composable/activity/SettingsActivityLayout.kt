@@ -245,7 +245,7 @@ fun SettingsActivityLayout(
                         )
                     }
                     SettingsItem(
-                        label = stringResource(R.string.top_bar_font_weight)
+                        label = stringResource(R.string.top_bar_font_style)
                     ) {
                         PreferencesRepository.Companion.TopBarFont.values().forEach { topBarFont->
                             Spacer(

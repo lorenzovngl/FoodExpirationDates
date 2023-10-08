@@ -27,6 +27,8 @@
     <string name="app_description">%1$s è un progetto open source sviluppato da Lorenzo Vainigli e altri contributori.\nIl codice di questa applicazione è pubblicato con licenza MIT e disponibile su GitHub.</string>
     <string name="about_this_app">Informazioni app</string>
     <string name="privacy_policy">Privacy policy</string>
+    <string name="contributors_list_title">Contributori</string>
+    <string name="contributors_list_subtitle">Queste sono le persone che hanno contribuito allo sviluppo di questa app.</string>
     <string name="back">Indietro</string>
     <string name="no_items_found">Nessun elemento trovato</string>
     <string name="please_insert_one">Per favore inserirne uno</string>
@@ -45,6 +47,12 @@
     <string name="dark">Scuro</string>
     <string name="x_deleted">%1$s eliminato</string>
     <string name="undo">Annulla</string>
+    <string name="normal">Normale</string>
+    <string name="bold">Grassetto</string>
+    <string name="extra_bold">Massiccio</string>
+    <string name="top_bar_font_style">Stile titolo barra superiore</string>
+    <string name="behaviour">Comportamento</string>
+    <string name="appearance">Aspetto</string>
 
     <string-array name="features">
         <item>Visualizza un elenco con le date di scadenza degli alimenti in ordine crescente di tempo.</item>

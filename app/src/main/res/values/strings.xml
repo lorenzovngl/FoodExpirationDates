@@ -27,7 +27,7 @@
     <string name="about_this_app">About this app</string>
     <string name="privacy_policy">Privacy policy</string>
     <string name="contributors_list_title">Contributors</string>
-    <string name="contributors_list_subtitle">Thanks to these awesome people for contributing to the development of this app.</string>
+    <string name="contributors_list_subtitle">These are the people who contributed to the development of this app.</string>
     <string name="back">Back</string>
     <string name="no_items_found">No items found</string>
     <string name="please_insert_one">Please insert one</string>
@@ -46,13 +46,12 @@
     <string name="dark">Dark</string>
     <string name="x_deleted">%1$s deleted</string>
     <string name="undo">Undo</string>
-    <string name ="normal">Normal</string>
-    <string name ="bold">Bold</string>
-    <string name ="extra_bold">Extra Bold</string>
-    <string name ="ui_settings">UI Settings</string>
-    <string name ="top_bar_font_weight">Top Bar Font Weight</string>
-    <string name ="behaviour">Behaviour</string>
-    <string name ="appearance">Appearance</string>
+    <string name="normal">Normal</string>
+    <string name="bold">Bold</string>
+    <string name="extra_bold">Extra Bold</string>
+    <string name="top_bar_font_style">Top bar font style</string>
+    <string name="behaviour">Behaviour</string>
+    <string name="appearance">Appearance</string>
 
 
     <string-array name="features">

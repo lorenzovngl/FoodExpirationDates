@@ -47,8 +47,7 @@
     <string name="normal">Normal</string>
     <string name="bold">Fett</string>
     <string name="extra_bold">Extrafett</string>
-    <string name="ui_settings">Benutzeroberfläche</string>
-    <string name="top_bar_font_weight">Schriftstärke in der oberen Leiste</string>
+    <string name="top_bar_font_style">Schriftstärke in der oberen Leiste</string>
     <string name="behaviour">Verhalten</string>
     <string name="appearance">Aussehen</string>
 
