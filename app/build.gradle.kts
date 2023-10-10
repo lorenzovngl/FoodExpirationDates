@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.com.google.dagger.hilt.android)
     alias(libs.plugins.app.cash.paparazzi)
     alias(libs.plugins.com.google.devtools.ksp)
+    id("com.google.gms.google-services")
 }
 
 var buildFoss = false
@@ -134,7 +135,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
-    implementation(libs.accompanist.systemuicontroller)
+    //implementation(libs.accompanist.systemuicontroller)
+    implementation("androidx.activity:activity-compose:1.8.0-alpha07")
 
     implementation(libs.androidx.work.runtime.ktx)
 
@@ -144,6 +146,8 @@ dependencies {
     "fullImplementation"(libs.firebase.analytics)
     "fullImplementation"(libs.firebase.crashlytics)
 
+    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
 }
 
 if (!buildFoss){
