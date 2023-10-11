@@ -18,6 +18,5 @@ plugins {
     alias(libs.plugins.com.google.dagger.hilt.android) apply false
     alias(libs.plugins.app.cash.paparazzi) apply false
     alias(libs.plugins.com.google.devtools.ksp) apply false
-    id("com.google.gms.google-services") version "4.4.0" apply false
 }
 true // Needed to make the Suppress annotation work for the plugins block
