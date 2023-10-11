@@ -184,7 +184,7 @@ fun MainActivityLayout(
                                 ) {
                                     Icon(
                                         imageVector = Icons.Rounded.Add,
-                                        contentDescription = null
+                                        contentDescription = stringResource(id = R.string.insert)
                                     )
                                 }
                             }
@@ -307,7 +307,7 @@ fun MainActivityLayout(
                         ) {
                             Icon(
                                 imageVector = Icons.Rounded.Add,
-                                contentDescription = null
+                                contentDescription = stringResource(id = R.string.insert)
                             )
                         }
                     }

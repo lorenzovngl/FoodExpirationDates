@@ -29,6 +29,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -48,6 +49,8 @@ import com.lorenzovainigli.foodexpirationdates.view.preview.DefaultPreviews
 import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
 import java.text.SimpleDateFormat
 import java.util.Calendar
+
+const val FOOD_CARD = "FoodCard"
 
 @Composable
 fun FoodCard(
@@ -98,6 +101,7 @@ fun FoodCard(
         else MaterialTheme.colorScheme.onSurface
     Surface(
         modifier = Modifier
+            .testTag(FOOD_CARD)
             .padding(4.dp)
             .clip(RoundedCornerShape(10.dp)),
         tonalElevation = TonalElevation.level5()
@@ -130,6 +134,7 @@ fun FoodCard(
             )
             Button(
                 modifier = Modifier
+                    .testTag("Delete item")
                     .padding(start = 8.dp)
                     .width(32.dp)
                     .height(32.dp),

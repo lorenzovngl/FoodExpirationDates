@@ -46,6 +46,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.tooling.preview.Preview
@@ -149,6 +150,7 @@ fun InsertActivityLayout(
                             },
                             confirmButton = {
                                 Button(
+                                    modifier = Modifier.testTag("Insert date"),
                                     onClick = { isDialogOpen = false },
                                     colors = ButtonDefaults.buttonColors(
                                         containerColor = MaterialTheme.colorScheme.tertiary,
@@ -241,6 +243,7 @@ fun InsertActivityLayout(
                                 }
                                 Button(
                                     modifier = Modifier
+                                        .testTag("Insert item")
                                         .weight(0.5f)
                                         .padding(top = 8.dp, start = 4.dp),
                                     colors = ButtonDefaults.buttonColors(
