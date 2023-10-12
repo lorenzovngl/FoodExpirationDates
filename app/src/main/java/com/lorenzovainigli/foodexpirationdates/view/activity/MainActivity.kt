@@ -2,7 +2,9 @@ package com.lorenzovainigli.foodexpirationdates.view.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -25,6 +27,14 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onResume() {
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.light(
+                android.graphics.Color.TRANSPARENT, android.graphics.Color.TRANSPARENT
+            ),
+            navigationBarStyle = SystemBarStyle.light(
+                android.graphics.Color.TRANSPARENT, android.graphics.Color.TRANSPARENT
+            )
+        )
         super.onResume()
         setContent {
             val viewModel: ExpirationDatesViewModel = viewModel()
@@ -36,5 +46,4 @@ class MainActivity : ComponentActivity() {
             )
         }
     }
-
 }

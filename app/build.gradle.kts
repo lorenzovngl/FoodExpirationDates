@@ -136,8 +136,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
-    implementation(libs.accompanist.systemuicontroller)
-
     implementation(libs.androidx.work.runtime.ktx)
 
     // Firebase
@@ -145,7 +143,6 @@ dependencies {
     "fullImplementation"(platform(libs.firebase.bom))
     "fullImplementation"(libs.firebase.analytics)
     "fullImplementation"(libs.firebase.crashlytics)
-
 }
 
 if (!buildFoss){
