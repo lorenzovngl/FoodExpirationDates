@@ -16,7 +16,7 @@ class FirebaseTest {
     val testRule = createAndroidComposeRule(MainActivity::class.java)
 
     @Test
-    fun firebaseNotEnabledOnFullBuild(){
+    fun firebaseEnabledOnFullBuild(){
         testRule.onNodeWithText("Settings").assertIsDisplayed()
         // Run a UiAutomator command to capture logcat output
         val uiDevice: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
