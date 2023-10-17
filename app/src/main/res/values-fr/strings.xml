@@ -1,0 +1,70 @@
+<resources>
+    <string name="app_name">Dates d\'expiration des aliments</string>
+    <string name="app_name_short">Exp. des aliments</string>
+    <string name="n_days_ago">Il y a %1$d jours</string>
+    <string name="yesterday">Hier</string>
+    <string name="today">Aujourd/'hui</string>
+    <string name="tomorrow">Demain</string>
+    <string name="in_n_days">Dans %1$d jours</string>
+    <string name="add_item">Ajouter un élément</string>
+    <string name="edit_item">Modifier l\'élément</string>
+    <string name="food_name">Nom de l\'aliment</string>
+    <string name="expiration_date">Date d\'expiration</string>
+    <string name="please_select_a_date">Veuillez sélectionner une date</string>
+    <string name="please_enter_a_food_name">Veuillez saisir un nom d\'aliment</string>
+    <string name="insert">Insérer</string>
+    <string name="update">Mettre à jour</string>
+    <string name="cancel">Annuler</string>
+    <string name="share">Partager</string>
+    <string name="leave_a_star_on_github">Laissez une étoile sur GitHub</string>
+    <string name="write_a_review">Écrire un avis</string>
+    <string name="source_code">Code source</string>
+    <string name="features">Caractéristiques</string>
+    <string name="support_this_project">Soutenir ce projet</string>
+    <string name="report_a_bug">Signaler un bogue</string>
+    <string name="version_x">Version %1$s</string>
+    <string name="app_description">%1$s est un projet open source développé par Lorenzo Vainigli et d\'autres contributeurs.\nLe code de cette application est publié sous la licence MIT et disponible sur GitHub.</string>
+    <string name="about_this_app">À propos de cette application</string>
+    <string name="privacy_policy">Politique de confidentialité</string>
+    <string name="contributors_list_title">Contributeurs</string>
+    <string name="contributors_list_subtitle">Ce sont les personnes qui ont contribué au développement de cette application.</string>
+    <string name="back">Retour</string>
+    <string name="no_items_found">Aucun élément trouvé</string>
+    <string name="please_insert_one">Veuillez en insérer un</string>
+    <string name="menu">Menu</string>
+    <string name="settings">Paramètres</string>
+    <string name="date_format">Format de date</string>
+    <string name="choose_the_date_format">Choisissez le format de date</string>
+    <string name="locale_formats">Formats locaux</string>
+    <string name="other_formats">Autres formats</string>
+    <string name="your_food_is_expiring">Vos aliments expirent !</string>
+    <string name="notification_time">Heure de notification</string>
+    <string name="dynamic_colors">Couleurs dynamiques</string>
+    <string name="theme">Thème</string>
+    <string name="light">Clair</string>
+    <string name="system">Système</string>
+    <string name="dark">Sombre</string>
+    <string name="x_deleted">%1$s supprimé</string>
+    <string name="undo">Annuler</string>
+    <string name="normal">Normal</string>
+    <string name="bold">Gras</string>
+    <string name="extra_bold">Très Gras</string>
+    <string name="top_bar_font_style">Style de police de la barre supérieure</string>
+    <string name="behaviour">Comportement</string>
+    <string name="appearance">Apparence</string>
+
+    <string-array name="features">
+        <item>Afficher une liste d\'aliments avec des dates d\'expiration dans l\'ordre croissant du temps.</item>
+        <item>Ajouter, modifier et supprimer des éléments.</item>
+        <item>Notifications.</item>
+    </string-array>
+    <string-array name="example_foods">
+        <item>Œufs</item>
+        <item>Fromage</item>
+        <item>Lait</item>
+        <item>Jambon</item>
+        <item>Beurre</item>
+        <item>Champignons</item>
+        <item>Tomates</item>
+    </string-array>
+</resources>
