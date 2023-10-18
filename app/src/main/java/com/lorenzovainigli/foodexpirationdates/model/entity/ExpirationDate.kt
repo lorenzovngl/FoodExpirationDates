@@ -9,4 +9,6 @@ data class ExpirationDate(
     @PrimaryKey(autoGenerate = true) var id: Int,
     @ColumnInfo(name = "food_name") var foodName: String,
     @ColumnInfo(name = "expiration_date") var expirationDate: Long,
+    @ColumnInfo(name = "opening_date") var openingDate: Long? = null,
+    @ColumnInfo(name = "time_span_days") var timeSpanDays: Int? = null,
 )

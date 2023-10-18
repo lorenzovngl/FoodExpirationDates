@@ -23,7 +23,9 @@ class AppModule {
             application,
             AppDatabase::class.java,
             "database.db"
-        ).allowMainThreadQueries().build()
+        ).fallbackToDestructiveMigration()
+            .fallbackToDestructiveMigrationOnDowngrade()
+            .allowMainThreadQueries().build()
     }
 
     @Provides

@@ -72,32 +72,39 @@ fun FoodCard(
     val withinAWeek = Calendar.getInstance()
     withinAWeek.add(Calendar.DAY_OF_MONTH, 7)
     val msInADay = (1000 * 60 * 60 * 24)
+    var expirationDate = item.openingDate ?: item.expirationDate
+    if (item.openingDate != null && item.timeSpanDays != null){
+        expirationDate = Calendar.getInstance().apply {
+            timeInMillis = expirationDate
+            add(Calendar.DAY_OF_MONTH, item.timeSpanDays!!)
+        }.time.time
+    }
     val expiration =
-        if (item.expirationDate < twoDaysAgo.time.time) {
-            val days = (today.time.time - item.expirationDate) / msInADay
+        if (expirationDate < twoDaysAgo.time.time) {
+            val days = (today.time.time - expirationDate) / msInADay
             stringResource(R.string.n_days_ago, days)
-        } else if (item.expirationDate < yesterday.time.time)
+        } else if (expirationDate < yesterday.time.time)
             stringResource(R.string.yesterday)
-        else if (item.expirationDate < today.time.time)
+        else if (expirationDate < today.time.time)
             stringResource(R.string.today)
-        else if (item.expirationDate < tomorrow.time.time)
+        else if (expirationDate < tomorrow.time.time)
             stringResource(R.string.tomorrow)
-        else if (item.expirationDate < withinAWeek.time.time) {
-            val days = (item.expirationDate - today.time.time) / msInADay
+        else if (expirationDate < withinAWeek.time.time) {
+            val days = (expirationDate - today.time.time) / msInADay
             stringResource(R.string.in_n_days, days + 1)
-        } else sdf.format(item.expirationDate)
+        } else sdf.format(expirationDate)
     val bgColor =
-        if (item.expirationDate < today.time.time)
+        if (expirationDate < today.time.time)
             if (isInDarkTheme) LightRed else DarkRed
-        else if (item.expirationDate < tomorrow.time.time)
+        else if (expirationDate < tomorrow.time.time)
             if (isInDarkTheme) LightOrange else DarkOrange
-        else if (item.expirationDate < withinAWeek.time.time)
+        else if (expirationDate < withinAWeek.time.time)
             if (isInDarkTheme) LightYellow else DarkYellow
         else Color.Transparent
     val textColor =
-        if (item.expirationDate < today.time.time) Color.White.copy(alpha = .9f)
-        else if (item.expirationDate < tomorrow.time.time) Color.Black.copy(alpha = .9f)
-        else if (item.expirationDate < withinAWeek.time.time) Color.Black.copy(alpha = .9f)
+        if (expirationDate < today.time.time) Color.White.copy(alpha = .9f)
+        else if (expirationDate < tomorrow.time.time) Color.Black.copy(alpha = .9f)
+        else if (expirationDate < withinAWeek.time.time) Color.Black.copy(alpha = .9f)
         else MaterialTheme.colorScheme.onSurface
     Surface(
         modifier = Modifier

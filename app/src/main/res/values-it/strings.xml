@@ -53,6 +53,9 @@
     <string name="top_bar_font_style">Stile titolo barra superiore</string>
     <string name="behaviour">Comportamento</string>
     <string name="appearance">Aspetto</string>
+    <string name="opening_date">Data di apertura</string>
+    <string name="optional">opzionale</string>
+    <string name="time_span">Tempo residuo</string>
 
     <string-array name="features">
         <item>Visualizza un elenco con le date di scadenza degli alimenti in ordine crescente di tempo.</item>

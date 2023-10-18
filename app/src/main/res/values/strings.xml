@@ -12,6 +12,7 @@
     <string name="expiration_date">Expiration date</string>
     <string name="please_select_a_date">Please select a date</string>
     <string name="please_enter_a_food_name">Please enter a food name</string>
+    <string name="please_enter_a_valid_number">Please enter a valid number</string>
     <string name="insert">Insert</string>
     <string name="update">Update</string>
     <string name="cancel">Cancel</string>
@@ -52,7 +53,9 @@
     <string name="top_bar_font_style">Top bar font style</string>
     <string name="behaviour">Behaviour</string>
     <string name="appearance">Appearance</string>
-
+    <string name="opening_date">Opening date</string>
+    <string name="optional">optional</string>
+    <string name="time_span">Time span</string>
 
     <string-array name="features">
         <item>Display a list with food expiration dates in ascending time order.</item>
@@ -67,5 +70,9 @@
         <item>Butter</item>
         <item>Mushrooms</item>
         <item>Tomatoes</item>
+    </string-array>
+    <string-array name="time_span">
+        <item>Days</item>
+        <item>Months</item>
     </string-array>
 </resources>
