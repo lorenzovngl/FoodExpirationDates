@@ -40,6 +40,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lorenzovainigli.foodexpirationdates.R
@@ -49,8 +50,6 @@ import com.lorenzovainigli.foodexpirationdates.view.composable.DateFormatDialog
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
 import com.lorenzovainigli.foodexpirationdates.view.composable.NotificationTimeBottomSheet
 import com.lorenzovainigli.foodexpirationdates.view.composable.SettingsItem
-import com.lorenzovainigli.foodexpirationdates.view.preview.DefaultPreviews
-import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
 import com.lorenzovainigli.foodexpirationdates.viewmodel.PreferencesViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -280,8 +279,7 @@ fun SettingsActivityLayout(
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-@DefaultPreviews
-@LanguagePreviews
+@Preview
 @Composable
 fun SettingsActivityLayoutPreview() {
     SettingsActivityLayout()

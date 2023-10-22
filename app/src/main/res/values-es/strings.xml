@@ -53,6 +53,8 @@
     <string name="top_bar_font_style">Estilo de fuente de la barra superior</string>
     <string name="behaviour">Comportamiento</string>
     <string name="appearance">Apariencia</string>
+    <string name="send_an_email">Enviar un e-mail</string>
+    <string name="contacts_text">Si desea obtener más información sobre esta aplicación, enviar comentarios, informar de un error, solicitar una función o simplemente ponerse en contacto con el desarrollador, envíe un correo electrónico utilizando el siguiente botón.\nEn caso de informes de errores y solicitudes de funciones, puede abrir una incidencia en el repositorio de GitHub de esta aplicación.</string>
 
     <string-array name="features">
         <item>Muestra una lista con las fechas de caducidad de los alimentos, ordenadas cronológicamente de forma ascendente.</item>
