@@ -15,5 +15,6 @@ val contributors = listOf(
     Contributor("Richard", "Rick-AB"),
     Contributor("Dmitriy", "DeKaN"),
     Contributor("Aditya Kumdale", "AdityaKumdale"),
-    Contributor("Aaryan", "An-Array")
+    Contributor("Aaryan", "An-Array"),
+    Contributor("Yusril A", "rasvanjaya21")
 )
