@@ -4,6 +4,7 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.rule.GrantPermissionRule
 import androidx.test.uiautomator.UiDevice
 import com.lorenzovainigli.foodexpirationdates.view.activity.MainActivity
 import junit.framework.TestCase.assertTrue
@@ -15,6 +16,12 @@ class FirebaseTest {
     @get:Rule
     val testRule = createAndroidComposeRule(MainActivity::class.java)
 
+    @Rule
+    @JvmField
+    var mGrantPermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        "android.permission.POST_NOTIFICATIONS"
+    )
+    
     @Test
     fun firebaseEnabledOnFullBuild(){
         testRule.onNodeWithText("Settings").assertIsDisplayed()

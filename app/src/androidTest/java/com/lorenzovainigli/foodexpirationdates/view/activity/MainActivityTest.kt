@@ -19,7 +19,9 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
@@ -74,7 +76,7 @@ class MainActivityTest {
     private fun clear(){
         composeTestRule.run {
             onAllNodesWithTag("Delete item").apply {
-                fetchSemanticsNodes().forEachIndexed { i, _ ->
+                fetchSemanticsNodes().forEachIndexed { _, _ ->
                     get(0).performClick()
                 }
             }
@@ -82,12 +84,19 @@ class MainActivityTest {
         }
     }
 
+    fun formatDateForDatePicker(
+        calendar: Calendar = Calendar.getInstance()
+    ): String {
+        val dateFormat = SimpleDateFormat("MMMM d", Locale.getDefault())
+        return dateFormat.format(calendar.time)
+    }
+
     @Test
     fun insertItemTest() {
         val name = "Test"
         insertItem(
             name = name,
-            date = Calendar.getInstance().get(Calendar.DAY_OF_MONTH).toString()
+            date = formatDateForDatePicker()
         )
         composeTestRule.run {
             arrayOf(
@@ -105,7 +114,7 @@ class MainActivityTest {
         val updatedName = "Test updated"
         insertItem(
             name = name,
-            date = Calendar.getInstance().get(Calendar.DAY_OF_MONTH).toString()
+            date = formatDateForDatePicker()
         )
         composeTestRule.run {
             onNodeWithText(name).performClick()
@@ -127,7 +136,7 @@ class MainActivityTest {
         val name = "Test"
         insertItem(
             name = name,
-            date = Calendar.getInstance().get(Calendar.DAY_OF_MONTH).toString()
+            date = formatDateForDatePicker()
         )
         clear()
     }
@@ -137,9 +146,9 @@ class MainActivityTest {
         for (i in 0 until 3) {
             insertItem(
                 name = "Test item $i",
-                date = Calendar.getInstance().apply {
+                date = formatDateForDatePicker(Calendar.getInstance().apply {
                     add(Calendar.DAY_OF_MONTH, i-1)
-                }.get(Calendar.DAY_OF_MONTH).toString()
+                })
             )
         }
         composeTestRule.run {
