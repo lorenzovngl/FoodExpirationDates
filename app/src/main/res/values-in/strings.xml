@@ -7,7 +7,7 @@
     <string name="tomorrow">Besok</string>
     <string name="in_n_days">Dalam %1$d hari</string>
     <string name="add_item">Tambahkan item</string>
-    <string name="edit_item">Edit item</string>
+    <string name="edit_item">Perbarui item</string>
     <string name="food_name">Nama makanan</string>
     <string name="expiration_date">Tanggal kadaluarsa</string>
     <string name="please_select_a_date">Silakan pilih tanggal</string>
@@ -56,17 +56,17 @@
     <string name="contacts_text">Jika anda ingin mendapatkan informasi lebih lanjut tentang aplikasi ini, kirim umpan balik, laporkan bug, request fitur, atau hubungi pengembang, silakan kirim email menggunakan tombol berikut.</string>
 
     <string-array name="features">
-        <item>Display a list with food expiration dates in ascending time order.</item>
-        <item>Add, edit and delete items.</item>
-        <item>Notifications.</item>
+        <item>Menampilkan daftar tanggal kedaluwarsa makanan dalam urutan waktu yang terbaru.</item>
+        <item>Menambahkan, memperbarui dan menghapus item.</item>
+        <item>Notifikasi.</item>
     </string-array>
     <string-array name="example_foods">
-        <item>Eggs</item>
-        <item>Cheese</item>
-        <item>Milk</item>
-        <item>Ham</item>
-        <item>Butter</item>
-        <item>Mushrooms</item>
-        <item>Tomatoes</item>
+        <item>Telur</item>
+        <item>Keju</item>
+        <item>Susu</item>
+        <item>Daging</item>
+        <item>Mentega</item>
+        <item>Jamur</item>
+        <item>Tomat</item>
     </string-array>
 </resources>
