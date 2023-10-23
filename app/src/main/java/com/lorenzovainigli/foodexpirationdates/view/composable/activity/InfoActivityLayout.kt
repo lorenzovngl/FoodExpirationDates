@@ -121,7 +121,7 @@ fun InfoActivityLayout(
                                 .align(Alignment.CenterHorizontally)
                                 .padding(top = 16.dp),
                             text = stringResource(id = R.string.app_name),
-                            style = MaterialTheme.typography.headlineLarge,
+                            style = MaterialTheme.typography.headlineMedium,
                             textAlign = TextAlign.Center
                         )
                         Text(
@@ -141,7 +141,8 @@ fun InfoActivityLayout(
                             )
                         )
                         TextIconButton(
-                            modifier = Modifier.align(Alignment.CenterHorizontally)
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally)
                                 .width(256.dp),
                             onClick = {
                                 uriHandler.openUri(
@@ -262,7 +263,8 @@ fun ContactSection(
         )
         val uriHandler = LocalUriHandler.current
         TextIconButton(
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
                 .width(256.dp),
             onClick = {
                 uriHandler.openUri(
@@ -306,7 +308,7 @@ fun ContributorsList(
 
 private fun String.asListItem() = "  ● $this"
 
-@Preview
+@Preview(locale = "fr")
 @Composable
 fun InfoActivityLayoutPreview() {
     InfoActivityLayout()

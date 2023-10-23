@@ -46,6 +46,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
+import com.lorenzovainigli.foodexpirationdates.view.composable.AutoResizedText
 import com.lorenzovainigli.foodexpirationdates.view.composable.DateFormatDialog
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyTopAppBar
 import com.lorenzovainigli.foodexpirationdates.view.composable.NotificationTimeBottomSheet
@@ -206,7 +207,7 @@ fun SettingsActivityLayout(
                             )
                             if (it.ordinal == darkThemeState) {
                                 Button(onClick = {}) {
-                                    Text(
+                                    AutoResizedText(
                                         text = context.getString(it.label)
                                     )
                                 }
@@ -217,7 +218,7 @@ fun SettingsActivityLayout(
                                         prefsViewModel?.setThemeMode(context, it)
                                     },
                                 ) {
-                                    Text(
+                                    AutoResizedText(
                                         text = context.getString(it.label)
                                     )
                                 }
@@ -258,14 +259,14 @@ fun SettingsActivityLayout(
                                         prefsViewModel?.setTopBarFont(context, topBarFont)
                                     },
                                 ) {
-                                    Text(
+                                    AutoResizedText(
                                         text = context.getString(topBarFont.label)
                                     )
                                 }
                             }
                             if (topBarFont.ordinal == topBarFontState) {
                                 Button(onClick = {}) {
-                                    Text(
+                                    AutoResizedText(
                                         text = context.getString(topBarFont.label)
                                     )
                                 }
