@@ -1,0 +1,72 @@
+<resources>
+    <string name="app_name">Food Expiration Dates</string>
+    <string name="app_name_short">Food Expirations</string>
+    <string name="n_days_ago">%1$d hari lalu</string>
+    <string name="yesterday">Kemarin</string>
+    <string name="today">Hari ini</string>
+    <string name="tomorrow">Besok</string>
+    <string name="in_n_days">Dalam %1$d hari</string>
+    <string name="add_item">Tambahkan item</string>
+    <string name="edit_item">Perbarui item</string>
+    <string name="food_name">Nama makanan</string>
+    <string name="expiration_date">Tanggal kadaluarsa</string>
+    <string name="please_select_a_date">Silakan pilih tanggal</string>
+    <string name="please_enter_a_food_name">Silakan masukkan nama makanan</string>
+    <string name="insert">Tambahkan</string>
+    <string name="update">Perbarui</string>
+    <string name="cancel">Batalkan</string>
+    <string name="share">Bagikan</string>
+    <string name="leave_a_star_on_github">Beri bintang di GitHub</string>
+    <string name="write_a_review">Tulis ulasan</string>
+    <string name="source_code">Kode sumber</string>
+    <string name="features">Fitur - fitur</string>
+    <string name="support_this_project">Dukung proyek ini</string>
+    <string name="report_a_bug">Laporkan bug</string>
+    <string name="version_x">Versi %1$s</string>
+    <string name="app_description">%1$s adalah open source project yang dikembangkan oleh Lorenzo Vainigli dan kontributor lainnya. Kode aplikasi ini diterbitkan di bawah lisensi MIT dan tersedia di GitHub.</string>
+    <string name="about_this_app">Tentang aplikasi ini</string>
+    <string name="privacy_policy">Kebijakan privasi</string>
+    <string name="contributors_list_title">Kontributor</string>
+    <string name="contributors_list_subtitle">Orang - orang yang berkontribusi terhadap pengembangan aplikasi ini.</string>
+    <string name="back">Kembali</string>
+    <string name="no_items_found">Tidak ada item yang ditemukan</string>
+    <string name="please_insert_one">Silakan masukkan satu item</string>
+    <string name="menu">Menu</string>
+    <string name="settings">Pengaturan</string>
+    <string name="date_format">Format tanggal</string>
+    <string name="choose_the_date_format">Pilih format tanggal</string>
+    <string name="locale_formats">Format lokal</string>
+    <string name="other_formats">Format lainnya</string>
+    <string name="your_food_is_expiring">Makanan anda kadaluarsa!</string>
+    <string name="notification_time">Waktu notifikasi</string>
+    <string name="dynamic_colors">Warna dinamis</string>
+    <string name="theme">Tema</string>
+    <string name="light">Terang</string>
+    <string name="system">Sistem</string>
+    <string name="dark">Gelap</string>
+    <string name="x_deleted">%1$s dihapus</string>
+    <string name="undo">Batalkan</string>
+    <string name="normal">Normal</string>
+    <string name="bold">Tebal</string>
+    <string name="extra_bold">Ekstra Tebal</string>
+    <string name="top_bar_font_style">Gaya font bilah atas</string>
+    <string name="behaviour">Perilaku</string>
+    <string name="appearance">Tampilan</string>
+    <string name="send_an_email">Kirim email</string>
+    <string name="contacts_text">Jika anda ingin mendapatkan informasi lebih lanjut tentang aplikasi ini, kirim umpan balik, laporkan bug, request fitur, atau hubungi pengembang, silakan kirim email menggunakan tombol berikut.</string>
+
+    <string-array name="features">
+        <item>Menampilkan daftar tanggal kedaluwarsa makanan dalam urutan waktu yang terbaru.</item>
+        <item>Menambahkan, memperbarui dan menghapus item.</item>
+        <item>Notifikasi.</item>
+    </string-array>
+    <string-array name="example_foods">
+        <item>Telur</item>
+        <item>Keju</item>
+        <item>Susu</item>
+        <item>Daging</item>
+        <item>Mentega</item>
+        <item>Jamur</item>
+        <item>Tomat</item>
+    </string-array>
+</resources>
