@@ -9,7 +9,7 @@
 ![GitHub Workflow (Android CI)](https://img.shields.io/github/actions/workflow/status/lorenzovngl/FoodExpirationDates/.github%2Fworkflows%2Fandroid.yml?style=flat-square&label=Build)
 ![GitHub last commit](https://img.shields.io/github/last-commit/lorenzovngl/FoodExpirationDates?label=Last%20commit&style=flat-square)
 ![GitHub](https://img.shields.io/github/license/lorenzovngl/FoodExpirationDates?style=flat-square&label=License)
-![Languages](https://img.shields.io/badge/Languages-8-orange?style=flat-square)
+![Languages](https://img.shields.io/badge/Languages-9-orange?style=flat-square)
 ![Pull requests welcome](https://img.shields.io/badge/Pull%20requests-Welcome-ff69b4?style=flat-square)
 <a href="https://gitmoji.dev">
   <img
@@ -74,6 +74,7 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 ![French 96%](https://img.shields.io/badge/French-96%25-green?style=flat-square)
 ![German 93%](https://img.shields.io/badge/German-93%25-yellowgreen?style=flat-square)
 ![Hindi 70%](https://img.shields.io/badge/Hindi-70%25-orange?style=flat-square)
+![Indonesian 100%](https://img.shields.io/badge/Indonesian-100%25-brightgreen?style=flat-square)
 ![Italian 100%](https://img.shields.io/badge/Italian-100%25-brightgreen?style=flat-square)
 ![Japanese 84%](https://img.shields.io/badge/Japanese-84%25-yellow?style=flat-square)
 ![Spanish 100%](https://img.shields.io/badge/Spanish-100%25-brightgreen?style=flat-square)
