@@ -26,6 +26,8 @@
     <string name="app_description">%1$s ist ein Open-Source-Projekt, das von Lorenzo Vainigli und anderen Mitwirkenden entwickelt wurde.\nDer Code dieser Anwendung wird unter der MIT-Lizenz veröffentlicht und ist auf GitHub verfügbar.</string>
     <string name="about_this_app">Über diese App</string>
     <string name="privacy_policy">Datenschutzbestimmungen</string>
+    <string name="contributors_list_title">Mitwirkende</string>
+    <string name="contributors_list_subtitle">Dies sind die Personen, die zur Entwicklung dieser App beigetragen haben.</string>
     <string name="back">Zurück</string>
     <string name="no_items_found">Keine Einträge gefunden</string>
     <string name="please_insert_one">Bitte eins einfügen</string>
@@ -50,6 +52,8 @@
     <string name="top_bar_font_style">Schriftstärke in der oberen Leiste</string>
     <string name="behaviour">Verhalten</string>
     <string name="appearance">Aussehen</string>
+    <string name="send_an_email">E-Mail senden</string>
+    <string name="contacts_text">Wenn Sie weitere Informationen zu dieser Anwendung erhalten, Feedback senden, einen Fehler melden, eine Funktion anfordern oder einfach den Entwickler kontaktieren möchten, senden Sie bitte eine E-Mail über die folgende Schaltfläche.\nWenn Sie Fehlerberichte und Funktionsanfragen haben, können Sie auch ein Issue im GitHub-Repository dieser Anwendung öffnen.</string>
 
     <string-array name="features">
         <item>Anzeige einer Liste mit Lebensmittelverfallsdaten in aufsteigender zeitlicher Reihenfolge.</item>
