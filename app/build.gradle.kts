@@ -19,8 +19,8 @@ android {
         applicationId = "com.lorenzovainigli.foodexpirationdates"
         minSdk = 24
         targetSdk = 34
-        versionCode = 17
-        versionName = "1.1.2"
+        versionCode = 18
+        versionName = "1.2"
 
         archivesName.set("FoodExpirationDates-$versionName")
 
