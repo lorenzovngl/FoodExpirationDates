@@ -146,6 +146,9 @@ dependencies {
     "fullImplementation"(libs.firebase.analytics)
     "fullImplementation"(libs.firebase.crashlytics)
 
+    // Splash Screen
+    implementation(libs.splashscreen)
+
 }
 
 if (!buildFoss){
