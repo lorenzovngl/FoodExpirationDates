@@ -2,4 +2,10 @@
 <resources>
 
     <style name="Theme.FoodExpirationDates" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.CustomSplashScreenTheme" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash</item>
+        <item name="postSplashScreenTheme">@style/Theme.FoodExpirationDates</item>
+    </style>
+
 </resources>
