@@ -11,6 +11,7 @@ import javax.inject.Inject
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.State
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 
 @HiltViewModel
@@ -27,8 +28,11 @@ class ExpirationDatesViewModel @Inject constructor(
     fun getDates(): Flow<List<ExpirationDate>> {
         viewModelScope.launch {
             _isSplashScreenLoading.value = true
-            expirationDates = repository.getAll()
-            delay(2000)
+            val deferred = async {
+                expirationDates = repository.getAll()
+            }
+            deferred.await()
+            delay(1000)
             _isSplashScreenLoading.value = false
         }
         return expirationDates
