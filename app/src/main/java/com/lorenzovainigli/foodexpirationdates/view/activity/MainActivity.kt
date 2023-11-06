@@ -12,11 +12,19 @@ import com.lorenzovainigli.foodexpirationdates.model.NotificationManager
 import com.lorenzovainigli.foodexpirationdates.view.composable.activity.MainActivityLayout
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDatesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import androidx.activity.viewModels
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
+    private val viewModel: ExpirationDatesViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val splashScreen = installSplashScreen()
+        splashScreen.setKeepOnScreenCondition { viewModel.isSplashScreenLoading.value }
+
         super.onCreate(savedInstanceState)
         DaggerAppComponent.builder()
             .appModule(AppModule())
@@ -27,7 +35,6 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         setContent {
-            val viewModel: ExpirationDatesViewModel = viewModel()
             val items by viewModel.getDates().collectAsState(emptyList())
             MainActivityLayout(
                 context = this,

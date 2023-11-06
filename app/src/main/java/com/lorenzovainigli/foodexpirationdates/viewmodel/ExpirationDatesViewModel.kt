@@ -8,6 +8,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.State
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 
 @HiltViewModel
 class ExpirationDatesViewModel @Inject constructor(
@@ -17,9 +22,18 @@ class ExpirationDatesViewModel @Inject constructor(
     private var expirationDates : Flow<List<ExpirationDate>> = flowOf(emptyList())
     private var expirationDate : ExpirationDate? = null
 
+    private val _isSplashScreenLoading: MutableState<Boolean> = mutableStateOf(value = true)
+    val isSplashScreenLoading: State<Boolean> = _isSplashScreenLoading
+
     fun getDates(): Flow<List<ExpirationDate>> {
         viewModelScope.launch {
-            expirationDates = repository.getAll()
+            _isSplashScreenLoading.value = true
+            val deferred = async {
+                expirationDates = repository.getAll()
+            }
+            deferred.await()
+            delay(1000)
+            _isSplashScreenLoading.value = false
         }
         return expirationDates
     }
