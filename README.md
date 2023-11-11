@@ -70,14 +70,14 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 <div align="center">
 
 ![English default](https://img.shields.io/badge/English-default-blue?style=flat-square)
-![Arabic 81%](https://img.shields.io/badge/Arabic-81%25-yellow?style=flat-square)
-![French 96%](https://img.shields.io/badge/French-96%25-green?style=flat-square)
-![German 93%](https://img.shields.io/badge/German-93%25-yellowgreen?style=flat-square)
-![Hindi 70%](https://img.shields.io/badge/Hindi-70%25-orange?style=flat-square)
-![Indonesian 100%](https://img.shields.io/badge/Indonesian-100%25-brightgreen?style=flat-square)
-![Italian 100%](https://img.shields.io/badge/Italian-100%25-brightgreen?style=flat-square)
-![Japanese 84%](https://img.shields.io/badge/Japanese-84%25-yellow?style=flat-square)
-![Spanish 100%](https://img.shields.io/badge/Spanish-100%25-brightgreen?style=flat-square)
+![Arabic 81%](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Far.json)
+![French 96%](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Ffr.json)
+![German 93%](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fde.json)
+![Hindi 70%](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fhi.json)
+![Indonesian 100%](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fin.json)
+![Italian 100%](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fit.json)
+![Japanese 84%](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fja.json)
+![Spanish 100%](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fes.json)
 
 </div>
 
