@@ -84,7 +84,7 @@ class CheckExpirationsWorker @Inject constructor(
             val notification = NotificationCompat.Builder(applicationContext, "channel_reminders")
                 .setContentText(message)
                 .setContentTitle(title)
-                .setSmallIcon(R.drawable.fed_icon)
+                .setSmallIcon(R.drawable.fed_icon_notification)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
                 .build()

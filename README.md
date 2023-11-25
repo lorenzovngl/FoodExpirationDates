@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="fed-icon.png" width="100px">
+<img src="app/src/main/res/drawable/fed_icon.png" width="100px">
 
 # Food Expiration Dates
 

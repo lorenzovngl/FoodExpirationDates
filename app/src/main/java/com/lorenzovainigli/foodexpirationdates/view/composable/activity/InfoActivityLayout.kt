@@ -3,12 +3,14 @@ package com.lorenzovainigli.foodexpirationdates.view.composable.activity
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -116,10 +118,17 @@ fun InfoActivityLayout(
                             .padding(10.dp),
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
+                        Image(
+                            modifier = Modifier.fillMaxWidth()
+                                .height(128.dp)
+                                .padding(top = 16.dp),
+                            painter = painterResource(id = R.drawable.fed_icon),
+                            alignment = Alignment.Center,
+                            contentDescription = null
+                        )
                         Text(
                             modifier = Modifier
-                                .align(Alignment.CenterHorizontally)
-                                .padding(top = 16.dp),
+                                .align(Alignment.CenterHorizontally),
                             text = stringResource(id = R.string.app_name),
                             style = MaterialTheme.typography.headlineMedium,
                             textAlign = TextAlign.Center
