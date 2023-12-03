@@ -55,6 +55,7 @@
     <string name="appearance">Aspetto</string>
     <string name="send_an_email">Invia un\'e-mail</string>
     <string name="contacts_text">Se desideri ottenere maggiori informazioni su questa applicazione, inviare un feedback, segnalare un bug, richiedere una funzionalità, o semplicemente contattare lo sviluppatore, invia un\'e-mail utilizzando il seguente pulsante.\nIn caso di segnalazione di bug e richieste di funzionalità, è possibile aprire una issue sul repository GitHub di questa applicazione.</string>
+    <string name="list">Lista</string>
 
     <string-array name="features">
         <item>Visualizza un elenco con le date di scadenza degli alimenti in ordine crescente di tempo.</item>

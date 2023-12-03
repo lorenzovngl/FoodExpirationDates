@@ -16,6 +16,7 @@ hilt-common = "1.0.0"
 junit = "4.13.2"
 ksp = "1.9.10-1.0.13"
 lifecycle-runtime-ktx = "2.6.2"
+navigation-compose = "2.7.5"
 org-jetbrains-kotlin-android = "1.9.10"
 paparazzi = "1.3.1"
 room = "2.5.2"
@@ -35,6 +36,7 @@ androidx-hilt-common = { module = "androidx.hilt:hilt-common", version.ref = "hi
 androidx-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hilt-common" }
 androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle-runtime-ktx" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle-runtime-ktx" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
@@ -66,7 +68,7 @@ ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "ui-test-junit4" }
 ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version="1.6.0-beta02"}
 splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
 
 [plugins]

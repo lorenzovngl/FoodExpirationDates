@@ -25,6 +25,9 @@ class ExpirationDatesViewModel @Inject constructor(
     private val _isSplashScreenLoading: MutableState<Boolean> = mutableStateOf(value = true)
     val isSplashScreenLoading: State<Boolean> = _isSplashScreenLoading
 
+    private val _deletedItem: MutableState<ExpirationDate?> = mutableStateOf(value = null)
+    val deletedItem: State<ExpirationDate?> = _deletedItem
+
     fun getDates(): Flow<List<ExpirationDate>> {
         viewModelScope.launch {
             _isSplashScreenLoading.value = true
@@ -57,5 +60,6 @@ class ExpirationDatesViewModel @Inject constructor(
             repository.deleteExpirationDate(expirationDate)
             expirationDates = repository.getAll()
         }
+        _deletedItem.value = expirationDate
     }
 }

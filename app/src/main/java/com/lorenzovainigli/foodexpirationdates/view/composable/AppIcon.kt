@@ -18,7 +18,8 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asComposeColorFilter
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.res.imageResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewDynamicColors
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
@@ -69,7 +70,8 @@ fun AppIcon(
     }
 }
 
-@Preview
+@PreviewLightDark
+@PreviewDynamicColors
 @Composable
 fun AppIconPreview() {
     FoodExpirationDatesTheme {
@@ -78,6 +80,8 @@ fun AppIconPreview() {
         ) {
             Column {
                 AppIcon(size = 48.dp)
+                AppIcon(size = 48.dp, color = MaterialTheme.colorScheme.secondary)
+                AppIcon(size = 48.dp, color = MaterialTheme.colorScheme.tertiary)
             }
         }
     }

@@ -5,8 +5,14 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
+import com.lorenzovainigli.foodexpirationdates.viewmodel.PreferencesViewModel
 
 private val LightColors = lightColorScheme(
     primary = md_theme_light_primary,
@@ -85,16 +91,27 @@ fun FoodExpirationDatesTheme(
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
+
         darkTheme -> DarkColors
         else -> LightColors
     }
 
     val systemUiController = rememberSystemUiController()
-    //val useDarkIcons = isSystemInDarkTheme()
+    var useDarkIcons: Boolean = !isSystemInDarkTheme()
+    if (LocalViewModelStoreOwner.current != null) {
+        val prefsViewModel: PreferencesViewModel = viewModel()
+        useDarkIcons =
+            when (prefsViewModel.getThemeMode(LocalContext.current).collectAsState().value) {
+                PreferencesRepository.Companion.ThemeMode.LIGHT.ordinal -> true
+                PreferencesRepository.Companion.ThemeMode.DARK.ordinal -> false
+                else -> !isSystemInDarkTheme()
+            }
+    }
 
     SideEffect {
         systemUiController.setSystemBarsColor(
-            color = colorScheme.surface
+            darkIcons = useDarkIcons,
+            color = Color.Transparent
         )
     }
 

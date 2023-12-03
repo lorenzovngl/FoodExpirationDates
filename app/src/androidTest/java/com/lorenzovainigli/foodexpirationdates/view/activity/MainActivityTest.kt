@@ -14,6 +14,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.rule.GrantPermissionRule
 import com.lorenzovainigli.foodexpirationdates.R
+import com.lorenzovainigli.foodexpirationdates.view.MainActivity
 import com.lorenzovainigli.foodexpirationdates.view.composable.FOOD_CARD
 import org.junit.Before
 import org.junit.Rule

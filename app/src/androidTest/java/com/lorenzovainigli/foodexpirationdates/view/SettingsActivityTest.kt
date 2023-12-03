@@ -9,7 +9,6 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.rule.GrantPermissionRule
 import com.lorenzovainigli.foodexpirationdates.R
-import com.lorenzovainigli.foodexpirationdates.view.activity.MainActivity
 import com.lorenzovainigli.foodexpirationdates.view.composable.DateFormatDialog
 import com.lorenzovainigli.foodexpirationdates.view.composable.DateFormatRow
 import org.junit.Rule

@@ -52,6 +52,7 @@
     <string name="top_bar_font_style">Style de police de la barre supérieure</string>
     <string name="behaviour">Comportement</string>
     <string name="appearance">Apparence</string>
+    <string name="list">Liste</string>
 
     <string-array name="features">
         <item>Afficher une liste d\'aliments avec des dates d\'expiration dans l\'ordre croissant du temps.</item>

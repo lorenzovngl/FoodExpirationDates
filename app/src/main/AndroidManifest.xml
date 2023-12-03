@@ -16,7 +16,7 @@
         android:theme="@style/Theme.FoodExpirationDates"
         tools:targetApi="31">
         <activity
-            android:name=".view.activity.MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.CustomSplashScreenTheme">
             <intent-filter>
@@ -24,16 +24,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".view.activity.InsertActivity">
-        </activity>
-        <activity
-            android:exported="true"
-            android:name=".view.activity.InfoActivity">
-        </activity>
-        <activity
-            android:name=".view.activity.SettingsActivity">
         </activity>
         <provider
             android:name="androidx.startup.InitializationProvider"
