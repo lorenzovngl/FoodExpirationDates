@@ -22,7 +22,6 @@ import androidx.compose.ui.window.Dialog
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
-import com.lorenzovainigli.foodexpirationdates.view.preview.DefaultPreviews
 import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -105,7 +104,6 @@ fun DateFormatRow(
     )
 }
 
-@DefaultPreviews
 @LanguagePreviews
 @Composable
 fun DateFormatDialogPreview(){

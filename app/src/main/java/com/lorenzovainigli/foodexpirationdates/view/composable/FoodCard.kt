@@ -35,8 +35,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lorenzovainigli.foodexpirationdates.R
-import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.ui.theme.DarkOrange
 import com.lorenzovainigli.foodexpirationdates.ui.theme.DarkRed
 import com.lorenzovainigli.foodexpirationdates.ui.theme.DarkYellow
@@ -44,8 +44,7 @@ import com.lorenzovainigli.foodexpirationdates.ui.theme.LightOrange
 import com.lorenzovainigli.foodexpirationdates.ui.theme.LightRed
 import com.lorenzovainigli.foodexpirationdates.ui.theme.LightYellow
 import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
-import com.lorenzovainigli.foodexpirationdates.view.composable.activity.getItemsForPreview
-import com.lorenzovainigli.foodexpirationdates.view.preview.DefaultPreviews
+import com.lorenzovainigli.foodexpirationdates.view.composable.screen.getItemsForPreview
 import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -104,7 +103,7 @@ fun FoodCard(
             .testTag(FOOD_CARD)
             .padding(4.dp)
             .clip(RoundedCornerShape(10.dp)),
-        tonalElevation = TonalElevation.level5()
+        tonalElevation = TonalElevation.level1()
     ) {
         Row(
             modifier = Modifier
@@ -155,7 +154,6 @@ fun FoodCard(
     }
 }
 
-@DefaultPreviews
 @LanguagePreviews
 @Composable
 fun FoodCardPreview() {

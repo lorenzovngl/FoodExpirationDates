@@ -6,7 +6,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.GrantPermissionRule
 import androidx.test.uiautomator.UiDevice
-import com.lorenzovainigli.foodexpirationdates.view.activity.MainActivity
+import com.lorenzovainigli.foodexpirationdates.view.MainActivity
 import junit.framework.TestCase.assertTrue
 import org.junit.Rule
 import org.junit.Test

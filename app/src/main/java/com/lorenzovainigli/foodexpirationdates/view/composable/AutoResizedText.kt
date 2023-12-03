@@ -16,10 +16,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.isUnspecified
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
-import com.lorenzovainigli.foodexpirationdates.view.preview.DefaultPreviews
 
 @Composable
 fun AutoResizedText(
@@ -61,7 +61,7 @@ fun AutoResizedText(
     )
 }
 
-@DefaultPreviews
+@Preview
 @Composable
 fun AutoResizedTextPreview(){
     FoodExpirationDatesTheme {

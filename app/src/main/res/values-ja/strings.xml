@@ -45,6 +45,7 @@
     <string name="dark">暗い</string>
     <string name="x_deleted">%1$sが削除されました</string>
     <string name="undo">消去</string>
+    <string name="list">リスト</string>
 
     <string-array name="features">
         <item>食品の賞味期限を時間の昇順に並べたリストを表示する。</item>

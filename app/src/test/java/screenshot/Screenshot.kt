@@ -1,51 +1,79 @@
 package screenshot
 
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.navigation.compose.rememberNavController
 import app.cash.paparazzi.Paparazzi
-import com.lorenzovainigli.foodexpirationdates.view.composable.activity.InfoActivityLayout
-import com.lorenzovainigli.foodexpirationdates.view.composable.activity.InsertActivityLayout
-import com.lorenzovainigli.foodexpirationdates.view.composable.activity.MainActivityLayout
-import com.lorenzovainigli.foodexpirationdates.view.composable.activity.SettingsActivityLayout
-import com.lorenzovainigli.foodexpirationdates.view.composable.activity.getItemsForPreview
+import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
+import com.lorenzovainigli.foodexpirationdates.view.composable.MyScaffold
+import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InfoScreen
+import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InsertScreen
+import com.lorenzovainigli.foodexpirationdates.view.composable.screen.MainScreen
+import com.lorenzovainigli.foodexpirationdates.view.composable.screen.SettingsScreen
 
 open class Screenshot {
 
     fun screen1MainActivity(paparazzi: Paparazzi) {
         paparazzi.snapshot {
-            MainActivityLayout(
-                items = getItemsForPreview(LocalContext.current),
-                viewModel = null,
-                prefsViewModel = null,
-                addExpirationDate = null,
-                deleteExpirationDate = null
-            )
+            FoodExpirationDatesTheme(
+                dynamicColor = false
+            ) {
+                val navController = rememberNavController()
+                val showSnackbar = remember {
+                    mutableStateOf(false)
+                }
+                MyScaffold(navController = navController, showSnackbar = showSnackbar) {
+                    MainScreen(navController = navController)
+                }
+            }
         }
     }
 
     fun screen2InsertActivity(paparazzi: Paparazzi) {
         paparazzi.snapshot {
-            InsertActivityLayout(
-                itemId = null,
-                viewModel = null,
-                prefsViewModel = null,
-                addExpirationDate = null
-            )
+            FoodExpirationDatesTheme(
+                dynamicColor = false
+            ) {
+                val navController = rememberNavController()
+                val showSnackbar = remember {
+                    mutableStateOf(false)
+                }
+                MyScaffold(navController = navController, showSnackbar = showSnackbar) {
+                    InsertScreen(navController = navController)
+                }
+            }
         }
     }
 
     fun screen3SettingsActivity(paparazzi: Paparazzi) {
         paparazzi.snapshot {
-            SettingsActivityLayout(
-                prefsViewModel = null
-            )
+            FoodExpirationDatesTheme(
+                dynamicColor = false
+            ) {
+                val navController = rememberNavController()
+                val showSnackbar = remember {
+                    mutableStateOf(false)
+                }
+                MyScaffold(navController = navController, showSnackbar = showSnackbar) {
+                    SettingsScreen()
+                }
+            }
         }
     }
 
     fun screen4InfoActivity(paparazzi: Paparazzi) {
         paparazzi.snapshot {
-            InfoActivityLayout(
-                prefsViewModel = null
-            )
+            FoodExpirationDatesTheme(
+                dynamicColor = false
+            ) {
+                val navController = rememberNavController()
+                val showSnackbar = remember {
+                    mutableStateOf(false)
+                }
+                MyScaffold(navController = navController, showSnackbar = showSnackbar) {
+                    InfoScreen()
+                }
+            }
         }
     }
 
