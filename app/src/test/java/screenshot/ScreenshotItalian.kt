@@ -35,4 +35,14 @@ class ScreenshotItalian : Screenshot() {
         super.screen4InfoActivity(paparazzi)
     }
 
+    @Test
+    fun screen5DarkMode() {
+        super.screen5DarkMode(paparazzi)
+    }
+
+    @Test
+    fun screen6DynamicColors(){
+        super.screen6DynamicColors(paparazzi)
+    }
+
 }

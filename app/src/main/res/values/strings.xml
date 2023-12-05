@@ -70,4 +70,12 @@
         <item>Mushrooms</item>
         <item>Tomatoes</item>
     </string-array>
+    <string-array name="screenshot_titles">
+        <item>Your groceries sorted by expiration date</item>
+        <item>Easy insertion</item>
+        <item>Customize behavior and appearance</item>
+        <item>Open source</item>
+        <item>Dark theme</item>
+        <item>Dynamic colors</item>
+    </string-array>
 </resources>

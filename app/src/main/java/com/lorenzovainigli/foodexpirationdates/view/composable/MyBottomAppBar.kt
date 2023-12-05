@@ -16,7 +16,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.lorenzovainigli.foodexpirationdates.R
@@ -27,7 +26,7 @@ import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
 @Composable
 fun MyBottomAppBar(
     navController: NavHostController,
-    currentBackStackEntry: NavBackStackEntry?
+    currentDestination: String?
 ){
     val navigationItems = listOf(
         NavigationItem(
@@ -50,7 +49,7 @@ fun MyBottomAppBar(
         )
     )
     NavigationBar {
-        var selectedItem = when (currentBackStackEntry?.destination?.route) {
+        var selectedItem = when (currentDestination) {
             Screen.AboutScreen.route -> 0
             Screen.SettingsScreen.route -> 2
             else -> 1
@@ -91,7 +90,7 @@ fun MyBottomAppBarPreview(){
         Surface {
             MyBottomAppBar(
                 navController = rememberNavController(),
-                currentBackStackEntry = null
+                currentDestination = Screen.AboutScreen.route
             )
         }
     }

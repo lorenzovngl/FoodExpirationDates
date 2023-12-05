@@ -71,4 +71,12 @@
         <item>Funghi</item>
         <item>Pomodori</item>
     </string-array>
+    <string-array name="screenshot_titles">
+        <item>I tuoi alimenti ordinati per data di scadenza</item>
+        <item>Inserimento semplice</item>
+        <item>Personalizza comportamento e aspetto</item>
+        <item>Open source</item>
+        <item>Tema scuro</item>
+        <item>Colori dinamici</item>
+    </string-array>
 </resources>

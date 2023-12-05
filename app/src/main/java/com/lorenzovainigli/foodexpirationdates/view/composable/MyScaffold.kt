@@ -49,6 +49,7 @@ data class NavigationItem(
 fun MyScaffold(
     activity: MainActivity? = null,
     navController: NavHostController,
+    navDestination: String? = null,
     showSnackbar: MutableState<Boolean>,
     content: @Composable () -> Unit
 ) {
@@ -91,9 +92,10 @@ fun MyScaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
+            val destination = navDestination ?: currentBackStackEntry?.destination?.route
             MyTopAppBar(
                 activity = activity,
-                title = when (currentBackStackEntry?.destination?.route) {
+                title = when (destination) {
                     Screen.AboutScreen.route -> stringResource(id = R.string.about_this_app)
                     Screen.InsertScreen.route -> stringResource(id = R.string.insert)
                     Screen.SettingsScreen.route -> stringResource(id = R.string.settings)
@@ -120,7 +122,7 @@ fun MyScaffold(
         bottomBar = {
             MyBottomAppBar(
                 navController = navController,
-                currentBackStackEntry = currentBackStackEntry
+                currentDestination = navDestination ?: currentBackStackEntry?.destination?.route
             )
         }
     ) { padding ->

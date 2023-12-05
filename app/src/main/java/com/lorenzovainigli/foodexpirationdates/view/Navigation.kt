@@ -22,12 +22,13 @@ import com.lorenzovainigli.foodexpirationdates.view.composable.screen.SettingsSc
 fun Navigation(
     activity: MainActivity? = null,
     navController: NavHostController,
+    startDestination: String = Screen.MainScreen.route,
     showSnackbar: MutableState<Boolean>
 ) {
     NavHost(
         modifier = Modifier.fillMaxSize(),
         navController = navController,
-        startDestination = Screen.MainScreen.route
+        startDestination = startDestination
     ) {
         composable(route = Screen.MainScreen.route) {
             MainScreen(
