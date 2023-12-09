@@ -3,7 +3,6 @@ package com.lorenzovainigli.foodexpirationdates.view.composable
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -11,6 +10,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
@@ -97,23 +97,33 @@ fun MyScaffold(
                 activity = activity,
                 title = when (destination) {
                     Screen.AboutScreen.route -> stringResource(id = R.string.about_this_app)
-                    Screen.InsertScreen.route -> stringResource(id = R.string.insert)
                     Screen.SettingsScreen.route -> stringResource(id = R.string.settings)
-                    else -> stringResource(id = R.string.app_name)
+                    else -> {
+                        if (destination?.contains(Screen.InsertScreen.route) == true) {
+                            if (currentBackStackEntry?.arguments?.getString("itemId") != null){
+                                stringResource(id = R.string.edit_item)
+                            } else {
+                                stringResource(id = R.string.add_item)
+                            }
+                        } else {
+                            stringResource(id = R.string.app_name)
+                        }
+                    }
                 },
                 actions = {
                     AppIcon(size = 48.dp)
                 },
                 navigationIcon = {
-                    if (currentBackStackEntry?.destination?.route == Screen.InsertScreen.route) {
-                        Icon(
-                            modifier = Modifier.clickable {
-                                navController.popBackStack()
-                            },
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = stringResource(id = R.string.back),
-                            tint = MaterialTheme.colorScheme.primary
-                        )
+                    if (destination?.contains(Screen.InsertScreen.route) == true) {
+                        IconButton(
+                            onClick = { navController.popBackStack() }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Filled.ArrowBack,
+                                contentDescription = stringResource(id = R.string.back),
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        }
                     }
                 },
                 scrollBehavior = scrollBehavior

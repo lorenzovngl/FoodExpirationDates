@@ -88,10 +88,10 @@ fun InsertScreen(
                 Button(
                     modifier = Modifier.testTag("Insert date"),
                     onClick = { isDialogOpen = false },
-//                    colors = ButtonDefaults.buttonColors(
-//                        containerColor = MaterialTheme.colorScheme.tertiary,
-//                        contentColor = MaterialTheme.colorScheme.onTertiary
-//                    )
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.tertiary,
+                        contentColor = MaterialTheme.colorScheme.onTertiary
+                    )
                 ) {
                     Text(text = stringResource(id = R.string.insert))
                 }

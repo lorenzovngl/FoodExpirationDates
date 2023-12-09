@@ -50,7 +50,7 @@ fun SettingsScreen(
     val context = LocalContext.current
     val prefsViewModel = activity?.preferencesViewModel
     val darkThemeState = prefsViewModel?.getThemeMode(context)?.collectAsState()?.value
-        ?: PreferencesRepository.Companion.ThemeMode.SYSTEM
+        ?: PreferencesRepository.Companion.ThemeMode.SYSTEM.ordinal
     val dynamicColorsState = prefsViewModel?.getDynamicColors(context)?.collectAsState()?.value
         ?: false
     val topBarFontState = prefsViewModel?.getTopBarFont(context)?.collectAsState()?.value

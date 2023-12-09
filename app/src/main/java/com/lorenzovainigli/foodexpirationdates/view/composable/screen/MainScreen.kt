@@ -46,7 +46,7 @@ fun MainScreen(
 ) {
     Box(
         modifier = Modifier
-            .padding(4.dp)
+            .padding(start = 4.dp, end = 4.dp)
             .fillMaxSize()
     ) {
         val itemsState = activity?.viewModel?.getDates()?.collectAsState(emptyList())
