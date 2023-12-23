@@ -11,6 +11,7 @@ import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.lorenzovainigli.foodexpirationdates.R
+import com.lorenzovainigli.foodexpirationdates.model.entity.computeExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
 import com.lorenzovainigli.foodexpirationdates.view.MainActivity
 import kotlinx.coroutines.flow.first
@@ -27,27 +28,31 @@ class CheckExpirationsWorker @Inject constructor(
     override suspend fun doWork(): Result {
         val sb = StringBuilder()
         val today = Calendar.getInstance()
-        val twoDaysAgo = Calendar.getInstance()
-        twoDaysAgo.add(Calendar.DAY_OF_MONTH, -2)
-        val yesterday = Calendar.getInstance()
-        yesterday.add(Calendar.DAY_OF_MONTH, -1)
-        val tomorrow = Calendar.getInstance()
-        tomorrow.add(Calendar.DAY_OF_MONTH, 1)
+        val twoDaysAgo = Calendar.getInstance().apply {
+            add(Calendar.DAY_OF_MONTH, -2)
+        }
+        val yesterday = Calendar.getInstance().apply {
+            add(Calendar.DAY_OF_MONTH, -1)
+        }
+        val tomorrow = Calendar.getInstance().apply {
+            add(Calendar.DAY_OF_MONTH, 1)
+        }
         val msInADay = (1000 * 60 * 60 * 24)
         val filteredList = repository.getAll().first().filter {
-            it.expirationDate < tomorrow.time.time
+            computeExpirationDate(it) < tomorrow.time.time
         }
         if (filteredList.isEmpty()) {
             return Result.success()
         }
         filteredList.map {
+            val expDate = computeExpirationDate(it)
             sb.append(it.foodName).append(" (")
-            if (it.expirationDate < twoDaysAgo.time.time) {
-                val days = (today.time.time - it.expirationDate) / msInADay
+            if (expDate < twoDaysAgo.time.time) {
+                val days = (today.time.time - expDate) / msInADay
                 sb.append(applicationContext.getString(R.string.n_days_ago, days))
-            } else if (it.expirationDate < yesterday.time.time)
+            } else if (expDate < yesterday.time.time)
                 sb.append(applicationContext.getString(R.string.yesterday).lowercase())
-            else if (it.expirationDate < today.time.time) {
+            else if (expDate < today.time.time) {
                 sb.append(applicationContext.getString(R.string.today).lowercase())
             } else {
                 sb.append(applicationContext.getString(R.string.tomorrow).lowercase())

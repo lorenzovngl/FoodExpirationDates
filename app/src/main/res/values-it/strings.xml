@@ -56,6 +56,10 @@
     <string name="send_an_email">Invia un\'e-mail</string>
     <string name="contacts_text">Se desideri ottenere maggiori informazioni su questa applicazione, inviare un feedback, segnalare un bug, richiedere una funzionalità, o semplicemente contattare lo sviluppatore, invia un\'e-mail utilizzando il seguente pulsante.\nIn caso di segnalazione di bug e richieste di funzionalità, è possibile aprire una issue sul repository GitHub di questa applicazione.</string>
     <string name="list">Lista</string>
+    <string name="opening_date">Data di apertura</string>
+    <string name="optional">opzionale</string>
+    <string name="time_span">Tempo residuo</string>
+    <string name="please_enter_a_valid_number">Inserire un numero valido</string>
 
     <string-array name="features">
         <item>Visualizza un elenco con le date di scadenza degli alimenti in ordine crescente di tempo.</item>
@@ -73,10 +77,14 @@
     </string-array>
     <string-array name="screenshot_titles">
         <item>I tuoi alimenti ordinati per data di scadenza</item>
-        <item>Inserimento semplice</item>
+        <item>Inserimento semplice con data di apertura e tempo residuo</item>
         <item>Personalizza comportamento e aspetto</item>
         <item>Open source</item>
         <item>Tema scuro</item>
         <item>Colori dinamici</item>
+    </string-array>
+    <string-array name="time_span">
+        <item>Giorni</item>
+        <item>Mesi</item>
     </string-array>
 </resources>

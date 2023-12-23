@@ -28,14 +28,6 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += mapOf(
-                    "room.schemaLocation" to "$projectDir/schemas",
-                    "room.incremental" to "true"
-                )
-            }
-        }
     }
 
     configurations {
@@ -70,6 +62,10 @@ android {
         }
     }
 
+    sourceSets {
+        getByName("debug").assets.srcDirs(files("$projectDir/schemas")) // Room
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -94,6 +90,21 @@ android {
     }
 }
 
+class RoomSchemaArgProvider(
+    @get:InputDirectory
+    @get:PathSensitive(PathSensitivity.RELATIVE)
+    val schemaDir: File
+) : CommandLineArgumentProvider {
+
+    override fun asArguments(): Iterable<String> {
+        return listOf("room.schemaLocation=${schemaDir.path}")
+    }
+}
+
+ksp {
+    arg(RoomSchemaArgProvider(File(projectDir, "schemas")))
+}
+
 dependencies {
 
     implementation(libs.kotlin.stdlib)
@@ -102,9 +113,11 @@ dependencies {
     implementation(libs.activity.compose)
     implementation(libs.androidx.navigation.compose)
     testImplementation(libs.junit)
+    testImplementation(libs.junit.jupiter)
     androidTestImplementation(libs.test.core.ktx)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.androidx.room.testing)
     androidTestImplementation(libs.androidx.test.rules)
     androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation(libs.androidx.uiautomator)
@@ -159,3 +172,29 @@ if (!buildFoss){
 }
 
 apply(plugin = "com.google.dagger.hilt.android")
+
+
+tasks.register<Copy>("copyAPKs") {
+    from(layout.buildDirectory.dir("outputs/apk")) {
+        include("**/*.apk")
+        exclude("androidTest/**")
+        eachFile {
+            path = name.replace("-full", "")
+                .replace("-release", "")
+        }
+        includeEmptyDirs = false
+    }
+    from(layout.buildDirectory.dir("outputs/bundle")) {
+        include("**/*-release.aab")
+        eachFile {
+            path = name.replace("-full", "")
+                .replace("-release", "")
+        }
+        includeEmptyDirs = false
+    }
+    into(layout.projectDirectory.dir("apk"))
+}
+
+tasks.register("generateAPKs") {
+    dependsOn("assembleFullDebug", "copyAPKs")
+}

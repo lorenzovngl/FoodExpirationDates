@@ -22,7 +22,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -68,7 +67,7 @@ fun PlayStoreScreenshot(
                     modifier = Modifier.padding(6.dp),
                     text = text,
                     style = MaterialTheme.typography.headlineLarge,
-                    fontWeight = FontWeight(600),
+                    fontWeight = FontWeight(200),
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                     textAlign = TextAlign.Center
                 )
@@ -99,7 +98,6 @@ fun PlayStoreScreenshot(
 @Preview(showBackground = true)
 @Composable
 fun PlayStoreScreenshotPreview() {
-    val context = LocalContext.current
     PlayStoreScreenshot(
         text = stringResource(id = R.string.app_name)
     ) {

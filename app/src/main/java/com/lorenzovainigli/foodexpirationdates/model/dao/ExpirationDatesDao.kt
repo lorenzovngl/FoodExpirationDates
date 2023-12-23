@@ -6,7 +6,7 @@ import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 
 @Dao
 interface ExpirationDatesDao {
-    @Query("SELECT * FROM expiration_dates ORDER BY expiration_date")
+    @Query("SELECT * FROM expiration_dates ORDER BY COALESCE(opening_date, expiration_date)")
     fun getAll(): Flow<List<ExpirationDate>>
 
     @Query("SELECT * FROM expiration_dates WHERE id = :id")

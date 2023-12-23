@@ -41,7 +41,7 @@ class ExpirationDatesViewModel @Inject constructor(
         return expirationDates
     }
 
-    fun getDate(id: Int): ExpirationDate? {
+    fun getExpirationDate(id: Int): ExpirationDate? {
         viewModelScope.launch {
             expirationDate = repository.getOne(id)
         }

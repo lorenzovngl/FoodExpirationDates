@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
+import com.lorenzovainigli.foodexpirationdates.model.entity.computeExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.ui.theme.DarkRed
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
@@ -77,7 +78,8 @@ fun FoodCard(
         add(Calendar.DAY_OF_MONTH, 7)
     }
     val msInADay = (1000 * 60 * 60 * 24)
-    val expiration = item.expirationDate.let {
+    val expirationDate = computeExpirationDate(item)
+    val expiration = expirationDate.let {
         when {
             it < twoDaysAgo.time.time -> {
                 val days = (today.time.time - item.expirationDate) / msInADay
@@ -95,8 +97,8 @@ fun FoodCard(
             else -> sdf.format(item.expirationDate)
         }
     }
-    val days = (item.expirationDate - today.time.time) / msInADay
-    val bgColor = item.expirationDate.let {
+    val days = (expirationDate - today.time.time) / msInADay
+    val bgColor = expirationDate.let {
         when {
             it < today.time.time -> if (isInDarkTheme) LightRed else DarkRed
             it < withinAWeek.time.time -> getColorForDays(days = days.toInt())
@@ -105,7 +107,7 @@ fun FoodCard(
     }
     val foodNameTextColor = MaterialTheme.colorScheme.onSurface
     val daysRemainingTextColor =
-        if (item.expirationDate < today.time.time) Color.White.copy(alpha = .9f)
+        if (expirationDate < today.time.time) Color.White.copy(alpha = .9f)
         else foodNameTextColor
     Surface(
         modifier = Modifier
@@ -118,15 +120,19 @@ fun FoodCard(
             0f to Color.Transparent,
             1f to bgColor
         )
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(
-                    Brush.linearGradient(
-                        colorStops = colorStops
-                    )
+        var rowModifier = Modifier
+            .fillMaxWidth()
+            .background(
+                Brush.linearGradient(
+                    colorStops = colorStops
                 )
-                .padding(8.dp),
+            )
+        rowModifier = when (item.openingDate) {
+            null -> rowModifier.padding(8.dp)
+            else -> rowModifier.padding(start = 8.dp, end = 8.dp, top = 2.dp, bottom = 2.dp)
+        }
+        Row(
+            modifier = rowModifier,
             verticalAlignment = Alignment.CenterVertically
         ) {
             val color = MaterialTheme.colorScheme.primary
@@ -146,15 +152,25 @@ fun FoodCard(
                     blendMode = BlendMode.DstAtop
                 )
             }
-            Text(
-                text = item.foodName,
-                color = foodNameTextColor,
+            Column(
                 modifier = Modifier
                     .weight(1f)
                     .padding(8.dp)
-                    .clickable(onClick = onClickEdit),
-                fontSize = 18.sp
-            )
+                    .clickable(onClick = onClickEdit)
+            ) {
+                Text(
+                    text = item.foodName,
+                    color = foodNameTextColor,
+                    fontSize = 18.sp
+                )
+                if (item.openingDate != null){
+                    Text(
+                        modifier = Modifier.alpha(.8f),
+                        text = "Opened",
+                        fontSize = 12.sp
+                    )
+                }
+            }
             Text(
                 modifier = Modifier.padding(4.dp),
                 color = daysRemainingTextColor,
@@ -204,12 +220,14 @@ fun FoodCardPreview() {
     val items = getItemsForPreview(LocalContext.current)
     FoodExpirationDatesTheme {
         Column {
-            items.forEach {
+            items.forEachIndexed { index, item ->
                 FoodCard(
                     item = ExpirationDate(
                         id = 0,
-                        foodName = it.foodName,
-                        expirationDate = it.expirationDate
+                        foodName = item.foodName,
+                        expirationDate = item.expirationDate,
+                        openingDate = if (index in listOf(2, 4)) item.expirationDate else null,
+                        timeSpanDays = 0
                     ),
                     onClickEdit = {},
                     onClickDelete = {},
