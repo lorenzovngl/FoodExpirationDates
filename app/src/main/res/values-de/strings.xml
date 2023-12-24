@@ -55,6 +55,10 @@
     <string name="send_an_email">E-Mail senden</string>
     <string name="contacts_text">Wenn Sie weitere Informationen zu dieser Anwendung erhalten, Feedback senden, einen Fehler melden, eine Funktion anfordern oder einfach den Entwickler kontaktieren möchten, senden Sie bitte eine E-Mail über die folgende Schaltfläche.\nWenn Sie Fehlerberichte und Funktionsanfragen haben, können Sie auch ein Issue im GitHub-Repository dieser Anwendung öffnen.</string>
     <string name="list">Liste</string>
+    <string name="opening_date">Öffnungsdatum</string>
+    <string name="optional">optional</string>
+    <string name="time_span">Zeitspanne</string>
+    <string name="please_enter_a_valid_number">Bitte geben Sie eine gültige Nummer ein</string>
 
     <string-array name="features">
         <item>Anzeige einer Liste mit Lebensmittelverfallsdaten in aufsteigender zeitlicher Reihenfolge.</item>
@@ -69,5 +73,17 @@
         <item>Butter</item>
         <item>Pilze</item>
         <item>Tomaten</item>
+    </string-array>
+    <string-array name="screenshot_titles">
+        <item>Ihre Lebensmittel nach Ablaufdatum sortiert</item>
+        <item>Einfaches Einfügen mit Öffnungsdatum und Zeitspanne</item>
+        <item>Verhalten und Erscheinungsbild anpassbar</item>
+        <item>Offener Quelltext</item>
+        <item>Dunkles Thema</item>
+        <item>Dynamische Farben</item>
+    </string-array>
+    <string-array name="time_span">
+        <item>Tage</item>
+        <item>Monate</item>
     </string-array>
 </resources>
