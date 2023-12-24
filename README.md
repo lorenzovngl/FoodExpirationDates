@@ -41,28 +41,19 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 
 ## ✨ Features
 
-- Display a list of food with their expiration dates in ascending order of time.
-- Add, edit and delete items.
-- Notifications.
+- Display a list of food with their expiration dates in ascending order of time
+- Add, edit and delete items
+- Opening date
+- Notifications
 
 ## 📱 Screenshots
 
 <div align="center">
 
-| | | | |
-|-|-|-|-|
-| <img width="150px" src="screenshots/screenshot_ScreenshotEnglish_screen1MainActivity.png"> | <img width="150px" src="screenshots/screenshot_ScreenshotEnglish_screen2InsertActivity.png"> | <img width="150px" src="screenshots/screenshot_ScreenshotEnglish_screen3SettingsActivity.png"> | <img width="150px" src="screenshots/screenshot_ScreenshotEnglish_screen4InfoActivity.png"> |
-<img width="150px" src="screenshots/screenshot.night_ScreenshotEnglishNight_screen1MainActivity.png"> | <img width="150px" src="screenshots/screenshot.night_ScreenshotEnglishNight_screen2InsertActivity.png"> | <img width="150px" src="screenshots/screenshot.night_ScreenshotEnglishNight_screen3SettingsActivity.png"> | <img width="150px" src="screenshots/screenshot.night_ScreenshotEnglishNight_screen4InfoActivity.png"> |
-</div>
-
-## 🛠️ Technologies
-
-<div align="center">
-
-![Android 34](https://img.shields.io/badge/Android%20SDK-34-3DDC84?style=for-the-badge&logo=android)
-![Kotlin 1.9.10](https://img.shields.io/badge/Kotlin-1.9.10-A97BFF?&style=for-the-badge&logo=kotlin&logoColor=A97BFF)
-![Jetpack Compose 1.4.8](https://img.shields.io/badge/Jetpack%20Compose-1.5.3-4285F4?style=for-the-badge&logo=Jetpack+Compose&logoColor=4285F4)
-
+| | | |
+|-|-|-|
+| <img width="150px" src="screenshots/screenshot_ScreenshotEnglish_screen1MainActivity.png"> | <img width="150px" src="screenshots/screenshot_ScreenshotEnglish_screen2InsertActivity.png"> | <img width="150px" src="screenshots/screenshot_ScreenshotEnglish_screen3SettingsActivity.png"> | 
+| <img width="150px" src="screenshots/screenshot_ScreenshotEnglish_screen4InfoActivity.png"> | <img width="150px" src="screenshots/screenshot_ScreenshotEnglish_screen5DarkMode.png"> | <img width="150px" src="screenshots/screenshot_ScreenshotEnglish_screen6DynamicColors.png"> |
 </div>
 
 ## 🌐 Languages
@@ -105,7 +96,6 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 
 - [Material Design Icons](https://pictogrammers.com/library/mdi/)
 - [Icons8 Fluency Icons](https://icons8.it/icons/fluency)
-- [Marquee by T8RIN](https://github.com/T8RIN/Marquee)
 
 ## 👥 Contributors
 
