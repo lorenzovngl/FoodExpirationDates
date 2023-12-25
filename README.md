@@ -10,6 +10,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/lorenzovngl/FoodExpirationDates?label=Last%20commit&style=flat-square)
 ![GitHub](https://img.shields.io/github/license/lorenzovngl/FoodExpirationDates?style=flat-square&label=License)
 ![Languages](https://img.shields.io/badge/Languages-9-orange?style=flat-square)
+![GitHub repo size](https://img.shields.io/github/repo-size/lorenzovngl/FoodExpirationDates?style=flat-square&label=Size)
 ![Pull requests welcome](https://img.shields.io/badge/Pull%20requests-Welcome-ff69b4?style=flat-square)
 <a href="https://gitmoji.dev">
   <img
