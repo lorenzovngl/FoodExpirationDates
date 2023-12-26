@@ -61,9 +61,10 @@
     <string name="please_enter_a_valid_number">Please enter a valid number</string>
 
     <string-array name="features">
-        <item>Display a list with food expiration dates in ascending time order.</item>
-        <item>Add, edit and delete items.</item>
-        <item>Notifications.</item>
+        <item>Display a list with food expiration dates in ascending time order</item>
+        <item>Add, edit and delete items</item>
+        <item>Opening date</item>
+        <item>Notifications</item>
     </string-array>
     <string-array name="example_foods">
         <item>Eggs</item>

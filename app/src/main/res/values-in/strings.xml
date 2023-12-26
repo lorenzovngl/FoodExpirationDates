@@ -56,9 +56,9 @@
     <string name="contacts_text">Jika anda ingin mendapatkan informasi lebih lanjut tentang aplikasi ini, kirim umpan balik, laporkan bug, request fitur, atau hubungi pengembang, silakan kirim email menggunakan tombol berikut.</string>
 
     <string-array name="features">
-        <item>Menampilkan daftar tanggal kedaluwarsa makanan dalam urutan waktu yang terbaru.</item>
-        <item>Menambahkan, memperbarui dan menghapus item.</item>
-        <item>Notifikasi.</item>
+        <item>Menampilkan daftar tanggal kedaluwarsa makanan dalam urutan waktu yang terbaru</item>
+        <item>Menambahkan, memperbarui dan menghapus item</item>
+        <item>Notifikasi</item>
     </string-array>
     <string-array name="example_foods">
         <item>Telur</item>

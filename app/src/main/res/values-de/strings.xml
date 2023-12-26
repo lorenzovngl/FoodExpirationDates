@@ -61,9 +61,10 @@
     <string name="please_enter_a_valid_number">Bitte geben Sie eine gültige Nummer ein</string>
 
     <string-array name="features">
-        <item>Anzeige einer Liste mit Lebensmittelverfallsdaten in aufsteigender zeitlicher Reihenfolge.</item>
-        <item>Einträge hinzufügen, bearbeiten und löschen.</item>
-        <item>Benachrichtigungen.</item>
+        <item>Anzeige einer Liste mit Lebensmittelverfallsdaten in aufsteigender zeitlicher Reihenfolge</item>
+        <item>Einträge hinzufügen, bearbeiten und löschen</item>
+        <item>Eröffnungsdatum</item>
+        <item>Benachrichtigungen</item>
     </string-array>
     <string-array name="example_foods">
         <item>Eier</item>

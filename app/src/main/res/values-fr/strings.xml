@@ -52,12 +52,19 @@
     <string name="top_bar_font_style">Style de police de la barre supérieure</string>
     <string name="behaviour">Comportement</string>
     <string name="appearance">Apparence</string>
+    <string name="send_an_email">Envoyer un e-mail</string>
+    <string name="contacts_text">Si vous souhaitez obtenir plus d\'informations sur cette application, envoyer un commentaire, signaler un bug, demander une fonctionnalité ou simplement contacter le développeur, veuillez envoyer un e-mail en utilisant le bouton suivant. Si vous avez des rapports de bug et des demandes de fonctionnalités, vous pouvez également ouvrir un problème sur le dépôt GitHub pour cette application.</string>
     <string name="list">Liste</string>
+    <string name="opening_date">Date d\'ouverture</string>
+    <string name="optional">facultatif</string>
+    <string name="time_span">durée</string>
+    <string name="please_enter_a_valid_number">Veuillez entrer un numéro valide</string>
 
     <string-array name="features">
-        <item>Afficher une liste d\'aliments avec des dates d\'expiration dans l\'ordre croissant du temps.</item>
-        <item>Ajouter, modifier et supprimer des éléments.</item>
-        <item>Notifications.</item>
+        <item>Afficher une liste d\'aliments avec des dates d\'expiration dans l\'ordre croissant du temps</item>
+        <item>Ajouter, modifier et supprimer des éléments</item>
+        <item>Date d\'ouverture</item>
+        <item>Notifications</item>
     </string-array>
     <string-array name="example_foods">
         <item>Œufs</item>
@@ -67,5 +74,17 @@
         <item>Beurre</item>
         <item>Champignons</item>
         <item>Tomates</item>
+    </string-array>
+    <string-array name="screenshot_titles">
+        <item>Vos aliments triés par date de péremption</item>
+        <item>Easy insertion with opening date and time span</item>
+        <item>Insertion facile avec date d\'ouverture et durée</item>
+        <item>Open source</item>
+        <item>Thème sombre</item>
+        <item>Couleurs dynamiques</item>
+    </string-array>
+    <string-array name="time_span">
+        <item>Jours</item>
+        <item>Mois</item>
     </string-array>
 </resources>

@@ -62,9 +62,10 @@
     <string name="please_enter_a_valid_number">Inserire un numero valido</string>
 
     <string-array name="features">
-        <item>Visualizza un elenco con le date di scadenza degli alimenti in ordine crescente di tempo.</item>
-        <item>Aggiungi, modifica ed elimina elementi.</item>
-        <item>Notifiche.</item>
+        <item>Visualizza un elenco con le date di scadenza degli alimenti in ordine crescente di tempo</item>
+        <item>Aggiungi, modifica ed elimina elementi</item>
+        <item>Data di apertura</item>
+        <item>Notifiche</item>
     </string-array>
     <string-array name="example_foods">
         <item>Uova</item>
