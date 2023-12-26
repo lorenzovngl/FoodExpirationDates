@@ -82,7 +82,7 @@ fun FoodCard(
     val expiration = expirationDate.let {
         when {
             it < twoDaysAgo.time.time -> {
-                val days = (today.time.time - item.expirationDate) / msInADay
+                val days = (today.time.time - expirationDate) / msInADay
                 stringResource(R.string.n_days_ago, days)
             }
 
@@ -90,11 +90,11 @@ fun FoodCard(
             it < today.time.time -> stringResource(R.string.today)
             it < tomorrow.time.time -> stringResource(R.string.tomorrow)
             it < withinAWeek.time.time -> {
-                val days = (item.expirationDate - today.time.time) / msInADay
+                val days = (expirationDate - today.time.time) / msInADay
                 stringResource(R.string.in_n_days, days + 1)
             }
 
-            else -> sdf.format(item.expirationDate)
+            else -> sdf.format(expirationDate)
         }
     }
     val days = (expirationDate - today.time.time) / msInADay
