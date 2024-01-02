@@ -11,6 +11,7 @@ import javax.inject.Inject
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.State
+import com.lorenzovainigli.foodexpirationdates.model.entity.computeExpirationDate
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 
@@ -33,9 +34,17 @@ class ExpirationDatesViewModel @Inject constructor(
             _isSplashScreenLoading.value = true
             val deferred = async {
                 expirationDates = repository.getAll()
+                expirationDates = expirationDates.transform { list ->
+                    val sortedList = list.sortedWith { item1, item2 ->
+                        val expiration1 = computeExpirationDate(item1)
+                        val expiration2 = computeExpirationDate(item2)
+                        expiration1.compareTo(expiration2)
+                    }
+                    emit(sortedList)
+                }
             }
-            deferred.await()
             delay(1000)
+            deferred.await()
             _isSplashScreenLoading.value = false
         }
         return expirationDates
