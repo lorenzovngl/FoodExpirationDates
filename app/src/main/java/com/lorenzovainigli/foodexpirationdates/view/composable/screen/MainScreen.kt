@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.lorenzovainigli.foodexpirationdates.R
@@ -146,6 +147,7 @@ fun EmptyList() {
             Text(
                 text = stringResource(id = R.string.no_items_found),
                 style = MaterialTheme.typography.displaySmall,
+                fontSize = 24.sp,
                 color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.9f),
                 textAlign = TextAlign.Center
             )
