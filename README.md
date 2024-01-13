@@ -5,6 +5,8 @@
 # Food Expiration Dates
 
 [![Author](https://img.shields.io/badge/Author-lorenzovngl-white?style=flat-square)](https://github.com/lorenzovngl)
+![GitHub Repo stars](https://img.shields.io/github/stars/lorenzovngl/FoodExpirationDates?style=flat-square&label=%E2%AD%90&&color=white)
+
 
 ![GitHub Workflow (Android CI)](https://img.shields.io/github/actions/workflow/status/lorenzovngl/FoodExpirationDates/.github%2Fworkflows%2Fandroid.yml?style=flat-square&label=Build)
 ![GitHub last commit](https://img.shields.io/github/last-commit/lorenzovngl/FoodExpirationDates?label=Last%20commit&style=flat-square)
@@ -116,12 +118,21 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 
 *Building software is awesome, making it open source is even more so. However, this requires dedication, efforts, and time. If you use this software or find it valuable, please support my commitment in developing and maintaining this project through one or more of the following methods:*
 
-- *Follow me on [GitHub](https://github.com/lorenzovngl), [Twitter](https://twitter.com/lorenzovngl_dev) or [LinkedIn](https://www.linkedin.com/in/lorenzovainigli/).*
-- *Share or star the project.*
-- *[Make a donation](https://www.paypal.com/donate/?hosted_button_id=LX8P6X75XF65A).*
+- *Follow me on one of these platforms*
+
+[![Twitter](https://img.shields.io/badge/twitter/x-%23000000.svg?&style=for-the-badge&logo=x&logoColor=white)](https://twitter.com/lorenzovngl_dev)
+[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/lorenzovainigli)
+[![Threads](https://img.shields.io/badge/threads-%23FFFFFF.svg?&style=for-the-badge&logo=threads&logoColor=black)](https://www.threads.net/@lorenzovngl)
+
+- *Star the project*
+- *[Make a donation](https://www.paypal.com/donate/?hosted_button_id=LX8P6X75XF65A)*
 
 *Your support would be very precious for me.*
 
 *Thank you,*
 
 *Lorenzo*
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=lorenzovngl/FoodExpirationDates&type=Date)](https://star-history.com/#lorenzovngl/FoodExpirationDates&Date)
