@@ -4,7 +4,7 @@ activity-compose = "1.8.2"
 agp = "8.2.2"
 androidx-test-core-ktx = "1.5.0"
 androidx-test-ext-junit = "1.1.5"
-compose-bom = "2023.10.01"
+compose-bom = "2024.01.00"
 core-ktx = "1.12.0"
 dagger-hilt = "2.50"
 espresso-core = "3.5.1"
@@ -22,7 +22,6 @@ paparazzi = "1.3.1"
 room = "2.6.1"
 test-rules = "1.5.0"
 test-runner = "1.5.2"
-ui-test-junit4 = "1.5.4"
 uiautomator = "2.2.0"
 work-runtime-ktx = "2.8.1"
 splashscreen = "1.0.1"
@@ -65,10 +64,10 @@ material3 = { group = "androidx.compose.material3", name = "material3" }
 runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata" }
 test-core-ktx = { module = "androidx.test:core-ktx", version.ref = "androidx-test-core-ktx" }
 ui = { group = "androidx.compose.ui", name = "ui" }
-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "ui-test-junit4" }
+ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version="1.6.0-beta03"}
+ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
 
 [plugins]
