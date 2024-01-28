@@ -2,10 +2,10 @@ package com.lorenzovainigli.foodexpirationdates.view.composable
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material.icons.outlined.List
+import androidx.compose.material.icons.automirrored.outlined.List
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -38,8 +38,8 @@ fun MyBottomAppBar(
         NavigationItem(
             label = stringResource(id = R.string.list),
             route = Screen.MainScreen.route,
-            selectedIcon = Icons.Filled.List,
-            unselectedIcon = Icons.Outlined.List
+            selectedIcon = Icons.AutoMirrored.Filled.List,
+            unselectedIcon = Icons.AutoMirrored.Outlined.List
         ),
         NavigationItem(
             label = stringResource(id = R.string.settings),

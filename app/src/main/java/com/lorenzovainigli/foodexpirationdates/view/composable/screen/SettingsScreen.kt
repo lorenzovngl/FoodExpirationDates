@@ -224,6 +224,11 @@ fun SettingsScreen(
                         )
                     }
                 }
+                Spacer(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .weight(0.1f)
+                )
             }
         }
     }
