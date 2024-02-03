@@ -5,8 +5,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.tooling.preview.PreviewDynamicColors
-import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.Navigation
@@ -19,7 +18,7 @@ import com.lorenzovainigli.foodexpirationdates.view.composable.screen.SettingsSc
 
 class DefaultPreviews {
     @RequiresApi(Build.VERSION_CODES.O)
-    @PreviewLightDark
+    @Preview
     @Composable
     fun MainScreenPreview() {
         FoodExpirationDatesTheme(
@@ -36,8 +35,7 @@ class DefaultPreviews {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    @PreviewLightDark
-    @PreviewDynamicColors
+    @Preview
     @Composable
     fun MainScreenDynamicColorsPreview() {
         FoodExpirationDatesTheme {
@@ -52,7 +50,7 @@ class DefaultPreviews {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    @PreviewLightDark
+    @Preview
     @Composable
     fun InsertScreenPreview() {
         FoodExpirationDatesTheme(
@@ -69,7 +67,7 @@ class DefaultPreviews {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    @PreviewLightDark
+    @Preview
     @Composable
     fun SettingsScreenPreview() {
         FoodExpirationDatesTheme(
@@ -86,7 +84,7 @@ class DefaultPreviews {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    @PreviewLightDark
+    @Preview
     @Composable
     fun InfoScreenPreview() {
         FoodExpirationDatesTheme(

@@ -14,7 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.Preview
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -71,7 +71,7 @@ fun Dropdown(
 }
 
 @Composable
-@PreviewLightDark
+@Preview
 fun DropdownPreview() {
     FoodExpirationDatesTheme {
         Surface {

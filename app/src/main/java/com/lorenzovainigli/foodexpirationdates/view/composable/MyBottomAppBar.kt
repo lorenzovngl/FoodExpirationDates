@@ -15,7 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.lorenzovainigli.foodexpirationdates.R
@@ -82,7 +82,7 @@ fun MyBottomAppBar(
     }
 }
 
-@PreviewLightDark
+@Preview
 @LanguagePreviews
 @Composable
 fun MyBottomAppBarPreview(){

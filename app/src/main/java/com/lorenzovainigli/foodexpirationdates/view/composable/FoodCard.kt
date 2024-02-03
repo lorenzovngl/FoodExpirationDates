@@ -36,10 +36,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.util.lerp
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.entity.computeExpirationDate
@@ -207,14 +206,14 @@ fun getColorForDays(days: Int): Color {
     val hueEnd = 60f  // Hue for yellow
     val hueStart = 30f  // Hue for orange
     val fraction = days.toFloat() / maxDays
-    val hue = lerp(hueStart, hueEnd, fraction)
-    val alpha = lerp(1f, 0f, fraction)
+    val hue = (hueEnd - hueStart) * fraction + hueStart // lerp(hueStart, hueEnd, fraction)
+    val alpha = 1f - fraction // lerp(1f, 0f, fraction)
     val saturation = 0.8f
     val lightness = 0.5f
     return Color.hsl(hue = hue, saturation = saturation, lightness = lightness, alpha = alpha)
 }
 
-@PreviewLightDark
+@Preview
 @Composable
 fun FoodCardPreview() {
     val items = getItemsForPreview(LocalContext.current)

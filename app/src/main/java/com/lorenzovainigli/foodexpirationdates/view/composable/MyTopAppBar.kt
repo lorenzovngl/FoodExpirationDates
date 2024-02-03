@@ -15,7 +15,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.Preview
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
@@ -54,7 +54,7 @@ fun MyTopAppBar(
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@PreviewLightDark
+@Preview
 @Composable
 fun MyTopAppBarPreview(){
     FoodExpirationDatesTheme(
