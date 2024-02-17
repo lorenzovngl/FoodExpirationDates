@@ -7,6 +7,7 @@
 [![Author](https://img.shields.io/badge/Author-lorenzovngl-white?style=flat-square)](https://github.com/lorenzovngl)
 ![GitHub Repo stars](https://img.shields.io/github/stars/lorenzovngl/FoodExpirationDates?style=flat-square&label=%E2%AD%90&&color=white)
 
+[![Discord](https://img.shields.io/discord/1208027149299224606?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/vV98jT2umw)
 
 ![GitHub Workflow (Android CI)](https://img.shields.io/github/actions/workflow/status/lorenzovngl/FoodExpirationDates/.github%2Fworkflows%2Fandroid.yml?style=flat-square&label=Build)
 ![GitHub last commit](https://img.shields.io/github/last-commit/lorenzovngl/FoodExpirationDates?label=Last%20commit&style=flat-square)
