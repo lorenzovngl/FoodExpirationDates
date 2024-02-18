@@ -1,4 +1,7 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
+import java.io.FileInputStream
+import java.io.FileNotFoundException
+import java.util.Properties
 
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
@@ -9,7 +12,18 @@ plugins {
     alias(libs.plugins.com.google.devtools.ksp)
 }
 
-var buildFoss = false
+val buildFossProperty = "buildFoss"
+val buildFoss = project.hasProperty(buildFossProperty)
+
+val keystorePropertiesFile: File = rootProject.file("keystore.properties")
+val keystoreProperties = Properties()
+var areKeystorePropertiesLoaded = false
+try {
+    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+    areKeystorePropertiesLoaded = true
+} catch (_: FileNotFoundException){
+    println("File keystore.properties not found!")
+}
 
 android {
     namespace = "com.lorenzovainigli.foodexpirationdates"
@@ -36,10 +50,24 @@ android {
         }
     }
 
+    if (areKeystorePropertiesLoaded) {
+        signingConfigs {
+            create("release") {
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["keyPassword"] as String
+                storeFile = file(keystoreProperties["storeFile"] as String)
+                storePassword = keystoreProperties["storePassword"] as String
+            }
+        }
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            if (areKeystorePropertiesLoaded) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
         getByName("debug") {
             applicationIdSuffix = ".debug"
