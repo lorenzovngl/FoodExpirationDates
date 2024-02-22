@@ -3,7 +3,9 @@ package com.lorenzovainigli.foodexpirationdates.view
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -55,6 +57,15 @@ class MainActivity : ComponentActivity() {
                 PreferencesRepository.Companion.ThemeMode.DARK.ordinal -> true
                 else -> isSystemInDarkTheme()
             }
+            val systemBarStyle = SystemBarStyle.auto(
+                lightScrim = android.graphics.Color.TRANSPARENT,
+                darkScrim = android.graphics.Color.TRANSPARENT,
+                detectDarkMode = { _ -> isInDarkTheme }
+            )
+            enableEdgeToEdge(
+                statusBarStyle = systemBarStyle,
+                navigationBarStyle = systemBarStyle
+            )
             FoodExpirationDatesTheme(
                 darkTheme = isInDarkTheme,
                 dynamicColor = dynamicColorsState

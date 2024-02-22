@@ -1,5 +1,4 @@
 [versions]
-accompanist-systemuicontroller = "0.34.0"
 activity-compose = "1.8.2"
 agp = "8.2.2"
 androidx-test-core-ktx = "1.5.0"
@@ -28,7 +27,6 @@ splashscreen = "1.0.1"
 org-jetbrains-kotlin-jvm = "1.9.22"
 
 [libraries]
-accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist-systemuicontroller" }
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
 androidx-hilt-common = { module = "androidx.hilt:hilt-common", version.ref = "hilt-common" }
 androidx-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hilt-common" }
