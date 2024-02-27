@@ -1,7 +1,9 @@
-package com.lorenzovainigli.foodexpirationdates.view.activity
+package com.lorenzovainigli.foodexpirationdates.view
 
 import android.content.res.Resources
+import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithContentDescription
@@ -14,7 +16,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.rule.GrantPermissionRule
 import com.lorenzovainigli.foodexpirationdates.R
-import com.lorenzovainigli.foodexpirationdates.view.MainActivity
 import com.lorenzovainigli.foodexpirationdates.view.composable.FOOD_CARD
 import org.junit.Before
 import org.junit.Rule
@@ -26,7 +27,7 @@ import java.util.Locale
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class MainActivityTest {
+class ManageItemsTest {
 
     @JvmField
     @Rule
@@ -85,10 +86,10 @@ class MainActivityTest {
         }
     }
 
-    fun formatDateForDatePicker(
+    private fun formatDateForDatePicker(
         calendar: Calendar = Calendar.getInstance()
     ): String {
-        val dateFormat = SimpleDateFormat("MMMM d", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.getDefault())
         return dateFormat.format(calendar.time)
     }
 
@@ -132,6 +133,7 @@ class MainActivityTest {
         clear()
     }
 
+    @OptIn(ExperimentalTestApi::class)
     @Test
     fun deleteItemTest() {
         val name = "Test"
@@ -139,6 +141,12 @@ class MainActivityTest {
             name = name,
             date = formatDateForDatePicker()
         )
+        composeTestRule.run {
+            onNodeWithTag(res.getString(R.string.test_tag_delete_item)).performClick()
+            waitUntilExactlyOneExists(
+                matcher = hasText(res.getString(R.string.undo))
+            )
+        }
         clear()
     }
 
