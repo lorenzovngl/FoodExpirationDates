@@ -196,7 +196,7 @@ fun ContactSection(
     Column(modifier = modifier.fillMaxWidth()) {
         Text(
             modifier = Modifier.padding(top = 16.dp),
-            text = "Contacts",
+            text = stringResource(id = R.string.contacts),
             style = MaterialTheme.typography.headlineMedium,
             textAlign = TextAlign.Center
         )
