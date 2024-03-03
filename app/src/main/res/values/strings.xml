@@ -34,11 +34,18 @@
     <string name="menu">Menu</string>
     <string name="settings">Settings</string>
     <string name="date_format">Date format</string>
+    <string name="date_format_desc">The date format you prefer to see on the items.</string>
     <string name="choose_the_date_format">Choose the date format</string>
     <string name="locale_formats">Locale formats</string>
     <string name="other_formats">Other formats</string>
     <string name="your_food_is_expiring">Your food is expiring!</string>
     <string name="notification_time">Notification time</string>
+    <string name="notification_time_desc">
+        Each day you will receive a notification with a list of your items:\n
+        - already expired\n
+        - that expire on the current date\n
+        - that have one day left until their expiration date.
+    </string>
     <string name="dynamic_colors">Dynamic colors</string>
     <string name="theme">Theme</string>
     <string name="light">Light</string>

@@ -36,10 +36,17 @@
     <string name="menu">Menú</string>
     <string name="settings">Configuración</string>
     <string name="date_format">Formato de Fecha</string>
+    <string name="date_format_desc">El formato de la fecha que desea ver en los alimentos.</string>
     <string name="choose_the_date_format">Selecciona el formato de Fecha</string>
     <string name="locale_formats">Formatos locales</string>
     <string name="other_formats">Otros formatos</string>
     <string name="notification_time">Hora de notificación</string>
+    <string name="notification_time_desc">
+        Cada día recibirás una notificación con la lista de tus alimentos:\n
+        - ya caducados\n
+        - que caducan en el día en curso\n
+        - a los que les queda un día para caducar.\n
+    </string>
     <string name="dynamic_colors">Colores dinámicos</string>
     <string name="theme">Tema</string>
     <string name="light">Claro</string>

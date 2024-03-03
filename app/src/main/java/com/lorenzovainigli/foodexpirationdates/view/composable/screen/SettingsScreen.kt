@@ -14,6 +14,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberTimePickerState
@@ -28,16 +29,19 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.NotificationManager
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
+import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.MainActivity
 import com.lorenzovainigli.foodexpirationdates.view.composable.AutoResizedText
 import com.lorenzovainigli.foodexpirationdates.view.composable.DateFormatDialog
 import com.lorenzovainigli.foodexpirationdates.view.composable.NotificationTimeBottomSheet
 import com.lorenzovainigli.foodexpirationdates.view.composable.SettingsItem
+import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
@@ -112,7 +116,8 @@ fun SettingsScreen(
             style = MaterialTheme.typography.labelLarge
         )
         SettingsItem(
-            label = stringResource(id = R.string.date_format)
+            label = stringResource(id = R.string.date_format),
+            description = stringResource(id = R.string.date_format_desc)
         ) {
             ClickableText(
                 modifier = Modifier.testTag(stringResource(id = R.string.date_format)),
@@ -124,7 +129,8 @@ fun SettingsScreen(
             )
         }
         SettingsItem(
-            label = stringResource(R.string.notification_time)
+            label = stringResource(id = R.string.notification_time),
+            description = stringResource(id = R.string.notification_time_desc)
         ) {
             var text = ""
             if (timePickerState.hour < 10) {
@@ -235,8 +241,14 @@ fun SettingsScreen(
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-@Preview(showBackground = true)
+@PreviewLightDark
+@LanguagePreviews
+@PreviewScreenSizes
 @Composable
-fun SettingsScreenPreview() {
-    SettingsScreen()
+fun SettingsScreenContentPreview() {
+    FoodExpirationDatesTheme {
+        Surface {
+            SettingsScreen()
+        }
+    }
 }

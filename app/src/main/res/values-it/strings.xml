@@ -35,11 +35,18 @@
     <string name="menu">Menù</string>
     <string name="settings">Impostazioni</string>
     <string name="date_format">Formato data</string>
+    <string name="date_format_desc">Il formato della data che vuoi vedere sugli alimenti.</string>
     <string name="choose_the_date_format">Scegli il formato della data</string>
     <string name="locale_formats">Formati locali</string>
     <string name="other_formats">Altri formati</string>
     <string name="your_food_is_expiring">Il tuo cibo sta scadendo!</string>
     <string name="notification_time">Orario delle notifiche</string>
+    <string name="notification_time_desc">
+        Ogni giorno riceverai una notifica con la lista dei tuoi alimenti:\n
+        - già scaduti\n
+        - che scadono il giorno corrente\n
+        - a cui rimane un giorno prima della loro scadenza.
+    </string>
     <string name="dynamic_colors">Colori dinamici</string>
     <string name="theme">Tema</string>
     <string name="light">Chiaro</string>

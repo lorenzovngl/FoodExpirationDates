@@ -18,7 +18,7 @@ import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
@@ -26,6 +26,7 @@ import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
 @Composable
 fun SettingsItem(
     label: String,
+    description: String? = null,
     content: @Composable RowScope.() -> Unit = {}
 ) {
     Column(
@@ -40,6 +41,13 @@ fun SettingsItem(
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.onSurface
         )
+        description?.let {
+            Text(
+                text = it,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.secondary
+            )
+        }
         Spacer(
             modifier = Modifier.height(8.dp)
         )
@@ -53,7 +61,7 @@ fun SettingsItem(
     }
 }
 
-@Preview(showBackground = true)
+@PreviewLightDark
 @Composable
 fun Preview() {
     FoodExpirationDatesTheme {
@@ -61,7 +69,10 @@ fun Preview() {
             color = MaterialTheme.colorScheme.background,
             tonalElevation = TonalElevation.level2()
         ) {
-            SettingsItem(label = "Label") {
+            SettingsItem(
+                label = "Label",
+                description = "Description"
+            ) {
                 Text(text = "Value")
             }
         }
