@@ -2,6 +2,7 @@ package screenshot
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringArrayResource
 import androidx.navigation.compose.rememberNavController
 import app.cash.paparazzi.Paparazzi
@@ -32,7 +33,9 @@ open class Screenshot {
                 dynamicColor = dynamicColors
             ) {
                 val navController = rememberNavController()
-                val showSnackbar = mutableStateOf(false)
+                val showSnackbar = remember {
+                    mutableStateOf(false)
+                }
                 MyScaffold(
                     navController = navController,
                     showSnackbar = showSnackbar,
