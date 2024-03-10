@@ -17,10 +17,12 @@ import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
+import androidx.compose.material3.Surface
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -28,11 +30,15 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.lorenzovainigli.foodexpirationdates.R
+import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.MainActivity
+import com.lorenzovainigli.foodexpirationdates.view.composable.screen.MainScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import kotlinx.coroutines.launch
 
@@ -111,7 +117,9 @@ fun MyScaffold(
                     }
                 },
                 actions = {
-                    AppIcon(size = 48.dp)
+                    if (destination?.contains(Screen.MainScreen.route) == true) {
+                        MainScreenMenu()
+                    }
                 },
                 navigationIcon = {
                     if (destination?.contains(Screen.InsertScreen.route) == true) {
@@ -146,17 +154,25 @@ fun MyScaffold(
     }
 }
 
-//@RequiresApi(Build.VERSION_CODES.O)
-//@PreviewLightDark
-//@PreviewScreenSizes
-//@Composable
-//fun MyScaffoldPreview() {
-//    val navController = rememberNavController()
-//    FoodExpirationDatesTheme {
-//        Surface(modifier = Modifier.fillMaxSize()) {
-//            MyScaffold(
-//                navController = navController
-//            )
-//        }
-//    }
-//}
+@RequiresApi(Build.VERSION_CODES.O)
+@PreviewLightDark
+@PreviewScreenSizes
+@Composable
+fun MyScaffoldPreview() {
+    FoodExpirationDatesTheme {
+        Surface {
+            val navController =  rememberNavController()
+            val showSnackbar = remember {
+                mutableStateOf(false)
+            }
+            MyScaffold(
+                navController = navController,
+                showSnackbar = showSnackbar
+            ) {
+                MainScreen(
+                    navController = rememberNavController()
+                )
+            }
+        }
+    }
+}

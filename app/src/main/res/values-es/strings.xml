@@ -68,6 +68,9 @@
     <string name="optional">opcional</string>
     <string name="time_span">Lapso de tiempo</string>
     <string name="please_enter_a_valid_number">Por favor, introduce un número válido</string>
+    <string name="ok">OK</string>.
+    <string name="data_export_success">Datos exportados con éxito.</string>.
+    <string name="data_export_error">Se ha producido un error durante la exportación de datos.</string>
 
     <string-array name="features">
         <item>Muestra una lista con las fechas de caducidad de los alimentos, ordenadas cronológicamente de forma ascendente</item>

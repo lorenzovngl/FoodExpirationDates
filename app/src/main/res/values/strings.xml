@@ -67,6 +67,9 @@
     <string name="optional">optional</string>
     <string name="time_span">Time span</string>
     <string name="please_enter_a_valid_number">Please enter a valid number</string>
+    <string name="ok">OK</string>
+    <string name="data_export_success">Data exported successfully.</string>
+    <string name="data_export_error">An error occurred during data export.</string>
 
     <string-array name="features">
         <item>Display a list with food expiration dates in ascending time order</item>

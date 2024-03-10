@@ -14,6 +14,8 @@ data class ExpirationDate(
     @ColumnInfo(name = "time_span_days") var timeSpanDays: Int? = null,
 )
 
+const val CSV_HEADER = "FOOD_NAME,EXPIRATION_DATE,OPENING_DATE,TIME_SPAN_DAYS"
+
 fun computeExpirationDate(
     item: ExpirationDate
 ): Long {
@@ -35,4 +37,8 @@ fun computeExpirationDate(
         null -> expirationDate
         else -> minOf(expirationDate, expirationByOpeningDate)
     }
+}
+
+fun ExpirationDate.toCSV(): String{
+    return "$foodName,$expirationDate,$openingDate,$timeSpanDays"
 }

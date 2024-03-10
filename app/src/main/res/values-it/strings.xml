@@ -68,6 +68,9 @@
     <string name="optional">opzionale</string>
     <string name="time_span">Tempo residuo</string>
     <string name="please_enter_a_valid_number">Inserire un numero valido</string>
+    <string name="ok">OK</string>
+    <string name="data_export_success">Dati esportati correttamente.</string>
+    <string name="data_export_error">Si è verificato un errore durante l\'esportazione dei dati.</string>
 
     <string-array name="features">
         <item>Visualizza un elenco con le date di scadenza degli alimenti in ordine crescente di tempo</item>
