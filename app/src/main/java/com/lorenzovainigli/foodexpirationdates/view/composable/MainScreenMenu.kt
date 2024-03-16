@@ -78,12 +78,12 @@ fun MainScreenMenu() {
     }
     if (notifyExportTaskDone) {
         if (exportTaskSuccess) {
-            SuccessDialog(
-                onDismiss = {
-                    viewModel.resetNotifyExportTaskDone()
-                },
-                message = stringResource(id = R.string.data_export_success)
-            )
+//            SuccessDialog(
+//                onDismiss = {
+//                    viewModel.resetNotifyExportTaskDone()
+//                },
+//                message = stringResource(id = R.string.data_export_success)
+//            )
         } else {
             ErrorDialog(
                 onDismiss = {

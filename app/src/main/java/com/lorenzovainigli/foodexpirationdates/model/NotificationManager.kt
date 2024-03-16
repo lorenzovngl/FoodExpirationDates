@@ -22,20 +22,30 @@ class NotificationManager {
 
     companion object {
 
-        private const val channelId = "channel_reminders"
-        private const val channelName = "Reminders"
+        const val CHANNEL_REMINDERS_ID = "channel_reminders"
+        private const val CHANNEL_REMINDERS_NAME = "Reminders"
+        const val CHANNEL_EXPORT_DONE_ID = "channel_export_done"
+        private const val CHANNEL_EXPORT_DONE_NAME = "Export done"
         private var permissionGranted = false
 
         fun setupNotificationChannel(activity: ComponentActivity) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val channel = NotificationChannel(
-                    channelId,
-                    channelName,
+                // Channel for reminders
+                val channelReminders = NotificationChannel(
+                    CHANNEL_REMINDERS_ID,
+                    CHANNEL_REMINDERS_NAME,
                     NotificationManager.IMPORTANCE_HIGH
                 )
                 val notificationManager = activity.getSystemService(Context.NOTIFICATION_SERVICE)
                         as NotificationManager
-                notificationManager.createNotificationChannel(channel)
+                notificationManager.createNotificationChannel(channelReminders)
+                // Channel for export done notification
+                val channelExportDone = NotificationChannel(
+                    CHANNEL_EXPORT_DONE_ID,
+                    CHANNEL_EXPORT_DONE_NAME,
+                    NotificationManager.IMPORTANCE_HIGH
+                )
+                notificationManager.createNotificationChannel(channelExportDone)
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 permissionGranted = activity.let {
@@ -90,7 +100,7 @@ class NotificationManager {
                 .build()
             WorkManager.getInstance(context)
                 .enqueueUniquePeriodicWork(
-                    CheckExpirationsWorker.workerID,
+                    CheckExpirationsWorker.WORKER_ID,
                     ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE,
                     workRequest
                 )
