@@ -191,6 +191,7 @@ dependencies {
     // Splash Screen
     implementation(libs.splashscreen)
 
+    implementation(libs.opencsv)
 }
 
 if (!buildFoss){

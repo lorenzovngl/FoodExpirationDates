@@ -14,7 +14,16 @@ data class ExpirationDate(
     @ColumnInfo(name = "time_span_days") var timeSpanDays: Int? = null,
 )
 
-const val CSV_HEADER = "FOOD_NAME,EXPIRATION_DATE,OPENING_DATE,TIME_SPAN_DAYS"
+const val FOOD_NAME_INDEX = 0
+const val FOOD_NAME = "FOOD_NAME"
+const val EXPIRATION_DATE_INDEX = 1
+const val EXPIRATION_DATE = "EXPIRATION_DATE"
+const val OPENING_DATE_INDEX = 2
+const val OPENING_DATE = "OPENING_DATE"
+const val TIME_SPAN_DAYS_INDEX = 3
+const val TIME_SPAN_DAYS = "TIME_SPAN_DAYS"
+
+const val CSV_HEADER = "$FOOD_NAME,$EXPIRATION_DATE,$OPENING_DATE,$TIME_SPAN_DAYS"
 
 fun computeExpirationDate(
     item: ExpirationDate

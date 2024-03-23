@@ -1,5 +1,7 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
@@ -19,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lorenzovainigli.foodexpirationdates.R
+import com.lorenzovainigli.foodexpirationdates.util.OperationResult
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDatesViewModel
 
 data class MenuItem(
@@ -31,10 +34,18 @@ data class MenuItem(
 fun MainScreenMenu() {
     val viewModel: ExpirationDatesViewModel = viewModel()
     val exportTaskSuccess = viewModel.exportTaskSuccess.value
+    val operationResult = remember {
+        mutableStateOf(OperationResult())
+    }
     val notifyExportTaskDone = viewModel.notifyExportTaskDone.value
     val context = LocalContext.current
     var isExpanded by remember {
         mutableStateOf(false)
+    }
+    val filePickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.OpenDocument()
+    ) {
+        operationResult.value = viewModel.importData(context, it)
     }
     IconButton(
         onClick = { isExpanded = true }
@@ -57,6 +68,14 @@ fun MainScreenMenu() {
                 label = "Export data",
                 onClick = {
                     viewModel.exportData(context)
+                    isExpanded = false
+                }
+            ),
+            MenuItem(
+                iconId = R.drawable.ic_import,
+                label = "Import data",
+                onClick = {
+                    filePickerLauncher.launch(arrayOf("*/*"))
                     isExpanded = false
                 }
             )
@@ -92,5 +111,20 @@ fun MainScreenMenu() {
                 message = stringResource(id = R.string.data_export_error)
             )
         }
+    }
+    when (operationResult.value.state){
+        OperationResult.State.FAILURE -> ErrorDialog(
+            onDismiss = {
+                operationResult.value = OperationResult()
+            },
+            message = operationResult.value.message
+        )
+        OperationResult.State.SUCCESS -> SuccessDialog(
+            onDismiss = {
+                operationResult.value = OperationResult()
+            },
+            message = operationResult.value.message
+        )
+        OperationResult.State.NOT_PERFORMED -> {}
     }
 }
