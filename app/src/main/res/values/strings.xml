@@ -20,6 +20,12 @@
     <string name="write_a_review">Write a review</string>
     <string name="source_code">Source code</string>
     <string name="features">Features</string>
+    <string name="feature_list">
+        - Display a list with food expiration dates in ascending time order\n
+        - Add, edit and delete items\n
+        - Opening date\n
+        - Notifications
+    </string>
     <string name="support_this_project">Support this project</string>
     <string name="report_a_bug">Report a bug</string>
     <string name="version_x">Version %1$s</string>
@@ -71,12 +77,6 @@
     <string name="data_export_success">Data exported successfully.</string>
     <string name="data_export_error">An error occurred during data export.</string>
 
-    <string-array name="features">
-        <item>Display a list with food expiration dates in ascending time order</item>
-        <item>Add, edit and delete items</item>
-        <item>Opening date</item>
-        <item>Notifications</item>
-    </string-array>
     <string-array name="example_foods">
         <item>Eggs</item>
         <item>Cheese</item>

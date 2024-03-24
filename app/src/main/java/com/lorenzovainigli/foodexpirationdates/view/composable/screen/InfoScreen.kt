@@ -6,6 +6,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -19,6 +20,7 @@ import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -27,12 +29,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.DEVELOPER_EMAIL
@@ -41,6 +43,7 @@ import com.lorenzovainigli.foodexpirationdates.PLAY_STORE_URL
 import com.lorenzovainigli.foodexpirationdates.PRIVACY_POLICY_URL
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.contributors
+import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.composable.TextIconButton
 import com.lorenzovainigli.foodexpirationdates.view.composable.TextIconButtonData
 
@@ -49,8 +52,6 @@ fun InfoScreen(
     context: Context = LocalContext.current
 ) {
     val uriHandler = LocalUriHandler.current
-    val features = stringArrayResource(id = R.array.features)
-        .joinToString(separator = "\n") { it.asListItem() }
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
@@ -109,17 +110,8 @@ fun InfoScreen(
         )
         Text(
             modifier = Modifier.fillMaxWidth(),
-            text = features
+            text = stringResource(id = R.string.feature_list),
         )
-        /*TextIconButton(
-        modifier = Modifier.align(CenterHorizontally),
-        onClick = {
-
-        },
-        imagePainter = painterResource(id = R.drawable.bug_report),
-        contentDescription = "Star",
-        text = stringResource(id = R.string.report_a_bug)
-    )*/
         Text(
             modifier = Modifier.padding(top = 16.dp),
             text = stringResource(id = R.string.support_this_project),
@@ -253,15 +245,15 @@ fun ContributorsList(
 
 private fun String.asListItem() = "  ● $this"
 
-//@PreviewLightDark
-//@Composable
-//fun InfoScreenPreview() {
-//    FoodExpirationDatesTheme {
-//        Surface (modifier = Modifier.fillMaxHeight()) {
-//            InfoScreen()
-//        }
-//    }
-//}
+@PreviewLightDark
+@Composable
+fun InfoScreenPreview() {
+    FoodExpirationDatesTheme {
+        Surface (modifier = Modifier.fillMaxHeight()) {
+            InfoScreen()
+        }
+    }
+}
 
 @Preview(showBackground = true)
 @Composable

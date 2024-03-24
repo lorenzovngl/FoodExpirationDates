@@ -21,6 +21,12 @@
     <string name="write_a_review">Déjanos tu opinión</string>
     <string name="source_code">Código Fuente</string>
     <string name="features">Características</string>
+    <string name="feature_list">
+        - Muestra una lista con las fechas de caducidad de los alimentos, ordenadas cronológicamente de forma ascendente\n
+        - Añade, edita y elimina artículos\n
+        - Fecha de apertura\n
+        - Notificaciones
+    </string>
     <string name="support_this_project">Apoya este proyecto</string>
     <string name="report_a_bug">Reportar un error</string>
     <string name="version_x">Versión %1$s</string>
@@ -72,12 +78,6 @@
     <string name="data_export_success">Datos exportados con éxito.</string>.
     <string name="data_export_error">Se ha producido un error durante la exportación de datos.</string>
 
-    <string-array name="features">
-        <item>Muestra una lista con las fechas de caducidad de los alimentos, ordenadas cronológicamente de forma ascendente</item>
-        <item>Añade, edita y elimina artículos</item>
-        <item>Fecha de apertura</item>
-        <item>Notificaciones</item>
-    </string-array>
     <string-array name="example_foods">
         <item>Huevos</item>
         <item>Queso</item>

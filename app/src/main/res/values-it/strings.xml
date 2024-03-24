@@ -21,6 +21,12 @@
     <string name="write_a_review">Scrivi una recensione</string>
     <string name="source_code">Codice sorgente</string>
     <string name="features">Funzionalità</string>
+    <string name="feature_list">
+        - Visualizza un elenco con le date di scadenza degli alimenti in ordine crescente di tempo\n
+        - Aggiungi, modifica ed elimina elementi\n
+        - Data di apertura\n
+        - Notifiche
+    </string>
     <string name="support_this_project">Supporta questo progetto</string>
     <string name="report_a_bug">Segnala un bug</string>
     <string name="version_x">Versione %1$s</string>
@@ -72,12 +78,6 @@
     <string name="data_export_success">Dati esportati correttamente.</string>
     <string name="data_export_error">Si è verificato un errore durante l\'esportazione dei dati.</string>
 
-    <string-array name="features">
-        <item>Visualizza un elenco con le date di scadenza degli alimenti in ordine crescente di tempo</item>
-        <item>Aggiungi, modifica ed elimina elementi</item>
-        <item>Data di apertura</item>
-        <item>Notifiche</item>
-    </string-array>
     <string-array name="example_foods">
         <item>Uova</item>
         <item>Formaggio</item>

@@ -21,6 +21,11 @@
     <string name="write_a_review">復習を書く</string>
     <string name="source_code">ソースコード</string>
     <string name="features">機能</string>
+    <string name="feature_list">
+        - 食品の賞味期限を時間の昇順に並べたリストを表示する。\n
+        - アイテムの追加、編集、削除。\n
+        - 通知機能。
+    </string>
     <string name="support_this_project">このプロジェクトを支援する</string>
     <string name="report_a_bug">バグを報告する</string>。
     <string name="version_x">バージョン%1$s</string>
@@ -47,11 +52,6 @@
     <string name="undo">消去</string>
     <string name="list">リスト</string>
 
-    <string-array name="features">
-        <item>食品の賞味期限を時間の昇順に並べたリストを表示する。</item>
-        <item>アイテムの追加、編集、削除。</item>
-        <item>通知機能。</item>
-    </string-array>
     <string-array name="example_foods">
         <item>卵</item>
         <item>チーズ</item>
