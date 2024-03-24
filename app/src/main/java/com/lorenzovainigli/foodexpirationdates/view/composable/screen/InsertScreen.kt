@@ -58,6 +58,8 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
 
+const val TEST_TAG_INSERT_ITEM = "Insert item"
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InsertScreen(
@@ -209,7 +211,7 @@ fun InsertScreen(
             }
             Button(
                 modifier = Modifier
-                    .testTag("Insert item")
+                    .testTag(TEST_TAG_INSERT_ITEM)
                     .weight(0.5f)
                     .padding(top = 8.dp, start = 4.dp),
                     colors = ButtonDefaults.buttonColors(

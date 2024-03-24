@@ -23,6 +23,8 @@ import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import java.util.Calendar
 
+const val TEST_TAG_INSERT_DATE = "Insert date"
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyDatePickerDialog(
@@ -48,7 +50,7 @@ fun MyDatePickerDialog(
         },
         confirmButton = {
             Button(
-                modifier = Modifier.testTag("Insert date"),
+                modifier = Modifier.testTag(TEST_TAG_INSERT_DATE),
                 onClick = onConfirm,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.tertiary,

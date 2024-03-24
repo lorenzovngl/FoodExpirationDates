@@ -53,6 +53,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 
 const val FOOD_CARD = "FoodCard"
+const val TEST_TAG_DELETE_ITEM = "Delete item"
 
 @Composable
 fun FoodCard(
@@ -178,7 +179,7 @@ fun FoodCard(
             )
             Button(
                 modifier = Modifier
-                    .testTag("Delete item")
+                    .testTag(TEST_TAG_DELETE_ITEM)
                     .padding(start = 8.dp)
                     .width(32.dp)
                     .height(32.dp),

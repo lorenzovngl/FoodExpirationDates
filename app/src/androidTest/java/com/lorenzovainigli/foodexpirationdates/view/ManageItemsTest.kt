@@ -17,6 +17,9 @@ import androidx.test.filters.LargeTest
 import androidx.test.rule.GrantPermissionRule
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.view.composable.FOOD_CARD
+import com.lorenzovainigli.foodexpirationdates.view.composable.TEST_TAG_DELETE_ITEM
+import com.lorenzovainigli.foodexpirationdates.view.composable.TEST_TAG_INSERT_DATE
+import com.lorenzovainigli.foodexpirationdates.view.composable.screen.TEST_TAG_INSERT_ITEM
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -64,11 +67,11 @@ class ManageItemsTest {
                 assertIsDisplayed()
                 performClick()
             }
-            onNodeWithTag("Insert date").run {
+            onNodeWithTag(TEST_TAG_INSERT_DATE).run {
                 assertIsDisplayed()
                 performClick()
             }
-            onNodeWithTag("Insert item").run {
+            onNodeWithTag(TEST_TAG_INSERT_ITEM).run {
                 assertIsDisplayed()
                 performClick()
             }
@@ -77,7 +80,7 @@ class ManageItemsTest {
 
     private fun clear(){
         composeTestRule.run {
-            onAllNodesWithTag("Delete item").apply {
+            onAllNodesWithTag(TEST_TAG_DELETE_ITEM).apply {
                 fetchSemanticsNodes().forEachIndexed { _, _ ->
                     get(0).performClick()
                 }
@@ -124,7 +127,7 @@ class ManageItemsTest {
             onNodeWithText(res.getString(R.string.food_name)).run {
                 performTextReplacement(updatedName)
             }
-            onNodeWithTag("Insert item").run {
+            onNodeWithTag(TEST_TAG_INSERT_ITEM).run {
                 performClick()
             }
             waitForIdle()
@@ -142,7 +145,7 @@ class ManageItemsTest {
             date = formatDateForDatePicker()
         )
         composeTestRule.run {
-            onNodeWithTag(res.getString(R.string.test_tag_delete_item)).performClick()
+            onNodeWithTag(TEST_TAG_DELETE_ITEM).performClick()
             waitUntilExactlyOneExists(
                 matcher = hasText(res.getString(R.string.undo))
             )
