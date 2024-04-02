@@ -220,9 +220,5 @@ tasks.register<Copy>("copyAPKs") {
         }
         includeEmptyDirs = false
     }
-    into(layout.projectDirectory.dir("apk"))
-}
-
-tasks.register("generateAPKs") {
-    dependsOn("assembleFullDebug", "copyAPKs")
+    into(layout.projectDirectory.dir("apk/${android.defaultConfig.versionCode}_${android.defaultConfig.versionName}"))
 }
