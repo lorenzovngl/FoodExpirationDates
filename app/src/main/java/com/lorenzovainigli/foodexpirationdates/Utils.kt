@@ -80,7 +80,7 @@ fun saveFileToExternalStorage(context: Context, url: String, fileName: String){
     showNotification(
         context = context,
         channelId = com.lorenzovainigli.foodexpirationdates.model.NotificationManager.CHANNEL_EXPORT_DONE_ID,
-        title = "Export done",
+        title = context.getString(R.string.data_exported),
         message = fileName
     )
 }

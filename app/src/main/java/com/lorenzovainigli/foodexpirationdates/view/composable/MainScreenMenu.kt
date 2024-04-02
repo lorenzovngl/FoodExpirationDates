@@ -65,7 +65,7 @@ fun MainScreenMenu() {
         arrayOf(
             MenuItem(
                 iconId = R.drawable.ic_export,
-                label = "Export data",
+                label = stringResource(R.string.export_data),
                 onClick = {
                     viewModel.exportData(context)
                     isExpanded = false
@@ -73,7 +73,7 @@ fun MainScreenMenu() {
             ),
             MenuItem(
                 iconId = R.drawable.ic_import,
-                label = "Import data",
+                label = stringResource(R.string.import_data),
                 onClick = {
                     filePickerLauncher.launch(arrayOf("*/*"))
                     isExpanded = false

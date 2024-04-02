@@ -76,6 +76,9 @@
     <string name="ok">OK</string>
     <string name="data_export_success">Data exported successfully.</string>
     <string name="data_export_error">An error occurred during data export.</string>
+    <string name="export_data">Export data</string>
+    <string name="import_data">Import data</string>
+    <string name="data_exported">Data exported</string>
 
     <string-array name="example_foods">
         <item>Eggs</item>
