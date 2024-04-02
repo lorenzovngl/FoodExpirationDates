@@ -32,7 +32,7 @@ fun SettingsItem(
     Column(
         modifier = Modifier
             .wrapContentSize()
-            .clip(RoundedCornerShape(20))
+            .clip(RoundedCornerShape(12))
             .background(MaterialTheme.colorScheme.surfaceColorAtElevation(TonalElevation.level1()))
             .padding(12.dp)
     ) {
@@ -65,10 +65,7 @@ fun SettingsItem(
 @Composable
 fun Preview() {
     FoodExpirationDatesTheme {
-        Surface(
-            color = MaterialTheme.colorScheme.background,
-            tonalElevation = TonalElevation.level2()
-        ) {
+        Surface {
             SettingsItem(
                 label = "Label",
                 description = "Description"
