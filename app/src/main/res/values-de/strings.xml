@@ -40,11 +40,18 @@
     <string name="menu">Menü</string>
     <string name="settings">Einstellungen</string>
     <string name="date_format">Datumsformat</string>
+    <string name="date_format_desc">Das Datumsformat, dass für Einträge verwendet wird.</string>
     <string name="choose_the_date_format">Das Datumsformat auswählen</string>
     <string name="locale_formats">Lokale Formate</string>
     <string name="other_formats">Andere Formate</string>
     <string name="your_food_is_expiring">Ihre Lebensmittel verfallen!</string>
     <string name="notification_time">Zeitpunkt der Benachrichtigung</string>
+    <string name="notification_time_desc">
+        Sie erhalten täglich eine Benachrichtigung mit einer Liste Ihrer Einträge:\n
+        - bereits abgelaufen\n
+        - die heute ablaufen\n
+        - die morgen ablaufen werden.
+    </string>
     <string name="dynamic_colors">Dynamische Farben</string>
     <string name="theme">Thema</string>
     <string name="light">Hell</string>
@@ -65,7 +72,13 @@
     <string name="optional">optional</string>
     <string name="time_span">Zeitspanne</string>
     <string name="please_enter_a_valid_number">Bitte geben Sie eine gültige Nummer ein</string>
-
+    <string name="ok">OK</string>
+    <string name="data_export_success">Daten erfolgreich exportiert.</string>
+    <string name="data_export_error">Beim Datenexport ist ein Fehler aufgetreten.</string>
+    <string name="export_data">Daten exportieren</string>
+    <string name="import_data">Daten importieren</string>
+    <string name="data_exported">Daten exportiert</string>
+    
     <string-array name="example_foods">
         <item>Eier</item>
         <item>Käse</item>
