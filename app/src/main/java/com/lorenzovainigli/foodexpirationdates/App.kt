@@ -11,8 +11,8 @@ class App : Application(), Configuration.Provider {
     @Inject
     lateinit var workerFactory: MyWorkerFactory
 
-    override fun getWorkManagerConfiguration() =
-        Configuration.Builder()
+    override val workManagerConfiguration: Configuration
+        get() = Configuration.Builder()
             .setWorkerFactory(workerFactory)
             .build()
 }
