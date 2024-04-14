@@ -1,11 +1,19 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable.screen
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Build
+import android.util.Log
 import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultRegistryOwner
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,6 +27,9 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DatePickerState
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
@@ -38,7 +49,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -51,6 +64,7 @@ import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
+import com.lorenzovainigli.foodexpirationdates.view.BarcodeScannerActivity
 import com.lorenzovainigli.foodexpirationdates.view.MainActivity
 import com.lorenzovainigli.foodexpirationdates.view.composable.Dropdown
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyDatePickerDialog
@@ -59,6 +73,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 const val TEST_TAG_INSERT_ITEM = "Insert item"
+const val EXTRA_PRODUCT_NAME = "product_name"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -67,6 +82,7 @@ fun InsertScreen(
     navController: NavController,
     itemId: String? = null,
 ) {
+    val context = LocalContext.current
     val itemToEdit = itemId?.let { activity?.viewModel?.getExpirationDate(it.toInt()) }
     var foodNameToEdit = ""
     var expDate: Long? = null
@@ -91,27 +107,61 @@ fun InsertScreen(
     var checkedOpeningDateState by remember {
         mutableStateOf(openingDate != null)
     }
+    val startForResult = if (LocalContext.current is ActivityResultRegistryOwner) {
+        rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val intent = result.data
+                if (intent != null) {
+                    foodName = intent.getStringExtra(EXTRA_PRODUCT_NAME) ?: ""
+                    Log.i("Activity result", intent.getStringExtra(EXTRA_PRODUCT_NAME) ?: "")
+                }
+            }
+        }
+    } else null
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
     ) {
-        TextField(
-            label = {
-                Text(
-                    text = stringResource(id = R.string.food_name),
-                    modifier = Modifier.fillMaxWidth()
+        Row (
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            TextField(
+                modifier = Modifier.weight(1f),
+                label = {
+                    Text(
+                        text = stringResource(id = R.string.food_name),
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                },
+                value = foodName,
+                onValueChange = { newText ->
+                    foodName = newText
+                },
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(
+                    capitalization = KeyboardCapitalization.Sentences
                 )
-            },
-            value = foodName,
-            onValueChange = { newText ->
-                foodName = newText
-            },
-            singleLine = true,
-            keyboardOptions = KeyboardOptions(
-                capitalization = KeyboardCapitalization.Sentences
             )
-        )
+            IconButton(
+                modifier = Modifier.padding(start = 8.dp),
+                onClick = {
+                    startForResult?.launch(Intent(context, BarcodeScannerActivity::class.java))
+                },
+                colors = IconButtonDefaults.iconButtonColors(
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+                ),
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_barcode_scan),
+                    contentDescription = stringResource(id = R.string.back),
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
+        }
         Spacer(modifier = Modifier.height(16.dp))
         TextFieldDatePicker(
             datePickerState = datePickerExpDateState,

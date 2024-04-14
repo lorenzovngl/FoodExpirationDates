@@ -151,6 +151,7 @@ dependencies {
     // https://developer.android.com/jetpack/compose/bom/bom-mapping
     implementation(platform(libs.compose.bom))
     implementation(libs.material3)
+    implementation(libs.material.icons.extended)
     implementation(libs.runtime.livedata)
     implementation(libs.ui)
     implementation(libs.ui.tooling.preview)
@@ -189,6 +190,23 @@ dependencies {
 
     implementation(libs.opencsv)
     api(libs.guava)
+
+    // Camera
+    implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
+
+    // ML Kit Barcode scanner
+    implementation(libs.androidx.camera.mlkit.vision)
+    implementation(libs.barcode.scanning)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    // Coil
+    implementation(libs.coil.compose)
 }
 
 if (!buildFoss){
