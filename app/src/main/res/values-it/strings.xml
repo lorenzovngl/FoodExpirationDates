@@ -80,6 +80,13 @@
     <string name="export_data">Esporta dati</string>
     <string name="import_data">Importa dati</string>
     <string name="data_exported">Dati esportati</string>
+    <string name="connection_error">Errore di connessione</string>
+    <string name="getting_product_info">Recupero info prodotto…</string>
+    <string name="no_internet_connection">Nessuna connessione ad internet</string>
+    <string name="please_scan_a_barcode">Scansiona un codice a barre</string>
+    <string name="product_not_found">Prodotto non trovato</string>
+    <string name="retry">Riprova</string>
+    <string name="scanning_error">Errore di scansione</string>
 
     <string-array name="example_foods">
         <item>Uova</item>

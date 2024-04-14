@@ -79,6 +79,13 @@
     <string name="export_data">Export data</string>
     <string name="import_data">Import data</string>
     <string name="data_exported">Data exported</string>
+    <string name="connection_error">Connection error</string>
+    <string name="getting_product_info">Getting product info…</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="please_scan_a_barcode">Please scan a barcode</string>
+    <string name="product_not_found">Product not found</string>
+    <string name="retry">Retry</string>
+    <string name="scanning_error">Scanning error</string>
 
     <string-array name="example_foods">
         <item>Eggs</item>
