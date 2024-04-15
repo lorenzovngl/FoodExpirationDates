@@ -25,7 +25,7 @@ test-runner = "1.5.2"
 uiautomator = "2.3.0"
 work-runtime-ktx = "2.9.0"
 splashscreen = "1.0.1"
-org-jetbrains-kotlin-jvm = "1.9.22"
+org-jetbrains-kotlin-jvm = "1.9.23"
 
 [libraries]
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
