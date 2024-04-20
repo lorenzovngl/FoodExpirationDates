@@ -29,7 +29,7 @@
     <string name="support_this_project">Bu projeyi destekle</string>
     <string name="report_a_bug">Hata bildir</string>
     <string name="version_x">Sürüm %1$s</string>
-    <string name="app_description">%1$s, Lorenzo Vainigli ve diğer katkıda bulunanlar tarafından geliştirilen açık kaynaklı bir projedir.\nBu uygulamanın kodu MIT lisansı altında yayınlanmıştır ve GitHub'da mevcuttur.</string>
+    <string name="app_description">%1$s, Lorenzo Vainigli ve diğer katkıda bulunanlar tarafından geliştirilen açık kaynaklı bir projedir.\nBu uygulamanın kodu MIT lisansı altında yayınlanmıştır ve GitHub\'da mevcuttur.</string>
     <string name="about_this_app">Bu uygulama hakkında</string>
     <string name="privacy_policy">Gizlilik politikası</string>
     <string name="contributors_list_title">Katkıda bulunanlar</string>
