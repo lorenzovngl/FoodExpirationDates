@@ -1,0 +1,104 @@
+<resources>
+    <string name="app_name">Food Expiration Dates</string>
+    <string name="app_name_short">Food Expirations</string>
+    <string name="n_days_ago">%1$d gün önce</string>
+    <string name="yesterday">Dün</string>
+    <string name="today">Bugün</string>
+    <string name="tomorrow">Yarın</string>
+    <string name="in_n_days">%1$d gün içinde</string>
+    <string name="add_item">Öğe ekle</string>
+    <string name="edit_item">Öğeyi düzenle</string>
+    <string name="food_name">Yemek adı</string>
+    <string name="expiration_date">Son kullanma tarihi</string>
+    <string name="please_select_a_date">Lütfen bir tarih seçin</string>
+    <string name="please_enter_a_food_name">Lütfen bir yemek adı girin</string>
+    <string name="insert">Ekle</string>
+    <string name="update">Güncelle</string>
+    <string name="cancel">İptal</string>
+    <string name="share">Paylaş</string>
+    <string name="leave_a_star_on_github">GitHub\'da bir yıldız bırak</string>
+    <string name="write_a_review">Değerlendirme yaz</string>
+    <string name="source_code">Kaynak kodu</string>
+    <string name="features">Özellikler</string>
+    <string name="feature_list">
+        - Artan zaman sırasına göre yemek son kullanma tarihlerini içeren bir liste görüntüleyin\n
+        - Öğe ekleyin, düzenleyin ve silin\n
+        - Açılış tarihi\n
+        - Bildirimler
+    </string>
+    <string name="support_this_project">Bu projeyi destekle</string>
+    <string name="report_a_bug">Hata bildir</string>
+    <string name="version_x">Sürüm %1$s</string>
+    <string name="app_description">%1$s, Lorenzo Vainigli ve diğer katkıda bulunanlar tarafından geliştirilen açık kaynaklı bir projedir.\nBu uygulamanın kodu MIT lisansı altında yayınlanmıştır ve GitHub\'da mevcuttur.</string>
+    <string name="about_this_app">Bu uygulama hakkında</string>
+    <string name="privacy_policy">Gizlilik politikası</string>
+    <string name="contributors_list_title">Katkıda bulunanlar</string>
+    <string name="contributors_list_subtitle">Bunlar, bu uygulamanın geliştirilmesine katkıda bulunan kişilerdir.</string>
+    <string name="back">Geri</string>
+    <string name="no_items_found">Öğe bulunamadı</string>
+    <string name="please_insert_one">Lütfen bir tane girin</string>
+    <string name="menu">Menü</string>
+    <string name="settings">Ayarlar</string>
+    <string name="date_format">Tarih formatı</string>
+    <string name="date_format_desc">Öğelerde görmeyi tercih ettiğiniz tarih biçimi.</string>
+    <string name="choose_the_date_format">Tarih biçimini seçin</string>
+    <string name="locale_formats">Yerel ayar biçimleri</string>
+    <string name="other_formats">Diğer formatlar</string>
+    <string name="your_food_is_expiring">Yemeğinizin süresi doluyor!</string>
+    <string name="notification_time">Bildirim saati</string>
+    <string name="notification_time_desc">
+        Her gün öğelerinizin bir listesini içeren bir bildirim alacaksınız:\n
+        - zaten süresi dolanlar\n
+        - geçerli tarihte sona erenler\n
+        - son kullanma tarihine bir gün kalmış olanlar.
+    </string>
+    <string name="dynamic_colors">Dinamik renkler</string>
+    <string name="theme">Tema</string>
+    <string name="light">Açık</string>
+    <string name="system">Sistem</string>
+    <string name="dark">Koyu</string>
+    <string name="x_deleted">%1$s silindi</string>
+    <string name="undo">Geri al</string>
+    <string name="normal">Normal</string>
+    <string name="bold">Kalın</string>
+    <string name="extra_bold">Ekstra Kalın</string>
+    <string name="top_bar_font_style">Üst çubuk yazı tipi stili</string>
+    <string name="behaviour">Davranış</string>
+    <string name="appearance">Görünüm</string>
+    <string name="send_an_email">E-posta gönder</string>
+    <string name="contacts">İletişim</string>
+    <string name="contacts_text">Bu uygulama hakkında daha fazla bilgi edinmek, geri bildirim göndermek, hata bildirmek, özellik talep etmek veya sadece geliştiriciyle iletişime geçmek istiyorsanız, lütfen aşağıdaki düğmeyi kullanarak bir e-posta gönderin.\nHata raporlarınız ve özellik talepleriniz varsa, bu uygulama için GitHub deposunda da bir sorun açabilirsiniz.</string>
+    <string name="list">Liste</string>
+    <string name="opening_date">Açılış tarihi</string>
+    <string name="optional">İsteğe bağlı</string>
+    <string name="time_span">Zaman dilimi</string>
+    <string name="please_enter_a_valid_number">Lütfen geçerli bir sayı girin</string>
+    <string name="ok">Tamam</string>
+    <string name="data_export_success">Veriler başarıyla dışa aktarıldı.</string>
+    <string name="data_export_error">Veri dışa aktarma sırasında bir hata oluştu.</string>
+    <string name="export_data">Verileri dışa aktar</string>
+    <string name="import_data">Verileri içe aktar</string>
+    <string name="data_exported">Veriler dışa aktarıldı</string>
+
+    <string-array name="example_foods">
+        <item>Yumurtalar</item>
+        <item>Peynir</item>
+        <item>Süt</item>
+        <item>Jambon</item>
+        <item>Tereyağı</item>
+        <item>Mantarlar</item>
+        <item>Domates</item>
+    </string-array>
+    <string-array name="screenshot_titles">
+        <item>Market alışverişleriniz son kullanma tarihine göre sıralandı</item>
+        <item>Açılış tarihi ve zaman aralığı ile kolay ekleme</item>
+        <item>Davranışı ve görünümü özelleştir</item>
+        <item>Açık kaynak</item>
+        <item>Koyu tema</item>
+        <item>Dinamik renkler</item>
+    </string-array>
+    <string-array name="time_span">
+        <item>Gün</item>
+        <item>Ay</item>
+    </string-array>
+</resources>
