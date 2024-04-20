@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Сроки годности еды</string>
+    <string name="app_name_short">Сроки годности</string>
+    <string name="n_days_ago">%1$d дней назад</string>
+    <string name="yesterday">Вчера</string>
+    <string name="today">Сегодня</string>
+    <string name="tomorrow">Завтра</string>
+    <string name="in_n_days">Через %1$d дней</string>
+    <string name="add_item">Добавить элемент</string>
+    <string name="edit_item">Изменить элемент</string>
+    <string name="food_name">Название продукта</string>
+    <string name="expiration_date">Срок годности</string>
+    <string name="please_select_a_date">Пожалуйста, выберите дату</string>
+    <string name="please_enter_a_food_name">Пожалуйста, введите название продукта</string>
+    <string name="insert">Добавить</string>
+    <string name="update">Обновить</string>
+    <string name="cancel">Отменить</string>
+    <string name="share">Поделиться</string>
+    <string name="leave_a_star_on_github">Поставить звезду на GitHub</string>
+    <string name="write_a_review">Написать отзыв</string>
+    <string name="source_code">Исходный код</string>
+    <string name="features">Особенности</string>
+    <string name="feature_list">
+        - Отображение списков со сроками годности продуктов в порядке возрастания\n
+        - Добавление, редактирование и удаление элементов\n
+        - Дата открытия\n
+        - Уведомления
+    </string>
+    <string name="support_this_project">Поддержать этот проект</string>
+    <string name="report_a_bug">Сообщить об ошибке</string>
+    <string name="version_x">Версия %1$s</string>
+    <string name="app_description">%1$s представляет собой проект с открытым исходным кодом, разработанный Lorenzo Vainigli и другими участниками.\nКод этого приложения опубликован под лицензией MIT и доступен на GitHub.</string>
+    <string name="about_this_app">О приложении</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="contributors_list_title">Учавствовавшие в разработке</string>
+    <string name="contributors_list_subtitle">Эти люди внесли свой вклад в разработку данного приложения.</string>
+    <string name="back">Назад</string>
+    <string name="no_items_found">Ничего не найдено</string>
+    <string name="please_insert_one">Для начала добавьте продукт</string>
+    <string name="menu">Меню</string>
+    <string name="settings">Настройки</string>
+    <string name="date_format">Формат даты</string>
+    <string name="date_format_desc">Формат даты, который вы предпочитаете видеть на продуктах.</string>
+    <string name="choose_the_date_format">Выберите формат даты</string>
+    <string name="locale_formats">Локальные форматы</string>
+    <string name="other_formats">Другие форматы</string>
+    <string name="your_food_is_expiring">Срок годности ваших продуктов истекает!</string>
+    <string name="notification_time">Время уведомления</string>
+    <string name="notification_time_desc">
+        Ежедневно вы будете получать уведомление со списком ваших продуктов, у которых:\n
+        - уже истёк срок годности\n
+        - срок годности истекает сегодня\n
+        - остался один день до истечения срока годности.
+    </string>
+    <string name="dynamic_colors">Динамические цвета</string>
+    <string name="theme">Тема</string>
+    <string name="light">Светлая</string>
+    <string name="system">Системная</string>
+    <string name="dark">Тёмная</string>
+    <string name="x_deleted">%1$s удалено</string>
+    <string name="undo">Отменить</string>
+    <string name="normal">Нормальный</string>
+    <string name="bold">Жирный</string>
+    <string name="extra_bold">Очень Жирный</string>
+    <string name="top_bar_font_style">Стиль шрифта верхней панели</string>
+    <string name="behaviour">Режим работы</string>
+    <string name="appearance">Внешний вид</string>
+    <string name="send_an_email">Отправить письмо</string>
+    <string name="contacts">Контакты</string>
+    <string name="contacts_text">Если вы хотите получить дополнительную информацию об этом приложении, отправить отзыв, сообщить об ошибке, запросить функцию или просто связаться с разработчиком, пожалуйста, отправьте электронное письмо, нажав на следующую кнопку.\nЕсли у вас есть сообщения об ошибках и запросы на добавление новых функций, вы также можете создать тикет в репозитории GitHub этого приложения.</string>
+    <string name="list">Список</string>
+    <string name="opening_date">Дата открытия</string>
+    <string name="optional">Опционально</string>
+    <string name="time_span">Промежуток времени</string>
+    <string name="please_enter_a_valid_number">Пожалуйста, введите корректное число</string>
+    <string name="ok">ОК</string>
+    <string name="data_export_success">Данные успешно экспортированы.</string>
+    <string name="data_export_error">Произошла ошибка в процессе экспорта данных.</string>
+    <string name="export_data">Экспорт данных</string>
+    <string name="import_data">Импорт данных</string>
+    <string name="data_exported">Данные экспортированы</string>
+
+    <string-array name="example_foods">
+        <item>Яйца</item>
+        <item>Сыр</item>
+        <item>Молоко</item>
+        <item>Ветчина</item>
+        <item>Масло</item>
+        <item>Грибы</item>
+        <item>Помидоры</item>
+    </string-array>
+    <string-array name="screenshot_titles">
+        <item>Ваши продукты отсортированы по сроку годности</item>
+        <item>Простое добавление с указанием даты открытия и промежутка времени</item>
+        <item>Настраиваемое поведение и внешний вид</item>
+        <item>Открытый исходный код</item>
+        <item>Тёмная тема</item>
+        <item>Динамические цвета</item>
+    </string-array>
+    <string-array name="time_span">
+        <item>Дней</item>
+        <item>Месяцев</item>
+    </string-array>
+</resources>
