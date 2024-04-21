@@ -91,9 +91,6 @@ fun InsertScreen(
     var checkedOpeningDateState by remember {
         mutableStateOf(openingDate != null)
     }
-    var isDatePickerDialogOpeningDateOpen by remember {
-        mutableStateOf(false)
-    }
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -147,13 +144,12 @@ fun InsertScreen(
                 modifier = Modifier
                     .clickable(
                         enabled = checkedOpeningDateState,
-                        onClick = {
-                            isDatePickerDialogOpeningDateOpen = true
-                        }
+                        onClick = {}
                     )
                     .alpha(if (checkedOpeningDateState) 1f else 0.5f),
                 datePickerState = datePickerOpeningDateState,
-                label = stringResource(id = R.string.opening_date)
+                label = stringResource(id = R.string.opening_date),
+                allowUserInteraction = checkedOpeningDateState
             )
             Spacer(modifier = Modifier.height(16.dp))
             Column(
@@ -170,6 +166,7 @@ fun InsertScreen(
                     TextField(
                         modifier = Modifier.fillMaxWidth(0.5f),
                         value = timeSpan.toString(),
+                        readOnly = !checkedOpeningDateState,
                         onValueChange = {
                             timeSpan = try {
                                 it.toInt()
@@ -187,7 +184,8 @@ fun InsertScreen(
                         choices = timeSpanArray,
                         onChange = {
                             dropdownChoice = it
-                        }
+                        },
+                        allowUserInteraction = checkedOpeningDateState
                     )
                 }
             }
@@ -280,14 +278,17 @@ fun InsertScreen(
 fun TextFieldDatePicker(
     modifier: Modifier = Modifier,
     datePickerState: DatePickerState,
-    label: String
+    label: String,
+    allowUserInteraction: Boolean = true
 ) {
     var isDatePickerDialogOpen by remember {
         mutableStateOf(false)
     }
     TextField(
         modifier = modifier.clickable(onClick = {
-            isDatePickerDialogOpen = true
+            if (allowUserInteraction) {
+                isDatePickerDialogOpen = true
+            }
         }),
         enabled = false,
         label = {

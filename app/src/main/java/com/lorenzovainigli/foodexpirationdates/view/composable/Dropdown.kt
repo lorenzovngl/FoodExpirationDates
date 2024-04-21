@@ -23,7 +23,8 @@ fun Dropdown(
     modifier: Modifier = Modifier,
     choices: Array<String>,
     onChange: (String) -> Unit,
-    isExpandedStartValue: Boolean = false
+    isExpandedStartValue: Boolean = false,
+    allowUserInteraction: Boolean = true
 ) {
     var isExpanded by remember {
         mutableStateOf(isExpandedStartValue)
@@ -35,7 +36,8 @@ fun Dropdown(
         modifier = modifier,
         expanded = isExpanded,
         onExpandedChange = {
-            isExpanded = it
+            isExpanded = if (allowUserInteraction) it
+            else false
         }
     ) {
         TextField(
