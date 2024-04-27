@@ -35,7 +35,8 @@ val locales = mapOf(
     "it" to "Italian",
     "ja" to "Japanese",
     "ru" to "Russian",
-    "tr" to "Turkish"
+    "tr" to "Turkish",
+    "pl" to "Polish"
 )
 
 var results: List<Pair<String, Int>> = mutableListOf()

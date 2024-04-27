@@ -1,0 +1,100 @@
+<resources>
+    <string name="app_name">Food Expiration Dates</string>
+    <string name="app_name_short">Food Expirations</string>
+    <string name="n_days_ago">%1$d dni temu</string>
+    <string name="yesterday">Wczoraj</string>
+    <string name="today">Dziś</string>
+    <string name="tomorrow">Jutro</string>
+    <string name="in_n_days">Za %1$d dni</string>
+    <string name="add_item">Dodaj produkt</string>
+    <string name="edit_item">Edytuj produkt</string>
+    <string name="food_name">Nazwa</string>
+    <string name="expiration_date">Termin przydatności</string>
+    <string name="please_select_a_date">Proszę wybrać datę</string>
+    <string name="please_enter_a_food_name">Proszę wprowadzić nazwę produktu</string>
+    <string name="insert">Wprowadź</string>
+    <string name="update">Zaaktualizuj</string>
+    <string name="cancel">Anuluj</string>
+    <string name="share">Udostępnij</string>
+    <string name="leave_a_star_on_github">Dodaj gwiazdkę na platformie GitHub</string>
+    <string name="write_a_review">Wystaw opinię</string>
+    <string name="source_code">Kod źródłowy</string>
+    <string name="features">Funkcje</string>
+    <string name="feature_list">                               - Wyświetlanie listy z datami ważności żywności w rosnącej kolejności czasowej\n
+        - Dodawanie, edytowanie i usuwanie produktów\n
+        - Data otwarcia\n
+        - Powiadomienia</string>
+    <string name="support_this_project">Wesprzyj ten projekt</string>
+    <string name="report_a_bug">Zgłoś błąd</string>
+    <string name="version_x">Wersja %1$s</string>
+    <string name="app_description">%1$s to projekt o otwartym kodzie źródłowym opracowany przez Lorenzo Vainigli i innych współtwórców. Kod tej aplikacji jest publikowany na licencji MIT i dostępny na GitHubie.</string>
+    <string name="about_this_app">Informacje o tej aplikacji</string>
+    <string name="privacy_policy">Polityka prywatności</string>
+    <string name="contributors_list_title">Współtwórcy</string>
+    <string name="contributors_list_subtitle">To są osoby, które przyczyniły się do rozwoju tej aplikacji.</string>
+    <string name="back">Powrót</string>
+    <string name="no_items_found">Nie znaleziono produktów</string>
+    <string name="please_insert_one">Dodaj pierwszy produkt</string>
+    <string name="menu">Menu</string>
+    <string name="settings">Ustawienia</string>
+    <string name="date_format">Format daty</string>
+    <string name="date_format_desc">Format daty, który ma być widoczny przy produktach.</string>
+    <string name="choose_the_date_format">Wybierz format daty</string>
+    <string name="locale_formats">Formaty regionalne</string>
+    <string name="other_formats">Inne formaty</string>
+    <string name="your_food_is_expiring">Twoje jedzenie traci ważność!</string>
+    <string name="notification_time">Czas powiadamiania</string>
+    <string name="notification_time_desc">              Każdego dnia otrzymasz powiadomienie z listą przedmiotów: \n
+        - które już wygasły\n
+        - które wygasają w bieżącym dniu\n
+        - które mają jeden dzień do wygaśnięcia.</string>
+    <string name="dynamic_colors">Używaj kolorów systemu</string>
+    <string name="theme">Motyw</string>
+    <string name="light">Jasny</string>
+    <string name="system">Systemowy</string>
+    <string name="dark">Ciemny</string>
+    <string name="x_deleted">Usunięto %1$s</string>
+    <string name="undo">Przywróć</string>
+    <string name="normal">Normalna</string>
+    <string name="bold">Pogrubiona</string>
+    <string name="extra_bold">Bardzo pogrubiona</string>
+    <string name="top_bar_font_style">Styl czcionki dla górnego paska</string>
+    <string name="behaviour">Sposób działania</string>
+    <string name="appearance">Wygląd</string>
+    <string name="send_an_email">Wyślij wiadomość e-mail</string>
+    <string name="contacts">Kontakt</string>
+    <string name="contacts_text">Jeśli chcesz uzyskać więcej informacji na temat tej aplikacji, wysłać opinię, zgłosić błąd, poprosić o funkcję lub po prostu skontaktować się z deweloperem, wyślij wiadomość e-mail za pomocą poniższego przycisku. Jeśli chcesz zgłosić błąd lub poprosić o funkcję, możesz również otworzyć zgłoszenie w repozytorium GitHub dla tej aplikacji.</string>
+    <string name="list">Lista</string>
+    <string name="opening_date">Data otwarcia</string>
+    <string name="optional">opcjonalnie</string>
+    <string name="time_span">Zakres czasu</string>
+    <string name="please_enter_a_valid_number">Proszę wprowadzić prawidłowy numer</string>
+    <string name="ok">OK</string>
+    <string name="data_export_success">Dane zostały pomyślnie wyeksportowane.</string>
+    <string name="data_export_error">Wystąpił błąd podczas eksportu danych.</string>
+    <string name="export_data">Eksportuj dane</string>
+    <string name="import_data">Importuj dane</string>
+    <string name="data_exported">Wyeksportowane dane</string>
+
+    <string-array name="example_foods">
+        <item>Jaja</item>
+        <item>Ser</item>
+        <item>Mleko</item>
+        <item>Szynka</item>
+        <item>Masło</item>
+        <item>Grzyby</item>
+        <item>Pomidory</item>
+    </string-array>
+    <string-array name="screenshot_titles">
+        <item>Twoje artykuły spożywcze posortowane według daty ważności</item>
+        <item>Łatwe wprowadzanie daty i godziny otwarcia</item>
+        <item>Dostosowywanie zachowania i wyglądu</item>
+        <item>Otwarty kod źródłowy</item>
+        <item>Ciemny motyw</item>
+        <item>Możliwość użycia kolorów systemowych</item>
+    </string-array>
+    <string-array name="time_span">
+        <item>Dni</item>
+        <item>Miesiące</item>
+    </string-array>
+</resources>
