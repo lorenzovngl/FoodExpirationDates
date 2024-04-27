@@ -12,7 +12,7 @@
 ![GitHub Workflow (Android CI)](https://img.shields.io/github/actions/workflow/status/lorenzovngl/FoodExpirationDates/.github%2Fworkflows%2Fandroid.yml?style=flat-square&label=Build)
 ![GitHub last commit](https://img.shields.io/github/last-commit/lorenzovngl/FoodExpirationDates?label=Last%20commit&style=flat-square)
 ![GitHub](https://img.shields.io/github/license/lorenzovngl/FoodExpirationDates?style=flat-square&label=License)
-![Languages](https://img.shields.io/badge/Languages-11-orange?style=flat-square)
+![Languages](https://img.shields.io/badge/Languages-12-orange?style=flat-square)
 ![GitHub repo size](https://img.shields.io/github/repo-size/lorenzovngl/FoodExpirationDates?style=flat-square&label=Size)
 ![Pull requests welcome](https://img.shields.io/badge/Pull%20requests-Welcome-ff69b4?style=flat-square)
 <a href="https://gitmoji.dev">
@@ -72,6 +72,7 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 ![Indonesian](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fin.json)
 ![Italian](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fit.json)
 ![Japanese](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fja.json)
+![Polish](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fpl.json)
 ![Russian](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fru.json)
 ![Spanish](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fes.json)
 ![Turkish](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Ftr.json)
@@ -118,6 +119,7 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 <a href="https://github.com/rasvanjaya21"><img src="https://avatars.githubusercontent.com/rasvanjaya21" alt="@rasvanjaya21" height="32" width="32"></a>
 <a href="https://github.com/gerasimov-mv"><img src="https://avatars.githubusercontent.com/gerasimov-mv" alt="@gerasimov-mv" height="32" width="32"></a>
 <a href="https://github.com/mikropsoft"><img src="https://avatars.githubusercontent.com/mikropsoft" alt="@mikropsoft" height="32" width="32"></a>
+<a href="https://github.com/3limssmile"><img src="https://avatars.githubusercontent.com/3limssmile" alt="@3limssmile" height="32" width="32"></a>
 
 ## ❤️ Support
 
