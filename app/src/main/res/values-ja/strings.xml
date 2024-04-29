@@ -9,7 +9,7 @@
     <string name="add_item">食品を追加</string>
     <string name="edit_item">食品を編集</string>
     <string name="food_name">食品名</string>
-    <string name="expiration_date">賞味怪訝</string>
+    <string name="expiration_date">賞味期限</string>
     <string name="please_select_a_date">日付を選択してください</string>
     <string name="please_enter_a_food_name">食品名を入力してください</string>
     <string name="insert">追加</string>
@@ -57,28 +57,28 @@
     <string name="light">ライト</string>
     <string name="system">システム</string>
     <string name="dark">ダーク</string>
-    <string name="x_deleted">%1$s deleted</string>
-    <string name="undo">Undo</string>
-    <string name="normal">Normal</string>
-    <string name="bold">Bold</string>
-    <string name="extra_bold">Extra Bold</string>
-    <string name="top_bar_font_style">Top bar font style</string>
-    <string name="behaviour">Behaviour</string>
-    <string name="appearance">Appearance</string>
-    <string name="send_an_email">Send an email</string>
-    <string name="contacts">Contacts</string>
-    <string name="contacts_text">If you would like to get more information about this application, send a feedback, report a bug, request a feature, or simply contact the developer, please send an email using the following button.\nIf you have bug reports and feature requests, you can also open an issue on the GitHub repository for this application.</string>
-    <string name="list">List</string>
-    <string name="opening_date">Opening date</string>
-    <string name="optional">optional</string>
-    <string name="time_span">Time span</string>
-    <string name="please_enter_a_valid_number">Please enter a valid number</string>
+    <string name="x_deleted">%1$sが削除されました</string>
+    <string name="undo">元に戻す</string>
+    <string name="normal">通常</string>
+    <string name="bold">太字</string>
+    <string name="extra_bold">極太</string>
+    <string name="top_bar_font_style">上部バーのフォントスタイル</string>
+    <string name="behaviour">行動</string>
+    <string name="appearance">外観</string>
+    <string name="send_an_email">メールを送信</string>
+    <string name="contacts">連絡先</string>
+    <string name="contacts_text">このアプリケーションに関する詳細な情報を入手したい場合、またはフィードバックの送信、バグ報告、機能リクエスト、単に開発者に連絡したい場合は、次のボタンを使用してメールを送信してください。\nバグレポートや機能リクエストがある場合は、このアプリケーションのGitHubリポジトリでissueを開くこともできます。</string>
+    <string name="list">リスト</string>
+    <string name="opening_date">開始日</string>
+    <string name="optional">任意</string>
+    <string name="time_span">期間</string>
+    <string name="please_enter_a_valid_number">有効な数値を入力してください</string>
     <string name="ok">OK</string>
-    <string name="data_export_success">Data exported successfully.</string>
-    <string name="data_export_error">An error occurred during data export.</string>
-    <string name="export_data">Export data</string>
-    <string name="import_data">Import data</string>
-    <string name="data_exported">Data exported</string>
+    <string name="data_export_success">データは正常にエクスポートされました。</string>
+    <string name="data_export_error">データのエクスポート中にエラーが発生しました。</string>
+    <string name="export_data">データをエクスポート</string>
+    <string name="import_data">データをインポート</string>
+    <string name="data_exported">エクスポートされたデータ</string>
 
     <string-array name="example_foods">
         <item>卵</item>
@@ -90,15 +90,15 @@
         <item>トマト</item>
     </string-array>
     <string-array name="screenshot_titles">
-        <item>Your groceries sorted by expiration date</item>
-        <item>Easy insertion with opening date and time span</item>
-        <item>Customize behavior and appearance</item>
-        <item>Open source</item>
-        <item>Dark theme</item>
-        <item>Dynamic colors</item>
+        <item>食品を賞味期限順に並べ替え</item>
+        <item>開始日と期間を簡単に追加</item>
+        <item>動作と外観をカスタマイズ</item>
+        <item>オープンソース</item>
+        <item>ダークテーマ</item>
+        <item>ダイナミックカラー</item>
     </string-array>
     <string-array name="time_span">
-        <item>Days</item>
-        <item>Months</item>
+        <item>日後</item>
+        <item>ヶ月後</item>
     </string-array>
 </resources>
