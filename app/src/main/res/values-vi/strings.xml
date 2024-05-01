@@ -1,0 +1,104 @@
+<resources>
+    <string name="app_name">Ngày thực phẩm hết hạn</string>
+    <string name="app_name_short">Thực phẩm hết hạn</string>
+    <string name="n_days_ago">%1$d ngày trước</string>
+    <string name="yesterday">Hôm qua</string>
+    <string name="today">Hôm nay</string>
+    <string name="tomorrow">Ngày mai</string>
+    <string name="in_n_days">Trong %1$d ngày</string>
+    <string name="add_item">Thêm mặt hàng</string>
+    <string name="edit_item">Chỉnh sửa mặt hàng</string>
+    <string name="food_name">Tên thực phẩm</string>
+    <string name="expiration_date">Ngày hết hạn</string>
+    <string name="please_select_a_date">Vui lòng chọn một ngày</string>
+    <string name="please_enter_a_food_name">Vui lòng nhập tên thực phẩm</string>
+    <string name="insert">Chèn</string>
+    <string name="update">Cập nhật</string>
+    <string name="cancel">Hủy bỏ</string>
+    <string name="share">Chia sẻ</string>
+    <string name="leave_a_star_on_github">Để lại một ngôi sao trên GitHub</string>
+    <string name="write_a_review">Viết đánh giá</string>
+    <string name="source_code">Mã nguồn</string>
+    <string name="features">Đặc trưng</string>
+    <string name="feature_list">
+        - Hiển thị danh sách hạn sử dụng của thực phẩm theo thứ tự thời gian tăng dần\n
+        - Thêm, chỉnh sửa và xóa các mặt hàng\n
+        - Ngày mở hàng\n
+        - Thông báo
+    </string>
+    <string name="support_this_project">Hỗ trợ dự án này</string>
+    <string name="report_a_bug">Báo cáo lỗi</string>
+    <string name="version_x">Phiên bản %1$s</string>
+    <string name="app_description">%1$s là một dự án nguồn mở được phát triển bởi Lorenzo Vainigli và những người đóng góp khác.\nMã của ứng dụng này được xuất bản theo giấy phép MIT và có sẵn trên GitHub.</string>
+    <string name="about_this_app">Giới thiệu về ứng dụng này</string>
+    <string name="privacy_policy">Chính sách bảo mật</string>
+    <string name="contributors_list_title">Người đóng góp</string>
+    <string name="contributors_list_subtitle">Đây là những người đã đóng góp vào sự phát triển của ứng dụng này.</string>
+    <string name="back">Trở lại</string>
+    <string name="no_items_found">Không tìm mặt hàng nào</string>
+    <string name="please_insert_one">Vui lòng chèn một</string>
+    <string name="menu">Thực đơn</string>
+    <string name="settings">Thiết đặt</string>
+    <string name="date_format">Định dạng ngày tháng</string>
+    <string name="date_format_desc">Định dạng ngày bạn muốn thấy trên các mặt hàng.</string>
+    <string name="choose_the_date_format">Chọn định dạng ngày</string>
+    <string name="locale_formats">Định dạng ngôn ngữ</string>
+    <string name="other_formats">Các định dạng khác</string>
+    <string name="your_food_is_expiring">Thực phẩm của bạn sắp hết hạn!</string>
+    <string name="notification_time">Thời gian thông báo</string>
+    <string name="notification_time_desc">
+        Mỗi ngày bạn sẽ nhận được thông báo kèm theo danh sách các mặt hàng của mình:\n
+        - đã hết hạn\n
+        - hết hạn vào ngày hiện tại\n
+        - còn một ngày nữa là đến ngày hết hạn.
+    </string>
+    <string name="dynamic_colors">Màu sắc năng động</string>
+    <string name="theme">Chủ đề</string>
+    <string name="light">Sáng</string>
+    <string name="system">Hệ thống</string>
+    <string name="dark">Tối</string>
+    <string name="x_deleted">%1$s đã bị xóa</string>
+    <string name="undo">Hoàn tác</string>
+    <string name="normal">Bình thường</string>
+    <string name="bold">In đậm</string>
+    <string name="extra_bold">In cực đậm</string>
+    <string name="top_bar_font_style">Kiểu phông chữ thanh trên cùng</string>
+    <string name="behaviour">Hành vi</string>
+    <string name="appearance">Diện mạo</string>
+    <string name="send_an_email">Gửi email</string>
+    <string name="contacts">Liên lạc</string>
+    <string name="contacts_text">Nếu bạn muốn biết thêm thông tin về ứng dụng này, gửi phản hồi, báo cáo lỗi, yêu cầu một tính năng hoặc chỉ liên hệ với nhà phát triển, vui lòng gửi email bằng nút sau.\nNếu bạn có báo cáo lỗi và yêu cầu tính năng, bạn cũng có thể mở một vấn đề trên kho GitHub cho ứng dụng này.</string>
+    <string name="list">Danh sách</string>
+    <string name="opening_date">Ngày mở hàng</string>
+    <string name="optional">Không bắt buộc</string>
+    <string name="time_span">Khoảng thời gian</string>
+    <string name="please_enter_a_valid_number">Vui lòng nhập một số hợp lệ</string>
+    <string name="ok">Ừ</string>
+    <string name="data_export_success">Đã xuất dữ liệu thành công.</string>
+    <string name="data_export_error">Đã xảy ra lỗi trong quá trình xuất dữ liệu.</string>
+    <string name="export_data">Xuất dữ liệu</string>
+    <string name="import_data">Nhập dữ liệu</string>
+    <string name="data_exported">Đã xuất dữ liệu</string>
+
+    <string-array name="example_foods">
+        <item>Trứng</item>
+        <item>Phô mai</item>
+        <item>Sữa</item>
+        <item>Giăm bông</item>
+        <item>Bơ</item>
+        <item>Nấm</item>
+        <item>Cà chua</item>
+    </string-array>
+    <string-array name="screenshot_titles">
+        <item>Kệ thực phẩm của bạn được sắp xếp theo ngày hết hạn</item>
+        <item>Dễ dàng chèn với ngày và khoảng thời gian mở</item>
+        <item>Tùy chỉnh hành vi và diện mạo</item>
+        <item>Nguồn mở</item>
+        <item>Chủ đề tối</item>
+        <item>Màu sắc năng động</item>
+</string-array>
+    <string-array name="time_span">
+        <item>Ngày</item>
+        <item>Tháng</item>
+    </string-array>
+</resources>
