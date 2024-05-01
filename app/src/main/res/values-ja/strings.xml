@@ -1,56 +1,84 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">食品の賞味期限</string>
-    <string name="app_name_short">@string/app_name</string>
+    <string name="app_name">Food Expiration Dates</string>
+    <string name="app_name_short">Food Expirations</string>
     <string name="n_days_ago">%1$d日前</string>
     <string name="yesterday">昨日</string>
     <string name="today">今日</string>
     <string name="tomorrow">明日</string>
-    <string name="in_n_days">%1$d日以内</string>
-    <string name="add_item">アイテムを追加</string>
-    <string name="edit_item">アイテムを編集</string>
+    <string name="in_n_days">%1$d日後</string>
+    <string name="add_item">食品を追加</string>
+    <string name="edit_item">食品を編集</string>
     <string name="food_name">食品名</string>
-    <string name="expiration_date">賞味期限</string>about this app
+    <string name="expiration_date">賞味期限</string>
     <string name="please_select_a_date">日付を選択してください</string>
     <string name="please_enter_a_food_name">食品名を入力してください</string>
-    <string name="insert">入れる</string>
+    <string name="insert">追加</string>
     <string name="update">更新</string>
-    <string name="cancel">取消</string>
+    <string name="cancel">キャンセル</string>
     <string name="share">共有</string>
-    <string name="leave_a_star_on_github">GitHubに星を置く</string>
-    <string name="write_a_review">復習を書く</string>
+    <string name="leave_a_star_on_github">GitHubでStarを付ける</string>
+    <string name="write_a_review">レビューを書く</string>
     <string name="source_code">ソースコード</string>
-    <string name="features">機能</string>
+    <string name="features">特徴</string>
     <string name="feature_list">
-        - 食品の賞味期限を時間の昇順に並べたリストを表示する。\n
-        - アイテムの追加、編集、削除。\n
-        - 通知機能。
+        - 食品の賞味期限を期限の短い順に一覧表示\n
+        - 食品の追加、編集、削除\n
+        - 開始日\n
+        - 通知
     </string>
-    <string name="support_this_project">このプロジェクトを支援する</string>
-    <string name="report_a_bug">バグを報告する</string>。
-    <string name="version_x">バージョン%1$s</string>
-    <string name="app_description">%1$sはLorenzo Vainigliと他の貢献者によって開発されたオープンソースプロジェクトです。</string>
-    <string name="about_this_app">このアプリについて</string>
+    <string name="support_this_project">プロジェクトを支援</string>
+    <string name="report_a_bug">バグを報告</string>
+    <string name="version_x">バージョン %1$s</string>
+    <string name="app_description">%1$sは、Lorenzo Vainigliおよび他の貢献者によって開発されたオープンソースプロジェクトです。\nこのアプリケーションのコードはMITライセンスに基づいて公開されており、GitHubにて入手出来ます。</string>
+    <string name="about_this_app">詳細</string>
     <string name="privacy_policy">プライバシーポリシー</string>
+    <string name="contributors_list_title">貢献者</string>
+    <string name="contributors_list_subtitle">このアプリの開発に貢献した方々です。</string>
     <string name="back">戻る</string>
-    <string name="no_items_found">アイテムは見つかりませんでした</string>
-    <string name="please_insert_one">アイテムを挿入してください</string>
+    <string name="no_items_found">食品が見つかりませんでした</string>
+    <string name="please_insert_one">最低でも１つ挿入してください</string>
     <string name="menu">メニュー</string>
     <string name="settings">設定</string>
-    <string name="date_format">日付のフォーマット</string>
-    <string name="choose_the_date_format">日付のフォーマットを選択</string>
-    <string name="locale_formats">ローカルフォーマット</string>
-    <string name="other_formats">他のフォーマット</string>
-    <string name="your_food_is_expiring">食べ物の賞味期限が切れています</string>
-    <string name="notification_time">お知らせの時間</string>
-    <string name="dynamic_colors">ダイナミック色</string>
+    <string name="date_format">日付形式</string>
+    <string name="date_format_desc">食品に表示する日付形式</string>
+    <string name="choose_the_date_format">日付形式を選択してください</string>
+    <string name="locale_formats">ロケール形式</string>
+    <string name="other_formats">その他の形式</string>
+    <string name="your_food_is_expiring">食べ物の賞味期限が切れてしまいます！</string>
+    <string name="notification_time">通知時間</string>
+    <string name="notification_time_desc">
+        毎日、食品のリストが記載された通知を受け取ります：\n
+        - 賞味期限切れ\n
+        - 現在の日付で賞味期限切れとなる食品\n
+        - 賞味期限が後１日で切れる食品
+    </string>
+    <string name="dynamic_colors">ダイナミックカラー</string>
     <string name="theme">テーマ</string>
-    <string name="light">光</string>
+    <string name="light">ライト</string>
     <string name="system">システム</string>
-    <string name="dark">暗い</string>
+    <string name="dark">ダーク</string>
     <string name="x_deleted">%1$sが削除されました</string>
-    <string name="undo">消去</string>
+    <string name="undo">元に戻す</string>
+    <string name="normal">通常</string>
+    <string name="bold">太字</string>
+    <string name="extra_bold">極太</string>
+    <string name="top_bar_font_style">上部バーのフォントスタイル</string>
+    <string name="behaviour">行動</string>
+    <string name="appearance">外観</string>
+    <string name="send_an_email">メールを送信</string>
+    <string name="contacts">連絡先</string>
+    <string name="contacts_text">このアプリケーションに関する詳細な情報を入手したい場合、またはフィードバックの送信、バグ報告、機能リクエスト、単に開発者に連絡したい場合は、次のボタンを使用してメールを送信してください。\nバグレポートや機能リクエストがある場合は、このアプリケーションのGitHubリポジトリでissueを開くこともできます。</string>
     <string name="list">リスト</string>
+    <string name="opening_date">開始日</string>
+    <string name="optional">任意</string>
+    <string name="time_span">期間</string>
+    <string name="please_enter_a_valid_number">有効な数値を入力してください</string>
+    <string name="ok">OK</string>
+    <string name="data_export_success">データは正常にエクスポートされました。</string>
+    <string name="data_export_error">データのエクスポート中にエラーが発生しました。</string>
+    <string name="export_data">データをエクスポート</string>
+    <string name="import_data">データをインポート</string>
+    <string name="data_exported">エクスポートされたデータ</string>
 
     <string-array name="example_foods">
         <item>卵</item>
@@ -58,7 +86,19 @@
         <item>牛乳</item>
         <item>ハム</item>
         <item>バター</item>
-        <item>キノコ</item>
+        <item>きのこ</item>
         <item>トマト</item>
     </string-array>
-    </resources>
+    <string-array name="screenshot_titles">
+        <item>食品を賞味期限順に並べ替え</item>
+        <item>開始日と期間を簡単に追加</item>
+        <item>動作と外観をカスタマイズ</item>
+        <item>オープンソース</item>
+        <item>ダークテーマ</item>
+        <item>ダイナミックカラー</item>
+    </string-array>
+    <string-array name="time_span">
+        <item>日後</item>
+        <item>ヶ月後</item>
+    </string-array>
+</resources>
