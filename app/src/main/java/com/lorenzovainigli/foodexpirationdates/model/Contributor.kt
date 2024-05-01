@@ -21,5 +21,7 @@ val contributors = listOf(
     Contributor(name = "Yusril A", username = "rasvanjaya21"),
     Contributor(name = "Максим", username = "gerasimov-mv"),
     Contributor(name = "ＷＩＮＺＯＲＴ", username = "mikropsoft"),
-    Contributor(username = "3limssmile")
+    Contributor(username = "3limssmile"),
+    Contributor(username = "ngocanhtve"),
+    Contributor(name = "kuragehime", username = "kuragehimekurara1")
 )
