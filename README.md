@@ -64,23 +64,13 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 
 <div align="center">
 
-![English default](https://img.shields.io/badge/English-default-blue?style=flat-square)
-![Arabic](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Far.json)
-![French](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Ffr.json)
-![German](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fde.json)
-![Hindi](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fhi.json)
-![Indonesian](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fin.json)
-![Italian](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fit.json)
-![Japanese](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fja.json)
-![Polish](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fpl.json)
-![Russian](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fru.json)
-![Spanish](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fes.json)
-![Turkish](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Ftr.json)
-![Vietnamese](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fraw.githubusercontent.com%2Florenzovngl%2FFoodExpirationDates%2Fmain%2Fshields%2Ftranslations%2Fvi.json)
+[![Translation status](https://hosted.weblate.org/widget/FoodExpirationDates/287x66-black.png)](https://hosted.weblate.org/engage/FoodExpirationDates/)
+
+[![Translation status](https://hosted.weblate.org/widget/FoodExpirationDates/horizontal-auto.svg)](https://hosted.weblate.org/engage/FoodExpirationDates/)
 
 </div>
 
-> New translations are welcome. If you want to add a new language to the app, or improve or review an existing one, please [open an issue](https://github.com/lorenzovngl/FoodExpirationDates/issues/new).
+Contribute to the translation of this project on [Hosted Weblate](https://hosted.weblate.org/engage/FoodExpirationDates/) or by [opening an issue](https://github.com/lorenzovngl/FoodExpirationDates/issues/new).
 
 ## 🏗️ Installation steps
 
@@ -143,6 +133,6 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 
 *Lorenzo*
 
-## Star History
+## ⭐ Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=lorenzovngl/FoodExpirationDates&type=Date)](https://star-history.com/#lorenzovngl/FoodExpirationDates&Date)
