@@ -58,7 +58,7 @@ class PreferencesRepository {
             context: Context,
             sharedPrefs: String = sharedPrefsName
         ): String {
-            return context.getSharedPreferences(sharedPrefs, ComponentActivity.MODE_PRIVATE)
+            return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
                 .getString(keyDateFormat, "d MMM") ?: "d MMM"
         }
 
@@ -67,7 +67,7 @@ class PreferencesRepository {
             sharedPrefs: String = sharedPrefsName,
             dateFormat: String
         ) {
-            return context.getSharedPreferences(sharedPrefs, ComponentActivity.MODE_PRIVATE)
+            return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
                 .edit().putString(keyDateFormat, dateFormat).apply()
         }
 
@@ -75,7 +75,7 @@ class PreferencesRepository {
             context: Context,
             sharedPrefs: String = sharedPrefsName
         ): Int {
-            return context.getSharedPreferences(sharedPrefs, ComponentActivity.MODE_PRIVATE)
+            return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
                 .getInt(keyNotificationTimeHour, 11)
         }
 
@@ -83,7 +83,7 @@ class PreferencesRepository {
             context: Context,
             sharedPrefs: String = sharedPrefsName
         ): Int {
-            return context.getSharedPreferences(sharedPrefs, ComponentActivity.MODE_PRIVATE)
+            return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
                 .getInt(keyNotificationTimeMinute, 0)
         }
 
@@ -93,7 +93,7 @@ class PreferencesRepository {
             hour: Int,
             minute: Int
         ) {
-            return context.getSharedPreferences(sharedPrefs, ComponentActivity.MODE_PRIVATE)
+            return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
                 .edit().putInt(keyNotificationTimeHour, hour)
                 .putInt(keyNotificationTimeMinute, minute).apply()
         }
@@ -103,7 +103,7 @@ class PreferencesRepository {
             sharedPrefs: String = sharedPrefsName,
         ): Int {
             try {
-                return context.getSharedPreferences(sharedPrefs, ComponentActivity.MODE_PRIVATE)
+                return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
                     .getInt(keyThemeMode, ThemeMode.SYSTEM.ordinal)
             } catch (e: Exception){
                 e.printStackTrace()
@@ -116,7 +116,7 @@ class PreferencesRepository {
             sharedPrefs: String = sharedPrefsName,
             themeMode: ThemeMode
         ) {
-            return context.getSharedPreferences(sharedPrefs, ComponentActivity.MODE_PRIVATE)
+            return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
                 .edit().putInt(keyThemeMode, themeMode.ordinal).apply()
         }
 
@@ -125,7 +125,7 @@ class PreferencesRepository {
             sharedPrefs: String = sharedPrefsName,
         ): Int{
             try {
-                return context.getSharedPreferences(sharedPrefs, ComponentActivity.MODE_PRIVATE)
+                return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
                     .getInt(keyTopBarFont,TopBarFont.NORMAL.ordinal)
             } catch (e: Exception){
                 e.printStackTrace()
@@ -138,7 +138,7 @@ class PreferencesRepository {
             sharedPrefs: String = sharedPrefsName,
             topBarFont: TopBarFont
         ) {
-            return context.getSharedPreferences(sharedPrefs, ComponentActivity.MODE_PRIVATE)
+            return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
                 .edit().putInt(keyTopBarFont, topBarFont.ordinal).apply()
         }
 
@@ -147,7 +147,7 @@ class PreferencesRepository {
             sharedPrefs: String = sharedPrefsName,
         ): Boolean {
             try {
-            return context.getSharedPreferences(sharedPrefs, ComponentActivity.MODE_PRIVATE)
+            return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
                 .getBoolean(keyDynamicColors, false)
             } catch (e: Exception){
                 e.printStackTrace()
@@ -160,7 +160,7 @@ class PreferencesRepository {
             sharedPrefs: String = sharedPrefsName,
             dynamicColorsEnabled: Boolean
         ) {
-            return context.getSharedPreferences(sharedPrefs, ComponentActivity.MODE_PRIVATE)
+            return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
                 .edit().putBoolean(keyDynamicColors, dynamicColorsEnabled).apply()
         }
     }

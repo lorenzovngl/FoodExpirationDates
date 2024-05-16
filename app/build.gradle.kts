@@ -106,7 +106,7 @@ android {
         buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.8"
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
     packaging {
         resources {
@@ -221,4 +221,10 @@ tasks.register<Copy>("copyAPKs") {
         includeEmptyDirs = false
     }
     into(layout.projectDirectory.dir("apk/${android.defaultConfig.versionCode}_${android.defaultConfig.versionName}"))
+}
+
+tasks.all {
+    if (name == "uploadCrashlyticsMappingFileFullRelease") {
+        dependsOn("processFullDebugGoogleServices")
+    }
 }

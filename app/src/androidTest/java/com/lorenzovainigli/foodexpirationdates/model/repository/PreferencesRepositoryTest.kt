@@ -26,7 +26,7 @@ internal class PreferencesRepositoryTest {
     @Test
     fun userDateFormatTest() {
         val sharedPrefs =
-            context.getSharedPreferences(testSharedPrefsName, ComponentActivity.MODE_PRIVATE)
+            context.getSharedPreferences(testSharedPrefsName, Context.MODE_PRIVATE)
         // Test the default value
         assertEquals(
             sharedPrefs.getString(
@@ -58,7 +58,7 @@ internal class PreferencesRepositoryTest {
     @Test
     fun userNotificationTimeHourTest() {
         val sharedPrefs =
-            context.getSharedPreferences(testSharedPrefsName, ComponentActivity.MODE_PRIVATE)
+            context.getSharedPreferences(testSharedPrefsName, Context.MODE_PRIVATE)
         // Test the default value
         assertEquals(sharedPrefs.getInt(PreferencesRepository.keyNotificationTimeHour, 11), 11)
         // Test the setter
@@ -83,7 +83,7 @@ internal class PreferencesRepositoryTest {
     @Test
     fun userThemeMode() {
         val sharedPrefs =
-            context.getSharedPreferences(testSharedPrefsName, ComponentActivity.MODE_PRIVATE)
+            context.getSharedPreferences(testSharedPrefsName, Context.MODE_PRIVATE)
         // Test the default value
         assertEquals(
             sharedPrefs.getInt(
@@ -118,7 +118,7 @@ internal class PreferencesRepositoryTest {
     @Test
     fun userDynamicColors() {
         val sharedPrefs =
-            context.getSharedPreferences(testSharedPrefsName, ComponentActivity.MODE_PRIVATE)
+            context.getSharedPreferences(testSharedPrefsName, Context.MODE_PRIVATE)
         // Test the default value
         assertEquals(
             sharedPrefs.getBoolean(
