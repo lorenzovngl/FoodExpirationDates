@@ -12,7 +12,8 @@ class ScreenshotItalian : Screenshot() {
         deviceConfig = PIXEL_5.copy(
             locale = "it"
         ),
-        theme = "android:Theme.Material.Light.NoActionBar"
+        theme = "android:Theme.Material.Light.NoActionBar",
+        useDeviceResolution = true
     )
 
     @Test

@@ -30,7 +30,7 @@ fun ScreenshotHeader(text: String) {
         val fontSize = text.length.let {
             when {
                 it > 50 -> 26.sp
-                it > 40 -> 32.sp
+                it > 30 -> 32.sp
                 else -> 36.sp
             }
         }

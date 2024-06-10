@@ -12,22 +12,9 @@ class ScreenshotHindi : Screenshot() {
         deviceConfig = PIXEL_5.copy(
             locale = "hi"
         ),
-        theme = "android:Theme.Material.Light.NoActionBar"
+        theme = "android:Theme.Material.Light.NoActionBar",
+        useDeviceResolution = true
     )
-
-    /*private val maxImageSize = 2_000
-
-    @Before
-    fun initMaxImageSize() {
-        maxImageSize.let {
-            app.cash.paparazzi.internal.ImageUtils::class.java.declaredFields.firstOrNull {
-                it.name == "THUMBNAIL_SIZE"
-            }?.let {
-                it.isAccessible = true
-                it.set(paparazzi, maxImageSize)
-            }
-        }
-    }*/
 
     @Test
     fun screen1MainActivity() {
