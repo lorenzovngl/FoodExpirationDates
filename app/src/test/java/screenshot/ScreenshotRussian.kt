@@ -5,12 +5,12 @@ import app.cash.paparazzi.Paparazzi
 import org.junit.Rule
 import org.junit.Test
 
-class ScreenshotSpanish : Screenshot() {
+class ScreenshotRussian : Screenshot() {
 
     @get:Rule
     val paparazzi = Paparazzi(
         deviceConfig = PIXEL_5.copy(
-            locale = "es"
+            locale = "ru"
         ),
         theme = "android:Theme.Material.Light.NoActionBar",
         useDeviceResolution = true

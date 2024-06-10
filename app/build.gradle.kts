@@ -188,6 +188,7 @@ dependencies {
     implementation(libs.splashscreen)
 
     implementation(libs.opencsv)
+    api(libs.guava)
 }
 
 if (!buildFoss){

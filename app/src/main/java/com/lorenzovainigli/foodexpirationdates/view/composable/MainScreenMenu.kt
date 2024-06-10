@@ -19,10 +19,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.util.OperationResult
-import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDatesViewModel
+import com.lorenzovainigli.foodexpirationdates.view.MainActivity
 
 data class MenuItem(
     @DrawableRes val iconId: Int,
@@ -31,21 +30,27 @@ data class MenuItem(
 )
 
 @Composable
-fun MainScreenMenu() {
-    val viewModel: ExpirationDatesViewModel = viewModel()
-    val exportTaskSuccess = viewModel.exportTaskSuccess.value
+fun MainScreenMenu(
+    activity: MainActivity? = null,
+) {
+    val viewModel = activity?.viewModel
+    val exportTaskSuccess = viewModel?.exportTaskSuccess?.value
     val operationResult = remember {
         mutableStateOf(OperationResult())
     }
-    val notifyExportTaskDone = viewModel.notifyExportTaskDone.value
+    val notifyExportTaskDone = viewModel?.notifyExportTaskDone?.value
     val context = LocalContext.current
     var isExpanded by remember {
         mutableStateOf(false)
     }
-    val filePickerLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.OpenDocument()
-    ) {
-        operationResult.value = viewModel.importData(context, it)
+    val filePickerLauncher = when (activity){
+        null -> null
+        else -> rememberLauncherForActivityResult(
+            contract = ActivityResultContracts.OpenDocument()
+        ) {
+            operationResult.value = viewModel?.importData(context, it)
+                ?: OperationResult(state = OperationResult.State.NOT_PERFORMED)
+        }
     }
     IconButton(
         onClick = { isExpanded = true }
@@ -67,7 +72,7 @@ fun MainScreenMenu() {
                 iconId = R.drawable.ic_export,
                 label = stringResource(R.string.export_data),
                 onClick = {
-                    viewModel.exportData(context)
+                    viewModel?.exportData(context)
                     isExpanded = false
                 }
             ),
@@ -75,7 +80,7 @@ fun MainScreenMenu() {
                 iconId = R.drawable.ic_import,
                 label = stringResource(R.string.import_data),
                 onClick = {
-                    filePickerLauncher.launch(arrayOf("*/*"))
+                    filePickerLauncher?.launch(arrayOf("*/*"))
                     isExpanded = false
                 }
             )
@@ -95,8 +100,8 @@ fun MainScreenMenu() {
             )
         }
     }
-    if (notifyExportTaskDone) {
-        if (exportTaskSuccess) {
+    if (notifyExportTaskDone == true) {
+        if (exportTaskSuccess == true) {
 //            SuccessDialog(
 //                onDismiss = {
 //                    viewModel.resetNotifyExportTaskDone()
