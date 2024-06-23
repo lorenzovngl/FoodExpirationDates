@@ -42,10 +42,13 @@ import com.lorenzovainigli.foodexpirationdates.GITHUB_URL
 import com.lorenzovainigli.foodexpirationdates.PLAY_STORE_URL
 import com.lorenzovainigli.foodexpirationdates.PRIVACY_POLICY_URL
 import com.lorenzovainigli.foodexpirationdates.R
+import com.lorenzovainigli.foodexpirationdates.WEBSITE_URL_EN
+import com.lorenzovainigli.foodexpirationdates.WEBSITE_URL_IT
 import com.lorenzovainigli.foodexpirationdates.model.contributors
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.composable.TextIconButton
 import com.lorenzovainigli.foodexpirationdates.view.composable.TextIconButtonData
+import java.util.Locale
 
 @Composable
 fun InfoScreen(
@@ -143,7 +146,11 @@ fun InfoScreen(
                 onClick = {
                     val sendIntent: Intent = Intent().apply {
                         action = Intent.ACTION_SEND
-                        putExtra(Intent.EXTRA_TEXT, PLAY_STORE_URL)
+                        putExtra(
+                            Intent.EXTRA_TEXT,
+                            if (Locale.getDefault().language == "it") WEBSITE_URL_IT
+                            else WEBSITE_URL_EN
+                        )
                         type = "text/plain"
                     }
                     val shareIntent = Intent.createChooser(sendIntent, null)
