@@ -2,7 +2,7 @@
 activity-compose = "1.9.0"
 agp = "8.5.0"
 androidx-test-core-ktx = "1.5.0"
-androidx-test-ext-junit = "1.1.5"
+androidx-test-ext-junit = "1.2.0"
 compose-bom = "2024.06.00"
 core-ktx = "1.13.1"
 dagger-hilt = "2.51.1"
