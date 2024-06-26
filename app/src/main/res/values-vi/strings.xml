@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Ngày thực phẩm hết hạn</string>
     <string name="app_name_short">Thực phẩm hết hạn</string>
@@ -35,7 +36,7 @@
     <string name="contributors_list_title">Người đóng góp</string>
     <string name="contributors_list_subtitle">Đây là những người đã đóng góp vào sự phát triển của ứng dụng này.</string>
     <string name="back">Trở lại</string>
-    <string name="no_items_found">Không tìm mặt hàng nào</string>
+    <string name="no_items_found">Không thấy mặt hàng nào</string>
     <string name="please_insert_one">Vui lòng chèn một</string>
     <string name="menu">Thực đơn</string>
     <string name="settings">Thiết đặt</string>
@@ -79,7 +80,6 @@
     <string name="export_data">Xuất dữ liệu</string>
     <string name="import_data">Nhập dữ liệu</string>
     <string name="data_exported">Đã xuất dữ liệu</string>
-
     <string-array name="example_foods">
         <item>Trứng</item>
         <item>Phô mai</item>
@@ -96,7 +96,7 @@
         <item>Nguồn mở</item>
         <item>Chủ đề tối</item>
         <item>Màu sắc năng động</item>
-</string-array>
+    </string-array>
     <string-array name="time_span">
         <item>Ngày</item>
         <item>Tháng</item>
