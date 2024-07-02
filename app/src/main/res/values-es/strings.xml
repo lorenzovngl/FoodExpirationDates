@@ -21,8 +21,9 @@
     <string name="write_a_review">Déjanos tu opinión</string>
     <string name="source_code">Código fuente</string>
     <string name="features">Características</string>
-    <string name="feature_list">- Muestra una lista con las fechas de caducidad de los alimentos, ordenadas cronológicamente de forma ascendente
-\n - Añade, edita y elimina artículos
+    <string name="feature_list">- Mostrar una lista con las fechas de caducidad de los alimentos en orden ascendente de tiempo
+\n - Agregar, editar y eliminar elementos
+\n - Recuperación de productos mediante escáner de código de barras y API Open Food Facts
 \n - Fecha de apertura
 \n - Notificaciones</string>
     <string name="support_this_project">Apoya este proyecto</string>
@@ -99,4 +100,11 @@
         <item>Días</item>
         <item>Meses</item>
     </string-array>
+    <string name="connection_error">Fallo en la conexión</string>
+    <string name="no_internet_connection">Sin conexión a Internet</string>
+    <string name="please_scan_a_barcode">Por favor escanee un código de barras</string>
+    <string name="product_not_found">Producto no encontrado</string>
+    <string name="retry">Reintentar</string>
+    <string name="scanning_error">Buscando errores</string>
+    <string name="getting_product_info">Obteniendo información del producto…</string>
 </resources>
