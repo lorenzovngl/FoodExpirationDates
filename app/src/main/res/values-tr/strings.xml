@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Food Expiration Dates</string>
     <string name="app_name_short">Food Expirations</string>
@@ -20,12 +21,10 @@
     <string name="write_a_review">Değerlendirme yaz</string>
     <string name="source_code">Kaynak kodu</string>
     <string name="features">Özellikler</string>
-    <string name="feature_list">
-        - Artan zaman sırasına göre yemek son kullanma tarihlerini içeren bir liste görüntüleyin\n
-        - Öğe ekleyin, düzenleyin ve silin\n
-        - Açılış tarihi\n
-        - Bildirimler
-    </string>
+    <string name="feature_list">- Artan zaman sırasına göre yemek son kullanma tarihlerini içeren bir liste görüntüleyin
+\n - Öğe ekleyin, düzenleyin ve silin
+\n - Açılış tarihi
+\n - Bildirimler</string>
     <string name="support_this_project">Bu projeyi destekle</string>
     <string name="report_a_bug">Hata bildir</string>
     <string name="version_x">Sürüm %1$s</string>
@@ -79,7 +78,6 @@
     <string name="export_data">Verileri dışa aktar</string>
     <string name="import_data">Verileri içe aktar</string>
     <string name="data_exported">Veriler dışa aktarıldı</string>
-
     <string-array name="example_foods">
         <item>Yumurtalar</item>
         <item>Peynir</item>
