@@ -21,12 +21,10 @@
     <string name="write_a_review">Déjanos tu opinión</string>
     <string name="source_code">Código fuente</string>
     <string name="features">Características</string>
-    <string name="feature_list">
-        - Muestra una lista con las fechas de caducidad de los alimentos, ordenadas cronológicamente de forma ascendente\n
-        - Añade, edita y elimina artículos\n
-        - Fecha de apertura\n
-        - Notificaciones
-    </string>
+    <string name="feature_list">- Muestra una lista con las fechas de caducidad de los alimentos, ordenadas cronológicamente de forma ascendente
+\n - Añade, edita y elimina artículos
+\n - Fecha de apertura
+\n - Notificaciones</string>
     <string name="support_this_project">Apoya este proyecto</string>
     <string name="report_a_bug">Reportar un error</string>
     <string name="version_x">Versión %1$s</string>
