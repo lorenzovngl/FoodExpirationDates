@@ -12,8 +12,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.google.firebase.crashlytics.ktx.crashlytics
-import com.google.firebase.ktx.Firebase
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.util.PermissionUtils
@@ -33,7 +31,7 @@ class BarcodeScannerActivity: ComponentActivity() {
             activity = this,
             permission = Manifest.permission.CAMERA
         )
-        try {
+//        try {
             val context = this
             setContent {
                 val prefsViewModel: PreferencesViewModel = viewModel()
@@ -60,10 +58,13 @@ class BarcodeScannerActivity: ComponentActivity() {
                     }
                 }
             }
-        } catch (e: Exception){
-            e.printStackTrace()
-            Firebase.crashlytics.log("Exception: $e")
-        }
+//        } catch (e: Exception){
+//            e.printStackTrace()
+//            if (BuildConfig.FLAVOR != "foss") {
+//                com.google.firebase.crashlytics.FirebaseCrashlytics.getInstance()
+//                    .log("Exception: $e")
+//            }
+//        }
     }
 
 }
