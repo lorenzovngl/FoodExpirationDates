@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Dates d\'expiration des aliments</string>
     <string name="app_name_short">Exp. des aliments</string>
@@ -20,12 +21,10 @@
     <string name="write_a_review">Écrire un avis</string>
     <string name="source_code">Code source</string>
     <string name="features">Caractéristiques</string>
-    <string name="feature_list">
-        - Afficher une liste d\'aliments avec des dates d\'expiration dans l\'ordre croissant du temps\n
-        - Ajouter, modifier et supprimer des éléments\n
-        - Date d\'ouverture\n
-        - Notifications
-    </string>
+    <string name="feature_list">- Afficher une liste d\'aliments avec des dates d\'expiration dans l\'ordre croissant du temps
+\n - Ajouter, modifier et supprimer des éléments
+\n - Date d\'ouverture
+\n - Notifications</string>
     <string name="support_this_project">Soutenir ce projet</string>
     <string name="report_a_bug">Signaler un bogue</string>
     <string name="version_x">Version %1$s</string>
@@ -65,7 +64,6 @@
     <string name="optional">facultatif</string>
     <string name="time_span">durée</string>
     <string name="please_enter_a_valid_number">Veuillez entrer un numéro valide</string>
-
     <string-array name="example_foods">
         <item>Œufs</item>
         <item>Fromage</item>
