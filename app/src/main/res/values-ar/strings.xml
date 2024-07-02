@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">تواريخ انتهاء صلاحية الطعام</string>
     <string name="app_name_short">انتهاء صلاحية الطعام</string>
@@ -20,11 +21,9 @@
     <string name="write_a_review">أكتب مراجعة</string>
     <string name="source_code">مصدر الرمز</string>
     <string name="features">سمات</string>
-    <string name="feature_list">
-        - اعرض قائمة بتواريخ انتهاء صلاحية الطعام بترتيب زمني تصاعدي.\n
-        - إضافة وتحرير وحذف العناصر.\n
-        - إشعارات.
-    </string>
+    <string name="feature_list">- اعرض قائمة بتواريخ انتهاء صلاحية الطعام بترتيب زمني تصاعدي.
+\n - إضافة وتحرير وحذف العناصر.
+\n - إشعارات.</string>
     <string name="support_this_project">ادعم هذا المشروع</string>
     <string name="report_a_bug">الإبلاغ عن خطأ</string>
     <string name="version_x">الإصدار٪ 1 $ s</string>
@@ -47,7 +46,6 @@
     <string name="light">ضوء</string>
     <string name="system">نظام</string>
     <string name="dark">مظلم</string>
-
     <string-array name="example_foods">
         <item>بيض</item>
         <item>جبنه</item>
