@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Food Expiration Dates</string>
     <string name="app_name_short">Food Expirations</string>
@@ -20,11 +21,9 @@
     <string name="write_a_review">Tulis ulasan</string>
     <string name="source_code">Kode sumber</string>
     <string name="features">Fitur - fitur</string>
-    <string name="feature_list">
-        - Menampilkan daftar tanggal kedaluwarsa makanan dalam urutan waktu yang terbaru\n
-        - Menambahkan, memperbarui dan menghapus item\n
-        - Notifikasi
-    </string>
+    <string name="feature_list">- Menampilkan daftar tanggal kedaluwarsa makanan dalam urutan waktu yang terbaru
+\n - Menambahkan, memperbarui dan menghapus item
+\n - Notifikasi</string>
     <string name="support_this_project">Dukung proyek ini</string>
     <string name="report_a_bug">Laporkan bug</string>
     <string name="version_x">Versi %1$s</string>
@@ -59,7 +58,6 @@
     <string name="appearance">Tampilan</string>
     <string name="send_an_email">Kirim email</string>
     <string name="contacts_text">Jika anda ingin mendapatkan informasi lebih lanjut tentang aplikasi ini, kirim umpan balik, laporkan bug, request fitur, atau hubungi pengembang, silakan kirim email menggunakan tombol berikut.</string>
-
     <string-array name="example_foods">
         <item>Telur</item>
         <item>Keju</item>
