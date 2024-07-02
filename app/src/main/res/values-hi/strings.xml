@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">खाद्य सामग्री की समाप्ति तिथियाँ</string>
     <string name="app_name_short">खाद्य सामग्री की समाप्ति</string>
@@ -20,11 +21,9 @@
     <string name="write_a_review">एक समीक्षा लिखें</string>
     <string name="source_code">स्रोत कोड</string>
     <string name="features">विशेषताएं</string>
-    <string name="feature_list">
-        - खाद्य समाप्ति तिथियों की सूची को समय के आरोहण के क्रम में प्रदर्शित करें।\n
-        - आइटम जोड़ें, संपादित करें और हटाएं।\n
-        - सूचनाएं।
-    </string>
+    <string name="feature_list">- खाद्य समाप्ति तिथियों की सूची को समय के आरोहण के क्रम में प्रदर्शित करें।
+\n - आइटम जोड़ें, संपादित करें और हटाएं।
+\n - सूचनाएं।</string>
     <string name="support_this_project">इस project का समर्थन करें</string>
     <string name="report_a_bug">एक bug की रिपोर्ट करें</string>
     <string name="version_x">%1$s संस्करण</string>
@@ -40,7 +39,6 @@
     <string name="choose_the_date_format">तारीख का प्रारूप चुनें</string>
     <string name="locale_formats">स्थानीय प्रारूप</string>
     <string name="other_formats">अन्य प्रारूप</string>
-
     <string-array name="example_foods">
         <item>अंडे</item>
         <item>पनीर</item>
