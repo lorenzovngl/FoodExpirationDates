@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Food Expiration Dates</string>
     <string name="app_name_short">Food Expirations</string>
@@ -20,12 +21,10 @@
     <string name="write_a_review">レビューを書く</string>
     <string name="source_code">ソースコード</string>
     <string name="features">特徴</string>
-    <string name="feature_list">
-        - 食品の賞味期限を期限の短い順に一覧表示\n
-        - 食品の追加、編集、削除\n
-        - 開始日\n
-        - 通知
-    </string>
+    <string name="feature_list">- 食品の賞味期限を期限の短い順に一覧表示
+\n - 食品の追加、編集、削除
+\n - 開始日
+\n - 通知</string>
     <string name="support_this_project">プロジェクトを支援</string>
     <string name="report_a_bug">バグを報告</string>
     <string name="version_x">バージョン %1$s</string>
@@ -79,7 +78,6 @@
     <string name="export_data">データをエクスポート</string>
     <string name="import_data">データをインポート</string>
     <string name="data_exported">エクスポートされたデータ</string>
-
     <string-array name="example_foods">
         <item>卵</item>
         <item>チーズ</item>
