@@ -24,6 +24,7 @@
     <string name="feature_list">
         - Visualizza un elenco con le date di scadenza degli alimenti in ordine crescente di tempo\n
         - Aggiungi, modifica ed elimina elementi\n
+        - Recupero di prodotti tramite scansione di codici a barre e API di Open Food Facts\n
         - Data di apertura\n
         - Notifiche
     </string>

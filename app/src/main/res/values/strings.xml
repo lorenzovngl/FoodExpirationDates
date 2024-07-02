@@ -23,6 +23,7 @@
     <string name="feature_list">
         - Display a list with food expiration dates in ascending time order\n
         - Add, edit and delete items\n
+        - Product retrieval using barcode scanner and Open Food Facts API\n
         - Opening date\n
         - Notifications
     </string>

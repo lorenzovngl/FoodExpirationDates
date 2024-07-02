@@ -47,6 +47,7 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 
 - Display a list of food with their expiration dates in ascending order of time
 - Add, edit and delete items
+- Product retrieval using barcode scanner and [Open Food Facts](https://world.openfoodfacts.org/) API
 - Opening date
 - Notifications
 
