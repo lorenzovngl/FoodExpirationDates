@@ -23,6 +23,7 @@
     <string name="features">特徴</string>
     <string name="feature_list">- 食品の賞味期限を期限の短い順に一覧表示
 \n - 食品の追加、編集、削除
+\n - バーコード スキャナーとOpen Food Facts APIを使った商品検索
 \n - 開始日
 \n - 通知</string>
     <string name="support_this_project">プロジェクトを支援</string>
@@ -99,4 +100,11 @@
         <item>日後</item>
         <item>ヶ月後</item>
     </string-array>
+    <string name="please_scan_a_barcode">バーコードをスキャンしてください</string>
+    <string name="connection_error">接続エラー</string>
+    <string name="no_internet_connection">インターネットに接続されていません</string>
+    <string name="product_not_found">商品が見つかりません</string>
+    <string name="getting_product_info">商品情報を取得しています…</string>
+    <string name="retry">やり直す</string>
+    <string name="scanning_error">スキャンエラー</string>
 </resources>
