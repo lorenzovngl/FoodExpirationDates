@@ -23,7 +23,8 @@
     <string name="features">Funkcje</string>
     <string name="feature_list">- Wyświetlanie listy z datami ważności żywności w rosnącej kolejności czasowej
 \n - Dodawanie, edytowanie i usuwanie produktów
-\n - Data otwarcia
+\n - Rozpoznawanie produktów za pomocą czytnika kodów kreskowych i API Open Food Facts
+\n - Data otwarcia produktu
 \n - Powiadomienia</string>
     <string name="support_this_project">Wesprzyj ten projekt</string>
     <string name="report_a_bug">Zgłoś błąd</string>
@@ -97,4 +98,11 @@
         <item>Dni</item>
         <item>Miesiące</item>
     </string-array>
+    <string name="connection_error">Błąd połączenia</string>
+    <string name="getting_product_info">Pobieranie informacji o produkcie…</string>
+    <string name="no_internet_connection">Brak połączenia z Internetem</string>
+    <string name="please_scan_a_barcode">Prosimy zeskanować kod kreskowy</string>
+    <string name="product_not_found">Nie znaleziono produktu</string>
+    <string name="scanning_error">Błąd podczas skanowania</string>
+    <string name="retry">Spróbuj ponownie</string>
 </resources>
