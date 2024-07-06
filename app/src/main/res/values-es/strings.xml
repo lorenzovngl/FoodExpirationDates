@@ -46,19 +46,17 @@
     <string name="locale_formats">Formatos locales</string>
     <string name="other_formats">Otros formatos</string>
     <string name="notification_time">Hora de notificación</string>
-    <string name="notification_time_desc">
-        Cada día recibirás una notificación con la lista de tus alimentos:\n
-        - ya caducados\n
-        - que caducan en el día en curso\n
-        - a los que les queda un día para caducar.\n
-    </string>
+    <string name="notification_time_desc">Cada día recibirás una notificación con una lista de tus artículos:
+\n - que ya han caducado
+\n - que caducan en la fecha actual
+\n - a los que les queda un día para la fecha de caducidad.</string>
     <string name="dynamic_colors">Colores dinámicos</string>
     <string name="theme">Tema</string>
     <string name="light">Claro</string>
     <string name="system">Sistema</string>
     <string name="dark">Oscuro</string>
     <string name="x_deleted">%1$s eliminado</string>
-    <string name="undo">Cancelar</string>
+    <string name="undo">Deshacer</string>
     <string name="normal">Normal</string>
     <string name="bold">Negrita</string>
     <string name="extra_bold">Negrita extra</string>
@@ -105,6 +103,6 @@
     <string name="please_scan_a_barcode">Por favor escanee un código de barras</string>
     <string name="product_not_found">Producto no encontrado</string>
     <string name="retry">Reintentar</string>
-    <string name="scanning_error">Buscando errores</string>
+    <string name="scanning_error">Error al escanear</string>
     <string name="getting_product_info">Obteniendo información del producto…</string>
 </resources>
