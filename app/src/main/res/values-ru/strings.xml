@@ -21,12 +21,10 @@
     <string name="write_a_review">Написать отзыв</string>
     <string name="source_code">Исходный код</string>
     <string name="features">Особенности</string>
-    <string name="feature_list">
-        - Отображение списков со сроками годности продуктов в порядке возрастания\n
-        - Добавление, редактирование и удаление элементов\n
-        - Дата открытия\n
-        - Уведомления
-    </string>
+    <string name="feature_list">- Отображение списков со сроками годности продуктов в порядке возрастания
+\n - Добавление, редактирование и удаление элементов
+\n - Дата открытия
+\n - Уведомления</string>
     <string name="support_this_project">Поддержать этот проект</string>
     <string name="report_a_bug">Сообщить об ошибке</string>
     <string name="version_x">Версия %1$s</string>
@@ -80,7 +78,6 @@
     <string name="export_data">Экспорт данных</string>
     <string name="import_data">Импорт данных</string>
     <string name="data_exported">Данные экспортированы</string>
-
     <string-array name="example_foods">
         <item>Яйца</item>
         <item>Сыр</item>

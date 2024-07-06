@@ -21,12 +21,11 @@
     <string name="write_a_review">Déjanos tu opinión</string>
     <string name="source_code">Código fuente</string>
     <string name="features">Características</string>
-    <string name="feature_list">
-        - Muestra una lista con las fechas de caducidad de los alimentos, ordenadas cronológicamente de forma ascendente\n
-        - Añade, edita y elimina artículos\n
-        - Fecha de apertura\n
-        - Notificaciones
-    </string>
+    <string name="feature_list">- Mostrar una lista con las fechas de caducidad de los alimentos en orden ascendente de tiempo
+\n - Agregar, editar y eliminar elementos
+\n - Recuperación de productos mediante escáner de código de barras y API Open Food Facts
+\n - Fecha de apertura
+\n - Notificaciones</string>
     <string name="support_this_project">Apoya este proyecto</string>
     <string name="report_a_bug">Reportar un error</string>
     <string name="version_x">Versión %1$s</string>
@@ -47,19 +46,17 @@
     <string name="locale_formats">Formatos locales</string>
     <string name="other_formats">Otros formatos</string>
     <string name="notification_time">Hora de notificación</string>
-    <string name="notification_time_desc">
-        Cada día recibirás una notificación con la lista de tus alimentos:\n
-        - ya caducados\n
-        - que caducan en el día en curso\n
-        - a los que les queda un día para caducar.\n
-    </string>
+    <string name="notification_time_desc">Cada día recibirás una notificación con una lista de tus artículos:
+\n - que ya han caducado
+\n - que caducan en la fecha actual
+\n - a los que les queda un día para la fecha de caducidad.</string>
     <string name="dynamic_colors">Colores dinámicos</string>
     <string name="theme">Tema</string>
     <string name="light">Claro</string>
     <string name="system">Sistema</string>
     <string name="dark">Oscuro</string>
     <string name="x_deleted">%1$s eliminado</string>
-    <string name="undo">Cancelar</string>
+    <string name="undo">Deshacer</string>
     <string name="normal">Normal</string>
     <string name="bold">Negrita</string>
     <string name="extra_bold">Negrita extra</string>
@@ -101,4 +98,11 @@
         <item>Días</item>
         <item>Meses</item>
     </string-array>
+    <string name="connection_error">Fallo en la conexión</string>
+    <string name="no_internet_connection">Sin conexión a Internet</string>
+    <string name="please_scan_a_barcode">Por favor escanee un código de barras</string>
+    <string name="product_not_found">Producto no encontrado</string>
+    <string name="retry">Reintentar</string>
+    <string name="scanning_error">Error al escanear</string>
+    <string name="getting_product_info">Obteniendo información del producto…</string>
 </resources>

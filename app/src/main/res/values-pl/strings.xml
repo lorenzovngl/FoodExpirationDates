@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Food Expiration Dates</string>
     <string name="app_name_short">Food Expirations</string>
@@ -20,10 +21,11 @@
     <string name="write_a_review">Wystaw opinię</string>
     <string name="source_code">Kod źródłowy</string>
     <string name="features">Funkcje</string>
-    <string name="feature_list">                               - Wyświetlanie listy z datami ważności żywności w rosnącej kolejności czasowej\n
-        - Dodawanie, edytowanie i usuwanie produktów\n
-        - Data otwarcia\n
-        - Powiadomienia</string>
+    <string name="feature_list">- Wyświetlanie listy z datami ważności żywności w rosnącej kolejności czasowej
+\n - Dodawanie, edytowanie i usuwanie produktów
+\n - Rozpoznawanie produktów za pomocą czytnika kodów kreskowych i API Open Food Facts
+\n - Data otwarcia produktu
+\n - Powiadomienia</string>
     <string name="support_this_project">Wesprzyj ten projekt</string>
     <string name="report_a_bug">Zgłoś błąd</string>
     <string name="version_x">Wersja %1$s</string>
@@ -75,7 +77,6 @@
     <string name="export_data">Eksportuj dane</string>
     <string name="import_data">Importuj dane</string>
     <string name="data_exported">Wyeksportowane dane</string>
-
     <string-array name="example_foods">
         <item>Jaja</item>
         <item>Ser</item>
@@ -97,4 +98,11 @@
         <item>Dni</item>
         <item>Miesiące</item>
     </string-array>
+    <string name="connection_error">Błąd połączenia</string>
+    <string name="getting_product_info">Pobieranie informacji o produkcie…</string>
+    <string name="no_internet_connection">Brak połączenia z Internetem</string>
+    <string name="please_scan_a_barcode">Prosimy zeskanować kod kreskowy</string>
+    <string name="product_not_found">Nie znaleziono produktu</string>
+    <string name="scanning_error">Błąd podczas skanowania</string>
+    <string name="retry">Spróbuj ponownie</string>
 </resources>
