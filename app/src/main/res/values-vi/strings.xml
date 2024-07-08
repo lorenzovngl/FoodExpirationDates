@@ -22,7 +22,8 @@
     <string name="source_code">Mã nguồn</string>
     <string name="features">Đặc trưng</string>
     <string name="feature_list">- Hiển thị danh sách hạn sử dụng của thực phẩm theo thứ tự thời gian tăng dần
-\n - Thêm, chỉnh sửa và xóa các mặt hàng
+\n - Thêm, chỉnh sửa và xóa các mục
+\n - Truy xuất sản phẩm bằng máy quét mã vạch và API Open Food Facts
 \n - Ngày mở hàng
 \n - Thông báo</string>
     <string name="support_this_project">Hỗ trợ dự án này</string>
@@ -99,4 +100,11 @@
         <item>Ngày</item>
         <item>Tháng</item>
     </string-array>
+    <string name="no_internet_connection">Không có kết nối Internet</string>
+    <string name="please_scan_a_barcode">Vui lòng quét mã vạch</string>
+    <string name="product_not_found">Không thấy sản phẩm</string>
+    <string name="retry">Thử lại</string>
+    <string name="connection_error">Lỗi kết nối</string>
+    <string name="getting_product_info">Đang lấy thông tin sản phẩm…</string>
+    <string name="scanning_error">Lỗi quét</string>
 </resources>
