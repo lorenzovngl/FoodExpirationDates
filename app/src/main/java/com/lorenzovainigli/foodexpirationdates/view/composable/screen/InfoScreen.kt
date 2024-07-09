@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
@@ -36,6 +37,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.DEVELOPER_EMAIL
 import com.lorenzovainigli.foodexpirationdates.GITHUB_URL
@@ -44,6 +46,7 @@ import com.lorenzovainigli.foodexpirationdates.PRIVACY_POLICY_URL
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.WEBSITE_URL_EN
 import com.lorenzovainigli.foodexpirationdates.WEBSITE_URL_IT
+import com.lorenzovainigli.foodexpirationdates.model.Platform
 import com.lorenzovainigli.foodexpirationdates.model.contributors
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.composable.TextIconButton
@@ -227,7 +230,7 @@ fun ContributorsList(
 ) {
     val contributorsText = remember {
         contributors.joinToString(separator = "\n") {
-            "${it.name} (@${it.username})".asListItem()
+            "${it.name} - ${it.platform.url.substring(0, 1)}/@${it.username}".asListItem()
         }
     }
     Column(modifier = modifier.fillMaxWidth()) {
@@ -240,8 +243,18 @@ fun ContributorsList(
         Text(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 16.dp, bottom = 8.dp),
+                .padding(top = 16.dp, bottom = 4.dp),
             text = stringResource(id = R.string.contributors_list_subtitle)
+        )
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 4.dp),
+            text = Platform.entries.joinToString(" | ") {
+                "(${it.url.substring(0, 1)}) ${it.url}"
+            },
+            fontSize = 12.sp,
+            color = Color.Gray
         )
         Text(
             modifier = Modifier.fillMaxWidth(),
@@ -250,7 +263,7 @@ fun ContributorsList(
     }
 }
 
-private fun String.asListItem() = "  ● $this"
+private fun String.asListItem() = "  • $this"
 
 @PreviewLightDark
 @Composable
@@ -265,5 +278,9 @@ fun InfoScreenPreview() {
 @Preview(showBackground = true)
 @Composable
 fun ContributorsListPreview() {
-    ContributorsList()
+    FoodExpirationDatesTheme {
+        Surface (modifier = Modifier.fillMaxWidth()) {
+            ContributorsList()
+        }
+    }
 }
