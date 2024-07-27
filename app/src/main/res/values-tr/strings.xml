@@ -23,6 +23,7 @@
     <string name="features">Özellikler</string>
     <string name="feature_list">- Artan zaman sırasına göre yemek son kullanma tarihlerini içeren bir liste görüntüleyin
 \n - Öğe ekleyin, düzenleyin ve silin
+\n - Barkod tarayıcı ve Open Food Facts API kullanarak ürün arayın
 \n - Açılış tarihi
 \n - Bildirimler</string>
     <string name="support_this_project">Bu projeyi destekle</string>
@@ -99,4 +100,11 @@
         <item>Gün</item>
         <item>Ay</item>
     </string-array>
+    <string name="connection_error">Bağlantı hatası</string>
+    <string name="please_scan_a_barcode">Lütfen bir barkod tarayın</string>
+    <string name="product_not_found">Ürün bulunamadı</string>
+    <string name="getting_product_info">Ürün bilgileri alınıyor…</string>
+    <string name="no_internet_connection">İnternet bağlantısı yok</string>
+    <string name="retry">Yeniden dene</string>
+    <string name="scanning_error">Tarama hatası</string>
 </resources>
