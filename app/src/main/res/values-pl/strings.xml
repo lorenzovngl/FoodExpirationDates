@@ -101,7 +101,7 @@
     <string name="connection_error">Błąd połączenia</string>
     <string name="getting_product_info">Pobieranie informacji o produkcie…</string>
     <string name="no_internet_connection">Brak połączenia z Internetem</string>
-    <string name="please_scan_a_barcode">Prosimy zeskanować kod kreskowy</string>
+    <string name="please_scan_a_barcode">Zeskanuj kod kreskowy produktu</string>
     <string name="product_not_found">Nie znaleziono produktu</string>
     <string name="scanning_error">Błąd podczas skanowania</string>
     <string name="retry">Spróbuj ponownie</string>
