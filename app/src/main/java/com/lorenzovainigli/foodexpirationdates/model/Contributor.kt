@@ -31,5 +31,6 @@ val contributors = listOf(
     Contributor(username = "ngocanhtve"),
     Contributor(name = "kuragehime", username = "kuragehimekurara1"),
     Contributor(name = "gallegonovato", username = "gallegonovato", platform = Platform.WEBLATE),
-    Contributor(name = "Eryk Michalak", username = "gnu-ewm", platform = Platform.WEBLATE)
+    Contributor(name = "Eryk Michalak", username = "gnu-ewm", platform = Platform.WEBLATE),
+    Contributor(name = "Oğuz Ersen", username = "oersen")
 )

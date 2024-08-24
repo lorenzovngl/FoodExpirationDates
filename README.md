@@ -120,6 +120,7 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 <a href="https://github.com/kuragehimekurara1"><img src="https://avatars.githubusercontent.com/kuragehimekurara1" alt="@kuragehimekurara1" height="32" width="32"></a>
 <a href="https://hosted.weblate.org/user/gallegonovato/"><img src="https://hosted.weblate.org/avatar/128/gallegonovato.png" alt="@gallegonovato" height="32" width="32"></a>
 <a href="https://hosted.weblate.org/user/gnu-ewm/"><img src="https://hosted.weblate.org/avatar/128/gnu-ewm.png" alt="@gnu-ewm" height="32" width="32"></a>
+<a href="https://github.com/oersen"><img src="https://avatars.githubusercontent.com/oersen" alt="@oersen" height="32" width="32"></a>
 
 ## ❤️ Support
 
