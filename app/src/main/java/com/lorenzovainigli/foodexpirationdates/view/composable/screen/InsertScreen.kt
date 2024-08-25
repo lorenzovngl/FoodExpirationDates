@@ -60,6 +60,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
@@ -145,21 +146,23 @@ fun InsertScreen(
                     capitalization = KeyboardCapitalization.Sentences
                 )
             )
-            IconButton(
-                modifier = Modifier.padding(start = 8.dp),
-                onClick = {
-                    startForResult?.launch(Intent(context, BarcodeScannerActivity::class.java))
-                },
-                colors = IconButtonDefaults.iconButtonColors(
-                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer
-                ),
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_barcode_scan),
-                    contentDescription = stringResource(id = R.string.back),
-                    tint = MaterialTheme.colorScheme.primary
-                )
+            if (BuildConfig.FLAVOR == "full") {
+                IconButton(
+                    modifier = Modifier.padding(start = 8.dp),
+                    onClick = {
+                        startForResult?.launch(Intent(context, BarcodeScannerActivity::class.java))
+                    },
+                    colors = IconButtonDefaults.iconButtonColors(
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+                    ),
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_barcode_scan),
+                        contentDescription = stringResource(id = R.string.back),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
             }
         }
         Spacer(modifier = Modifier.height(16.dp))

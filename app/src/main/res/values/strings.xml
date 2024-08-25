@@ -105,6 +105,8 @@
         <item>Dark theme</item>
         <item>Dynamic colors</item>
     </string-array>
+    <string name="screenshot_titles_barcode_scanner">Barcode scanner</string>
+    <string name="screenshot_titles_made_with_heart">Made with ❤️</string>
     <string-array name="time_span">
         <item>Days</item>
         <item>Months</item>

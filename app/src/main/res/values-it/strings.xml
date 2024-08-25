@@ -106,6 +106,7 @@
         <item>Tema scuro</item>
         <item>Colori dinamici</item>
     </string-array>
+    <string name="screenshot_titles_barcode_scanner">Scanner di codici a barre</string>
     <string-array name="time_span">
         <item>Giorni</item>
         <item>Mesi</item>

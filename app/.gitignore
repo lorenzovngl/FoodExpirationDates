@@ -1,4 +1,4 @@
 /build
 /release
 google-services.json
-/src/test/snapshots/
+/src/test*/snapshots/

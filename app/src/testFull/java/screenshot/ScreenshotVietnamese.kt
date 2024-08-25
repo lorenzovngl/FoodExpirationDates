@@ -5,12 +5,12 @@ import app.cash.paparazzi.Paparazzi
 import org.junit.Rule
 import org.junit.Test
 
-class ScreenshotEnglish : Screenshot() {
+class ScreenshotVietnamese : Screenshot() {
 
     @get:Rule
     val paparazzi = Paparazzi(
         deviceConfig = PIXEL_5.copy(
-            locale = "en"
+            locale = "vi"
         ),
         theme = "android:Theme.Material.Light.NoActionBar",
         useDeviceResolution = true
@@ -46,4 +46,13 @@ class ScreenshotEnglish : Screenshot() {
         super.screen6DynamicColors(paparazzi)
     }
 
+    @Test
+    fun screen7BarcodeScanner(){
+        super.screen7BarcodeScanner(paparazzi)
+    }
+
+    @Test
+    fun screen8MadeWithHeart(){
+        super.screen8MadeWithHeart(paparazzi)
+    }
 }

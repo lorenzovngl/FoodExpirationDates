@@ -192,21 +192,21 @@ dependencies {
     api(libs.guava)
 
     // Camera
-    implementation(libs.androidx.camera.core)
-    implementation(libs.androidx.camera.camera2)
-    implementation(libs.androidx.camera.lifecycle)
-    implementation(libs.androidx.camera.view)
+    "fullImplementation"(libs.androidx.camera.core)
+    "fullImplementation"(libs.androidx.camera.camera2)
+    "fullImplementation"(libs.androidx.camera.lifecycle)
+    "fullImplementation"(libs.androidx.camera.view)
 
     // ML Kit Barcode scanner
-    implementation(libs.androidx.camera.mlkit.vision)
-    implementation(libs.barcode.scanning)
+    "fullImplementation"(libs.androidx.camera.mlkit.vision)
+    "fullImplementation"(libs.barcode.scanning)
 
     // Retrofit
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
+    "fullImplementation"(libs.retrofit)
+    "fullImplementation"(libs.converter.gson)
 
     // Coil
-    implementation(libs.coil.compose)
+    "fullImplementation"(libs.coil.compose)
 }
 
 if (!buildFoss){

@@ -1,6 +1,5 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable.screen
 
-import android.app.Activity
 import android.util.Log
 import androidx.camera.mlkit.vision.MlKitAnalyzer
 import androidx.camera.view.CameraController
