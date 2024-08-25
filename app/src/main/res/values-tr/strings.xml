@@ -107,4 +107,6 @@
     <string name="no_internet_connection">İnternet bağlantısı yok</string>
     <string name="retry">Yeniden dene</string>
     <string name="scanning_error">Tarama hatası</string>
+    <string name="screenshot_titles_barcode_scanner">Barkod tarayıcı</string>
+    <string name="screenshot_titles_made_with_heart">❤️ ile yapıldı</string>
 </resources>
