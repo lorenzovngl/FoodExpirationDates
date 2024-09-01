@@ -98,4 +98,10 @@
         <item>Tage</item>
         <item>Monate</item>
     </string-array>
+    <string name="connection_error">Verbindungsfehler</string>
+    <string name="no_internet_connection">Keine Internetverbindung</string>
+    <string name="product_not_found">Produkt nicht gefunden</string>
+    <string name="retry">Wiederholen</string>
+    <string name="contacts">Kontakte</string>
+    <string name="screenshot_titles_made_with_heart">Hergestellt mit ❤️</string>
 </resources>
