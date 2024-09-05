@@ -107,4 +107,6 @@
     <string name="getting_product_info">商品情報を取得しています…</string>
     <string name="retry">やり直す</string>
     <string name="scanning_error">スキャンエラー</string>
+    <string name="screenshot_titles_barcode_scanner">バーコードスキャナー</string>
+    <string name="screenshot_titles_made_with_heart">♥で作られました</string>
 </resources>

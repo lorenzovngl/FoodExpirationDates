@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">食物有效期限</string>
+    <string name="n_days_ago">%1$d 天前</string>
+    <string name="yesterday">昨天</string>
+    <string name="today">今天</string>
+    <string name="tomorrow">明天</string>
+    <string name="in_n_days">%1$d 天後</string>
+    <string name="edit_item">編輯物品</string>
+    <string name="add_item">新增物品</string>
+    <string name="app_name_short">食物有效期限</string>
+    <string name="food_name">食物名稱</string>
+    <string name="expiration_date">到期日</string>
+    <string name="please_select_a_date">請選擇日期</string>
+    <string name="please_enter_a_food_name">請輸入食物名稱</string>
+    <string name="insert">插入</string>
+    <string name="update">更新</string>
+    <string name="cancel">取消</string>
+    <string name="share">分享</string>
+    <string name="leave_a_star_on_github">在 GitHub 上留下星星</string>
+    <string name="source_code">原始碼</string>
+    <string name="features">特點</string>
+    <string name="report_a_bug">報告錯誤</string>
+    <string name="write_a_review">撰寫評論</string>
+    <string name="feature_list">- 按時間升序顯示食物有效日期的列表
+\n - 新增、編輯和刪除物品
+\n - 使用條碼掃描器和 Open Food Facts API 檢索產品
+\n - 開啟日期
+\n - 通知</string>
+    <string name="support_this_project">支援此專案</string>
+    <string name="version_x">版本 %1$s</string>
+    <string name="about_this_app">關於此應用程式</string>
+    <string name="privacy_policy">隱私權政策</string>
+    <string name="contributors_list_title">貢獻者</string>
+    <string name="back">返回</string>
+    <string name="no_items_found">找不到物品</string>
+    <string name="app_description">%1$s 是一個由 Lorenzo Vainigli 和其他貢獻者開發的開源專案。
+\n此應用程式的程式碼在 MIT 許可下發佈，並可以在 GitHub 上取得。</string>
+    <string name="contributors_list_subtitle">這些人為此應用程式的開發作出了貢獻。</string>
+    <string name="date_format_desc">你希望在物品上看到的日期格式。</string>
+    <string name="notification_time_desc">每天你都會收到一則通知關於你的物品清單：
+\n - 已經過期了
+\n - 在今天過期
+\n - 距離到期日還剩一天。</string>
+    <string name="theme">主題</string>
+    <string name="light">淺色</string>
+    <string name="system">系統</string>
+    <string name="dark">深色</string>
+    <string name="x_deleted">%1$s 已刪除</string>
+    <string name="normal">正常</string>
+    <string name="bold">粗體</string>
+    <string name="extra_bold">額外粗體</string>
+    <string name="top_bar_font_style">頂部欄字型樣式</string>
+    <string name="behaviour">行為</string>
+    <string name="appearance">外觀</string>
+    <string name="send_an_email">傳送電子郵件</string>
+    <string name="list">列表</string>
+    <string name="optional">選擇性</string>
+    <string name="undo">復原</string>
+    <string name="contacts">聯絡</string>
+    <string name="opening_date">開啟日期</string>
+    <string name="contacts_text">如果你想獲取有關此應用程式的更多資訊、傳送意見反映、報告錯誤、請求功能或只是聯絡開發人員，請使用以下按鈕傳送電子郵件。
+\n如果你有錯誤報告和功能請求，你也可以在此應用程式的 GitHub 儲存庫上提出問題。</string>
+    <string name="time_span">時間跨度</string>
+    <string name="please_enter_a_valid_number">請輸入有效數字</string>
+    <string name="ok">好的</string>
+    <string name="data_export_success">資料匯出成功。</string>
+    <string name="data_export_error">資料匯出時發生錯誤。</string>
+    <string name="export_data">匯出資料</string>
+    <string name="import_data">匯入資料</string>
+    <string name="data_exported">資料已匯出</string>
+    <string name="connection_error">連接錯誤</string>
+    <string name="getting_product_info">取得產品資訊中…</string>
+    <string name="no_internet_connection">沒有網路連線</string>
+    <string name="please_scan_a_barcode">請掃描條碼</string>
+    <string name="product_not_found">找不到產品</string>
+    <string name="retry">重試</string>
+    <string name="scanning_error">掃描錯誤</string>
+    <string name="screenshot_titles_barcode_scanner">條碼掃描器</string>
+    <string name="screenshot_titles_made_with_heart">用 ❤️ 製作</string>
+    <string name="please_insert_one">請插入一個</string>
+    <string name="other_formats">其他格式</string>
+    <string name="dynamic_colors">動態顏色</string>
+    <string name="menu">選單</string>
+    <string name="notification_time">通知時間</string>
+    <string name="settings">設定</string>
+    <string name="date_format">日期格式</string>
+    <string name="choose_the_date_format">選擇日期格式</string>
+    <string name="locale_formats">語言環境格式</string>
+    <string name="your_food_is_expiring">你的食物快過期了！</string>
+</resources>

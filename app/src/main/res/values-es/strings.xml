@@ -105,4 +105,6 @@
     <string name="retry">Reintentar</string>
     <string name="scanning_error">Error al escanear</string>
     <string name="getting_product_info">Obteniendo información del producto…</string>
+    <string name="screenshot_titles_barcode_scanner">Escáner de código de barras</string>
+    <string name="screenshot_titles_made_with_heart">Hecho con ❤️</string>
 </resources>
