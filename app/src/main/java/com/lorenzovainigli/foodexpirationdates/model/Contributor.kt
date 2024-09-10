@@ -6,6 +6,11 @@ class Contributor(
     val platform: Platform = Platform.GITHUB
 ) {
     constructor(username: String) : this(name = username, username = username)
+    constructor(username: String, platform: Platform) : this(
+        name = username,
+        username = username,
+        platform = platform
+    )
 }
 
 enum class Platform(val url: String) {
@@ -32,5 +37,7 @@ val contributors = listOf(
     Contributor(name = "kuragehime", username = "kuragehimekurara1"),
     Contributor(name = "gallegonovato", username = "gallegonovato", platform = Platform.WEBLATE),
     Contributor(name = "Eryk Michalak", username = "gnu-ewm", platform = Platform.WEBLATE),
-    Contributor(name = "Oğuz Ersen", username = "oersen")
+    Contributor(name = "Oğuz Ersen", username = "oersen"),
+    Contributor(username = "hugoalh", platform = Platform.WEBLATE),
+    Contributor(name = "Ettore Atalan", username = "Atalanttore")
 )
