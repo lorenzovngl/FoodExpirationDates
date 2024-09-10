@@ -20,6 +20,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.lorenzovainigli.foodexpirationdates.R
+import com.lorenzovainigli.foodexpirationdates.util.FirebaseUtils
 import com.lorenzovainigli.foodexpirationdates.util.OperationResult
 import com.lorenzovainigli.foodexpirationdates.view.MainActivity
 
@@ -72,7 +73,11 @@ fun MainScreenMenu(
                 iconId = R.drawable.ic_export,
                 label = stringResource(R.string.export_data),
                 onClick = {
-                    viewModel?.exportData(context)
+                    if (viewModel != null) {
+                        viewModel.exportData(context)
+                    } else {
+                        FirebaseUtils.logToCrashlytics("Cannot export data, viewModel is null")
+                    }
                     isExpanded = false
                 }
             ),
@@ -80,7 +85,11 @@ fun MainScreenMenu(
                 iconId = R.drawable.ic_import,
                 label = stringResource(R.string.import_data),
                 onClick = {
-                    filePickerLauncher?.launch(arrayOf("*/*"))
+                    if (filePickerLauncher != null){
+                        filePickerLauncher.launch(arrayOf("*/*"))
+                    } else {
+                        FirebaseUtils.logToCrashlytics("Cannot import data, filePickerLauncher is null")
+                    }
                     isExpanded = false
                 }
             )
