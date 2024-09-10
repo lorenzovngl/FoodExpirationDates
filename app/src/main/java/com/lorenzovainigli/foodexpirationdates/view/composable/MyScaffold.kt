@@ -118,7 +118,7 @@ fun MyScaffold(
                 },
                 actions = {
                     if (destination?.contains(Screen.MainScreen.route) == true) {
-                        MainScreenMenu()
+                        MainScreenMenu(activity)
                     }
                 },
                 navigationIcon = {
