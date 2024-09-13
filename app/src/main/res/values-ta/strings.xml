@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="yesterday">நேற்று</string>
+    <string name="today">இன்று</string>
+    <string name="tomorrow">நாளை</string>
+    <string name="edit_item">உருப்படியைத் திருத்தவும்</string>
+    <string name="food_name">உணவின் பெயர்</string>
+    <string name="expiration_date">காலாவதி தேதி</string>
+    <string name="please_select_a_date">தேதியைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="please_enter_a_food_name">உணவின் பெயரை உள்ளிடவும்</string>
+    <string name="insert">உள்ளீடு</string>
+    <string name="update">புதுப்பிக்கவும்</string>
+    <string name="cancel">விலக்கு</string>
+    <string name="leave_a_star_on_github">GitHub இல் ஒரு விண்மீன் விடுங்கள்</string>
+    <string name="write_a_review">மதிப்புரை எழுதவும்</string>
+    <string name="source_code">மூல குறியீடு</string>
+    <string name="features">செயலியின் சிறப்புகள்</string>
+    <string name="support_this_project">இந்த திட்டத்தை ஆதரிக்கவும்</string>
+    <string name="report_a_bug">பிழையைப் புகாரளி</string>
+    <string name="version_x">பதிப்பு %1$s</string>
+    <string name="about_this_app">இந்த செயலியைப் பற்றி</string>
+    <string name="privacy_policy">தனியுரிமைக் கொள்கை</string>
+    <string name="back">பின்செள்</string>
+    <string name="no_items_found">உருப்படிகள் எதுவும் செருகப்படவில்லை</string>
+    <string name="please_insert_one">தயவுசெய்து ஒன்றைச் உள்ளிடவும்</string>
+    <string name="menu">வகைப்பட்டியல்</string>
+    <string name="settings">அமைப்புகள்</string>
+    <string name="choose_the_date_format">தேதி வடிவமைப்பைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="locale_formats">உள்ளூர் வடிவங்கள்</string>
+    <string name="theme">வண்ணம்</string>
+    <string name="light">வெளிர் நிறம்</string>
+    <string name="system">அமைப்பு</string>
+    <string name="dark">அடர் நிறம்</string>
+    <string name="x_deleted">%1$s நீக்கப்பட்டது</string>
+    <string name="extra_bold">மிக தடித்தது</string>
+    <string name="top_bar_font_style">மேல் பட்டையின் எழுத்துரு நடை</string>
+    <string name="send_an_email">மின்னஞ்சல் அனுப்பவும்</string>
+    <string name="contacts">தொடர்புகள்</string>
+    <string name="list">பட்டியல்</string>
+    <string name="time_span">கால இடைவெளி</string>
+    <string name="please_enter_a_valid_number">சரியான எண்ணை உள்ளிடவும்</string>
+    <string name="data_export_success">தரவு வெற்றிகரமாக ஏற்றுமதி செய்யப்பட்டது.</string>
+    <string name="import_data">தரவு இறக்குமதி செய்க</string>
+    <string name="n_days_ago">%1$d நாட்களுக்கு முன்பு</string>
+    <string name="in_n_days">%1$d நாட்களில்</string>
+    <string name="add_item">உருப்படியைச் சேர்க்கவும்</string>
+    <string name="share">பகிர்</string>
+    <string name="feature_list">- உணவு காலாவதி தேதிகளுடன் கூடிய பட்டியலை ஏறுவரிசையில் கட்டுதல்
+\n- உருப்படிகளின் விருப்பங்களைச் சேர்த்தல், திருத்துதல் மற்றும் நீக்குதல்
+\n- வரிக்குறி ஸ்கேனர் மற்றும் திறந்தவெளி ஃபுட் ஃபேக்ட்ஸ் ஏபிஐ பயன்படுத்தி தரவு மீட்டெடுத்தல்
+\n- திறக்கும் தேதி
+\n- அறிவிப்புகள்</string>
+    <string name="contributors_list_title">பங்களிப்பாளர்கள்</string>
+    <string name="app_description">%1$s என்பது Lorenzo Vainigli மற்றும் பிற பங்களிப்பாளர்களால் உருவாக்கப்பட்ட ஒரு திறந்த மூல குறியீடு திட்டமாகும்.
+\nஇந்த செயலியின் குறியீடு MIT உரிமத்தின் கீழ் வெளியிடப்பட்டது மற்றும் GitHub இல் உள்ளது.</string>
+    <string name="contributors_list_subtitle">இந்த செயலியின் வளர்ச்சிக்கு பங்களித்தவர்கள் இவர்கள்தான்.</string>
+    <string name="notification_time">அறிவிப்பு நேரம்</string>
+    <string name="date_format">தேதியின் வடிவம்</string>
+    <string name="date_format_desc">உருப்படிகளில் நீங்கள் பார்க்க விரும்பும் தேதியின் வடிவம்.</string>
+    <string name="other_formats">பிற வடிவங்கள்</string>
+    <string name="your_food_is_expiring">உங்கள் உணவு காலாவதியாகிறது!</string>
+    <string name="undo">செய்ததை நீக்கு</string>
+    <string name="normal">இயல்பானது</string>
+    <string name="bold">தடித்தது</string>
+    <string name="behaviour">நடத்தை</string>
+    <string name="appearance">தோற்றம்</string>
+    <string name="opening_date">திறக்கும் தேதி</string>
+    <string name="data_export_error">தரவு ஏற்றுமதியின் போது பிழை ஏற்பட்டது.</string>
+    <string name="data_exported">தரவு ஏற்றுமதி செய்யப்பட்டது</string>
+    <string name="connection_error">இணைபில் பிழை</string>
+    <string name="export_data">தரவு ஏற்றுமதி செய்க</string>
+    <string name="getting_product_info">பொருளின் தகவலைப் பெறுகிறது…</string>
+    <string name="please_scan_a_barcode">பார்கோடை ஸ்கேன் செய்யவும்</string>
+    <string name="no_internet_connection">இணைய இணைப்பு இல்லை</string>
+    <string name="retry">மீண்டும் முயற்சிக்கவும்</string>
+    <string name="screenshot_titles_made_with_heart">❤️ கொண்டு உருவாக்கப்பட்டது</string>
+</resources>
