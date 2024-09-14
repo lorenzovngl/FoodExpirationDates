@@ -12,7 +12,7 @@
 ![GitHub Workflow (Android CI)](https://img.shields.io/github/actions/workflow/status/lorenzovngl/FoodExpirationDates/.github%2Fworkflows%2Fandroid.yml?style=flat-square&label=Build)
 ![GitHub last commit](https://img.shields.io/github/last-commit/lorenzovngl/FoodExpirationDates?label=Last%20commit&style=flat-square)
 ![GitHub](https://img.shields.io/github/license/lorenzovngl/FoodExpirationDates?style=flat-square&label=License)
-![Languages](https://img.shields.io/badge/Languages-14-orange?style=flat-square)
+![Languages](https://img.shields.io/badge/Languages-15-orange?style=flat-square)
 ![GitHub repo size](https://img.shields.io/github/repo-size/lorenzovngl/FoodExpirationDates?style=flat-square&label=Size)
 ![Pull requests welcome](https://img.shields.io/badge/Pull%20requests-Welcome-ff69b4?style=flat-square)
 <a href="https://gitmoji.dev">
@@ -123,6 +123,7 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 <a href="https://github.com/oersen"><img src="https://avatars.githubusercontent.com/oersen" alt="@oersen" height="32" width="32"></a>
 <a href="https://hosted.weblate.org/user/hugoalh/"><img src="https://hosted.weblate.org/avatar/128/hugoalh.png" alt="@hugoalh" height="32" width="32"></a>
 <a href="https://github.com/Atalanttore"><img src="https://avatars.githubusercontent.com/Atalanttore" alt="@Atalanttore" height="32" width="32"></a>
+<a href="https://github.com/Maha-Rajan"><img src="https://avatars.githubusercontent.com/Maha-Rajan" alt="@Maha-Rajan" height="32" width="32"></a>
 
 ## ❤️ Support
 
