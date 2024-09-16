@@ -74,4 +74,6 @@
     <string name="no_internet_connection">இணைய இணைப்பு இல்லை</string>
     <string name="retry">மீண்டும் முயற்சிக்கவும்</string>
     <string name="screenshot_titles_made_with_heart">❤️ கொண்டு உருவாக்கப்பட்டது</string>
+    <string name="app_name">உணவு காலாவதி தேதிகள்</string>
+    <string name="app_name_short">உணவு காலாவதிகள்</string>
 </resources>
