@@ -76,4 +76,14 @@
     <string name="screenshot_titles_made_with_heart">❤️ கொண்டு உருவாக்கப்பட்டது</string>
     <string name="app_name">உணவு காலாவதி தேதிகள்</string>
     <string name="app_name_short">உணவு காலாவதிகள்</string>
+    <string name="screenshot_titles_barcode_scanner">பார்கோடு ஸ்கேனர்</string>
+    <string name="notification_time_desc">ஒவ்வொரு நாளும் உங்கள் உருப்படிகளின் பட்டியலுடன் அறிவிப்பைப் பெறுவீர்கள்:
+\n- ஏற்கனவே காலாவதியானவை
+\n- தற்போதைய தேதியில் காலாவதியாபாவை
+\n- அவற்றின் காலாவதி தேதிக்கு இன்னும் ஒரு நாள் உள்ளவை.</string>
+    <string name="contacts_text">இந்தப் செயலியைப் பற்றிய கூடுதல் தகவலைப் பெற, கருத்தை அனுப்ப, பிழையைப் புகாரளிக்க, அம்சத்தைக் கோர அல்லது டெவலப்பரைத் தொடர்புகொள்ள விரும்பினால், பின்வரும் பொத்தானைப் பயன்படுத்தி மின்னஞ்சலை அனுப்பவும்.
+\nஉங்களிடம் பிழை அறிக்கைகள் மற்றும் அம்சக் கோரிக்கைகள் இருந்தால், இந்தப் பயன்பாட்டிற்கான GitHub களஞ்சியத்திலும் நீங்கள் சிக்கலைத் திறக்கலாம்.</string>
+    <string name="ok">சரி</string>
+    <string name="product_not_found">பொருள் கிடைக்கவில்லை</string>
+    <string name="scanning_error">ஸ்கேனிங் பிழை</string>
 </resources>
