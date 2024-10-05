@@ -50,9 +50,9 @@ fun MyBottomAppBar(
     )
     NavigationBar {
         var selectedItem = when (currentDestination) {
-            Screen.AboutScreen.route -> 0
-            Screen.SettingsScreen.route -> 2
-            else -> 1
+            Screen.AboutScreen.route -> 2
+            Screen.SettingsScreen.route -> 1
+            else -> 0
         }
         navigationItems.forEachIndexed { index, item ->
             NavigationBarItem(
