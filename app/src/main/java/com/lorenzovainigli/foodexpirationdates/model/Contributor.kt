@@ -41,4 +41,5 @@ val contributors = listOf(
     Contributor(username = "hugoalh", platform = Platform.WEBLATE),
     Contributor(name = "Ettore Atalan", username = "Atalanttore"),
     Contributor(name = "Maha Rajan", username = "Maha-Rajan"),
+    Contributor(name = "Anurag Kanojiya", username = "anuragkanojiya1"),
 )
