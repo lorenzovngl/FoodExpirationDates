@@ -30,12 +30,6 @@ fun MyBottomAppBar(
 ){
     val navigationItems = listOf(
         NavigationItem(
-            label = stringResource(id = R.string.about_this_app),
-            route = Screen.AboutScreen.route,
-            selectedIcon = Icons.Filled.Info,
-            unselectedIcon = Icons.Outlined.Info
-        ),
-        NavigationItem(
             label = stringResource(id = R.string.list),
             route = Screen.MainScreen.route,
             selectedIcon = Icons.AutoMirrored.Filled.List,
@@ -46,13 +40,19 @@ fun MyBottomAppBar(
             route = Screen.SettingsScreen.route,
             selectedIcon = Icons.Filled.Settings,
             unselectedIcon = Icons.Outlined.Settings
-        )
+        ),
+        NavigationItem(
+            label = stringResource(id = R.string.about_this_app),
+        route = Screen.AboutScreen.route,
+        selectedIcon = Icons.Filled.Info,
+        unselectedIcon = Icons.Outlined.Info
+    )
     )
     NavigationBar {
         var selectedItem = when (currentDestination) {
-            Screen.AboutScreen.route -> 0
-            Screen.SettingsScreen.route -> 2
-            else -> 1
+            Screen.AboutScreen.route -> 2
+            Screen.SettingsScreen.route -> 1
+            else -> 0
         }
         navigationItems.forEachIndexed { index, item ->
             NavigationBarItem(
