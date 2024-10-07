@@ -8,6 +8,7 @@ import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.automirrored.outlined.List
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Surface
@@ -48,7 +49,7 @@ fun MyBottomAppBar(
         unselectedIcon = Icons.Outlined.Info
     )
     )
-    NavigationBar {
+    NavigationBar(containerColor = MaterialTheme.colorScheme.inverseOnSurface) {
         var selectedItem = when (currentDestination) {
             Screen.AboutScreen.route -> 2
             Screen.SettingsScreen.route -> 1
