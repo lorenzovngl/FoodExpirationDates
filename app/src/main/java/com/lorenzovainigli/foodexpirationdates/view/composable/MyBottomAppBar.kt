@@ -13,6 +13,7 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -21,6 +22,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
+import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
 
@@ -49,7 +51,7 @@ fun MyBottomAppBar(
         unselectedIcon = Icons.Outlined.Info
     )
     )
-    NavigationBar(containerColor = MaterialTheme.colorScheme.inverseOnSurface) {
+    NavigationBar(containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(TonalElevation.level2())) {
         var selectedItem = when (currentDestination) {
             Screen.AboutScreen.route -> 2
             Screen.SettingsScreen.route -> 1
