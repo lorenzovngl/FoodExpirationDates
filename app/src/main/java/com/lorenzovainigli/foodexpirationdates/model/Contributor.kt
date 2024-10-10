@@ -42,4 +42,5 @@ val contributors = listOf(
     Contributor(name = "Ettore Atalan", username = "Atalanttore"),
     Contributor(name = "Maha Rajan", username = "Maha-Rajan"),
     Contributor(name = "Anurag Kanojiya", username = "anuragkanojiya1"),
+    Contributor(name = "Prakash Irom", username = "PrakashIrom"),
 )
