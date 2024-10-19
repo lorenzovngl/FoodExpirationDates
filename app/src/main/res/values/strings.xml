@@ -7,6 +7,8 @@
     <string name="tomorrow">Tomorrow</string>
     <string name="in_n_days">In %1$d days</string>
     <string name="add_item">Add item</string>
+    <string name="enable_screen_protection">Enable Screen Protection</string>
+    <string name="protect_your_screen">Protect your Screen from Screenshots and Screen Recording.</string>
     <string name="edit_item">Edit item</string>
     <string name="food_name">Food name</string>
     <string name="expiration_date">Expiration date</string>

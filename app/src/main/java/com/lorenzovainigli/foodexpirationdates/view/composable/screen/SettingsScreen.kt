@@ -1,12 +1,18 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable.screen
 
+import android.app.Activity
+import android.content.Context
 import android.os.Build
+import android.util.Log
+import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
@@ -24,6 +30,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
@@ -78,6 +85,9 @@ fun SettingsScreen(
     var isNotificationTimeBottomSheetOpen by remember {
         mutableStateOf(false)
     }
+
+    var isScreenProtectionEnabled by remember { mutableStateOf(getScreenProtectionEnabled(context)) }
+
     prefsViewModel?.let {
         DateFormatDialog(
             isDialogOpen = isDateFormatDialogOpened,
@@ -111,10 +121,45 @@ fun SettingsScreen(
             .padding(10.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+
         Text(
             text = stringResource(R.string.behaviour),
             style = MaterialTheme.typography.labelLarge
         )
+
+        SettingsItem(
+            label = stringResource(R.string.enable_screen_protection),
+            description = stringResource(R.string.protect_your_screen)
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(start = 11.dp)
+            ) {
+                Switch(
+                    modifier = Modifier.padding(start = 4.dp),
+                    checked = isScreenProtectionEnabled,
+                    onCheckedChange = { enabled ->
+                        isScreenProtectionEnabled = enabled
+
+                        setScreenProtectionEnabled(context, enabled)
+
+                        if (enabled) {
+                            (context as Activity).window.setFlags(
+                                WindowManager.LayoutParams.FLAG_SECURE,
+                                WindowManager.LayoutParams.FLAG_SECURE
+                            )
+                            Log.d("isScreenProtectionEnabled", "Screen protection enabled: true")
+                        } else {
+                            (context as Activity).window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
+                            Log.d("isScreenProtectionEnabled", "Screen protection enabled: false")
+                        }
+                    }
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(text = if (isScreenProtectionEnabled) "Enabled" else "Disabled")
+            }
+        }
+
         SettingsItem(
             label = stringResource(id = R.string.date_format),
             description = stringResource(id = R.string.date_format_desc)
@@ -251,4 +296,16 @@ fun SettingsScreenContentPreview() {
             SettingsScreen()
         }
     }
+}
+
+fun setScreenProtectionEnabled(context: Context, enabled: Boolean) {
+    val sharedPreferences = context.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+    val editor = sharedPreferences.edit()
+    editor.putBoolean("screen_protection_enabled", enabled)
+    editor.apply()
+}
+
+fun getScreenProtectionEnabled(context: Context): Boolean {
+    val sharedPreferences = context.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+    return sharedPreferences.getBoolean("screen_protection_enabled", false)
 }

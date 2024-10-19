@@ -2,6 +2,7 @@ package com.lorenzovainigli.foodexpirationdates.view
 
 import android.os.Build
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
@@ -24,6 +25,7 @@ import com.lorenzovainigli.foodexpirationdates.model.NotificationManager
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyScaffold
+import com.lorenzovainigli.foodexpirationdates.view.composable.screen.getScreenProtectionEnabled
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDatesViewModel
 import com.lorenzovainigli.foodexpirationdates.viewmodel.PreferencesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,14 +43,19 @@ class MainActivity : ComponentActivity() {
         val splashScreen = installSplashScreen()
         splashScreen.setKeepOnScreenCondition { viewModel.isSplashScreenLoading.value }
 
+        checkAndSetSecureFlag()
+
         NotificationManager.setupNotificationChannel(this)
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onResume() {
         super.onResume()
         val context = this
+
         setContent {
+
             val prefsViewModel: PreferencesViewModel = viewModel()
             val darkThemeState = prefsViewModel.getThemeMode(context).collectAsState().value
             val dynamicColorsState = prefsViewModel.getDynamicColors(context).collectAsState().value
@@ -92,6 +99,23 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
+        }
+    }
+
+    private fun checkAndSetSecureFlag() {
+        val sharedPreferences = getSharedPreferences("my_preferences", MODE_PRIVATE)
+        val isPasswordProtectionEnabled = sharedPreferences.getBoolean("screen_protection_enabled", false)
+
+        val s = getScreenProtectionEnabled(context = this)
+        if (isPasswordProtectionEnabled) {
+            // Set the FLAG_SECURE to prevent screenshots
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE
+            )
+        } else {
+            // Clear the FLAG_SECURE if password protection is not enabled
+            window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
         }
     }
 
