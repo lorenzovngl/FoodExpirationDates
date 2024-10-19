@@ -106,15 +106,12 @@ class MainActivity : ComponentActivity() {
         val sharedPreferences = getSharedPreferences("my_preferences", MODE_PRIVATE)
         val isPasswordProtectionEnabled = sharedPreferences.getBoolean("screen_protection_enabled", false)
 
-        val s = getScreenProtectionEnabled(context = this)
         if (isPasswordProtectionEnabled) {
-            // Set the FLAG_SECURE to prevent screenshots
             window.setFlags(
                 WindowManager.LayoutParams.FLAG_SECURE,
                 WindowManager.LayoutParams.FLAG_SECURE
             )
         } else {
-            // Clear the FLAG_SECURE if password protection is not enabled
             window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
         }
     }
