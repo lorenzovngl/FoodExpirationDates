@@ -25,7 +25,6 @@ import com.lorenzovainigli.foodexpirationdates.model.NotificationManager
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyScaffold
-import com.lorenzovainigli.foodexpirationdates.view.composable.screen.getScreenProtectionEnabled
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDatesViewModel
 import com.lorenzovainigli.foodexpirationdates.viewmodel.PreferencesViewModel
 import dagger.hilt.android.AndroidEntryPoint
