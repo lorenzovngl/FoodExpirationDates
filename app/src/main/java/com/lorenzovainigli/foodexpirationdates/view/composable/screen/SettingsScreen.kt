@@ -1,7 +1,6 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable.screen
 
 import android.app.Activity
-import android.content.Context
 import android.os.Build
 import android.util.Log
 import android.view.WindowManager
@@ -12,7 +11,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
@@ -296,16 +294,4 @@ fun SettingsScreenContentPreview() {
             SettingsScreen()
         }
     }
-}
-
-fun setScreenProtectionEnabled(context: Context, enabled: Boolean) {
-    val sharedPreferences = context.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
-    val editor = sharedPreferences.edit()
-    editor.putBoolean("screen_protection_enabled", enabled)
-    editor.apply()
-}
-
-fun getScreenProtectionEnabled(context: Context): Boolean {
-    val sharedPreferences = context.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
-    return sharedPreferences.getBoolean("screen_protection_enabled", false)
 }
