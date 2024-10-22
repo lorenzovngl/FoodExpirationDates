@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
         val splashScreen = installSplashScreen()
         splashScreen.setKeepOnScreenCondition { viewModel.isSplashScreenLoading.value }
 
-        checkAndSetSecureFlag()
+        checkAndSetSecureFlags()
 
         NotificationManager.setupNotificationChannel(this)
 
@@ -102,7 +102,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun checkAndSetSecureFlag() {
+    private fun checkAndSetSecureFlags() {
         val sharedPreferences = getSharedPreferences("my_preferences", MODE_PRIVATE)
         val isPasswordProtectionEnabled = sharedPreferences.getBoolean("screen_protection_enabled", false)
 

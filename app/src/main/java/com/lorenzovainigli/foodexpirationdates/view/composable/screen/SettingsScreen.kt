@@ -42,6 +42,8 @@ import androidx.compose.ui.unit.dp
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.NotificationManager
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.getScreenProtectionEnabled
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.setScreenProtectionEnabled
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.MainActivity
 import com.lorenzovainigli.foodexpirationdates.view.composable.AutoResizedText
@@ -155,8 +157,6 @@ fun SettingsScreen(
                         }
                     }
                 )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(text = if (isScreenProtectionEnabled) "Enabled" else "Disabled")
             }
         }
 

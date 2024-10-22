@@ -14,6 +14,7 @@ class PreferencesRepository {
 
         private const val sharedPrefsName = "shared_pref"
         const val keyDateFormat = "date_format"
+        const val screenProtection = "screen_protection"
         const val keyNotificationTimeHour = "notification_time_hour"
         const val keyNotificationTimeMinute = "notification_time_minute"
         const val keyThemeMode = "theme_mode"
@@ -40,6 +41,18 @@ class PreferencesRepository {
             NORMAL(R.string.normal),
             BOLD(R.string.bold),
             EXTRA_BOLD(R.string.extra_bold)
+        }
+
+        fun setScreenProtectionEnabled(context: Context, enabled: Boolean) {
+            val sharedPreferences = context.getSharedPreferences(sharedPrefsName, Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putBoolean(screenProtection, enabled)
+            editor.apply()
+        }
+
+        fun getScreenProtectionEnabled(context: Context): Boolean {
+            val sharedPreferences = context.getSharedPreferences(sharedPrefsName, Context.MODE_PRIVATE)
+            return sharedPreferences.getBoolean(screenProtection, false)
         }
 
         fun getAvailLocaleDateFormats(): List<String> {
