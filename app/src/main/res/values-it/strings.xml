@@ -88,6 +88,7 @@
     <string name="product_not_found">Prodotto non trovato</string>
     <string name="retry">Riprova</string>
     <string name="scanning_error">Errore di scansione</string>
+    <string name="opened">Aperto</string>
 
     <string-array name="example_foods">
         <item>Uova</item>

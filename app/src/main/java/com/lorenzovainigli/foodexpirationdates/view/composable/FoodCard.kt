@@ -167,7 +167,7 @@ fun FoodCard(
                 if (item.openingDate != null){
                     Text(
                         modifier = Modifier.alpha(.8f),
-                        text = "Opened",
+                        text = stringResource(R.string.opened),
                         fontSize = 12.sp
                     )
                 }

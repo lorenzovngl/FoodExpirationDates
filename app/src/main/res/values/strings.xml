@@ -90,6 +90,7 @@
     <string name="product_not_found">Product not found</string>
     <string name="retry">Retry</string>
     <string name="scanning_error">Scanning error</string>
+    <string name="opened">Opened</string>
 
     <string-array name="example_foods">
         <item>Eggs</item>
