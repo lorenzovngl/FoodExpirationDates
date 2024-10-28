@@ -2,7 +2,6 @@ package com.lorenzovainigli.foodexpirationdates.view
 
 import android.os.Build
 import android.os.Bundle
-import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
@@ -23,6 +22,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.lorenzovainigli.foodexpirationdates.model.NotificationManager
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.checkAndSetSecureFlags
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyScaffold
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDatesViewModel
@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
         val splashScreen = installSplashScreen()
         splashScreen.setKeepOnScreenCondition { viewModel.isSplashScreenLoading.value }
 
-        checkAndSetSecureFlags()
+        checkAndSetSecureFlags(context = this, window)
 
         NotificationManager.setupNotificationChannel(this)
 
@@ -98,20 +98,6 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
-        }
-    }
-
-    private fun checkAndSetSecureFlags() {
-        val sharedPreferences = getSharedPreferences("my_preferences", MODE_PRIVATE)
-        val isPasswordProtectionEnabled = sharedPreferences.getBoolean("screen_protection_enabled", false)
-
-        if (isPasswordProtectionEnabled) {
-            window.setFlags(
-                WindowManager.LayoutParams.FLAG_SECURE,
-                WindowManager.LayoutParams.FLAG_SECURE
-            )
-        } else {
-            window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
         }
     }
 

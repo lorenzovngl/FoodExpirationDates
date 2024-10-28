@@ -1,7 +1,8 @@
 package com.lorenzovainigli.foodexpirationdates.model.repository
 
 import android.content.Context
-import androidx.activity.ComponentActivity
+import android.view.Window
+import android.view.WindowManager
 import com.lorenzovainigli.foodexpirationdates.R
 import java.lang.Exception
 import java.text.DateFormat
@@ -41,6 +42,19 @@ class PreferencesRepository {
             NORMAL(R.string.normal),
             BOLD(R.string.bold),
             EXTRA_BOLD(R.string.extra_bold)
+        }
+
+        fun checkAndSetSecureFlags(context: Context, window: Window) {
+            val isScreenProtectionEnabled = getScreenProtectionEnabled(context)
+
+            if (isScreenProtectionEnabled) {
+                window.setFlags(
+                    WindowManager.LayoutParams.FLAG_SECURE,
+                    WindowManager.LayoutParams.FLAG_SECURE
+                )
+            } else {
+                window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
+            }
         }
 
         fun setScreenProtectionEnabled(context: Context, enabled: Boolean) {

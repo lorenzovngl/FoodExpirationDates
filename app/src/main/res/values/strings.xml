@@ -68,6 +68,7 @@
     <string name="top_bar_font_style">Top bar font style</string>
     <string name="behaviour">Behaviour</string>
     <string name="appearance">Appearance</string>
+    <string name="privacy">Privacy</string>
     <string name="send_an_email">Send an email</string>
     <string name="contacts">Contacts</string>
     <string name="contacts_text">If you would like to get more information about this application, send a feedback, report a bug, request a feature, or simply contact the developer, please send an email using the following button.\nIf you have bug reports and feature requests, you can also open an issue on the GitHub repository for this application.</string>

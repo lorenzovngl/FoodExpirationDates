@@ -128,37 +128,6 @@ fun SettingsScreen(
         )
 
         SettingsItem(
-            label = stringResource(R.string.enable_screen_protection),
-            description = stringResource(R.string.protect_your_screen)
-        ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(start = 11.dp)
-            ) {
-                Switch(
-                    modifier = Modifier.padding(start = 4.dp),
-                    checked = isScreenProtectionEnabled,
-                    onCheckedChange = { enabled ->
-                        isScreenProtectionEnabled = enabled
-
-                        setScreenProtectionEnabled(context, enabled)
-
-                        if (enabled) {
-                            (context as Activity).window.setFlags(
-                                WindowManager.LayoutParams.FLAG_SECURE,
-                                WindowManager.LayoutParams.FLAG_SECURE
-                            )
-                            Log.d("isScreenProtectionEnabled", "Screen protection enabled: true")
-                        } else {
-                            (context as Activity).window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
-                            Log.d("isScreenProtectionEnabled", "Screen protection enabled: false")
-                        }
-                    }
-                )
-            }
-        }
-
-        SettingsItem(
             label = stringResource(id = R.string.date_format),
             description = stringResource(id = R.string.date_format_desc)
         ) {
@@ -193,6 +162,41 @@ fun SettingsScreen(
                 }
             )
         }
+
+        Text(stringResource(R.string.privacy),
+            style = MaterialTheme.typography.labelLarge
+        )
+        SettingsItem(
+            label = stringResource(R.string.enable_screen_protection),
+            description = stringResource(R.string.protect_your_screen)
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(start = 11.dp)
+            ) {
+                Switch(
+                    modifier = Modifier.padding(start = 4.dp),
+                    checked = isScreenProtectionEnabled,
+                    onCheckedChange = { enabled ->
+                        isScreenProtectionEnabled = enabled
+
+                        setScreenProtectionEnabled(context, enabled)
+
+                        if (enabled) {
+                            (context as Activity).window.setFlags(
+                                WindowManager.LayoutParams.FLAG_SECURE,
+                                WindowManager.LayoutParams.FLAG_SECURE
+                            )
+                            Log.d("isScreenProtectionEnabled", "Screen protection enabled: true")
+                        } else {
+                            (context as Activity).window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
+                            Log.d("isScreenProtectionEnabled", "Screen protection enabled: false")
+                        }
+                    }
+                )
+            }
+        }
+
         Text(
             text = stringResource(R.string.appearance),
             style = MaterialTheme.typography.labelLarge
