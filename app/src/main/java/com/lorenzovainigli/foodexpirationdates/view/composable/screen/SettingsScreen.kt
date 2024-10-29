@@ -1,9 +1,13 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable.screen
 
+import android.app.Activity
 import android.os.Build
+import android.util.Log
+import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
@@ -24,6 +28,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
@@ -35,6 +40,8 @@ import androidx.compose.ui.unit.dp
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.NotificationManager
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.getScreenProtectionEnabled
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.setScreenProtectionEnabled
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.MainActivity
 import com.lorenzovainigli.foodexpirationdates.view.composable.AutoResizedText
@@ -78,6 +85,9 @@ fun SettingsScreen(
     var isNotificationTimeBottomSheetOpen by remember {
         mutableStateOf(false)
     }
+
+    var isScreenProtectionEnabled by remember { mutableStateOf(getScreenProtectionEnabled(context)) }
+
     prefsViewModel?.let {
         DateFormatDialog(
             isDialogOpen = isDateFormatDialogOpened,
@@ -111,10 +121,12 @@ fun SettingsScreen(
             .padding(10.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+
         Text(
             text = stringResource(R.string.behaviour),
             style = MaterialTheme.typography.labelLarge
         )
+
         SettingsItem(
             label = stringResource(id = R.string.date_format),
             description = stringResource(id = R.string.date_format_desc)
@@ -150,6 +162,41 @@ fun SettingsScreen(
                 }
             )
         }
+
+        Text(stringResource(R.string.privacy),
+            style = MaterialTheme.typography.labelLarge
+        )
+        SettingsItem(
+            label = stringResource(R.string.enable_screen_protection),
+            description = stringResource(R.string.protect_your_screen)
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(start = 11.dp)
+            ) {
+                Switch(
+                    modifier = Modifier.padding(start = 4.dp),
+                    checked = isScreenProtectionEnabled,
+                    onCheckedChange = { enabled ->
+                        isScreenProtectionEnabled = enabled
+
+                        setScreenProtectionEnabled(context, enabled)
+
+                        if (enabled) {
+                            (context as Activity).window.setFlags(
+                                WindowManager.LayoutParams.FLAG_SECURE,
+                                WindowManager.LayoutParams.FLAG_SECURE
+                            )
+                            Log.d("isScreenProtectionEnabled", "Screen protection enabled: true")
+                        } else {
+                            (context as Activity).window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
+                            Log.d("isScreenProtectionEnabled", "Screen protection enabled: false")
+                        }
+                    }
+                )
+            }
+        }
+
         Text(
             text = stringResource(R.string.appearance),
             style = MaterialTheme.typography.labelLarge

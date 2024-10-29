@@ -1,7 +1,8 @@
 package com.lorenzovainigli.foodexpirationdates.model.repository
 
 import android.content.Context
-import androidx.activity.ComponentActivity
+import android.view.Window
+import android.view.WindowManager
 import com.lorenzovainigli.foodexpirationdates.R
 import java.lang.Exception
 import java.text.DateFormat
@@ -14,6 +15,7 @@ class PreferencesRepository {
 
         private const val sharedPrefsName = "shared_pref"
         const val keyDateFormat = "date_format"
+        const val screenProtection = "screen_protection"
         const val keyNotificationTimeHour = "notification_time_hour"
         const val keyNotificationTimeMinute = "notification_time_minute"
         const val keyThemeMode = "theme_mode"
@@ -40,6 +42,31 @@ class PreferencesRepository {
             NORMAL(R.string.normal),
             BOLD(R.string.bold),
             EXTRA_BOLD(R.string.extra_bold)
+        }
+
+        fun checkAndSetSecureFlags(context: Context, window: Window) {
+            val isScreenProtectionEnabled = getScreenProtectionEnabled(context)
+
+            if (isScreenProtectionEnabled) {
+                window.setFlags(
+                    WindowManager.LayoutParams.FLAG_SECURE,
+                    WindowManager.LayoutParams.FLAG_SECURE
+                )
+            } else {
+                window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
+            }
+        }
+
+        fun setScreenProtectionEnabled(context: Context, enabled: Boolean) {
+            val sharedPreferences = context.getSharedPreferences(sharedPrefsName, Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putBoolean(screenProtection, enabled)
+            editor.apply()
+        }
+
+        fun getScreenProtectionEnabled(context: Context): Boolean {
+            val sharedPreferences = context.getSharedPreferences(sharedPrefsName, Context.MODE_PRIVATE)
+            return sharedPreferences.getBoolean(screenProtection, false)
         }
 
         fun getAvailLocaleDateFormats(): List<String> {

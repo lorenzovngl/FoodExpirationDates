@@ -22,6 +22,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.lorenzovainigli.foodexpirationdates.model.NotificationManager
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.checkAndSetSecureFlags
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyScaffold
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDatesViewModel
@@ -41,14 +42,19 @@ class MainActivity : ComponentActivity() {
         val splashScreen = installSplashScreen()
         splashScreen.setKeepOnScreenCondition { viewModel.isSplashScreenLoading.value }
 
+        checkAndSetSecureFlags(context = this, window)
+
         NotificationManager.setupNotificationChannel(this)
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onResume() {
         super.onResume()
         val context = this
+
         setContent {
+
             val prefsViewModel: PreferencesViewModel = viewModel()
             val darkThemeState = prefsViewModel.getThemeMode(context).collectAsState().value
             val dynamicColorsState = prefsViewModel.getDynamicColors(context).collectAsState().value

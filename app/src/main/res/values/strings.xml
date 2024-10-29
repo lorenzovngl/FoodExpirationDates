@@ -7,6 +7,8 @@
     <string name="tomorrow">Tomorrow</string>
     <string name="in_n_days">In %1$d days</string>
     <string name="add_item">Add item</string>
+    <string name="enable_screen_protection">Enable screen protection</string>
+    <string name="protect_your_screen">Protect your screen from screenshots and screen recording.</string>
     <string name="edit_item">Edit item</string>
     <string name="food_name">Food name</string>
     <string name="expiration_date">Expiration date</string>
@@ -66,6 +68,7 @@
     <string name="top_bar_font_style">Top bar font style</string>
     <string name="behaviour">Behaviour</string>
     <string name="appearance">Appearance</string>
+    <string name="privacy">Privacy</string>
     <string name="send_an_email">Send an email</string>
     <string name="contacts">Contacts</string>
     <string name="contacts_text">If you would like to get more information about this application, send a feedback, report a bug, request a feature, or simply contact the developer, please send an email using the following button.\nIf you have bug reports and feature requests, you can also open an issue on the GitHub repository for this application.</string>
