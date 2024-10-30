@@ -107,4 +107,8 @@
     <string name="getting_product_info">Obteniendo información del producto…</string>
     <string name="screenshot_titles_barcode_scanner">Escáner de código de barras</string>
     <string name="screenshot_titles_made_with_heart">Hecho con ❤️</string>
+    <string name="opened">Abierto</string>
+    <string name="enable_screen_protection">Activar la protección de pantalla</string>
+    <string name="protect_your_screen">Protege tu pantalla de capturas y grabaciones de pantalla.</string>
+    <string name="privacy">Privacidad</string>
 </resources>
