@@ -89,6 +89,9 @@
     <string name="retry">Riprova</string>
     <string name="scanning_error">Errore di scansione</string>
     <string name="opened">Aperto</string>
+    <string name="enable_screen_protection">Attiva protezione schermo</string>
+    <string name="protect_your_screen">Proteggi la tua schermata dagli screenshot e dalla registrazione dello schermo.</string>
+    <string name="privacy">Privacy</string>
 
     <string-array name="example_foods">
         <item>Uova</item>
