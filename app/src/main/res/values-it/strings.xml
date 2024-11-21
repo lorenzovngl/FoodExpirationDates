@@ -92,7 +92,6 @@
     <string name="enable_screen_protection">Attiva protezione schermo</string>
     <string name="protect_your_screen">Proteggi la tua schermata dagli screenshot e dalla registrazione dello schermo.</string>
     <string name="privacy">Privacy</string>
-
     <string-array name="example_foods">
         <item>Uova</item>
         <item>Formaggio</item>

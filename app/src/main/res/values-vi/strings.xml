@@ -107,4 +107,10 @@
     <string name="connection_error">Lỗi kết nối</string>
     <string name="getting_product_info">Đang lấy thông tin sản phẩm…</string>
     <string name="scanning_error">Lỗi quét</string>
+    <string name="opened">Đã mở</string>
+    <string name="screenshot_titles_barcode_scanner">Máy quét mã vạch</string>
+    <string name="screenshot_titles_made_with_heart">Làm bằng ❤️</string>
+    <string name="enable_screen_protection">Bật bảo vệ màn hình</string>
+    <string name="privacy">Quyền riêng tư</string>
+    <string name="protect_your_screen">Bảo vệ màn hình của bạn khỏi chụp màn hình và ghi màn hình.</string>
 </resources>

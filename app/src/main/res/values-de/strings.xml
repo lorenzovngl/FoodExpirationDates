@@ -21,10 +21,7 @@
     <string name="write_a_review">Eine Rezension schreiben</string>
     <string name="source_code">Quelltext</string>
     <string name="features">Funktionen</string>
-    <string name="feature_list">- Anzeige einer Liste mit Lebensmittelverfallsdaten in aufsteigender zeitlicher Reihenfolge
-\n - Einträge hinzufügen, bearbeiten und löschen
-\n - Eröffnungsdatum
-\n - Benachrichtigungen</string>
+    <string name="feature_list">- Anzeige einer Liste mit Lebensmittelverfallsdaten in aufsteigender zeitlicher Reihenfolge \n - Einträge hinzufügen, bearbeiten und löschen \n - Produktabfrage mittels Strichtcodescanner und Open Food Facts API \n - Öffnungsdatum \n - Benachrichtigungen</string>
     <string name="support_this_project">Dieses Projekt unterstützen</string>
     <string name="report_a_bug">Fehler melden</string>
     <string name="version_x">Version %1$s</string>
@@ -57,7 +54,7 @@
     <string name="system">System</string>
     <string name="dark">Dunkel</string>
     <string name="x_deleted">%1$s gelöscht</string>
-    <string name="undo">Abbrechen</string>
+    <string name="undo">Rückgängig</string>
     <string name="normal">Normal</string>
     <string name="bold">Fett</string>
     <string name="extra_bold">Extrafett</string>
@@ -104,4 +101,12 @@
     <string name="retry">Wiederholen</string>
     <string name="contacts">Kontakte</string>
     <string name="screenshot_titles_made_with_heart">Hergestellt mit ❤️</string>
+    <string name="please_scan_a_barcode">Bitte scannen Sie einen Strichcode</string>
+    <string name="getting_product_info">Produktinformationen abrufen…</string>
+    <string name="scanning_error">Scanfehler</string>
+    <string name="enable_screen_protection">Bildschirmschutz aktivieren</string>
+    <string name="protect_your_screen">Schützen Sie Ihren Bildschirm vor Screenshots und Bildschirmaufzeichnungen.</string>
+    <string name="privacy">Datenschutz</string>
+    <string name="opened">Geöffnet</string>
+    <string name="screenshot_titles_barcode_scanner">Strichcode-Scanner</string>
 </resources>
