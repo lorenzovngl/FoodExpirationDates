@@ -30,7 +30,7 @@ room = "2.6.1"
 test-rules = "1.6.1"
 test-runner = "1.6.2"
 uiautomator = "2.3.0"
-work-runtime-ktx = "2.9.1"
+work-runtime-ktx = "2.10.0"
 splashscreen = "1.0.1"
 
 [libraries]
