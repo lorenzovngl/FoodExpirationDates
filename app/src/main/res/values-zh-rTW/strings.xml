@@ -88,4 +88,8 @@
     <string name="choose_the_date_format">選擇日期格式</string>
     <string name="locale_formats">語言環境格式</string>
     <string name="your_food_is_expiring">你的食物快過期了！</string>
+    <string name="opened">已開啟的</string>
+    <string name="protect_your_screen">禁止螢幕擷圖和螢幕錄影以保護您的隱私。</string>
+    <string name="enable_screen_protection">啟用螢幕隱私保護</string>
+    <string name="privacy">隱私</string>
 </resources>
