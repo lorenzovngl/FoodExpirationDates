@@ -21,6 +21,7 @@ class PreferencesRepository {
         const val keyThemeMode = "theme_mode"
         const val keyTopBarFont = "top_bar_font"
         const val keyDynamicColors = "dynamic_colors"
+        const val keyMonochromeIcons = "monochrome_icons"
         private val availLocaleDateFormats = arrayOf(DateFormat.SHORT, DateFormat.MEDIUM)
         private val availOtherDateFormats =
             arrayOf(
@@ -174,8 +175,8 @@ class PreferencesRepository {
             sharedPrefs: String = sharedPrefsName,
         ): Boolean {
             try {
-            return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                .getBoolean(keyDynamicColors, false)
+                return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
+                    .getBoolean(keyDynamicColors, false)
             } catch (e: Exception){
                 e.printStackTrace()
             }
@@ -189,6 +190,28 @@ class PreferencesRepository {
         ) {
             return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
                 .edit().putBoolean(keyDynamicColors, dynamicColorsEnabled).apply()
+        }
+
+        fun getMonochromeIcons(
+            context: Context,
+            sharedPrefs: String = sharedPrefsName,
+        ): Boolean {
+            try {
+                return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
+                    .getBoolean(keyMonochromeIcons, true)
+            } catch (e: Exception){
+                e.printStackTrace()
+            }
+            return true
+        }
+
+        fun setMonochromeIcons(
+            context: Context,
+            sharedPrefs: String = sharedPrefsName,
+            monochromeIconsEnabled: Boolean
+        ) {
+            return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
+                .edit().putBoolean(keyMonochromeIcons, monochromeIconsEnabled).apply()
         }
     }
 }

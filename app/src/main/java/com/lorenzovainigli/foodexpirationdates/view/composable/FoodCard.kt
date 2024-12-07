@@ -64,6 +64,7 @@ fun FoodCard(
 ) {
     val context = LocalContext.current
     val dateFormat = PreferencesRepository.getUserDateFormat(context)
+    val monochromeIcons = PreferencesRepository.getMonochromeIcons(context)
     val sdf = SimpleDateFormat(dateFormat, context.resources.configuration.locales[0])
     val today = Calendar.getInstance()
     val twoDaysAgo = Calendar.getInstance().apply {
@@ -144,10 +145,12 @@ fun FoodCard(
                     .size(36.dp)
                     .alpha(0.8f)
             ) {
-                drawImage(
-                    image = imageBitmap,
-                    colorFilter = ColorFilter.tint(color, BlendMode.Color)
-                )
+                if (monochromeIcons) {
+                    drawImage(
+                        image = imageBitmap,
+                        colorFilter = ColorFilter.tint(color, BlendMode.Color)
+                    )
+                }
                 drawImage(
                     image = imageBitmap,
                     blendMode = BlendMode.DstAtop

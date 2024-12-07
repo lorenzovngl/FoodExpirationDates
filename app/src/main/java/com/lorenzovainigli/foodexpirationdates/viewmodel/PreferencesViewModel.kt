@@ -27,6 +27,8 @@ class PreferencesViewModel @Inject constructor(): ViewModel() {
     private var themeMode = _themeMode.asStateFlow()
     private var _dynamicColors = MutableStateFlow(false)
     private var dynamicColors = _dynamicColors.asStateFlow()
+    private var _monochromeIcons = MutableStateFlow(true)
+    private var monochromeIcons = _monochromeIcons.asStateFlow()
 
     private var _topBarFont = MutableStateFlow(0)
     private var topbarFont = _topBarFont.asStateFlow()
@@ -124,4 +126,20 @@ class PreferencesViewModel @Inject constructor(): ViewModel() {
         _dynamicColors.value = colors
     }
 
+    fun getMonochromeIcons(context: Context): StateFlow<Boolean> {
+        viewModelScope.launch {
+            _monochromeIcons.value = PreferencesRepository.getMonochromeIcons(context)
+        }
+        return monochromeIcons
+    }
+
+    fun setMonochromeIcons(context: Context, icons: Boolean) {
+        viewModelScope.launch {
+            PreferencesRepository.setMonochromeIcons(
+                context = context,
+                monochromeIconsEnabled = icons
+            )
+        }
+        _monochromeIcons.value = icons
+    }
 }

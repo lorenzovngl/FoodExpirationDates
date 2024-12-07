@@ -91,6 +91,7 @@
     <string name="retry">Retry</string>
     <string name="scanning_error">Scanning error</string>
     <string name="opened">Opened</string>
+    <string name="monochrome_icons">Monochrome icons</string>
 
     <string-array name="example_foods">
         <item>Eggs</item>

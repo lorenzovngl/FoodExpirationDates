@@ -64,6 +64,8 @@ fun SettingsScreen(
         ?: PreferencesRepository.Companion.ThemeMode.SYSTEM.ordinal
     val dynamicColorsState = prefsViewModel?.getDynamicColors(context)?.collectAsState()?.value
         ?: false
+    val monochromeIconsState = prefsViewModel?.getMonochromeIcons(context)?.collectAsState()?.value
+        ?: true
     val topBarFontState = prefsViewModel?.getTopBarFont(context)?.collectAsState()?.value
         ?: PreferencesRepository.Companion.TopBarFont.NORMAL.ordinal
 
@@ -283,6 +285,21 @@ fun SettingsScreen(
                         .weight(0.1f)
                 )
             }
+        }
+        SettingsItem(
+            label = stringResource(R.string.monochrome_icons)
+        ) {
+            Spacer(
+                Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+            )
+            Switch(
+                checked = monochromeIconsState,
+                onCheckedChange = {
+                    prefsViewModel?.setMonochromeIcons(context, it)
+                }
+            )
         }
     }
 }
