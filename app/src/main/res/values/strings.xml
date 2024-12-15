@@ -112,6 +112,10 @@
     </string-array>
     <string name="screenshot_titles_barcode_scanner">Barcode scanner</string>
     <string name="screenshot_titles_made_with_heart">Made with ❤️</string>
+    <string name="apply">Apply</string>
+    <string name="select_language">Select language</string>
+    <string name="debug_options">Debug Options</string>
+    <string name="language">Language</string>
     <string-array name="time_span">
         <item>Days</item>
         <item>Months</item>

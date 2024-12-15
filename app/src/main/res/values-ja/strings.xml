@@ -109,4 +109,8 @@
     <string name="scanning_error">スキャンエラー</string>
     <string name="screenshot_titles_barcode_scanner">バーコードスキャナー</string>
     <string name="screenshot_titles_made_with_heart">♥で作られました</string>
+    <string name="apply">適用</string>
+    <string name="select_language">言語を選択</string>
+    <string name="debug_options">デバッグオプション</string>
+    <string name="language">言語</string>
 </resources>

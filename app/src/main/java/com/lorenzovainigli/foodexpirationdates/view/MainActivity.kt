@@ -1,5 +1,6 @@
 package com.lorenzovainigli.foodexpirationdates.view
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -19,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
+import com.lorenzovainigli.foodexpirationdates.model.LocaleHelper
 import com.lorenzovainigli.foodexpirationdates.model.NotificationManager
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.checkAndSetSecureFlags
@@ -98,6 +100,11 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        val locale = PreferencesRepository.getLanguage(newBase)
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, locale))
     }
 
 }

@@ -4,10 +4,13 @@ import android.content.Context
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.R
+import com.lorenzovainigli.foodexpirationdates.model.LocaleHelper
 import com.lorenzovainigli.foodexpirationdates.model.NotificationManager.Companion.CHANNEL_REMINDERS_ID
 import com.lorenzovainigli.foodexpirationdates.model.entity.computeExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.showNotification
 import kotlinx.coroutines.flow.first
 import java.util.Calendar
@@ -57,10 +60,16 @@ class CheckExpirationsWorker @Inject constructor(
         var message = ""
         if (sb.toString().length > 2)
             message = sb.toString().substring(0, sb.toString().length - 2) + "."
+        val context = if (BuildConfig.DEBUG) {
+            LocaleHelper.setLocale(
+                context = applicationContext,
+                language = PreferencesRepository.getLanguage(applicationContext)
+            )
+        } else applicationContext
         showNotification(
-            context = applicationContext,
+            context = context,
             channelId = CHANNEL_REMINDERS_ID,
-            title = applicationContext.getString(R.string.your_food_is_expiring),
+            title = context.getString(R.string.your_food_is_expiring),
             message = message
         )
         return Result.success()

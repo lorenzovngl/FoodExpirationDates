@@ -5,6 +5,7 @@ import android.os.Build
 import android.util.Log
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -37,7 +39,9 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
+import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.R
+import com.lorenzovainigli.foodexpirationdates.model.Language
 import com.lorenzovainigli.foodexpirationdates.model.NotificationManager
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.getScreenProtectionEnabled
@@ -46,6 +50,7 @@ import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.MainActivity
 import com.lorenzovainigli.foodexpirationdates.view.composable.AutoResizedText
 import com.lorenzovainigli.foodexpirationdates.view.composable.DateFormatDialog
+import com.lorenzovainigli.foodexpirationdates.view.composable.LanguagePickerDialog
 import com.lorenzovainigli.foodexpirationdates.view.composable.NotificationTimeBottomSheet
 import com.lorenzovainigli.foodexpirationdates.view.composable.SettingsItem
 import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
@@ -73,6 +78,9 @@ fun SettingsScreen(
         ?: PreferencesRepository.getAvailOtherDateFormats()[0]
     var sdf = SimpleDateFormat(dateFormat, context.resources.configuration.locales[0])
     var isDateFormatDialogOpened by remember {
+        mutableStateOf(false)
+    }
+    var isLanguagePickerDialogOpened by remember {
         mutableStateOf(false)
     }
 
@@ -114,6 +122,14 @@ fun SettingsScreen(
                     timePickerState.minute
                 )
                 isNotificationTimeBottomSheetOpen = false
+            }
+        )
+    }
+    prefsViewModel?.let {
+        LanguagePickerDialog(
+            isDialogOpen = isLanguagePickerDialogOpened,
+            onDismiss = {
+                isLanguagePickerDialogOpened = false
             }
         )
     }
@@ -300,6 +316,31 @@ fun SettingsScreen(
                     prefsViewModel?.setMonochromeIcons(context, it)
                 }
             )
+        }
+
+        if (BuildConfig.DEBUG) {
+            Text(
+                text = stringResource(R.string.debug_options),
+                style = MaterialTheme.typography.labelLarge
+            )
+            SettingsItem(
+                label = stringResource(R.string.language)
+            ) {
+                Spacer(
+                    Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                )
+                BasicText(
+                    modifier = Modifier.clickable {
+                        isLanguagePickerDialogOpened = true
+                    },
+                    text = Language.fromCode(PreferencesRepository.getLanguage(context)).label,
+                    style = MaterialTheme.typography.headlineSmall.copy(
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                )
+            }
         }
     }
 }
