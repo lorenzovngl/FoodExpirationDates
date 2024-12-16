@@ -111,4 +111,9 @@
     <string name="enable_screen_protection">Activar la protección de pantalla</string>
     <string name="protect_your_screen">Protege tu pantalla de capturas y grabaciones de pantalla.</string>
     <string name="privacy">Privacidad</string>
+    <string name="language">Idioma</string>
+    <string name="apply">Aplicar</string>
+    <string name="debug_options">Opciones de depuración</string>
+    <string name="monochrome_icons">Iconos monocromáticos</string>
+    <string name="select_language">Selecciona el idioma</string>
 </resources>
