@@ -189,9 +189,14 @@ class PreferencesRepository {
             context: Context,
             sharedPrefs: String = sharedPrefsName,
             dynamicColorsEnabled: Boolean
-        ) {
-            return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                .edit().putBoolean(keyDynamicColors, dynamicColorsEnabled).apply()
+        ): Boolean {
+            try {
+                context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
+                    .edit().putBoolean(keyDynamicColors, dynamicColorsEnabled).apply()
+                return true
+            } catch (_: Exception){
+                return false
+            }
         }
 
         fun getMonochromeIcons(
@@ -211,9 +216,14 @@ class PreferencesRepository {
             context: Context,
             sharedPrefs: String = sharedPrefsName,
             monochromeIconsEnabled: Boolean
-        ) {
-            return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                .edit().putBoolean(keyMonochromeIcons, monochromeIconsEnabled).apply()
+        ): Boolean {
+            try {
+                context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
+                    .edit().putBoolean(keyMonochromeIcons, monochromeIconsEnabled).apply()
+                return true
+            } catch (_: Exception){
+                return false
+            }
         }
 
         fun getLanguage(
