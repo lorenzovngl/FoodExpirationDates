@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Food Expiration Dates</string>
-    <string name="app_name_short">Food Expirations</string>
+    <string name="app_name">食品の期限リマインダー</string>
+    <string name="app_name_short">食品の期限</string>
     <string name="n_days_ago">%1$d日前</string>
     <string name="yesterday">昨日</string>
     <string name="today">今日</string>
     <string name="tomorrow">明日</string>
     <string name="in_n_days">%1$d日後</string>
     <string name="add_item">食品を追加</string>
+    <string name="protect_your_screen">画面をスクリーンショットや画面録画から保護する。</string>
     <string name="edit_item">食品を編集</string>
     <string name="food_name">食品名</string>
     <string name="expiration_date">賞味期限</string>
@@ -65,6 +66,7 @@
     <string name="top_bar_font_style">上部バーのフォントスタイル</string>
     <string name="behaviour">行動</string>
     <string name="appearance">外観</string>
+    <string name="privacy">プライバシー</string>
     <string name="send_an_email">メールを送信</string>
     <string name="contacts">連絡先</string>
     <string name="contacts_text">このアプリケーションに関する詳細な情報を入手したい場合、またはフィードバックの送信、バグ報告、機能リクエスト、単に開発者に連絡したい場合は、次のボタンを使用してメールを送信してください。\nバグレポートや機能リクエストがある場合は、このアプリケーションのGitHubリポジトリでissueを開くこともできます。</string>
@@ -113,4 +115,7 @@
     <string name="select_language">言語を選択</string>
     <string name="debug_options">デバッグオプション</string>
     <string name="language">言語</string>
+    <string name="enable_screen_protection">画面保護をオンにする</string>
+    <string name="opened">開封済み</string>
+    <string name="monochrome_icons">モノクロアイコン</string>
 </resources>

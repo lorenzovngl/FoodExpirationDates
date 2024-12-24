@@ -110,6 +110,7 @@
         <item>Colori dinamici</item>
     </string-array>
     <string name="screenshot_titles_barcode_scanner">Scanner di codici a barre</string>
+    <string name="screenshot_titles_made_with_heart">Made with ❤️</string>
     <string name="apply">Applica</string>
     <string name="select_language">Seleziona lingua</string>
     <string name="debug_options">Opzioni di debug</string>
@@ -118,4 +119,5 @@
         <item>Giorni</item>
         <item>Mesi</item>
     </string-array>
+    <string name="monochrome_icons">Icone monocromatiche</string>
 </resources>
