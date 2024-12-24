@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Scadenze alimenti</string>
+    <string name="app_name">Scadenze Alimenti</string>
     <string name="app_name_short">@string/app_name</string>
     <string name="n_days_ago">%1$d giorni fa</string>
     <string name="yesterday">Ieri</string>
