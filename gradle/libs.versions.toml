@@ -22,9 +22,10 @@ junit-jupiter = "5.11.4"
 kotlin = "2.1.0"
 ksp = "2.1.0-1.0.29"
 lifecycle-runtime-ktx = "2.8.7"
-navigation-compose = "2.8.4"
 mockito = "3.12.4"
 mockito-kotlin = "3.2.0"
+mockk = "1.13.5"
+navigation-compose = "2.8.4"
 opencsv = "5.9"
 paparazzi = "1.3.5"
 retrofit = "2.11.0"
@@ -81,6 +82,7 @@ material3 = { group = "androidx.compose.material3", name = "material3" }
 material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
 mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockito-kotlin" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 opencsv = { module = "com.opencsv:opencsv", version.ref = "opencsv" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
