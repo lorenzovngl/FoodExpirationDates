@@ -36,7 +36,7 @@ enum class Language(val code: String, val label: String) {
 object LocaleHelper {
 
     fun setLocale(context: Context, language: String): Context {
-        val locale = if (language == Language.SYSTEM.name) {
+        val locale = if (language == Language.SYSTEM.code) {
             Locale.getDefault()
         } else {
             Locale(language)
