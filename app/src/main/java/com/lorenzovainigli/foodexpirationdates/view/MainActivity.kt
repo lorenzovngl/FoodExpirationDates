@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
+import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.model.LocaleHelper
 import com.lorenzovainigli.foodexpirationdates.model.NotificationManager
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
@@ -103,8 +104,12 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun attachBaseContext(newBase: Context) {
-        val locale = PreferencesRepository.getLanguage(newBase)
-        super.attachBaseContext(LocaleHelper.setLocale(newBase, locale))
+        if (BuildConfig.DEBUG) {
+            val locale = PreferencesRepository.getLanguage(newBase)
+            super.attachBaseContext(LocaleHelper.setLocale(newBase, locale))
+        } else {
+            super.attachBaseContext(newBase)
+        }
     }
 
 }
