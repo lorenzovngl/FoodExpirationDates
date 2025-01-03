@@ -23,7 +23,8 @@ fun Navigation(
     activity: MainActivity? = null,
     navController: NavHostController,
     startDestination: String = Screen.MainScreen.route,
-    showSnackbar: MutableState<Boolean>
+    showSnackbar: MutableState<Boolean>,
+    searchQuery: MutableState<String>
 ) {
     NavHost(
         modifier = Modifier.fillMaxSize(),
@@ -34,7 +35,8 @@ fun Navigation(
             MainScreen(
                 activity = activity,
                 navController = navController,
-                showSnackbar = showSnackbar
+                showSnackbar = showSnackbar,
+                searchQuery
             )
         }
         composable(

@@ -1,5 +1,6 @@
 package com.lorenzovainigli.foodexpirationdates.view.preview
 
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
@@ -18,6 +19,7 @@ import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.SettingsScreen
 
 class DefaultPreviews {
+    @SuppressLint("UnrememberedMutableState")
     @RequiresApi(Build.VERSION_CODES.O)
     @PreviewLightDark
     @Composable
@@ -29,12 +31,13 @@ class DefaultPreviews {
             val showSnackbar = remember {
                 mutableStateOf(false)
             }
-            MyScaffold(navController = navController, showSnackbar = showSnackbar) {
-                Navigation(navController = navController, showSnackbar = showSnackbar, startDestination = Screen.AboutScreen.route)
+            MyScaffold(navController = navController, showSnackbar = showSnackbar, searchQuery = mutableStateOf("")) {
+                Navigation(navController = navController, showSnackbar = showSnackbar, startDestination = Screen.AboutScreen.route, searchQuery = mutableStateOf(""))
             }
         }
     }
 
+    @SuppressLint("UnrememberedMutableState")
     @RequiresApi(Build.VERSION_CODES.O)
     @PreviewLightDark
     @PreviewDynamicColors
@@ -45,12 +48,13 @@ class DefaultPreviews {
             val showSnackbar = remember {
                 mutableStateOf(false)
             }
-            MyScaffold(navController = navController, showSnackbar = showSnackbar) {
-                MainScreen(navController = navController)
+            MyScaffold(navController = navController, showSnackbar = showSnackbar, searchQuery = mutableStateOf("")) {
+                MainScreen(navController = navController, searchQuery = mutableStateOf(""))
             }
         }
     }
 
+    @SuppressLint("UnrememberedMutableState")
     @RequiresApi(Build.VERSION_CODES.O)
     @PreviewLightDark
     @Composable
@@ -62,12 +66,13 @@ class DefaultPreviews {
             val showSnackbar = remember {
                 mutableStateOf(false)
             }
-            MyScaffold(navController = navController, showSnackbar = showSnackbar) {
+            MyScaffold(navController = navController, showSnackbar = showSnackbar, searchQuery = mutableStateOf("")) {
                 InsertScreen(navController = navController)
             }
         }
     }
 
+    @SuppressLint("UnrememberedMutableState")
     @RequiresApi(Build.VERSION_CODES.O)
     @PreviewLightDark
     @Composable
@@ -79,12 +84,13 @@ class DefaultPreviews {
             val showSnackbar = remember {
                 mutableStateOf(false)
             }
-            MyScaffold(navController = navController, showSnackbar = showSnackbar) {
+            MyScaffold(navController = navController, showSnackbar = showSnackbar, searchQuery = mutableStateOf("")) {
                 SettingsScreen()
             }
         }
     }
 
+    @SuppressLint("UnrememberedMutableState")
     @RequiresApi(Build.VERSION_CODES.O)
     @PreviewLightDark
     @Composable
@@ -96,7 +102,7 @@ class DefaultPreviews {
             val showSnackbar = remember {
                 mutableStateOf(false)
             }
-            MyScaffold(navController = navController, showSnackbar = showSnackbar) {
+            MyScaffold(navController = navController, showSnackbar = showSnackbar, searchQuery = mutableStateOf("")) {
                 InfoScreen()
             }
         }
