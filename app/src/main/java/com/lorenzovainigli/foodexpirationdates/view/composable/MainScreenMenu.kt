@@ -3,22 +3,36 @@ package com.lorenzovainigli.foodexpirationdates.view.composable
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.SearchBar
+import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.sp
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.util.FirebaseUtils
 import com.lorenzovainigli.foodexpirationdates.util.OperationResult
@@ -30,9 +44,11 @@ data class MenuItem(
     val onClick: () -> Unit = {}
 )
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreenMenu(
     activity: MainActivity? = null,
+    searchQuery: MutableState<String>
 ) {
     val viewModel = activity?.viewModel
     val exportTaskSuccess = viewModel?.exportTaskSuccess?.value
@@ -53,92 +69,127 @@ fun MainScreenMenu(
                 ?: OperationResult(state = OperationResult.State.NOT_PERFORMED)
         }
     }
-    IconButton(
-        onClick = { isExpanded = true }
-    ) {
-        Icon(
-            imageVector = Icons.Default.MoreVert,
-            contentDescription = stringResource(id = R.string.back),
-            tint = MaterialTheme.colorScheme.primary
-        )
-    }
-    DropdownMenu(
-        expanded = isExpanded,
-        onDismissRequest = {
-            isExpanded = false
-        }
-    ) {
-        arrayOf(
-            MenuItem(
-                iconId = R.drawable.ic_export,
-                label = stringResource(R.string.export_data),
-                onClick = {
-                    if (viewModel != null) {
-                        viewModel.exportData(context)
-                    } else {
-                        FirebaseUtils.logToCrashlytics("Cannot export data, viewModel is null")
-                    }
+
+
+//    TopAppBar(
+//        title = {
+//            BasicTextField(
+//                value = searchQuery,
+//                onValueChange = { searchQuery = it },
+//                textStyle = TextStyle(color = Color.White, fontSize = 18.sp),
+//                modifier = Modifier.fillMaxWidth()
+//            )
+//        },
+//        backgroundColor = MaterialTheme.colorScheme.primary
+//    )
+
+
+    var isSearchBarExpanded by remember { mutableStateOf(false) }
+
+    SearchBar(
+        query = searchQuery.value,
+        onQueryChange = { searchQuery.value = it },
+        onSearch = { /* Trigger search logic if needed */ },
+        active = isSearchBarExpanded,
+        onActiveChange = { isSearchBarExpanded = it },
+        placeholder = { Text("Search...") },
+        leadingIcon = {
+            Icon(Icons.Default.Search, contentDescription = null)
+        },
+        trailingIcon = {
+            IconButton(
+                onClick = { isExpanded = true }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.MoreVert,
+                    contentDescription = stringResource(id = R.string.back),
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
+            DropdownMenu(
+                expanded = isExpanded,
+                onDismissRequest = {
                     isExpanded = false
                 }
-            ),
-            MenuItem(
-                iconId = R.drawable.ic_import,
-                label = stringResource(R.string.import_data),
-                onClick = {
-                    if (filePickerLauncher != null){
-                        filePickerLauncher.launch(arrayOf("*/*"))
-                    } else {
-                        FirebaseUtils.logToCrashlytics("Cannot import data, filePickerLauncher is null")
-                    }
-                    isExpanded = false
-                }
-            )
-        ).forEach {
-            DropdownMenuItem(
-                leadingIcon = {
-                    Icon(
-                        painter = painterResource(id = it.iconId),
-                        contentDescription = stringResource(id = R.string.back),
-                        tint = MaterialTheme.colorScheme.primary
+            ) {
+                arrayOf(
+                    MenuItem(
+                        iconId = R.drawable.ic_export,
+                        label = stringResource(R.string.export_data),
+                        onClick = {
+                            if (viewModel != null) {
+                                viewModel.exportData(context)
+                            } else {
+                                FirebaseUtils.logToCrashlytics("Cannot export data, viewModel is null")
+                            }
+                            isExpanded = false
+                        }
+                    ),
+                    MenuItem(
+                        iconId = R.drawable.ic_import,
+                        label = stringResource(R.string.import_data),
+                        onClick = {
+                            if (filePickerLauncher != null){
+                                filePickerLauncher.launch(arrayOf("*/*"))
+                            } else {
+                                FirebaseUtils.logToCrashlytics("Cannot import data, filePickerLauncher is null")
+                            }
+                            isExpanded = false
+                        }
                     )
-                },
-                text = {
-                    Text(it.label)
-                },
-                onClick = it.onClick
-            )
-        }
-    }
-    if (notifyExportTaskDone == true) {
-        if (exportTaskSuccess == true) {
+                ).forEach {
+                    DropdownMenuItem(
+                        leadingIcon = {
+                            Icon(
+                                painter = painterResource(id = it.iconId),
+                                contentDescription = stringResource(id = R.string.back),
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        },
+                        text = {
+                            Text(it.label)
+                        },
+                        onClick = it.onClick
+                    )
+                }
+            }
+            if (notifyExportTaskDone == true) {
+                if (exportTaskSuccess == true) {
 //            SuccessDialog(
 //                onDismiss = {
 //                    viewModel.resetNotifyExportTaskDone()
 //                },
 //                message = stringResource(id = R.string.data_export_success)
 //            )
-        } else {
-            ErrorDialog(
-                onDismiss = {
-                    viewModel.resetNotifyExportTaskDone()
-                },
-                message = stringResource(id = R.string.data_export_error)
-            )
-        }
+                } else {
+                    ErrorDialog(
+                        onDismiss = {
+                            viewModel.resetNotifyExportTaskDone()
+                        },
+                        message = stringResource(id = R.string.data_export_error)
+                    )
+                }
+            }
+            when (operationResult.value.state){
+                OperationResult.State.FAILURE -> ErrorDialog(
+                    onDismiss = {
+                        operationResult.value = OperationResult()
+                    },
+                    message = operationResult.value.message
+                )
+                OperationResult.State.SUCCESS -> SuccessDialog(
+                    onDismiss = {
+                        operationResult.value = OperationResult()
+                    },
+                    message = operationResult.value.message
+                )
+                OperationResult.State.NOT_PERFORMED -> {}
+            }
+        },
+        colors = SearchBarDefaults.colors(),
+        modifier = Modifier.fillMaxWidth()
+    ) {
+
     }
-    when (operationResult.value.state){
-        OperationResult.State.FAILURE -> ErrorDialog(
-            onDismiss = {
-                operationResult.value = OperationResult()
-            },
-            message = operationResult.value.message
-        )
-        OperationResult.State.SUCCESS -> SuccessDialog(
-            onDismiss = {
-                operationResult.value = OperationResult()
-            },
-            message = operationResult.value.message
-        )
-        OperationResult.State.NOT_PERFORMED -> {}
-    }
+
 }

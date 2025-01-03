@@ -1,5 +1,6 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable.screen
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -22,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -45,7 +47,8 @@ import kotlin.math.min
 fun MainScreen(
     activity: MainActivity? = null,
     navController: NavHostController,
-    showSnackbar: MutableState<Boolean>? = null
+    showSnackbar: MutableState<Boolean>? = null,
+    searchQuery: MutableState<String>
 ) {
     Box(
         modifier = Modifier
@@ -54,16 +57,31 @@ fun MainScreen(
     ) {
         val itemsState = activity?.viewModel?.getDates()?.collectAsState(emptyList())
         val items = itemsState?.value ?: getItemsForPreview(LocalContext.current)
-        if (items.isNotEmpty()) {
+
+        val filteredItems = items.filter {
+            it.foodName.contains(searchQuery.value, ignoreCase = true)
+        }
+        if (filteredItems.isNotEmpty()) {
             ListOfItems(
                 activity = activity,
-                items = items,
-                showSnackbar = showSnackbar,
-                navController = navController
+                items = filteredItems,
+                navController = navController,
+                showSnackbar = showSnackbar
             )
         } else {
             EmptyList()
         }
+
+//        if (items.isNotEmpty()) {
+//            ListOfItems(
+//                activity = activity,
+//                items = items,
+//                showSnackbar = showSnackbar,
+//                navController = navController
+//            )
+//        } else {
+//            EmptyList()
+//        }
         FloatingActionButton(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
@@ -82,6 +100,7 @@ fun MainScreen(
     }
 }
 
+@SuppressLint("UnrememberedMutableState")
 @RequiresApi(Build.VERSION_CODES.O)
 @Preview
 @Composable
@@ -89,7 +108,8 @@ fun MainScreenPreview() {
     FoodExpirationDatesTheme {
         Surface {
             MainScreen(
-                navController = rememberNavController()
+                navController = rememberNavController(),
+                searchQuery = mutableStateOf("")
             )
         }
     }

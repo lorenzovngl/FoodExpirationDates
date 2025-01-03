@@ -68,6 +68,8 @@ class MainActivity : ComponentActivity() {
                 darkScrim = android.graphics.Color.TRANSPARENT,
                 detectDarkMode = { _ -> isInDarkTheme }
             )
+            val searchQuery = remember { mutableStateOf("") }
+
             enableEdgeToEdge(
                 statusBarStyle = systemBarStyle,
                 navigationBarStyle = systemBarStyle
@@ -88,12 +90,14 @@ class MainActivity : ComponentActivity() {
                     MyScaffold(
                         activity = this,
                         navController = navController,
-                        showSnackbar = showSnackbar
+                        showSnackbar = showSnackbar,
+                        searchQuery = searchQuery
                     ) {
                         Navigation(
                             activity = this,
                             navController = navController,
-                            showSnackbar = showSnackbar
+                            showSnackbar = showSnackbar,
+                            searchQuery = searchQuery
                         )
                     }
                 }
