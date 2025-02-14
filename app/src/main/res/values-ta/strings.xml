@@ -21,7 +21,7 @@
     <string name="about_this_app">இந்த செயலியைப் பற்றி</string>
     <string name="privacy_policy">தனியுரிமைக் கொள்கை</string>
     <string name="back">பின்செள்</string>
-    <string name="no_items_found">உருப்படிகள் எதுவும் செருகப்படவில்லை</string>
+    <string name="no_items_found">உருப்படிகள் எதுவும் கிடைக்கவில்லை</string>
     <string name="please_insert_one">தயவுசெய்து ஒன்றைச் உள்ளிடவும்</string>
     <string name="menu">வகைப்பட்டியல்</string>
     <string name="settings">அமைப்புகள்</string>
@@ -59,8 +59,8 @@
     <string name="date_format_desc">உருப்படிகளில் நீங்கள் பார்க்க விரும்பும் தேதியின் வடிவம்.</string>
     <string name="other_formats">பிற வடிவங்கள்</string>
     <string name="your_food_is_expiring">உங்கள் உணவு காலாவதியாகிறது!</string>
-    <string name="undo">செய்ததை நீக்கு</string>
-    <string name="normal">இயல்பானது</string>
+    <string name="undo">செயல்தவிர்</string>
+    <string name="normal">சாதாரண</string>
     <string name="bold">தடித்தது</string>
     <string name="behaviour">நடத்தை</string>
     <string name="appearance">தோற்றம்</string>
@@ -70,7 +70,7 @@
     <string name="connection_error">இணைபில் பிழை</string>
     <string name="export_data">தரவு ஏற்றுமதி செய்க</string>
     <string name="getting_product_info">பொருளின் தகவலைப் பெறுகிறது…</string>
-    <string name="please_scan_a_barcode">பார்கோடை ஸ்கேன் செய்யவும்</string>
+    <string name="please_scan_a_barcode">தயவுசெய்து ஒரு பார்கோடு ச்கேன் செய்யுங்கள்</string>
     <string name="no_internet_connection">இணைய இணைப்பு இல்லை</string>
     <string name="retry">மீண்டும் முயற்சிக்கவும்</string>
     <string name="screenshot_titles_made_with_heart">❤️ கொண்டு உருவாக்கப்பட்டது</string>
@@ -86,4 +86,15 @@
     <string name="ok">சரி</string>
     <string name="product_not_found">பொருள் கிடைக்கவில்லை</string>
     <string name="scanning_error">ஸ்கேனிங் பிழை</string>
+    <string name="apply">இடு</string>
+    <string name="debug_options">பிழைத்திருத்த விருப்பங்கள்</string>
+    <string name="dynamic_colors">மாறும் வண்ணங்கள்</string>
+    <string name="select_language">மொழியைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="language">மொழி</string>
+    <string name="optional">விரும்பினால்</string>
+    <string name="enable_screen_protection">திரை பாதுகாப்பை இயக்கவும்</string>
+    <string name="protect_your_screen">திரை சாட்கள் மற்றும் திரை பதிவிலிருந்து உங்கள் திரையை பாதுகாக்கவும்.</string>
+    <string name="privacy">தனியுரிமை</string>
+    <string name="opened">திறக்கப்பட்டது</string>
+    <string name="monochrome_icons">ஒரே வண்ணமுடைய சின்னங்கள்</string>
 </resources>
