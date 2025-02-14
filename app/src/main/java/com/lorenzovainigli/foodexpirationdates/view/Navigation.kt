@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -24,7 +25,7 @@ fun Navigation(
     navController: NavHostController,
     startDestination: String = Screen.MainScreen.route,
     showSnackbar: MutableState<Boolean>,
-    searchQuery: MutableState<String>
+    searchQuery: MutableState<String> = mutableStateOf("")
 ) {
     NavHost(
         modifier = Modifier.fillMaxSize(),

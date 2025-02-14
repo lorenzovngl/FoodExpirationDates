@@ -1,6 +1,5 @@
 package com.lorenzovainigli.foodexpirationdates.view.preview
 
-import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
@@ -75,7 +74,6 @@ fun PlayStoreScreenshot(
     }
 }
 
-@SuppressLint("UnrememberedMutableState")
 @RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
@@ -88,12 +86,11 @@ fun PlayStoreScreenshotPreview() {
             val showSnackbar = remember {
                 mutableStateOf(false)
             }
-            MyScaffold(navController = navController, showSnackbar = showSnackbar, searchQuery = mutableStateOf("")) {
+            MyScaffold(navController = navController, showSnackbar = showSnackbar) {
                 Navigation(
                     navController = navController ,
                     showSnackbar = showSnackbar,
                     startDestination = Screen.AboutScreen.route,
-                    searchQuery = mutableStateOf("")
                 )
             }
         }

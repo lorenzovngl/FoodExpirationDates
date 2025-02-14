@@ -1,6 +1,5 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable.screen
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -48,7 +47,7 @@ fun MainScreen(
     activity: MainActivity? = null,
     navController: NavHostController,
     showSnackbar: MutableState<Boolean>? = null,
-    searchQuery: MutableState<String>
+    searchQuery: MutableState<String> = mutableStateOf("")
 ) {
     Box(
         modifier = Modifier
@@ -72,16 +71,6 @@ fun MainScreen(
             EmptyList()
         }
 
-//        if (items.isNotEmpty()) {
-//            ListOfItems(
-//                activity = activity,
-//                items = items,
-//                showSnackbar = showSnackbar,
-//                navController = navController
-//            )
-//        } else {
-//            EmptyList()
-//        }
         FloatingActionButton(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
@@ -100,7 +89,6 @@ fun MainScreen(
     }
 }
 
-@SuppressLint("UnrememberedMutableState")
 @RequiresApi(Build.VERSION_CODES.O)
 @Preview
 @Composable
@@ -109,7 +97,6 @@ fun MainScreenPreview() {
         Surface {
             MainScreen(
                 navController = rememberNavController(),
-                searchQuery = mutableStateOf("")
             )
         }
     }

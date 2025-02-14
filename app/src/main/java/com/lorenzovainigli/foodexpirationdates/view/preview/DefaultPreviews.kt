@@ -1,6 +1,5 @@
 package com.lorenzovainigli.foodexpirationdates.view.preview
 
-import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
@@ -19,7 +18,6 @@ import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.SettingsScreen
 
 class DefaultPreviews {
-    @SuppressLint("UnrememberedMutableState")
     @RequiresApi(Build.VERSION_CODES.O)
     @PreviewLightDark
     @Composable
@@ -31,13 +29,12 @@ class DefaultPreviews {
             val showSnackbar = remember {
                 mutableStateOf(false)
             }
-            MyScaffold(navController = navController, showSnackbar = showSnackbar, searchQuery = mutableStateOf("")) {
-                Navigation(navController = navController, showSnackbar = showSnackbar, startDestination = Screen.AboutScreen.route, searchQuery = mutableStateOf(""))
+            MyScaffold(navController = navController, showSnackbar = showSnackbar) {
+                Navigation(navController = navController, showSnackbar = showSnackbar, startDestination = Screen.AboutScreen.route)
             }
         }
     }
 
-    @SuppressLint("UnrememberedMutableState")
     @RequiresApi(Build.VERSION_CODES.O)
     @PreviewLightDark
     @PreviewDynamicColors
@@ -54,7 +51,6 @@ class DefaultPreviews {
         }
     }
 
-    @SuppressLint("UnrememberedMutableState")
     @RequiresApi(Build.VERSION_CODES.O)
     @PreviewLightDark
     @Composable
@@ -72,7 +68,6 @@ class DefaultPreviews {
         }
     }
 
-    @SuppressLint("UnrememberedMutableState")
     @RequiresApi(Build.VERSION_CODES.O)
     @PreviewLightDark
     @Composable
@@ -90,7 +85,6 @@ class DefaultPreviews {
         }
     }
 
-    @SuppressLint("UnrememberedMutableState")
     @RequiresApi(Build.VERSION_CODES.O)
     @PreviewLightDark
     @Composable

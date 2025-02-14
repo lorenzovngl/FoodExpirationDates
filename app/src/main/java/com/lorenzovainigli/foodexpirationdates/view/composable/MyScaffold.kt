@@ -1,6 +1,5 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable
 
-import android.annotation.SuppressLint
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
@@ -9,20 +8,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -62,7 +57,7 @@ fun MyScaffold(
     navController: NavHostController,
     navDestination: String? = null,
     showSnackbar: MutableState<Boolean>,
-    searchQuery : MutableState<String>,
+    searchQuery : MutableState<String> = mutableStateOf(""),
     content: @Composable () -> Unit,
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
@@ -161,7 +156,6 @@ fun MyScaffold(
     }
 }
 
-@SuppressLint("UnrememberedMutableState")
 @RequiresApi(Build.VERSION_CODES.O)
 @PreviewLightDark
 @PreviewScreenSizes
@@ -176,12 +170,10 @@ fun MyScaffoldPreview() {
             MyScaffold(
                 navController = navController,
                 showSnackbar = showSnackbar,
-                searchQuery = mutableStateOf("")
             ) {
 
                 MainScreen(
                     navController = rememberNavController(),
-                    searchQuery = mutableStateOf("")
                 )
             }
         }
