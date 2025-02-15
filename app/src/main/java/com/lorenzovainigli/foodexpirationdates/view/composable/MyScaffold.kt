@@ -57,13 +57,15 @@ fun MyScaffold(
     navController: NavHostController,
     navDestination: String? = null,
     showSnackbar: MutableState<Boolean>,
-    content: @Composable () -> Unit
+    searchQuery : MutableState<String> = mutableStateOf(""),
+    content: @Composable () -> Unit,
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     val context = LocalContext.current
+
     if (showSnackbar.value){
         coroutineScope.launch {
             try {
@@ -118,7 +120,7 @@ fun MyScaffold(
                 },
                 actions = {
                     if (destination?.contains(Screen.MainScreen.route) == true) {
-                        MainScreenMenu(activity)
+                        MainScreenMenu(activity, searchQuery)
                     }
                 },
                 navigationIcon = {
@@ -167,10 +169,11 @@ fun MyScaffoldPreview() {
             }
             MyScaffold(
                 navController = navController,
-                showSnackbar = showSnackbar
+                showSnackbar = showSnackbar,
             ) {
+
                 MainScreen(
-                    navController = rememberNavController()
+                    navController = rememberNavController(),
                 )
             }
         }
