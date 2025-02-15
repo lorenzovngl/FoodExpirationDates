@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Food Expiration Dates</string>
     <string name="app_name_short">Food Expirations</string>
@@ -92,7 +93,6 @@
     <string name="scanning_error">Scanning error</string>
     <string name="opened">Opened</string>
     <string name="monochrome_icons">Monochrome icons</string>
-
     <string-array name="example_foods">
         <item>Eggs</item>
         <item>Cheese</item>

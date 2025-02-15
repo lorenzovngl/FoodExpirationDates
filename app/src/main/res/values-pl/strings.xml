@@ -105,4 +105,15 @@
     <string name="product_not_found">Nie znaleziono produktu</string>
     <string name="scanning_error">Błąd podczas skanowania</string>
     <string name="retry">Spróbuj ponownie</string>
+    <string name="apply">Aplikuj</string>
+    <string name="select_language">Wybierz język</string>
+    <string name="debug_options">Opcje debugowania</string>
+    <string name="language">Język</string>
+    <string name="screenshot_titles_barcode_scanner">Skaner kodów kreskowych</string>
+    <string name="enable_screen_protection">Włącz ochronę danych</string>
+    <string name="protect_your_screen">Zablokuj możliwość robienia zrzutów ekranu i nagrywania ekranu.</string>
+    <string name="privacy">Prywatność</string>
+    <string name="opened">Otwarte</string>
+    <string name="screenshot_titles_made_with_heart">Zrobione z ❤️</string>
+    <string name="monochrome_icons">Ikony monochromatyczne</string>
 </resources>
