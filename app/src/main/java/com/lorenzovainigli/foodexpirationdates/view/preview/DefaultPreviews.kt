@@ -45,8 +45,8 @@ class DefaultPreviews {
             val showSnackbar = remember {
                 mutableStateOf(false)
             }
-            MyScaffold(navController = navController, showSnackbar = showSnackbar, searchQuery = mutableStateOf("")) {
-                MainScreen(navController = navController, searchQuery = mutableStateOf(""))
+            MyScaffold(navController = navController, showSnackbar = showSnackbar) {
+                MainScreen(navController = navController)
             }
         }
     }
@@ -62,7 +62,7 @@ class DefaultPreviews {
             val showSnackbar = remember {
                 mutableStateOf(false)
             }
-            MyScaffold(navController = navController, showSnackbar = showSnackbar, searchQuery = mutableStateOf("")) {
+            MyScaffold(navController = navController, showSnackbar = showSnackbar) {
                 InsertScreen(navController = navController)
             }
         }
@@ -79,7 +79,7 @@ class DefaultPreviews {
             val showSnackbar = remember {
                 mutableStateOf(false)
             }
-            MyScaffold(navController = navController, showSnackbar = showSnackbar, searchQuery = mutableStateOf("")) {
+            MyScaffold(navController = navController, showSnackbar = showSnackbar) {
                 SettingsScreen()
             }
         }
@@ -96,7 +96,7 @@ class DefaultPreviews {
             val showSnackbar = remember {
                 mutableStateOf(false)
             }
-            MyScaffold(navController = navController, showSnackbar = showSnackbar, searchQuery = mutableStateOf("")) {
+            MyScaffold(navController = navController, showSnackbar = showSnackbar) {
                 InfoScreen()
             }
         }

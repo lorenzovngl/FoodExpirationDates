@@ -90,7 +90,7 @@ fun PlayStoreScreenshotPreview() {
                 Navigation(
                     navController = navController ,
                     showSnackbar = showSnackbar,
-                    startDestination = Screen.AboutScreen.route,
+                    startDestination = Screen.AboutScreen.route
                 )
             }
         }

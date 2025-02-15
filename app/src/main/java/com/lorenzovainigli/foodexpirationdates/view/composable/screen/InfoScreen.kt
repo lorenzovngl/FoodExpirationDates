@@ -38,7 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.android.datatransport.BuildConfig
+import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.DEVELOPER_EMAIL
 import com.lorenzovainigli.foodexpirationdates.GITHUB_URL
 import com.lorenzovainigli.foodexpirationdates.PLAY_STORE_URL
