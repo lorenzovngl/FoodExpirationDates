@@ -109,4 +109,9 @@
     <string name="privacy">Datenschutz</string>
     <string name="opened">Geöffnet</string>
     <string name="screenshot_titles_barcode_scanner">Strichcode-Scanner</string>
+    <string name="apply">Anwenden</string>
+    <string name="select_language">Sprache auswählen</string>
+    <string name="debug_options">Debug-Optionen</string>
+    <string name="language">Sprache</string>
+    <string name="monochrome_icons">Monochrome Symbole</string>
 </resources>
