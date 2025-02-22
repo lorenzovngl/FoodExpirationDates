@@ -66,6 +66,8 @@ fun MyScaffold(
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     val context = LocalContext.current
 
+    val noBottomBarRoutes = listOf(Screen.InsertScreen.route + "?itemId={itemId}")
+
     if (showSnackbar.value){
         coroutineScope.launch {
             try {
@@ -140,10 +142,13 @@ fun MyScaffold(
             )
         },
         bottomBar = {
-            MyBottomAppBar(
-                navController = navController,
-                currentDestination = navDestination ?: currentBackStackEntry?.destination?.route
-            )
+            val destination = navDestination ?: currentBackStackEntry?.destination?.route
+            if (destination !in noBottomBarRoutes) {
+                MyBottomAppBar(
+                    navController = navController,
+                    currentDestination = navDestination ?: currentBackStackEntry?.destination?.route
+                )
+            }
         }
     ) { padding ->
         Column(
