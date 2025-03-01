@@ -119,7 +119,7 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 <a href="https://github.com/3limssmile"><img src="https://avatars.githubusercontent.com/3limssmile" alt="@3limssmile" height="32" width="32"></a>
 <a href="https://github.com/ngocanhtve"><img src="https://avatars.githubusercontent.com/ngocanhtve" alt="@ngocanhtve" height="32" width="32"></a>
 <a href="https://github.com/kuragehimekurara1"><img src="https://avatars.githubusercontent.com/kuragehimekurara1" alt="@kuragehimekurara1" height="32" width="32"></a>
-<a href="https://hosted.weblate.org/user/gallegonovato/"><img src="https://hosted.weblate.org/avatar/128/gallegonovato.png" alt="@gallegonovato" height="32" width="32"></a>
+<!--<a href="https://hosted.weblate.org/user/gallegonovato/"><img src="https://hosted.weblate.org/avatar/128/gallegonovato.png" alt="@gallegonovato" height="32" width="32"></a>-->
 <a href="https://hosted.weblate.org/user/gnu-ewm/"><img src="https://hosted.weblate.org/avatar/128/gnu-ewm.png" alt="@gnu-ewm" height="32" width="32"></a>
 <a href="https://github.com/oersen"><img src="https://avatars.githubusercontent.com/oersen" alt="@oersen" height="32" width="32"></a>
 <a href="https://hosted.weblate.org/user/hugoalh/"><img src="https://hosted.weblate.org/avatar/128/hugoalh.png" alt="@hugoalh" height="32" width="32"></a>
@@ -128,6 +128,7 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 <a href="https://github.com/anuragkanojiya1"><img src="https://avatars.githubusercontent.com/anuragkanojiya1" alt="@anuragkanojiya1" height="32" width="32"></a>
 <a href="https://github.com/PrakashIrom"><img src="https://avatars.githubusercontent.com/PrakashIrom" alt="@PrakashIrom" height="32" width="32"></a>
 <a href="https://github.com/serAKL16lysA"><img src="https://avatars.githubusercontent.com/serAKL16lysA" alt="@serAKL16lysA" height="32" width="32"></a>
+<a href="https://github.com/aritra-tech"><img src="https://avatars.githubusercontent.com/aritra-tech" alt="@aritra-tech" height="32" width="32"></a>
 
 ## ❤️ Support
 
