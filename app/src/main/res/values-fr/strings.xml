@@ -85,4 +85,11 @@
         <item>Jours</item>
         <item>Mois</item>
     </string-array>
+    <string name="notification_time_desc">Chaque jour vous allez recevoir une notification avec une liste de vos items:\n- sont déjà périmé\n- qui expire au jour présent\n- qui a une journée restante jusqu\'à la date de péremption</string>
+    <string name="enable_screen_protection">Activer la protection d\'écran</string>
+    <string name="protect_your_screen">Protéger son écran contre les captures et les enregistrement d\'écran</string>
+    <string name="date_format_desc">Le format de dates que vous préférez voir sur les items.</string>
+    <string name="privacy">Confidentialité</string>
+    <string name="contacts">Contacts</string>
+    <string name="ok">OK</string>
 </resources>
