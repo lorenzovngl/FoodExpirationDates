@@ -230,7 +230,7 @@ fun ContributorsList(
 ) {
     val contributorsText = remember {
         contributors.joinToString(separator = "\n") {
-            "${it.name} - ${it.platform.url.substring(0, 1)}/@${it.username}".asListItem()
+            "${it.name} - ${it.platform.url.substring(0, 1)}/@${it.username}"
         }
     }
     Column(modifier = modifier.fillMaxWidth()) {
@@ -256,9 +256,13 @@ fun ContributorsList(
             fontSize = 12.sp,
             color = Color.Gray
         )
+        val fontSize = 12.sp
         Text(
             modifier = Modifier.fillMaxWidth(),
-            text = contributorsText
+            text = contributorsText,
+            textAlign = TextAlign.Center,
+            fontSize = fontSize,
+            lineHeight = fontSize * 1.5
         )
     }
 }
