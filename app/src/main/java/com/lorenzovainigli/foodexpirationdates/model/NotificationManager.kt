@@ -61,8 +61,8 @@ class NotificationManager {
                 ) { isGranted: Boolean ->
                     if (BuildConfig.DEBUG) {
                         if (isGranted) {
-                            Toast.makeText(activity, "Permission granted", Toast.LENGTH_SHORT)
-                                .show()
+//                            Toast.makeText(activity, "Permission granted", Toast.LENGTH_SHORT)
+//                                .show()
                         } else {
                             Toast.makeText(activity, "Permission not granted", Toast.LENGTH_SHORT)
                                 .show()
