@@ -3,6 +3,11 @@ package com.lorenzovainigli.foodexpirationdates.view.composable.screen
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,8 +15,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material3.FloatingActionButton
@@ -57,17 +62,24 @@ fun MainScreen(
         val itemsState = activity?.viewModel?.getDates()?.collectAsState(emptyList())
         val items = itemsState?.value ?: getItemsForPreview(LocalContext.current)
 
-        val filteredItems = items.filter {
-            it.foodName.contains(searchQuery.value, ignoreCase = true)
-        }
-        if (filteredItems.isNotEmpty()) {
+        AnimatedVisibility(
+            visible = items.isNotEmpty(),
+            enter = fadeIn() + expandVertically(),
+            exit = fadeOut() + shrinkVertically()
+        ) {
             ListOfItems(
                 activity = activity,
-                items = filteredItems,
+                items = items,
                 navController = navController,
-                showSnackbar = showSnackbar
+                showSnackbar = showSnackbar,
+                searchQuery = searchQuery
             )
-        } else {
+        }
+        AnimatedVisibility(
+            visible = items.isEmpty(),
+            enter = fadeIn() + expandVertically(),
+            exit = fadeOut() + shrinkVertically()
+        ) {
             EmptyList()
         }
 
@@ -107,24 +119,32 @@ fun ListOfItems(
     activity: MainActivity? = null,
     items: List<ExpirationDate>,
     navController: NavHostController,
-    showSnackbar: MutableState<Boolean>?
+    showSnackbar: MutableState<Boolean>?,
+    searchQuery: MutableState<String> = mutableStateOf("")
 ) {
-    Column(
-        modifier = Modifier.verticalScroll(rememberScrollState())
-    ) {
-        for (item in items) {
-            FoodCard(
-                item = item,
-                onClickEdit = {
-                    navController.navigate(Screen.InsertScreen.route + "?itemId=${item.id}")
-                },
-                onClickDelete = {
-                    showSnackbar?.value = true
-                    activity?.viewModel?.deleteExpirationDate(item)
-                }
-            )
+    LazyColumn {
+        items(items, key = { it.id }) { item ->
+            AnimatedVisibility(
+                modifier = Modifier.animateItem(),
+                visible = item.foodName.contains(searchQuery.value, ignoreCase = true),
+                enter = fadeIn() + expandVertically(),
+                exit = fadeOut() + shrinkVertically()
+            ) {
+                FoodCard(
+                    item = item,
+                    onClickEdit = {
+                        navController.navigate(Screen.InsertScreen.route + "?itemId=${item.id}")
+                    },
+                    onClickDelete = {
+                        showSnackbar?.value = true
+                        activity?.viewModel?.deleteExpirationDate(item)
+                    }
+                )
+            }
         }
-        Spacer(modifier = Modifier.height(70.dp))
+        item {
+            Spacer(modifier = Modifier.height(70.dp))
+        }
     }
 }
 
