@@ -208,7 +208,7 @@ fun getItemsForPreview(context: Context): List<ExpirationDate> {
         cal.add(Calendar.DATE, daysLeft[i])
         items.add(
             ExpirationDate(
-                id = 0,
+                id = i,
                 foodName = foods[i],
                 expirationDate = cal.time.time
             )
