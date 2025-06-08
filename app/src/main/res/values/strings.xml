@@ -120,4 +120,7 @@
         <item>Days</item>
         <item>Months</item>
     </string-array>
+    <string name="quantity">Quantity</string>
+    <string name="add">Add</string>
+    <string name="remove">Remove</string>
 </resources>

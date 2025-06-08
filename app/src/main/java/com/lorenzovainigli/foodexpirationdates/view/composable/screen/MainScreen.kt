@@ -210,7 +210,8 @@ fun getItemsForPreview(context: Context): List<ExpirationDate> {
             ExpirationDate(
                 id = i,
                 foodName = foods[i],
-                expirationDate = cal.time.time
+                expirationDate = cal.time.time,
+                quantity = i * 3 + 1,
             )
         )
     }

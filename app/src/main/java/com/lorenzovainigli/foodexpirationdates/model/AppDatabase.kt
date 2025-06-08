@@ -8,9 +8,10 @@ import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 
 @Database(
     entities = [ExpirationDate::class],
-    version = 2,
+    version = 3,
     autoMigrations = [
-        AutoMigration(from = 1, to = 2)
+        AutoMigration(from = 1, to = 2),
+        AutoMigration(from = 2, to = 3)
     ],
     exportSchema = true
 )

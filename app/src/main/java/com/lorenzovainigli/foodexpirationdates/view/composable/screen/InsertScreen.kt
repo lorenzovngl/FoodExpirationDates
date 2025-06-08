@@ -71,6 +71,7 @@ import com.lorenzovainigli.foodexpirationdates.view.BarcodeScannerActivity
 import com.lorenzovainigli.foodexpirationdates.view.MainActivity
 import com.lorenzovainigli.foodexpirationdates.view.composable.Dropdown
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyDatePickerDialog
+import com.lorenzovainigli.foodexpirationdates.view.composable.QuantitySelector
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -173,6 +174,26 @@ fun InsertScreen(
             datePickerState = datePickerExpDateState,
             label = stringResource(id = R.string.expiration_date)
         )
+        Spacer(modifier = Modifier.height(16.dp))
+        var quantity by remember {
+            mutableIntStateOf(itemToEdit?.quantity ?: 1)
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(start = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = stringResource(id = R.string.quantity),
+                style = MaterialTheme.typography.bodyLarge
+            )
+            QuantitySelector(
+                quantity = quantity,
+                onQuantityChange = { newQuantity ->
+                    quantity = newQuantity
+                }
+            )
+        }
         Spacer(modifier = Modifier.height(16.dp))
         Column (
             modifier = Modifier
@@ -293,7 +314,8 @@ fun InsertScreen(
                                                 timeSpan * 30
                                             }
                                         }
-                                    } else null
+                                    } else null,
+                                    quantity = quantity
                                 )
                                 activity?.viewModel?.addExpirationDate(entry)
                                 navController.popBackStack()

@@ -12,6 +12,7 @@ data class ExpirationDate(
     @ColumnInfo(name = "expiration_date") var expirationDate: Long,
     @ColumnInfo(name = "opening_date") var openingDate: Long? = null,
     @ColumnInfo(name = "time_span_days") var timeSpanDays: Int? = null,
+    @ColumnInfo(name = "quantity", defaultValue = "1") var quantity: Int = 1
 )
 
 const val FOOD_NAME_INDEX = 0
@@ -22,8 +23,10 @@ const val OPENING_DATE_INDEX = 2
 const val OPENING_DATE = "OPENING_DATE"
 const val TIME_SPAN_DAYS_INDEX = 3
 const val TIME_SPAN_DAYS = "TIME_SPAN_DAYS"
+const val QUANTITY_INDEX = 4
+const val QUANTITY = "QUANTITY"
 
-const val CSV_HEADER = "$FOOD_NAME,$EXPIRATION_DATE,$OPENING_DATE,$TIME_SPAN_DAYS"
+const val CSV_HEADER = "$FOOD_NAME,$EXPIRATION_DATE,$OPENING_DATE,$TIME_SPAN_DAYS,$QUANTITY"
 
 fun computeExpirationDate(
     item: ExpirationDate
@@ -49,5 +52,5 @@ fun computeExpirationDate(
 }
 
 fun ExpirationDate.toCSV(): String{
-    return "$foodName,$expirationDate,$openingDate,$timeSpanDays"
+    return "$foodName,$expirationDate,$openingDate,$timeSpanDays,$quantity"
 }

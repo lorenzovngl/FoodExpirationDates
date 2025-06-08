@@ -15,6 +15,7 @@ import com.lorenzovainigli.foodexpirationdates.model.entity.FOOD_NAME
 import com.lorenzovainigli.foodexpirationdates.model.entity.FOOD_NAME_INDEX
 import com.lorenzovainigli.foodexpirationdates.model.entity.OPENING_DATE
 import com.lorenzovainigli.foodexpirationdates.model.entity.OPENING_DATE_INDEX
+import com.lorenzovainigli.foodexpirationdates.model.entity.QUANTITY_INDEX
 import com.lorenzovainigli.foodexpirationdates.model.entity.TIME_SPAN_DAYS
 import com.lorenzovainigli.foodexpirationdates.model.entity.TIME_SPAN_DAYS_INDEX
 import com.lorenzovainigli.foodexpirationdates.model.entity.computeExpirationDate
@@ -151,6 +152,7 @@ class ExpirationDatesViewModel @Inject constructor(
                     expirationDate = row[EXPIRATION_DATE_INDEX].toLong(),
                     openingDate = row[OPENING_DATE_INDEX].let { if (it != "null") it.toLong() else null },
                     timeSpanDays = row[TIME_SPAN_DAYS_INDEX].let { if (it != "null") it.toInt() else null },
+                    quantity = row[QUANTITY_INDEX].toInt()
                 )
                 addExpirationDate(expirationDate)
             }

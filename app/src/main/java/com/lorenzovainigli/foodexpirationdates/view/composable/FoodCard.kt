@@ -2,11 +2,14 @@ package com.lorenzovainigli.foodexpirationdates.view.composable
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -36,6 +39,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -162,11 +166,28 @@ fun FoodCard(
                     .padding(8.dp)
                     .clickable(onClick = onClickEdit)
             ) {
-                Text(
-                    text = item.foodName,
-                    color = foodNameTextColor,
-                    fontSize = 18.sp
-                )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = item.foodName,
+                        color = foodNameTextColor,
+                        fontSize = 18.sp
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Box (
+                        modifier = Modifier.size(22.dp)
+                            .clip(RoundedCornerShape(12.dp))
+                            .border(1.dp, foodNameTextColor, RoundedCornerShape(12.dp)),
+                        contentAlignment = Alignment.Center
+                    ){
+                        Text(
+                            text = item.quantity.toString(),
+                            fontSize = 12.sp,
+                            lineHeight = 1.sp,
+                            color = foodNameTextColor,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
                 if (item.openingDate != null){
                     Text(
                         modifier = Modifier.alpha(.8f),
@@ -231,7 +252,8 @@ fun FoodCardPreview() {
                         foodName = item.foodName,
                         expirationDate = item.expirationDate,
                         openingDate = if (index in listOf(2, 4)) item.expirationDate else null,
-                        timeSpanDays = 0
+                        timeSpanDays = 0,
+                        quantity = item.quantity
                     ),
                     onClickEdit = {},
                     onClickDelete = {},
