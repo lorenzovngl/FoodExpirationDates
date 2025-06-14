@@ -1,6 +1,11 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable
 
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -14,10 +19,19 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
@@ -39,16 +53,44 @@ fun MyTopAppBar(
 
     LargeTopAppBar(
         title = {
-            Text(
-                text = title,
-                color = MaterialTheme.colorScheme.primary,
-                fontWeight = when(topBarFontState){
-                    PreferencesRepository.Companion.TopBarFont.NORMAL.ordinal -> FontWeight.Normal
-                    PreferencesRepository.Companion.TopBarFont.BOLD.ordinal -> FontWeight.Medium
-                    PreferencesRepository.Companion.TopBarFont.EXTRA_BOLD.ordinal-> FontWeight.Bold
-                    else -> null
+            val color = MaterialTheme.colorScheme.primary
+            val imageBitmap = ImageBitmap.imageResource(id = R.drawable.fed_icon)
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                val monochromeIcons = PreferencesRepository.getMonochromeIcons(context)
+                Canvas(
+                    modifier = Modifier
+                        .size(36.dp)
+                        .alpha(0.8f)
+                ) {
+                    val imageWidth = size.width.toInt()
+                    val imageHeight = size.height.toInt()
+                    if (monochromeIcons) {
+                        drawImage(
+                            image = imageBitmap,
+                            dstSize = IntSize(imageWidth, imageHeight),
+                            colorFilter = ColorFilter.tint(color, BlendMode.Color)
+                        )
+                    }
+                    drawImage(
+                        image = imageBitmap,
+                        dstSize = IntSize(imageWidth, imageHeight),
+                        blendMode = BlendMode.DstAtop
+                    )
                 }
-            )
+                Spacer(modifier = Modifier.width(10.dp))
+                Text(
+                    text = title,
+                    color = MaterialTheme.colorScheme.primary,
+                    fontWeight = when (topBarFontState) {
+                        PreferencesRepository.Companion.TopBarFont.NORMAL.ordinal -> FontWeight.Normal
+                        PreferencesRepository.Companion.TopBarFont.BOLD.ordinal -> FontWeight.Medium
+                        PreferencesRepository.Companion.TopBarFont.EXTRA_BOLD.ordinal -> FontWeight.Bold
+                        else -> null
+                    }
+                )
+            }
         },
         actions = actions,
         navigationIcon = navigationIcon,
