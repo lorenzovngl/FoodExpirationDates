@@ -1,6 +1,5 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -30,14 +29,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -141,25 +136,25 @@ fun FoodCard(
             modifier = rowModifier,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            val color = MaterialTheme.colorScheme.primary
-            val imageBitmap =
-                ImageBitmap.imageResource(id = R.drawable.icons8_cesto_96)
-            Canvas(
-                modifier = Modifier
-                    .size(36.dp)
-                    .alpha(0.8f)
-            ) {
-                if (monochromeIcons) {
-                    drawImage(
-                        image = imageBitmap,
-                        colorFilter = ColorFilter.tint(color, BlendMode.Color)
-                    )
-                }
-                drawImage(
-                    image = imageBitmap,
-                    blendMode = BlendMode.DstAtop
-                )
-            }
+//            val color = MaterialTheme.colorScheme.primary
+//            val imageBitmap =
+//                ImageBitmap.imageResource(id = R.drawable.icons8_cesto_96)
+//            Canvas(
+//                modifier = Modifier
+//                    .size(36.dp)
+//                    .alpha(0.8f)
+//            ) {
+//                if (monochromeIcons) {
+//                    drawImage(
+//                        image = imageBitmap,
+//                        colorFilter = ColorFilter.tint(color, BlendMode.Color)
+//                    )
+//                }
+//                drawImage(
+//                    image = imageBitmap,
+//                    blendMode = BlendMode.DstAtop
+//                )
+//            }
             Column(
                 modifier = Modifier
                     .weight(1f)
@@ -167,12 +162,6 @@ fun FoodCard(
                     .clickable(onClick = onClickEdit)
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(
-                        text = item.foodName,
-                        color = foodNameTextColor,
-                        fontSize = 18.sp
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
                     Box (
                         modifier = Modifier.size(22.dp)
                             .clip(RoundedCornerShape(12.dp))
@@ -187,6 +176,12 @@ fun FoodCard(
                             fontWeight = FontWeight.Bold
                         )
                     }
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = item.foodName,
+                        color = foodNameTextColor,
+                        fontSize = 18.sp
+                    )
                 }
                 if (item.openingDate != null){
                     Text(
