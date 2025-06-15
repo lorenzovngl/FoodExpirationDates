@@ -29,7 +29,7 @@
     <string name="support_this_project">Wesprzyj ten projekt</string>
     <string name="report_a_bug">Zgłoś błąd</string>
     <string name="version_x">Wersja %1$s</string>
-    <string name="app_description">%1$s to projekt o otwartym kodzie źródłowym opracowany przez Lorenzo Vainigli i innych współtwórców. Kod tej aplikacji jest publikowany na licencji MIT i dostępny na GitHubie.</string>
+    <string name="app_description">%1$s to projekt open source rozwijany przez Lorenzo Vainigli i innych współtwórców.\nKod tej aplikacji jest udostępniany na licencji MIT i dostępny w serwisie GitHub.</string>
     <string name="about_this_app">Informacje o tej aplikacji</string>
     <string name="privacy_policy">Polityka prywatności</string>
     <string name="contributors_list_title">Współtwórcy</string>
@@ -46,10 +46,7 @@
     <string name="other_formats">Inne formaty</string>
     <string name="your_food_is_expiring">Twoje jedzenie traci ważność!</string>
     <string name="notification_time">Czas powiadamiania</string>
-    <string name="notification_time_desc">              Każdego dnia otrzymasz powiadomienie z listą przedmiotów: \n
-        - które już wygasły\n
-        - które wygasają w bieżącym dniu\n
-        - które mają jeden dzień do wygaśnięcia.</string>
+    <string name="notification_time_desc">Każdego dnia otrzymasz powiadomienie z listą swoich produktów:\n - których termin ważności już minął\n - których termin ważności upływa dzisiaj\n - które stracą ważność za jeden dzień.</string>
     <string name="dynamic_colors">Używaj kolorów systemu</string>
     <string name="theme">Motyw</string>
     <string name="light">Jasny</string>
@@ -65,7 +62,7 @@
     <string name="appearance">Wygląd</string>
     <string name="send_an_email">Wyślij wiadomość e-mail</string>
     <string name="contacts">Kontakt</string>
-    <string name="contacts_text">Jeśli chcesz uzyskać więcej informacji na temat tej aplikacji, wysłać opinię, zgłosić błąd, poprosić o funkcję lub po prostu skontaktować się z deweloperem, wyślij wiadomość e-mail za pomocą poniższego przycisku. Jeśli chcesz zgłosić błąd lub poprosić o funkcję, możesz również otworzyć zgłoszenie w repozytorium GitHub dla tej aplikacji.</string>
+    <string name="contacts_text">Jeśli chcesz dowiedzieć się więcej o tej aplikacji, przesłać opinię, zgłosić błąd, zasugerować nową funkcję lub po prostu skontaktować się z deweloperem, wyślij wiadomość e-mail, korzystając z poniższego przycisku.\nW przypadku zgłoszeń błędów i propozycji nowych funkcji możesz też otworzyć zgłoszenie w repozytorium GitHub tej aplikacji.</string>
     <string name="list">Lista</string>
     <string name="opening_date">Data otwarcia</string>
     <string name="optional">opcjonalnie</string>
