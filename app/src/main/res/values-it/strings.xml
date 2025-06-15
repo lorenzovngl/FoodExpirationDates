@@ -120,4 +120,7 @@
         <item>Mesi</item>
     </string-array>
     <string name="monochrome_icons">Icone monocromatiche</string>
+    <string name="quantity">Quantità</string>
+    <string name="add">Aggiungi</string>
+    <string name="remove">Rimuovi</string>
 </resources>

@@ -67,4 +67,7 @@
         <item>Jamur</item>
         <item>Tomat</item>
     </string-array>
+    <string name="quantity">Jumlah</string>
+    <string name="add">Tambah</string>
+    <string name="remove">Hapus</string>
 </resources>

@@ -92,4 +92,7 @@
     <string name="protect_your_screen">禁止螢幕擷圖和螢幕錄影以保護您的隱私。</string>
     <string name="enable_screen_protection">啟用螢幕隱私保護</string>
     <string name="privacy">隱私</string>
+    <string name="quantity">數量</string>
+    <string name="add">新增</string>
+    <string name="remove">移除</string>
 </resources>

@@ -99,4 +99,7 @@
         <item>Дней</item>
         <item>Месяцев</item>
     </string-array>
+    <string name="quantity">Количество</string>
+    <string name="add">Добавить</string>
+    <string name="remove">Удалить</string>
 </resources>

@@ -113,4 +113,7 @@
     <string name="enable_screen_protection">Bật bảo vệ màn hình</string>
     <string name="privacy">Quyền riêng tư</string>
     <string name="protect_your_screen">Bảo vệ màn hình của bạn khỏi chụp màn hình và ghi màn hình.</string>
+    <string name="quantity">Số lượng</string>
+    <string name="add">Thêm</string>
+    <string name="remove">Xóa</string>
 </resources>

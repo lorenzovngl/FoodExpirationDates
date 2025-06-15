@@ -92,4 +92,7 @@
     <string name="privacy">Confidentialité</string>
     <string name="contacts">Contacts</string>
     <string name="ok">OK</string>
+    <string name="quantity">Quantité</string>
+    <string name="add">Ajouter</string>
+    <string name="remove">Supprimer</string>
 </resources>

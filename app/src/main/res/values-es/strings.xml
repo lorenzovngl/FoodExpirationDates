@@ -116,4 +116,7 @@
     <string name="debug_options">Opciones de depuración</string>
     <string name="monochrome_icons">Iconos monocromáticos</string>
     <string name="select_language">Selecciona el idioma</string>
+    <string name="quantity">Cantidad</string>
+    <string name="add">Añadir</string>
+    <string name="remove">Eliminar</string>
 </resources>

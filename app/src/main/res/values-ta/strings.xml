@@ -97,4 +97,7 @@
     <string name="privacy">தனியுரிமை</string>
     <string name="opened">திறக்கப்பட்டது</string>
     <string name="monochrome_icons">ஒரே வண்ணமுடைய சின்னங்கள்</string>
+    <string name="quantity">அளவு</string>
+    <string name="add">சேர்</string>
+    <string name="remove">அகற்று</string>
 </resources>

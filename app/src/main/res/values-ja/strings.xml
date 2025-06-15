@@ -118,4 +118,7 @@
     <string name="enable_screen_protection">画面保護をオンにする</string>
     <string name="opened">開封済み</string>
     <string name="monochrome_icons">モノクロアイコン</string>
+    <string name="quantity">数量</string>
+    <string name="add">追加</string>
+    <string name="remove">削除</string>
 </resources>

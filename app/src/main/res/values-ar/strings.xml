@@ -55,4 +55,7 @@
         <item>الفطر</item>
         <item>طماطم</item>
     </string-array>
+    <string name="quantity">كمية</string>
+    <string name="add">إضافة</string>
+    <string name="remove">إزالة</string>
 </resources>

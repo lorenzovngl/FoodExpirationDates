@@ -48,4 +48,7 @@
         <item>मशरूम</item>
         <item>टमाटर</item>
     </string-array>
+    <string name="quantity">मात्रा</string>
+    <string name="add">जोड़ें</string>
+    <string name="remove">हटाना</string>
 </resources>

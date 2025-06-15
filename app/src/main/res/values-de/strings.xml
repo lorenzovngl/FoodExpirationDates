@@ -114,4 +114,7 @@
     <string name="debug_options">Debug-Optionen</string>
     <string name="language">Sprache</string>
     <string name="monochrome_icons">Monochrome Symbole</string>
+    <string name="quantity">Menge</string>
+    <string name="add">Hinzufügen</string>
+    <string name="remove">Entfernen</string>
 </resources>

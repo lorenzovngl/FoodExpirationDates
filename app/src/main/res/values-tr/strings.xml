@@ -120,4 +120,7 @@
         <item>Gün</item>
         <item>Ay</item>
     </string-array>
+    <string name="quantity">Miktar</string>
+    <string name="add">Ekle</string>
+    <string name="remove">Kaldır</string>
 </resources>

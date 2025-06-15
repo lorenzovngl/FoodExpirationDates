@@ -113,4 +113,7 @@
     <string name="opened">Otwarte</string>
     <string name="screenshot_titles_made_with_heart">Zrobione z ❤️</string>
     <string name="monochrome_icons">Ikony monochromatyczne</string>
+    <string name="quantity">Ilość</string>
+    <string name="add">Dodaj</string>
+    <string name="remove">Usuń</string>
 </resources>
