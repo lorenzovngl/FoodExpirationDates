@@ -31,8 +31,8 @@
     <string name="app_description">%1$s представляет собой проект с открытым исходным кодом, разработанный Lorenzo Vainigli и другими участниками.\nКод этого приложения опубликован под лицензией MIT и доступен на GitHub.</string>
     <string name="about_this_app">О приложении</string>
     <string name="privacy_policy">Политика конфиденциальности</string>
-    <string name="contributors_list_title">Учавствовавшие в разработке</string>
-    <string name="contributors_list_subtitle">Эти люди внесли свой вклад в разработку данного приложения.</string>
+    <string name="contributors_list_title">Внесшие вклад в разработку</string>
+    <string name="contributors_list_subtitle">Эти люди внесли свой вклад в разработку этого приложения.</string>
     <string name="back">Назад</string>
     <string name="no_items_found">Ничего не найдено</string>
     <string name="please_insert_one">Для начала добавьте продукт</string>
@@ -102,4 +102,22 @@
     <string name="quantity">Количество</string>
     <string name="add">Добавить</string>
     <string name="remove">Удалить</string>
+    <string name="connection_error">Ошибка соединения</string>
+    <string name="getting_product_info">Загружаем информацию о продукте…</string>
+    <string name="scanning_error">Ошибка сканирования</string>
+    <string name="apply">Применить</string>
+    <string name="select_language">Выбор языка</string>
+    <string name="language">Язык</string>
+    <string name="debug_options">Параметры отладки</string>
+    <string name="no_internet_connection">Нет соединения с сетью</string>
+    <string name="product_not_found">Продукт не найден</string>
+    <string name="please_scan_a_barcode">Пожалуйста, отсканируйте штрих-код</string>
+    <string name="retry">Попробовать снова</string>
+    <string name="opened">Открыто</string>
+    <string name="screenshot_titles_barcode_scanner">Сканер штрих-кода</string>
+    <string name="screenshot_titles_made_with_heart">Сделано с ❤️</string>
+    <string name="enable_screen_protection">Включить защиту экрана</string>
+    <string name="protect_your_screen">Защитить экран от скриншотов и записей экрана.</string>
+    <string name="privacy">Приватность</string>
+    <string name="monochrome_icons">Монохромные иконки</string>
 </resources>
