@@ -202,6 +202,7 @@ fun EmptyListPreview() {
 fun getItemsForPreview(context: Context): List<ExpirationDate> {
     val items = ArrayList<ExpirationDate>()
     val foods = context.resources.getStringArray(R.array.example_foods)
+    val quantities = arrayOf(3, 1, 1, 2, 1, 7, 4)
     val daysLeft = arrayOf(-1, 0, 1, 3, 7, 10, 30)
     for (i in 0 until min(foods.size, daysLeft.size)) {
         val cal = Calendar.getInstance()
@@ -211,7 +212,7 @@ fun getItemsForPreview(context: Context): List<ExpirationDate> {
                 id = i,
                 foodName = foods[i],
                 expirationDate = cal.time.time,
-                quantity = i * 3 + 1,
+                quantity = quantities[i],
             )
         )
     }
