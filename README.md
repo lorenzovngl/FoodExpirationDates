@@ -129,6 +129,7 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 <a href="https://github.com/serAKL16lysA"><img src="https://avatars.githubusercontent.com/serAKL16lysA" alt="@serAKL16lysA" height="32" width="32"></a>
 <a href="https://github.com/aritra-tech"><img src="https://avatars.githubusercontent.com/aritra-tech" alt="@aritra-tech" height="32" width="32"></a>
 <a href="https://github.com/Saterz"><img src="https://avatars.githubusercontent.com/Saterz" alt="@Saterz" height="32" width="32"></a>
+<a href="https://github.com/vadimerenkov"><img src="https://avatars.githubusercontent.com/vadimerenkov" alt="@Saterz" height="32" width="32"></a>
 
 ## ❤️ Support
 
