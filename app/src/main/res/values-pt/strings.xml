@@ -7,5 +7,9 @@
     <string name="in_n_days">Em %1$d dia(s)</string>
     <string name="add_item">Adicionar Item</string>
     <string name="enable_screen_protection">Habilitar proteção de tela</string>
-    <string name="protect_your_screen">Proteja a sua tela de capturas e gravações de tela</string>
+    <string name="protect_your_screen">Proteja a sua tela de capturas e gravações de tela.</string>
+    <string name="edit_item">Editar item</string>
+    <string name="food_name">Nome do Alimento</string>
+    <string name="expiration_date">Data de validade</string>
+    <string name="please_select_a_date">Selecione uma data</string>
 </resources>
