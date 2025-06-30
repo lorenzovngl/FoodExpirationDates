@@ -1,3 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="n_days_ago">%1$d dia(s) atrás</string>
+    <string name="yesterday">Ontem</string>
+    <string name="today">Hoje</string>
+    <string name="tomorrow">Amanhã</string>
+    <string name="in_n_days">Em %1$d dia(s)</string>
+    <string name="add_item">Adicionar Item</string>
+    <string name="enable_screen_protection">Habilitar proteção de tela</string>
+    <string name="protect_your_screen">Proteja a sua tela de capturas e gravações de tela</string>
 </resources>
