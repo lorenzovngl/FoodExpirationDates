@@ -47,4 +47,5 @@ val contributors = listOf(
     Contributor(name = "Aritra Das", username = "aritra-tech"),
     Contributor(name = "Saterz_", username = "Saterz"),
     Contributor(name = "Vadim Erenkov", username = "vadimerenkov"),
+    Contributor(name = "Eduardo Nakatani", username = "ednakatani"),
 )

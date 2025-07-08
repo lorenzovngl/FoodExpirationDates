@@ -13,7 +13,7 @@
 ![GitHub Workflow (Android CI)](https://img.shields.io/github/actions/workflow/status/lorenzovngl/FoodExpirationDates/.github%2Fworkflows%2Fandroid.yml?style=flat-square&label=Build)
 ![GitHub last commit](https://img.shields.io/github/last-commit/lorenzovngl/FoodExpirationDates?label=Last%20commit&style=flat-square)
 ![GitHub](https://img.shields.io/github/license/lorenzovngl/FoodExpirationDates?style=flat-square&label=License)
-![Languages](https://img.shields.io/badge/Languages-15-orange?style=flat-square)
+![Languages](https://img.shields.io/badge/Languages-16-orange?style=flat-square)
 ![GitHub repo size](https://img.shields.io/github/repo-size/lorenzovngl/FoodExpirationDates?style=flat-square&label=Size)
 ![Pull requests welcome](https://img.shields.io/badge/Pull%20requests-Welcome-ff69b4?style=flat-square)
 <a href="https://gitmoji.dev">
@@ -130,6 +130,7 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 <a href="https://github.com/aritra-tech"><img src="https://avatars.githubusercontent.com/aritra-tech" alt="@aritra-tech" height="32" width="32"></a>
 <a href="https://github.com/Saterz"><img src="https://avatars.githubusercontent.com/Saterz" alt="@Saterz" height="32" width="32"></a>
 <a href="https://github.com/vadimerenkov"><img src="https://avatars.githubusercontent.com/vadimerenkov" alt="@Saterz" height="32" width="32"></a>
+<a href="https://github.com/ednakatani"><img src="https://avatars.githubusercontent.com/ednakatani" alt="@Saterz" height="32" width="32"></a>
 
 ## ❤️ Support
 
