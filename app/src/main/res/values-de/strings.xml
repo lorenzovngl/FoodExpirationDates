@@ -49,7 +49,7 @@
         - die morgen ablaufen werden.
     </string>
     <string name="dynamic_colors">Dynamische Farben</string>
-    <string name="theme">Thema</string>
+    <string name="theme">Farbschema</string>
     <string name="light">Hell</string>
     <string name="system">System</string>
     <string name="dark">Dunkel</string>
