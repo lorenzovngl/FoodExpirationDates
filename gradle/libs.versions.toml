@@ -66,9 +66,9 @@ core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx
 dagger = { module = "com.google.dagger:dagger", version.ref = "dagger-hilt" }
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger-hilt" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx"}
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics"}
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
-firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx"}
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics"}
 firebase-crashlytics-gradle = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebase-crashlytics-gradle" }
 google-services = { module = "com.google.gms:google-services", version.ref = "google-services" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
