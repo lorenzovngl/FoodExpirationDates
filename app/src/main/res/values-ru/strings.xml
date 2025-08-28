@@ -62,7 +62,7 @@
     <string name="bold">Жирный</string>
     <string name="extra_bold">Очень Жирный</string>
     <string name="top_bar_font_style">Стиль шрифта верхней панели</string>
-    <string name="behaviour">Режим работы</string>
+    <string name="behaviour">Поведение</string>
     <string name="appearance">Внешний вид</string>
     <string name="send_an_email">Отправить письмо</string>
     <string name="contacts">Контакты</string>
