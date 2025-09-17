@@ -26,12 +26,12 @@ try {
 
 android {
     namespace = "com.lorenzovainigli.foodexpirationdates"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.lorenzovainigli.foodexpirationdates"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 40
         versionName = "2.7.0"
 
