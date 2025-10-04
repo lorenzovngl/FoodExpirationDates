@@ -22,8 +22,9 @@ const val URL_TAG = "URL"
 @Composable
 fun AppDescription(
     modifier: Modifier = Modifier,
-    textStyle: TextStyle = MaterialTheme.typography.bodyLarge
-) {
+    textStyle: TextStyle = MaterialTheme.typography.bodyLarge.copy(
+        color = MaterialTheme.colorScheme.onBackground
+    )) {
     val uriHandler = LocalUriHandler.current
     val fullText = stringResource(R.string.app_description, stringResource(id = R.string.app_name))
 
