@@ -1,6 +1,7 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable.screen
 
 import android.app.Activity
+import android.graphics.drawable.Icon
 import android.os.Build
 import android.util.Log
 import android.view.WindowManager
@@ -16,8 +17,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
@@ -149,14 +154,26 @@ fun SettingsScreen(
             label = stringResource(id = R.string.date_format),
             description = stringResource(id = R.string.date_format_desc)
         ) {
-            ClickableText(
-                modifier = Modifier.testTag(stringResource(id = R.string.date_format)),
-                text = AnnotatedString(sdf.format(Calendar.getInstance().time)),
-                style = MaterialTheme.typography.headlineMedium.copy(color = MaterialTheme.colorScheme.onSurface),
-                onClick = {
-                    isDateFormatDialogOpened = true
-                }
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                ClickableText(
+                    modifier = Modifier.testTag(stringResource(id = R.string.date_format)),
+                    text = AnnotatedString(sdf.format(Calendar.getInstance().time)),
+                    style = MaterialTheme.typography.headlineMedium.copy(
+                        color = MaterialTheme.colorScheme.onSurface
+                    ),
+                    onClick = {
+                        isDateFormatDialogOpened = true
+                    }
+                )
+                Icon(
+                    imageVector = Icons.Default.Edit,
+                    contentDescription = "Change date format",
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
         }
         SettingsItem(
             label = stringResource(id = R.string.notification_time),
