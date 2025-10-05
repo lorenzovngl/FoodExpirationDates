@@ -151,13 +151,6 @@ fun DateFormatRow(
                 MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.weight(1f)
         )
-        if (isSelected) {
-            Icon(
-                imageVector = Icons.Default.Check,
-                contentDescription = "Selected",
-                tint = MaterialTheme.colorScheme.primary
-            )
-        }
     }
 }
 
