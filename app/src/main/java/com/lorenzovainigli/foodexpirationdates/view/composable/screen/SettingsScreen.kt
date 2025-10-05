@@ -187,14 +187,24 @@ fun SettingsScreen(
                 text += "0"
             }
             text += timePickerState.minute.toString()
-            ClickableText(
-                modifier = Modifier.testTag("Notification time"),
-                text = AnnotatedString(text),
-                style = MaterialTheme.typography.headlineMedium.copy(color = MaterialTheme.colorScheme.onSurface),
-                onClick = {
-                    isNotificationTimeBottomSheetOpen = true
-                }
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                ClickableText(
+                    modifier = Modifier.testTag("Notification time"),
+                    text = AnnotatedString(text),
+                    style = MaterialTheme.typography.headlineMedium.copy(color = MaterialTheme.colorScheme.onSurface),
+                    onClick = {
+                        isNotificationTimeBottomSheetOpen = true
+                    }
+                )
+                Icon(
+                    imageVector = Icons.Default.Edit,
+                    contentDescription = "Change notification time",
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
         }
 
         Text(stringResource(R.string.privacy),
