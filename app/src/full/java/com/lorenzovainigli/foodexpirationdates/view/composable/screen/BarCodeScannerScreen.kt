@@ -7,8 +7,12 @@ import androidx.camera.view.CameraController.COORDINATE_SYSTEM_VIEW_REFERENCED
 import androidx.camera.view.LifecycleCameraController
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
@@ -67,39 +71,47 @@ fun BarCodeScannerScreen(activity: BarcodeScannerActivity) {
             )
         }
     }
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Box(
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxWidth()
-        ) {
-            CameraPreview(
-                controller = controller,
-                modifier = Modifier.fillMaxSize()
-            )
-        }
-        if (!isOnline.value) {
-            BarcodeScannerResult(
-                activity = activity,
-                state = BarcodeScannerState.NO_CONNECTION
-            )
-        } else {
-            when (barcodeScannerState.value) {
-                BarcodeScannerState.GOT_RESULT ->
-                    BarcodeScannerResult(
-                        activity = activity,
-                        state = BarcodeScannerState.GOT_RESULT,
-                        responseOk = responseStatus.value,
-                        detectedProduct = detectedProduct.value
-                    )
 
-                else ->
-                    BarcodeScannerResult(
-                        activity = activity,
-                        state = barcodeScannerState.value
-                    )
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        contentWindowInsets = WindowInsets.navigationBars,
+    ) { padding ->
+        Column(
+            modifier = Modifier
+                .padding(padding)
+                .fillMaxSize()
+        ) {
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth()
+            ) {
+                CameraPreview(
+                    controller = controller,
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+            if (!isOnline.value) {
+                BarcodeScannerResult(
+                    activity = activity,
+                    state = BarcodeScannerState.NO_CONNECTION
+                )
+            } else {
+                when (barcodeScannerState.value) {
+                    BarcodeScannerState.GOT_RESULT ->
+                        BarcodeScannerResult(
+                            activity = activity,
+                            state = BarcodeScannerState.GOT_RESULT,
+                            responseOk = responseStatus.value,
+                            detectedProduct = detectedProduct.value
+                        )
+
+                    else ->
+                        BarcodeScannerResult(
+                            activity = activity,
+                            state = barcodeScannerState.value
+                        )
+                }
             }
         }
     }
