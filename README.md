@@ -133,6 +133,7 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 <a href="https://github.com/vadimerenkov"><img src="https://avatars.githubusercontent.com/vadimerenkov" alt="@vadimerenkov" height="32" width="32"></a>
 <a href="https://github.com/ednakatani"><img src="https://avatars.githubusercontent.com/ednakatani" alt="@ednakatani" height="32" width="32"></a>
 <a href="https://github.com/Avinash-Codes"><img src="https://avatars.githubusercontent.com/Avinash-Codes" alt="@Avinash-Codes" height="32" width="32"></a>
+<a href="https://github.com/adiputrastwn"><img src="https://avatars.githubusercontent.com/adiputrastwn" alt="@adiputrastwn" height="32" width="32"></a>
 
 ## ❤️ Support
 
