@@ -45,6 +45,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -96,7 +97,7 @@ fun InsertScreen(
         expDate = itemToEdit.expirationDate
         openingDate = itemToEdit.openingDate
     }
-    var foodName by remember {
+    var foodName by rememberSaveable {
         mutableStateOf(foodNameToEdit)
     }
     var timeSpan by remember {
@@ -175,7 +176,7 @@ fun InsertScreen(
             label = stringResource(id = R.string.expiration_date)
         )
         Spacer(modifier = Modifier.height(16.dp))
-        var quantity by remember {
+        var quantity by rememberSaveable {
             mutableIntStateOf(itemToEdit?.quantity ?: 1)
         }
         Row(
