@@ -357,15 +357,25 @@ fun SettingsScreen(
                         .weight(1f)
                         .fillMaxHeight()
                 )
-                BasicText(
-                    modifier = Modifier.clickable {
-                        isLanguagePickerDialogOpened = true
-                    },
-                    text = Language.fromCode(PreferencesRepository.getLanguage(context)).label,
-                    style = MaterialTheme.typography.headlineSmall.copy(
-                        color = MaterialTheme.colorScheme.onSurface
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    BasicText(
+                        modifier = Modifier.clickable {
+                            isLanguagePickerDialogOpened = true
+                        },
+                        text = Language.fromCode(PreferencesRepository.getLanguage(context)).label,
+                        style = MaterialTheme.typography.headlineSmall.copy(
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
                     )
-                )
+                    Icon(
+                        imageVector = Icons.Default.Edit,
+                        contentDescription = "Change language",
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
             }
         }
     }
