@@ -204,15 +204,19 @@ fun getItemsForPreview(context: Context): List<ExpirationDate> {
     val foods = context.resources.getStringArray(R.array.example_foods)
     val quantities = arrayOf(3, 1, 1, 2, 1, 7, 4)
     val daysLeft = arrayOf(-1, 0, 1, 3, 7, 10, 30)
+    val daysAdded = arrayOf(-7, -5, -3, -2, -1, -1, -1)
     for (i in 0 until min(foods.size, daysLeft.size)) {
         val cal = Calendar.getInstance()
         cal.add(Calendar.DATE, daysLeft[i])
+        val addedCal = Calendar.getInstance()
+        addedCal.add(Calendar.DATE, daysAdded[i])
         items.add(
             ExpirationDate(
                 id = i,
                 foodName = foods[i],
                 expirationDate = cal.time.time,
                 quantity = quantities[i],
+                dateAdded = addedCal.time.time
             )
         )
     }
