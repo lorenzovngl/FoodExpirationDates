@@ -19,6 +19,8 @@ import java.io.File
 import java.io.FileOutputStream
 import java.net.URL
 
+const val DEVELOPER_NAME = "Lorenzo Vainigli"
+const val DEVELOPER_WEBSITE = "https://www.lorenzovainigli.com"
 const val DEVELOPER_EMAIL = "lorenzovngl@gmail.com"
 const val WEBSITE_URL_EN = "https://foodexpirationdates.app/"
 const val WEBSITE_URL_IT = "https://scadenzealimenti.app/"

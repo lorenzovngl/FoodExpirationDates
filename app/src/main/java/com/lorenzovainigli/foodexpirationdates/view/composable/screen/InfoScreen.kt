@@ -49,6 +49,7 @@ import com.lorenzovainigli.foodexpirationdates.WEBSITE_URL_IT
 import com.lorenzovainigli.foodexpirationdates.model.Platform
 import com.lorenzovainigli.foodexpirationdates.model.contributors
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
+import com.lorenzovainigli.foodexpirationdates.view.composable.AppDescription
 import com.lorenzovainigli.foodexpirationdates.view.composable.TextIconButton
 import com.lorenzovainigli.foodexpirationdates.view.composable.TextIconButtonData
 import java.util.Locale
@@ -89,13 +90,7 @@ fun InfoScreen(
             ),
             textAlign = TextAlign.Center
         )
-        Text(
-            modifier = Modifier.fillMaxWidth(),
-            text = stringResource(
-                id = R.string.app_description,
-                stringResource(id = R.string.app_name)
-            )
-        )
+        AppDescription()
         TextIconButton(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)

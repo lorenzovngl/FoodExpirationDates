@@ -21,13 +21,11 @@
     <string name="write_a_review">Tulis ulasan</string>
     <string name="source_code">Kode sumber</string>
     <string name="features">Fitur - fitur</string>
-    <string name="feature_list">- Menampilkan daftar tanggal kedaluwarsa makanan dalam urutan waktu yang terbaru
-\n - Menambahkan, memperbarui dan menghapus item
-\n - Notifikasi</string>
+    <string name="feature_list">- Menampilkan daftar tanggal kedaluwarsa makanan dalam urutan waktu yang terbaru\n- Menambahkan, memperbarui dan menghapus item\n- Waktu dibuka\n- Notifikasi</string>
     <string name="support_this_project">Dukung proyek ini</string>
     <string name="report_a_bug">Laporkan bug</string>
     <string name="version_x">Versi %1$s</string>
-    <string name="app_description">%1$s adalah open source project yang dikembangkan oleh Lorenzo Vainigli dan kontributor lainnya. Kode aplikasi ini diterbitkan di bawah lisensi MIT dan tersedia di GitHub.</string>
+    <string name="app_description">%1$s adalah open source project yang dikembangkan oleh Lorenzo Vainigli dan kontributor lainnya.\nKode aplikasi ini diterbitkan di bawah lisensi MIT dan tersedia di GitHub.</string>
     <string name="about_this_app">Tentang aplikasi ini</string>
     <string name="privacy_policy">Kebijakan privasi</string>
     <string name="contributors_list_title">Kontributor</string>
@@ -57,7 +55,7 @@
     <string name="behaviour">Perilaku</string>
     <string name="appearance">Tampilan</string>
     <string name="send_an_email">Kirim email</string>
-    <string name="contacts_text">Jika anda ingin mendapatkan informasi lebih lanjut tentang aplikasi ini, kirim umpan balik, laporkan bug, request fitur, atau hubungi pengembang, silakan kirim email menggunakan tombol berikut.</string>
+    <string name="contacts_text">Jika anda ingin mendapatkan informasi lebih lanjut tentang aplikasi ini, kirim umpan balik, laporkan bug, request fitur, atau hubungi pengembang, silakan kirim email menggunakan tombol berikut.\nJika Anda memiliki laporan bug dan permintaan fitur, Anda juga dapat membuka masalah di repositori GitHub untuk aplikasi ini.</string>
     <string-array name="example_foods">
         <item>Telur</item>
         <item>Keju</item>
@@ -70,4 +68,36 @@
     <string name="quantity">Jumlah</string>
     <string name="add">Tambah</string>
     <string name="remove">Hapus</string>
+    <string name="enable_screen_protection">Aktifkan perlindungan layar</string>
+    <string name="protect_your_screen">Lindungi layar Anda dari tangkapan layar dan perekaman layar.</string>
+    <string name="date_format_desc">Format tanggal yang Anda ingin lihat pada item.</string>
+    <string name="list">Daftar</string>
+    <string name="opening_date">Tanggal pembukaan</string>
+    <string name="optional">opsional</string>
+    <string name="time_span">Rentang waktu</string>
+    <string name="please_enter_a_valid_number">Silakan masukkan nomor yang valid</string>
+    <string name="ok">OKE</string>
+    <string name="data_export_success">Data berhasil diekspor.</string>
+    <string name="data_export_error">Terjadi kesalahan selama ekspor data.</string>
+    <string name="export_data">Ekspor data</string>
+    <string name="import_data">Impor data</string>
+    <string name="data_exported">Data yang diekspor</string>
+    <string name="connection_error">Kesalahan koneksi</string>
+    <string name="getting_product_info">Mengambil informasi produk…</string>
+    <string name="no_internet_connection">Tidak ada koneksi internet</string>
+    <string name="please_scan_a_barcode">Silakan pindai barcode</string>
+    <string name="product_not_found">Produk tidak ditemukan</string>
+    <string name="retry">Ulangi</string>
+    <string name="scanning_error">Kesalahan pemindaian</string>
+    <string name="opened">Dibuka</string>
+    <string name="monochrome_icons">Ikon monokrom</string>
+    <string name="screenshot_titles_barcode_scanner">Pindai barcode</string>
+    <string name="screenshot_titles_made_with_heart">Dibuat dengan ❤️</string>
+    <string name="apply">Terapkan</string>
+    <string name="select_language">Pilih bahasa</string>
+    <string name="debug_options">Opsi debug</string>
+    <string name="language">Bahasa</string>
+    <string name="notification_time_desc">Setiap hari Anda akan menerima notifikasi berisi daftar barang Anda:\n- sudah kalauarsa\n- yang kedaluwarsa pada tanggal saat ini\n- yang masih tersisa sehari hingga tanggal kedaluwarsa.</string>
+    <string name="contacts">Kontak</string>
+    <string name="privacy">Privasi</string>
 </resources>

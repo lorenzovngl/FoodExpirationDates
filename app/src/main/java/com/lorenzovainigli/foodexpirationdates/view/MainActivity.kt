@@ -13,10 +13,14 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.surfaceColorAtElevation
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
@@ -65,21 +69,28 @@ class MainActivity : ComponentActivity() {
                 PreferencesRepository.Companion.ThemeMode.DARK.ordinal -> true
                 else -> isSystemInDarkTheme()
             }
-            val systemBarStyle = SystemBarStyle.auto(
-                lightScrim = android.graphics.Color.TRANSPARENT,
-                darkScrim = android.graphics.Color.TRANSPARENT,
-                detectDarkMode = { _ -> isInDarkTheme }
-            )
-            val searchQuery = remember { mutableStateOf("") }
-
-            enableEdgeToEdge(
-                statusBarStyle = systemBarStyle,
-                navigationBarStyle = systemBarStyle
-            )
             FoodExpirationDatesTheme(
                 darkTheme = isInDarkTheme,
                 dynamicColor = dynamicColorsState
             ) {
+                val navBarColor = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp)
+                val navBarColorArgb = navBarColor.toArgb()
+                SideEffect {
+                    window.navigationBarColor = navBarColorArgb
+                }
+                val searchQuery = remember { mutableStateOf("") }
+                enableEdgeToEdge(
+                    statusBarStyle = SystemBarStyle.auto(
+                        lightScrim = android.graphics.Color.TRANSPARENT,
+                        darkScrim = android.graphics.Color.TRANSPARENT,
+                        detectDarkMode = { _ -> isInDarkTheme }
+                    ),
+                    navigationBarStyle = SystemBarStyle.auto(
+                        lightScrim = navBarColorArgb,
+                        darkScrim = navBarColorArgb,
+                        detectDarkMode = { _ -> isInDarkTheme }
+                    )
+                )
                 Surface(
                     modifier = Modifier
                         .fillMaxSize(),
