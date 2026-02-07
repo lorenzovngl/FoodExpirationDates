@@ -5,12 +5,9 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.com.android.application)
     alias(libs.plugins.com.google.dagger.hilt.android)
+    alias(libs.plugins.app.cash.paparazzi)
     alias(libs.plugins.com.google.devtools.ksp)
     alias(libs.plugins.compose)
-}
-
-if (gradle.startParameter.taskNames.any { it.contains("Paparazzi", true) }) {
-    plugins.apply("app.cash.paparazzi")
 }
 
 val buildFossProperty = "buildFoss"
