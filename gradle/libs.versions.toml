@@ -36,7 +36,7 @@ splashscreen = "1.2.0"
 test-rules = "1.7.0"
 test-runner = "1.7.0"
 uiautomator = "2.3.0"
-work-runtime-ktx = "2.11.0"
+work-runtime-ktx = "2.11.1"
 
 [libraries]
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
