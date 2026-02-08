@@ -84,9 +84,10 @@ fun InfoScreen(
         Text(
             modifier = Modifier.align(Alignment.CenterHorizontally),
             style = MaterialTheme.typography.bodySmall,
-            text = stringResource(
+            text = if (BuildConfig.DEBUG) "Build ${BuildConfig.APP_VERSION_LABEL}"
+            else stringResource(
                 id = R.string.version_x,
-                BuildConfig.VERSION_NAME
+                BuildConfig.APP_VERSION_LABEL
             ),
             textAlign = TextAlign.Center
         )

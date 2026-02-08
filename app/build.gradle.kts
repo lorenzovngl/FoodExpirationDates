@@ -3,6 +3,7 @@ import java.io.FileNotFoundException
 import java.util.Properties
 
 plugins {
+    id("git-info")
     alias(libs.plugins.com.android.application)
     alias(libs.plugins.com.google.dagger.hilt.android)
     alias(libs.plugins.app.cash.paparazzi)
@@ -66,11 +67,27 @@ android {
             if (areKeystorePropertiesLoaded) {
                 signingConfig = signingConfigs.getByName("release")
             }
+
+            buildConfigField(
+                "String",
+                "APP_VERSION_LABEL",
+                "\"${defaultConfig.versionName}\""
+            )
         }
         getByName("debug") {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
             isDebuggable = true
+
+            val branch = rootProject.extra["gitBranch"] as String
+            val commit = rootProject.extra["gitCommitHash"] as String
+            val date   = rootProject.extra["gitCommitDate"] as String
+
+            buildConfigField(
+                "String",
+                "APP_VERSION_LABEL",
+                "\"$branch-$commit ($date)\""
+            )
         }
     }
 
