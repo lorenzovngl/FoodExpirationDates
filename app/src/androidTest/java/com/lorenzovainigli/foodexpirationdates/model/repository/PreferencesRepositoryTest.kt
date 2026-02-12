@@ -1,7 +1,6 @@
 package com.lorenzovainigli.foodexpirationdates.model.repository
 
 import android.content.Context
-import androidx.activity.ComponentActivity
 import androidx.test.platform.app.InstrumentationRegistry
 import junit.framework.TestCase.assertEquals
 import org.junit.After
@@ -30,7 +29,7 @@ internal class PreferencesRepositoryTest {
         // Test the default value
         assertEquals(
             sharedPrefs.getString(
-                PreferencesRepository.keyDateFormat,
+                PreferencesRepository.KEY_DATE_FORMAT,
                 PreferencesRepository.getAvailOtherDateFormats()[0]
             ),
             PreferencesRepository.getAvailOtherDateFormats()[0]
@@ -43,7 +42,7 @@ internal class PreferencesRepositoryTest {
         )
         assertEquals(
             sharedPrefs.getString(
-                PreferencesRepository.keyDateFormat,
+                PreferencesRepository.KEY_DATE_FORMAT,
                 PreferencesRepository.getAvailOtherDateFormats()[0]
             ),
             PreferencesRepository.getAvailOtherDateFormats()[1]
@@ -60,11 +59,11 @@ internal class PreferencesRepositoryTest {
         val sharedPrefs =
             context.getSharedPreferences(testSharedPrefsName, Context.MODE_PRIVATE)
         // Test the default value
-        assertEquals(sharedPrefs.getInt(PreferencesRepository.keyNotificationTimeHour, 11), 11)
+        assertEquals(sharedPrefs.getInt(PreferencesRepository.KEY_NOTIFICATION_TIME_HOUR, 11), 11)
         // Test the setter
         PreferencesRepository.setUserNotificationTime(context, testSharedPrefsName, 12, 30)
-        assertEquals(sharedPrefs.getInt(PreferencesRepository.keyNotificationTimeHour, 11), 12)
-        assertEquals(sharedPrefs.getInt(PreferencesRepository.keyNotificationTimeMinute, 11), 30)
+        assertEquals(sharedPrefs.getInt(PreferencesRepository.KEY_NOTIFICATION_TIME_HOUR, 11), 12)
+        assertEquals(sharedPrefs.getInt(PreferencesRepository.KEY_NOTIFICATION_TIME_MINUTE, 11), 30)
         // Test the getter
         assertEquals(
             PreferencesRepository.getUserNotificationTimeHour(
@@ -87,7 +86,7 @@ internal class PreferencesRepositoryTest {
         // Test the default value
         assertEquals(
             sharedPrefs.getInt(
-                PreferencesRepository.keyThemeMode,
+                PreferencesRepository.KEY_THEME_MODE,
                 PreferencesRepository.Companion.ThemeMode.SYSTEM.ordinal
             ),
             PreferencesRepository.Companion.ThemeMode.SYSTEM.ordinal
@@ -100,7 +99,7 @@ internal class PreferencesRepositoryTest {
         )
         assertEquals(
             sharedPrefs.getInt(
-                PreferencesRepository.keyThemeMode,
+                PreferencesRepository.KEY_THEME_MODE,
                 PreferencesRepository.Companion.ThemeMode.SYSTEM.ordinal
             ),
             PreferencesRepository.Companion.ThemeMode.DARK.ordinal
@@ -122,7 +121,7 @@ internal class PreferencesRepositoryTest {
         // Test the default value
         assertEquals(
             sharedPrefs.getBoolean(
-                PreferencesRepository.keyDynamicColors,
+                PreferencesRepository.KEY_DYNAMIC_COLORS,
                 false
             ),
             false
@@ -135,7 +134,7 @@ internal class PreferencesRepositoryTest {
         )
         assertEquals(
             sharedPrefs.getBoolean(
-                PreferencesRepository.keyDynamicColors,
+                PreferencesRepository.KEY_DYNAMIC_COLORS,
                 false
             ),
             true

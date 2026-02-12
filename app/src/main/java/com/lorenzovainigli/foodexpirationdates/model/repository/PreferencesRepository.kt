@@ -15,16 +15,16 @@ class PreferencesRepository {
 
     companion object {
 
-        private const val sharedPrefsName = "shared_pref"
-        const val keyDateFormat = "date_format"
-        const val screenProtection = "screen_protection"
-        const val keyNotificationTimeHour = "notification_time_hour"
-        const val keyNotificationTimeMinute = "notification_time_minute"
-        const val keyThemeMode = "theme_mode"
-        const val keyTopBarFont = "top_bar_font"
-        const val keyDynamicColors = "dynamic_colors"
-        const val keyMonochromeIcons = "monochrome_icons"
-        const val keyLanguage = "language"
+        private const val SHARED_PREFS_NAME = "shared_pref"
+        const val KEY_DATE_FORMAT = "date_format"
+        const val KEY_SCREEN_PROTECTION = "screen_protection"
+        const val KEY_NOTIFICATION_TIME_HOUR = "notification_time_hour"
+        const val KEY_NOTIFICATION_TIME_MINUTE = "notification_time_minute"
+        const val KEY_THEME_MODE = "theme_mode"
+        const val KEY_TOP_BAR_FONT = "top_bar_font"
+        const val KEY_DYNAMIC_COLORS = "dynamic_colors"
+        const val KEY_MONOCHROME_ICONS = "monochrome_icons"
+        const val KEY_LANGUAGE = "language"
         private val availLocaleDateFormats = arrayOf(DateFormat.SHORT, DateFormat.MEDIUM)
         private val availOtherDateFormats =
             arrayOf(
@@ -62,15 +62,15 @@ class PreferencesRepository {
         }
 
         fun setScreenProtectionEnabled(context: Context, enabled: Boolean) {
-            val sharedPreferences = context.getSharedPreferences(sharedPrefsName, Context.MODE_PRIVATE)
+            val sharedPreferences = context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
             sharedPreferences.edit {
-                putBoolean(screenProtection, enabled)
+                putBoolean(KEY_SCREEN_PROTECTION, enabled)
             }
         }
 
         fun getScreenProtectionEnabled(context: Context): Boolean {
-            val sharedPreferences = context.getSharedPreferences(sharedPrefsName, Context.MODE_PRIVATE)
-            return sharedPreferences.getBoolean(screenProtection, false)
+            val sharedPreferences = context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+            return sharedPreferences.getBoolean(KEY_SCREEN_PROTECTION, false)
         }
 
         fun getAvailLocaleDateFormats(): List<String> {
@@ -87,57 +87,57 @@ class PreferencesRepository {
 
         fun getUserDateFormat(
             context: Context,
-            sharedPrefs: String = sharedPrefsName
+            sharedPrefs: String = SHARED_PREFS_NAME
         ): String {
             return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                .getString(keyDateFormat, "d MMM") ?: "d MMM"
+                .getString(KEY_DATE_FORMAT, "d MMM") ?: "d MMM"
         }
 
         fun setUserDateFormat(
             context: Context,
-            sharedPrefs: String = sharedPrefsName,
+            sharedPrefs: String = SHARED_PREFS_NAME,
             dateFormat: String
         ) {
             return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                .edit { putString(keyDateFormat, dateFormat) }
+                .edit { putString(KEY_DATE_FORMAT, dateFormat) }
         }
 
         fun getUserNotificationTimeHour(
             context: Context,
-            sharedPrefs: String = sharedPrefsName
+            sharedPrefs: String = SHARED_PREFS_NAME
         ): Int {
             return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                .getInt(keyNotificationTimeHour, 11)
+                .getInt(KEY_NOTIFICATION_TIME_HOUR, 11)
         }
 
         fun getUserNotificationTimeMinute(
             context: Context,
-            sharedPrefs: String = sharedPrefsName
+            sharedPrefs: String = SHARED_PREFS_NAME
         ): Int {
             return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                .getInt(keyNotificationTimeMinute, 0)
+                .getInt(KEY_NOTIFICATION_TIME_MINUTE, 0)
         }
 
         fun setUserNotificationTime(
             context: Context,
-            sharedPrefs: String = sharedPrefsName,
+            sharedPrefs: String = SHARED_PREFS_NAME,
             hour: Int,
             minute: Int
         ) {
             return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
                 .edit {
-                    putInt(keyNotificationTimeHour, hour)
-                    putInt(keyNotificationTimeMinute, minute)
+                    putInt(KEY_NOTIFICATION_TIME_HOUR, hour)
+                    putInt(KEY_NOTIFICATION_TIME_MINUTE, minute)
                 }
         }
 
         fun getThemeMode(
             context: Context,
-            sharedPrefs: String = sharedPrefsName,
+            sharedPrefs: String = SHARED_PREFS_NAME,
         ): Int {
             try {
                 return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                    .getInt(keyThemeMode, ThemeMode.SYSTEM.ordinal)
+                    .getInt(KEY_THEME_MODE, ThemeMode.SYSTEM.ordinal)
             } catch (e: Exception){
                 e.printStackTrace()
             }
@@ -146,20 +146,20 @@ class PreferencesRepository {
 
         fun setThemeMode(
             context: Context,
-            sharedPrefs: String = sharedPrefsName,
+            sharedPrefs: String = SHARED_PREFS_NAME,
             themeMode: ThemeMode
         ) {
             return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                .edit { putInt(keyThemeMode, themeMode.ordinal) }
+                .edit { putInt(KEY_THEME_MODE, themeMode.ordinal) }
         }
 
         fun getTopBarFont(
             context: Context,
-            sharedPrefs: String = sharedPrefsName,
+            sharedPrefs: String = SHARED_PREFS_NAME,
         ): Int{
             try {
                 return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                    .getInt(keyTopBarFont,TopBarFont.NORMAL.ordinal)
+                    .getInt(KEY_TOP_BAR_FONT,TopBarFont.NORMAL.ordinal)
             } catch (e: Exception){
                 e.printStackTrace()
             }
@@ -168,20 +168,20 @@ class PreferencesRepository {
 
         fun setTopBarFont(
             context: Context,
-            sharedPrefs: String = sharedPrefsName,
+            sharedPrefs: String = SHARED_PREFS_NAME,
             topBarFont: TopBarFont
         ) {
             return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                .edit { putInt(keyTopBarFont, topBarFont.ordinal) }
+                .edit { putInt(KEY_TOP_BAR_FONT, topBarFont.ordinal) }
         }
 
         fun getDynamicColors(
             context: Context,
-            sharedPrefs: String = sharedPrefsName,
+            sharedPrefs: String = SHARED_PREFS_NAME,
         ): Boolean {
             try {
                 return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                    .getBoolean(keyDynamicColors, false)
+                    .getBoolean(KEY_DYNAMIC_COLORS, false)
             } catch (e: Exception){
                 e.printStackTrace()
             }
@@ -190,12 +190,12 @@ class PreferencesRepository {
 
         fun setDynamicColors(
             context: Context,
-            sharedPrefs: String = sharedPrefsName,
+            sharedPrefs: String = SHARED_PREFS_NAME,
             dynamicColorsEnabled: Boolean
         ): Boolean {
             try {
                 context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                    .edit { putBoolean(keyDynamicColors, dynamicColorsEnabled) }
+                    .edit { putBoolean(KEY_DYNAMIC_COLORS, dynamicColorsEnabled) }
                 return true
             } catch (_: Exception){
                 return false
@@ -204,11 +204,11 @@ class PreferencesRepository {
 
         fun getMonochromeIcons(
             context: Context,
-            sharedPrefs: String = sharedPrefsName,
+            sharedPrefs: String = SHARED_PREFS_NAME,
         ): Boolean {
             try {
                 return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                    .getBoolean(keyMonochromeIcons, true)
+                    .getBoolean(KEY_MONOCHROME_ICONS, true)
             } catch (e: Exception){
                 e.printStackTrace()
             }
@@ -217,12 +217,12 @@ class PreferencesRepository {
 
         fun setMonochromeIcons(
             context: Context,
-            sharedPrefs: String = sharedPrefsName,
+            sharedPrefs: String = SHARED_PREFS_NAME,
             monochromeIconsEnabled: Boolean
         ): Boolean {
             try {
                 context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                    .edit { putBoolean(keyMonochromeIcons, monochromeIconsEnabled) }
+                    .edit { putBoolean(KEY_MONOCHROME_ICONS, monochromeIconsEnabled) }
                 return true
             } catch (_: Exception){
                 return false
@@ -231,11 +231,11 @@ class PreferencesRepository {
 
         fun getLanguage(
             context: Context,
-            sharedPrefs: String = sharedPrefsName,
+            sharedPrefs: String = SHARED_PREFS_NAME,
         ): String {
             try {
                 return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                    .getString(keyLanguage, Language.SYSTEM.code)
+                    .getString(KEY_LANGUAGE, Language.SYSTEM.code)
                     ?: Language.SYSTEM.code
             } catch (e: Exception){
                 e.printStackTrace()
@@ -245,11 +245,11 @@ class PreferencesRepository {
 
         fun setLanguage(
             context: Context,
-            sharedPrefs: String = sharedPrefsName,
+            sharedPrefs: String = SHARED_PREFS_NAME,
             language: String
         ) {
             return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                .edit { putString(keyLanguage, language) }
+                .edit { putString(KEY_LANGUAGE, language) }
         }
     }
 }
