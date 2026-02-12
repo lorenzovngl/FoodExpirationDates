@@ -9,6 +9,7 @@ import java.lang.Exception
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
+import androidx.core.content.edit
 
 class PreferencesRepository {
 
@@ -62,9 +63,9 @@ class PreferencesRepository {
 
         fun setScreenProtectionEnabled(context: Context, enabled: Boolean) {
             val sharedPreferences = context.getSharedPreferences(sharedPrefsName, Context.MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
-            editor.putBoolean(screenProtection, enabled)
-            editor.apply()
+            sharedPreferences.edit {
+                putBoolean(screenProtection, enabled)
+            }
         }
 
         fun getScreenProtectionEnabled(context: Context): Boolean {
@@ -98,7 +99,7 @@ class PreferencesRepository {
             dateFormat: String
         ) {
             return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                .edit().putString(keyDateFormat, dateFormat).apply()
+                .edit { putString(keyDateFormat, dateFormat) }
         }
 
         fun getUserNotificationTimeHour(
@@ -124,8 +125,10 @@ class PreferencesRepository {
             minute: Int
         ) {
             return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                .edit().putInt(keyNotificationTimeHour, hour)
-                .putInt(keyNotificationTimeMinute, minute).apply()
+                .edit {
+                    putInt(keyNotificationTimeHour, hour)
+                    putInt(keyNotificationTimeMinute, minute)
+                }
         }
 
         fun getThemeMode(
@@ -147,7 +150,7 @@ class PreferencesRepository {
             themeMode: ThemeMode
         ) {
             return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                .edit().putInt(keyThemeMode, themeMode.ordinal).apply()
+                .edit { putInt(keyThemeMode, themeMode.ordinal) }
         }
 
         fun getTopBarFont(
@@ -169,7 +172,7 @@ class PreferencesRepository {
             topBarFont: TopBarFont
         ) {
             return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                .edit().putInt(keyTopBarFont, topBarFont.ordinal).apply()
+                .edit { putInt(keyTopBarFont, topBarFont.ordinal) }
         }
 
         fun getDynamicColors(
@@ -192,7 +195,7 @@ class PreferencesRepository {
         ): Boolean {
             try {
                 context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                    .edit().putBoolean(keyDynamicColors, dynamicColorsEnabled).apply()
+                    .edit { putBoolean(keyDynamicColors, dynamicColorsEnabled) }
                 return true
             } catch (_: Exception){
                 return false
@@ -219,7 +222,7 @@ class PreferencesRepository {
         ): Boolean {
             try {
                 context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                    .edit().putBoolean(keyMonochromeIcons, monochromeIconsEnabled).apply()
+                    .edit { putBoolean(keyMonochromeIcons, monochromeIconsEnabled) }
                 return true
             } catch (_: Exception){
                 return false
@@ -246,7 +249,7 @@ class PreferencesRepository {
             language: String
         ) {
             return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
-                .edit().putString(keyLanguage, language).apply()
+                .edit { putString(keyLanguage, language) }
         }
     }
 }
