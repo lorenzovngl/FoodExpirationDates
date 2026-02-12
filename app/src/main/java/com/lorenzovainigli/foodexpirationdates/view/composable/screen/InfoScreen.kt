@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Edit
@@ -31,9 +31,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withLink
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
@@ -50,6 +52,7 @@ import com.lorenzovainigli.foodexpirationdates.model.Platform
 import com.lorenzovainigli.foodexpirationdates.model.contributors
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.composable.AppDescription
+import com.lorenzovainigli.foodexpirationdates.view.composable.LinkText
 import com.lorenzovainigli.foodexpirationdates.view.composable.TextIconButton
 import com.lorenzovainigli.foodexpirationdates.view.composable.TextIconButtonData
 import java.util.Locale
@@ -172,17 +175,12 @@ fun InfoScreen(
         }
         ContactSection()
         ContributorsList()
-        ClickableText(
+        LinkText(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .padding(top = 4.dp),
-            text = AnnotatedString(text = stringResource(id = R.string.privacy_policy)),
-            style = TextStyle.Default.copy(color = MaterialTheme.colorScheme.primary),
-            onClick = {
-                uriHandler.openUri(
-                    uri = PRIVACY_POLICY_URL
-                )
-            }
+            text = stringResource(id = R.string.privacy_policy),
+            url = PRIVACY_POLICY_URL
         )
     }
 }

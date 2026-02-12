@@ -1,7 +1,6 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable.screen
 
 import android.app.Activity
-import android.graphics.drawable.Icon
 import android.os.Build
 import android.util.Log
 import android.view.WindowManager
@@ -15,7 +14,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicText
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
@@ -157,15 +155,13 @@ fun SettingsScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                ClickableText(
-                    modifier = Modifier.testTag(stringResource(id = R.string.date_format)),
+                BasicText(
+                    modifier = Modifier.testTag(stringResource(id = R.string.date_format))
+                        .clickable { isDateFormatDialogOpened = true },
                     text = AnnotatedString(sdf.format(Calendar.getInstance().time)),
                     style = MaterialTheme.typography.headlineMedium.copy(
                         color = MaterialTheme.colorScheme.onSurface
                     ),
-                    onClick = {
-                        isDateFormatDialogOpened = true
-                    }
                 )
                 Icon(
                     imageVector = Icons.Default.Edit,
@@ -191,13 +187,11 @@ fun SettingsScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                ClickableText(
-                    modifier = Modifier.testTag("Notification time"),
+                BasicText(
+                    modifier = Modifier.testTag("Notification time")
+                        .clickable { isNotificationTimeBottomSheetOpen = true },
                     text = AnnotatedString(text),
-                    style = MaterialTheme.typography.headlineMedium.copy(color = MaterialTheme.colorScheme.onSurface),
-                    onClick = {
-                        isNotificationTimeBottomSheetOpen = true
-                    }
+                    style = MaterialTheme.typography.headlineMedium.copy(color = MaterialTheme.colorScheme.onSurface)
                 )
                 Icon(
                     imageVector = Icons.Default.Edit,
