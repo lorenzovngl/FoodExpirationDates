@@ -163,7 +163,8 @@ open class Screenshot {
                                     productName = "Arancia rossa",
                                     imageThumbUrl = "https://images.openfoodfacts.org/images/products/800/112/074/2346/front_it.3.100.jpg"
                                 ),
-                                status = 1
+                                status = 1,
+                                statusVerbose = "product found"
                             )
                             BarcodeScannerResult(
                                 activity = null,

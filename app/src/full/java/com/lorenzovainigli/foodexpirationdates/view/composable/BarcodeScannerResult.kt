@@ -324,7 +324,8 @@ fun BarcodeScannerResultPreview() {
                     productName = "Nutella",
                     imageThumbUrl = "https://images.openfoodfacts.org/images/products/301/762/042/5035/front_de.474.100.jpg"
                 ),
-                status = 1
+                status = 1,
+                statusVerbose = "product found"
             )
             BarcodeScannerResult(
                 activity = null,
@@ -348,7 +349,8 @@ fun BarcodeScannerResultPreviewImageNull() {
                     productName = "Product name",
                     imageThumbUrl = null
                 ),
-                status = 1
+                status = 1,
+                statusVerbose = "product found"
             )
             BarcodeScannerResult(
                 activity = null,
@@ -372,7 +374,8 @@ fun BarcodeScannerResultPreviewWithNull() {
                     productName = null,
                     imageThumbUrl = null
                 ),
-                status = 1
+                status = 1,
+                statusVerbose = "product found"
             )
             BarcodeScannerResult(
                 activity = null,
@@ -396,7 +399,8 @@ fun BarcodeScannerResultProductNotFoundPreview() {
                     productName = "Nutella",
                     imageThumbUrl = "https://images.openfoodfacts.org/images/products/301/762/042/5035/front_de.474.100.jpg"
                 ),
-                status = 0
+                status = 0,
+                statusVerbose = "product found"
             )
             BarcodeScannerResult(
                 activity = null,

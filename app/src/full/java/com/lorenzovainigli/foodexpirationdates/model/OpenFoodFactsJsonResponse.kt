@@ -8,7 +8,8 @@ data class OpenFoodFactsJsonResponse(
     @SerializedName("product")
     var product: Product,
     @SerializedName("status")
-    var status: Int
+    var status: Int,
+    @SerializedName("status_verbose") val statusVerbose: String?
 )
 
 data class Product(
