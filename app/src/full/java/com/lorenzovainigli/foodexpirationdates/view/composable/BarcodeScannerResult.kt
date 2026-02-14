@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.util.Log
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -34,6 +35,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -82,10 +84,18 @@ fun BarcodeScannerResult(
                         error = true
                     } else if (detectedProduct != null) {
                         if (detectedProduct.status == 1) {
-                            BarcodeScannerResultGotResult(
-                                height = height,
-                                detectedProduct = detectedProduct
-                            )
+                            if (detectedProduct.product.productName != null) {
+                                BarcodeScannerResultGotResult(
+                                    height = height,
+                                    detectedProduct = detectedProduct
+                                )
+                            } else {
+                                BarcodeScannerResultResponseError(
+                                    height = height,
+                                    message = "Product name not available"
+                                )
+                                error = true
+                            }
                         } else {
                             BarcodeScannerResultResponseError(
                                 height = height,
@@ -204,36 +214,53 @@ fun BarcodeScannerResultReadyToScan(height: Dp) {
 
 @Composable
 fun BarcodeScannerResultGotResult(height: Dp, detectedProduct: OpenFoodFactsJsonResponse) {
-    AsyncImage(
-        modifier = Modifier
-            .size(height)
-            .padding(8.dp)
-            .clip(CircleShape)
-            .background(MaterialTheme.colorScheme.primaryContainer),
-        model = ImageRequest.Builder(LocalContext.current)
-            .data(detectedProduct.product.imageThumbUrl)
-            .crossfade(true)
-            .build(),
-        contentScale = ContentScale.Crop,
-        contentDescription = null,
-        placeholder = painterResource(id = R.drawable.icons8_cesto_96),
-        onError = {
-            Log.e("Coil", "Error: ${it.result.throwable.message}")
-            it.result.throwable.printStackTrace()
+    detectedProduct.product.imageThumbUrl.let {
+        if (!it.isNullOrEmpty()) {
+            AsyncImage(
+                modifier = Modifier
+                    .size(height)
+                    .padding(8.dp)
+                    .clip(CircleShape)
+                    .background(MaterialTheme.colorScheme.primaryContainer),
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(it)
+                    .crossfade(true)
+                    .build(),
+                contentScale = ContentScale.Crop,
+                contentDescription = null,
+                placeholder = painterResource(id = R.drawable.icons8_cesto_96),
+                onError = { e ->
+                    Log.e("Coil", "Error: ${e.result.throwable.message}")
+                    e.result.throwable.printStackTrace()
+                }
+            )
+        } else {
+            Image(
+                painter = painterResource(id = R.drawable.icons8_cesto_96),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(height)
+                    .padding(8.dp)
+            )
         }
-    )
+    }
     Column(
-        modifier = Modifier.padding(start = 8.dp, end = height / 2)
+        modifier = Modifier.padding(start = 8.dp, end = height / 2),
+        verticalArrangement = Arrangement.Center
     ) {
-        Text(
-            text = detectedProduct.product.brands,
-            fontSize = 18.sp,
-            color = Color.Gray
-        )
-        Text(
-            text = detectedProduct.product.productName,
-            fontSize = 24.sp,
-        )
+        detectedProduct.product.brands?.let {
+            Text(
+                text = it,
+                fontSize = 18.sp,
+                color = Color.Gray
+            )
+        }
+        detectedProduct.product.productName?.let {
+            Text(
+                text = it,
+                fontSize = 24.sp,
+            )
+        }
     }
 }
 
@@ -296,6 +323,54 @@ fun BarcodeScannerResultPreview() {
                     brands = "Ferrero",
                     productName = "Nutella",
                     imageThumbUrl = "https://images.openfoodfacts.org/images/products/301/762/042/5035/front_de.474.100.jpg"
+                ),
+                status = 1
+            )
+            BarcodeScannerResult(
+                activity = null,
+                state = BarcodeScannerState.GOT_RESULT,
+                responseOk = true,
+                detectedProduct = detectedProduct
+            )
+        }
+    }
+}
+
+@Preview
+@Composable
+fun BarcodeScannerResultPreviewImageNull() {
+    FoodExpirationDatesTheme {
+        Surface {
+            val detectedProduct = OpenFoodFactsJsonResponse(
+                code = "",
+                product = Product(
+                    brands = null,
+                    productName = "Product name",
+                    imageThumbUrl = null
+                ),
+                status = 1
+            )
+            BarcodeScannerResult(
+                activity = null,
+                state = BarcodeScannerState.GOT_RESULT,
+                responseOk = true,
+                detectedProduct = detectedProduct
+            )
+        }
+    }
+}
+
+@PreviewLightDark
+@Composable
+fun BarcodeScannerResultPreviewWithNull() {
+    FoodExpirationDatesTheme {
+        Surface {
+            val detectedProduct = OpenFoodFactsJsonResponse(
+                code = "",
+                product = Product(
+                    brands = null,
+                    productName = null,
+                    imageThumbUrl = null
                 ),
                 status = 1
             )
