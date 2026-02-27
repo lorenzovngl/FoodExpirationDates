@@ -8,6 +8,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lorenzovainigli.foodexpirationdates.model.entity.CSV_HEADER
+import com.lorenzovainigli.foodexpirationdates.model.entity.DATE_ADDED
+import com.lorenzovainigli.foodexpirationdates.model.entity.DATE_ADDED_INDEX
 import com.lorenzovainigli.foodexpirationdates.model.entity.EXPIRATION_DATE
 import com.lorenzovainigli.foodexpirationdates.model.entity.EXPIRATION_DATE_INDEX
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
@@ -152,7 +154,8 @@ class ExpirationDatesViewModel @Inject constructor(
                     expirationDate = row[EXPIRATION_DATE_INDEX].toLong(),
                     openingDate = row[OPENING_DATE_INDEX].let { if (it != "null") it.toLong() else null },
                     timeSpanDays = row[TIME_SPAN_DAYS_INDEX].let { if (it != "null") it.toInt() else null },
-                    quantity = row[QUANTITY_INDEX].toInt()
+                    quantity = row[QUANTITY_INDEX].toInt(),
+                    dateAdded = if (row.size > DATE_ADDED_INDEX) row[DATE_ADDED_INDEX].toLong() else System.currentTimeMillis()
                 )
                 addExpirationDate(expirationDate)
             }
@@ -164,10 +167,13 @@ class ExpirationDatesViewModel @Inject constructor(
 
     private fun validateCsv(csvData: List<Array<String>>): Boolean {
         val header = csvData[0]
+        // Support both old format (without DATE_ADDED) and new format (with DATE_ADDED)
+        val hasDateAdded = header.size > DATE_ADDED_INDEX
         return !(header[FOOD_NAME_INDEX] != FOOD_NAME ||
                 header[EXPIRATION_DATE_INDEX] != EXPIRATION_DATE ||
                 header[OPENING_DATE_INDEX] != OPENING_DATE ||
-                header[TIME_SPAN_DAYS_INDEX] != TIME_SPAN_DAYS)
+                header[TIME_SPAN_DAYS_INDEX] != TIME_SPAN_DAYS ||
+                (hasDateAdded && header[DATE_ADDED_INDEX] != DATE_ADDED))
     }
 
     fun resetNotifyExportTaskDone(){
