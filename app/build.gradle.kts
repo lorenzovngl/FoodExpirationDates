@@ -107,6 +107,11 @@ android {
 
     sourceSets {
         getByName("debug").assets.srcDirs(files("$projectDir/schemas")) // Room
+
+        getByName("test") {
+            java.srcDir("src/testScreenshot/java")
+            resources.srcDir("src/testScreenshot/resources")
+        }
     }
 
     compileOptions {
@@ -233,6 +238,14 @@ dependencies {
 
     // Coil
     "fullImplementation"(libs.coil.compose)
+
+    val testScreenshotImplementation by configurations.creating
+    testScreenshotImplementation(libs.junit)
+    testScreenshotImplementation(platform(libs.compose.bom))
+    testScreenshotImplementation(libs.ui.test.junit4)
+    
+    // Add screenshot dependencies to standard testImplementation so they can be compiled
+    configurations.getByName("testImplementation").extendsFrom(testScreenshotImplementation)
 }
 
 if (!buildFoss){
@@ -267,5 +280,13 @@ tasks.register<Copy>("copyAPKs") {
 tasks.all {
     if (name == "uploadCrashlyticsMappingFileFullRelease") {
         dependsOn("processFullDebugGoogleServices")
+    }
+}
+
+tasks.withType<Test> {
+    if (name == "testDebugUnitTest" || name == "testReleaseUnitTest" || name == "testFullDebugUnitTest" || name == "testFossDebugUnitTest") {
+        filter {
+            excludeTestsMatching("*Screenshot*")
+        }
     }
 }
