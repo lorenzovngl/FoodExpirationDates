@@ -1,6 +1,7 @@
 package com.lorenzovainigli.foodexpirationdates.model
 
 import kotlinx.coroutines.test.runTest
+import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
@@ -9,21 +10,35 @@ import org.junit.Test
 import org.junit.jupiter.api.Assertions.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.net.SocketTimeoutException
+import java.util.concurrent.TimeUnit
+import kotlin.test.assertFailsWith
 
 class OpenFoodFactsAPIServiceTest {
 
     private lateinit var mockWebServer: MockWebServer
     private lateinit var service: OpenFoodFactsAPIService
 
-    @Before
-    fun setup() {
-        mockWebServer = MockWebServer()
-
-        service = Retrofit.Builder()
+    private fun createService(client: OkHttpClient): OpenFoodFactsAPIService =
+        Retrofit.Builder()
             .baseUrl(mockWebServer.url("/"))
+            .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(OpenFoodFactsAPIService::class.java)
+
+    @Before
+    fun setup() {
+        mockWebServer = MockWebServer()
+        mockWebServer.start()
+
+        val defaultClient = OkHttpClient.Builder()
+            .readTimeout(5, TimeUnit.SECONDS)
+            .connectTimeout(5, TimeUnit.SECONDS)
+            .writeTimeout(5, TimeUnit.SECONDS)
+            .build()
+
+        service = createService(defaultClient)
     }
 
     @After
@@ -106,6 +121,28 @@ class OpenFoodFactsAPIServiceTest {
         assertEquals(barcode, body!!.code)
         assertEquals(0, body.status)
         assertEquals("product not found", body.statusVerbose)
+    }
+
+    @Test
+    fun `getProduct throws SocketTimeoutException when server delays headers`() = runTest {
+        val timeoutClient = OkHttpClient.Builder()
+            .readTimeout(300, TimeUnit.MILLISECONDS)
+            .connectTimeout(2, TimeUnit.SECONDS)
+            .writeTimeout(2, TimeUnit.SECONDS)
+            .build()
+
+        val timeoutService = createService(timeoutClient)
+
+        mockWebServer.enqueue(
+            MockResponse()
+                .setResponseCode(200)
+                .setHeadersDelay(2, TimeUnit.SECONDS)
+                .setBody("""{"code":"123","status":1}""")
+        )
+
+        assertFailsWith<SocketTimeoutException> {
+            timeoutService.getProduct("123")
+        }
     }
 
 }
