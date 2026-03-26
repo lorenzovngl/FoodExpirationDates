@@ -2,28 +2,26 @@ package com.lorenzovainigli.foodexpirationdates.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.lorenzovainigli.foodexpirationdates.model.OpenFoodFactsAPIService
 import com.lorenzovainigli.foodexpirationdates.model.OpenFoodFactsJsonResponse
-import javax.inject.Inject
-
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
+import javax.inject.Inject
 
 @HiltViewModel
-class APIServiceViewModel @Inject constructor() : ViewModel() {
-
-    private val BASE_URL = "https://de.openfoodfacts.org/api/v2/product/"
+class APIServiceViewModel @Inject constructor(
+    private val service: OpenFoodFactsAPIService
+) : ViewModel() {
 
     enum class BarcodeScannerState {
-        NO_CONNECTION, READY_TO_SCAN, GETTING_PRODUCT_INFO, SCANNING_ERROR, GOT_RESULT
+        NO_CONNECTION, READY_TO_SCAN, GETTING_PRODUCT_INFO, SCANNING_ERROR, GOT_RESULT, NETWORK_ERROR
     }
 
     private val _barcodeScannerState: MutableStateFlow<BarcodeScannerState> = MutableStateFlow(value = BarcodeScannerState.READY_TO_SCAN)
@@ -35,28 +33,32 @@ class APIServiceViewModel @Inject constructor() : ViewModel() {
     private val _product: MutableStateFlow<OpenFoodFactsJsonResponse?> = MutableStateFlow(value = null)
     val product: StateFlow<OpenFoodFactsJsonResponse?> = _product.asStateFlow()
 
-    private val instance: Retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
     fun run(barcode: String){
-        val service = instance.create(OpenFoodFactsAPIService::class.java)
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = service.getProduct(barcode)
-            withContext(Dispatchers.Main){
+        _barcodeScannerState.value = BarcodeScannerState.GETTING_PRODUCT_INFO
+        viewModelScope.launch {
+            try {
+                val response = service.getProduct(barcode)
                 _responseStatus.value = response.isSuccessful
-                if (response.isSuccessful){
-                    _barcodeScannerState.value = BarcodeScannerState.GOT_RESULT
+                if (response.isSuccessful) {
                     val item = response.body()
-                    if (item != null){
+                    if (item != null) {
                         Log.i("Retrofit", item.toString())
                         _product.value = item
+                        _barcodeScannerState.value = BarcodeScannerState.GOT_RESULT
+                    } else {
+                        _barcodeScannerState.value = BarcodeScannerState.SCANNING_ERROR
                     }
                 } else {
                     _barcodeScannerState.value = BarcodeScannerState.SCANNING_ERROR
                     Log.e("Retrofit error", response.code().toString())
                 }
+            } catch (e: Exception) {
+                _barcodeScannerState.value = when (e) {
+                    is UnknownHostException -> BarcodeScannerState.NO_CONNECTION
+                    is SocketTimeoutException, is IOException -> BarcodeScannerState.NETWORK_ERROR
+                    else -> BarcodeScannerState.SCANNING_ERROR
+                }
+                Log.e("APIServiceViewModel", "Error fetching product", e)
             }
         }
     }

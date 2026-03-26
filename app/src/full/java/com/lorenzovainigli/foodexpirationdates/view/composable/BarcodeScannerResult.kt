@@ -105,7 +105,7 @@ fun BarcodeScannerResult(
                         }
                     }
 
-                BarcodeScannerState.SCANNING_ERROR -> {
+                BarcodeScannerState.SCANNING_ERROR, BarcodeScannerState.NETWORK_ERROR -> {
                     BarcodeScannerResultResponseError(
                         height = height,
                         message = stringResource(R.string.scanning_error)
