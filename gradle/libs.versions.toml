@@ -37,6 +37,7 @@ room = "2.8.4"
 splashscreen = "1.2.0"
 test-rules = "1.7.0"
 test-runner = "1.7.0"
+turbine = "1.2.1"
 uiautomator = "2.3.0"
 work-runtime-ktx = "2.11.1"
 
@@ -95,6 +96,7 @@ robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectr
 runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata" }
 splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
 test-core-ktx = { module = "androidx.test:core-ktx", version.ref = "androidx-test-core-ktx" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 ui = { group = "androidx.compose.ui", name = "ui" }
 ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
