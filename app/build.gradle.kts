@@ -3,8 +3,8 @@ import java.io.FileNotFoundException
 import java.util.Properties
 
 plugins {
+    id("git-info")
     alias(libs.plugins.com.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.com.google.dagger.hilt.android)
     alias(libs.plugins.app.cash.paparazzi)
     alias(libs.plugins.com.google.devtools.ksp)
@@ -32,8 +32,8 @@ android {
         applicationId = "com.lorenzovainigli.foodexpirationdates"
         minSdk = 24
         targetSdk = 36
-        versionCode = 40
-        versionName = "2.7.0"
+        versionCode = 45
+        versionName = "2.8.2"
 
         base.archivesName.set("FoodExpirationDates-$versionName")
 
@@ -67,11 +67,27 @@ android {
             if (areKeystorePropertiesLoaded) {
                 signingConfig = signingConfigs.getByName("release")
             }
+
+            buildConfigField(
+                "String",
+                "APP_VERSION_LABEL",
+                "\"${defaultConfig.versionName}\""
+            )
         }
         getByName("debug") {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
             isDebuggable = true
+
+            val branch = rootProject.extra["gitBranch"] as String
+            val commit = rootProject.extra["gitCommitHash"] as String
+            val date   = rootProject.extra["gitCommitDate"] as String
+
+            buildConfigField(
+                "String",
+                "APP_VERSION_LABEL",
+                "\"$branch-$commit ($date)\""
+            )
         }
     }
 
@@ -91,15 +107,20 @@ android {
 
     sourceSets {
         getByName("debug").assets.srcDirs(files("$projectDir/schemas")) // Room
+
+        getByName("test") {
+            java.srcDir("src/testScreenshot/java")
+            resources.srcDir("src/testScreenshot/resources")
+        }
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
     kotlin {
         compilerOptions {
-            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
         }
     }
     buildFeatures {
@@ -138,12 +159,16 @@ dependencies {
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
     implementation(libs.androidx.navigation.compose)
+    testImplementation(kotlin("test"))
     testImplementation(libs.junit)
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.mockito.core)
     testImplementation(libs.mockito.kotlin)
     testImplementation(libs.robolectric)
     testImplementation(libs.mockk)
+    testImplementation(libs.mockwebserver)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.turbine)
     androidTestImplementation(libs.test.core.ktx)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -219,6 +244,14 @@ dependencies {
 
     // Coil
     "fullImplementation"(libs.coil.compose)
+
+    val testScreenshotImplementation by configurations.creating
+    testScreenshotImplementation(libs.junit)
+    testScreenshotImplementation(platform(libs.compose.bom))
+    testScreenshotImplementation(libs.ui.test.junit4)
+    
+    // Add screenshot dependencies to standard testImplementation so they can be compiled
+    configurations.getByName("testImplementation").extendsFrom(testScreenshotImplementation)
 }
 
 if (!buildFoss){
@@ -253,5 +286,13 @@ tasks.register<Copy>("copyAPKs") {
 tasks.all {
     if (name == "uploadCrashlyticsMappingFileFullRelease") {
         dependsOn("processFullDebugGoogleServices")
+    }
+}
+
+tasks.withType<Test> {
+    if (name == "testDebugUnitTest" || name == "testReleaseUnitTest" || name == "testFullDebugUnitTest" || name == "testFossDebugUnitTest") {
+        filter {
+            excludeTestsMatching("*Screenshot*")
+        }
     }
 }

@@ -3,7 +3,7 @@ package com.lorenzovainigli.foodexpirationdates.view.composable.screen
 import android.util.Log
 import androidx.camera.mlkit.vision.MlKitAnalyzer
 import androidx.camera.view.CameraController
-import androidx.camera.view.CameraController.COORDINATE_SYSTEM_VIEW_REFERENCED
+import androidx.camera.core.ImageAnalysis.COORDINATE_SYSTEM_VIEW_REFERENCED
 import androidx.camera.view.LifecycleCameraController
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,6 +22,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.lorenzovainigli.foodexpirationdates.model.repository.ConnectivityRepository
+import com.lorenzovainigli.foodexpirationdates.util.BarcodeValidator
 import com.lorenzovainigli.foodexpirationdates.view.BarcodeScannerActivity
 import com.lorenzovainigli.foodexpirationdates.view.composable.BarcodeScannerResult
 import com.lorenzovainigli.foodexpirationdates.view.composable.CameraPreview
@@ -56,12 +57,13 @@ fun BarCodeScannerScreen(activity: BarcodeScannerActivity) {
                     val barcodeResults = result?.getValue(barcodeScanner)
                     if (!barcodeResults.isNullOrEmpty() && isOnline.value) {
                         for (barcode in barcodeResults) {
-                            barcode.displayValue?.let {
-                                if (it != previousBarcodeDetected.value) {
+                            barcode.displayValue?.let { code ->
+                                if (BarcodeValidator().isValidBarcode(barcode) && code != previousBarcodeDetected.value) {
                                     apiServiceViewModel.setBarcodeScannerState(
-                                        BarcodeScannerState.GETTING_PRODUCT_INFO)
-                                    apiServiceViewModel.run(it)
-                                    previousBarcodeDetected.value = it
+                                        BarcodeScannerState.GETTING_PRODUCT_INFO
+                                    )
+                                    apiServiceViewModel.run(code)
+                                    previousBarcodeDetected.value = code
                                     Log.i("detectedProduct", detectedProduct.value.toString())
                                 }
                             }
