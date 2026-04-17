@@ -30,6 +30,7 @@ import com.lorenzovainigli.foodexpirationdates.model.NotificationManager
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.checkAndSetSecureFlags
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
+import com.lorenzovainigli.foodexpirationdates.util.AppReviewManager
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyScaffold
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDatesViewModel
 import com.lorenzovainigli.foodexpirationdates.viewmodel.PreferencesViewModel
@@ -40,6 +41,7 @@ class MainActivity : ComponentActivity() {
 
     val viewModel: ExpirationDatesViewModel by viewModels()
     val preferencesViewModel: PreferencesViewModel by viewModels()
+    private lateinit var reviewManager: AppReviewManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +54,9 @@ class MainActivity : ComponentActivity() {
 
         NotificationManager.setupNotificationChannel(this)
 
+        // Initialize and preload review flow
+        reviewManager = AppReviewManager(this)
+        reviewManager.preloadReviewFlow()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -75,22 +80,22 @@ class MainActivity : ComponentActivity() {
             ) {
                 val navBarColor = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp)
                 val navBarColorArgb = navBarColor.toArgb()
+                val isInDarkThemeValue = isInDarkTheme
                 SideEffect {
-                    window.navigationBarColor = navBarColorArgb
+                    enableEdgeToEdge(
+                        statusBarStyle = SystemBarStyle.auto(
+                            lightScrim = android.graphics.Color.TRANSPARENT,
+                            darkScrim = android.graphics.Color.TRANSPARENT,
+                            detectDarkMode = { _ -> isInDarkThemeValue }
+                        ),
+                        navigationBarStyle = SystemBarStyle.auto(
+                            lightScrim = navBarColorArgb,
+                            darkScrim = navBarColorArgb,
+                            detectDarkMode = { _ -> isInDarkThemeValue }
+                        )
+                    )
                 }
                 val searchQuery = remember { mutableStateOf("") }
-                enableEdgeToEdge(
-                    statusBarStyle = SystemBarStyle.auto(
-                        lightScrim = android.graphics.Color.TRANSPARENT,
-                        darkScrim = android.graphics.Color.TRANSPARENT,
-                        detectDarkMode = { _ -> isInDarkTheme }
-                    ),
-                    navigationBarStyle = SystemBarStyle.auto(
-                        lightScrim = navBarColorArgb,
-                        darkScrim = navBarColorArgb,
-                        detectDarkMode = { _ -> isInDarkTheme }
-                    )
-                )
                 Surface(
                     modifier = Modifier
                         .fillMaxSize(),

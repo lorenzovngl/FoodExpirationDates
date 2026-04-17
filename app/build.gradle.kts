@@ -199,6 +199,10 @@ dependencies {
     annotationProcessor(libs.androidx.room.compiler)
     ksp(libs.androidx.room.compiler)
 
+    //in-app-reviews
+    implementation("com.google.android.play:review:2.0.2")
+    implementation("com.google.android.play:review-ktx:2.0.2")
+
     // Dagger
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
