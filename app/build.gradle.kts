@@ -106,11 +106,11 @@ android {
     }
 
     sourceSets {
-        getByName("debug").assets.srcDirs(files("$projectDir/schemas")) // Room
+        getByName("debug").assets.directories.add(("$projectDir/schemas")) // Room
 
         getByName("test") {
-            java.srcDir("src/testScreenshot/java")
-            resources.srcDir("src/testScreenshot/resources")
+            java.directories.add("src/testScreenshot/java")
+            resources.directories.add("src/testScreenshot/resources")
         }
     }
 
