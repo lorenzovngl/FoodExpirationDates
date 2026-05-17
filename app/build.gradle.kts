@@ -43,12 +43,6 @@ android {
         }
     }
 
-    configurations {
-        all {
-            exclude(module = "kotlin-stdlib-jdk7")
-        }
-    }
-
     if (areKeystorePropertiesLoaded) {
         signingConfigs {
             create("release") {
@@ -61,8 +55,9 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             if (areKeystorePropertiesLoaded) {
                 signingConfig = signingConfigs.getByName("release")
@@ -74,7 +69,7 @@ android {
                 "\"${defaultConfig.versionName}\""
             )
         }
-        getByName("debug") {
+        debug {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
             isDebuggable = true
@@ -118,11 +113,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
     }
-    kotlin {
-        compilerOptions {
-            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
-        }
-    }
+
     buildFeatures {
         compose = true
         buildConfig = true
@@ -134,6 +125,19 @@ android {
     }
     lint {
         abortOnError = false
+    }
+}
+
+configurations {
+    all {
+        exclude(module = "kotlin-stdlib-jdk7")
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
+        freeCompilerArgs.add("-Xannotation-default-target=param-property")
     }
 }
 

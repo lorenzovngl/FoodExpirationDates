@@ -23,8 +23,8 @@ class AppModule {
             application,
             AppDatabase::class.java,
             "database.db"
-        ).fallbackToDestructiveMigration()
-            .fallbackToDestructiveMigrationOnDowngrade()
+        ).fallbackToDestructiveMigration(dropAllTables = false)
+            .fallbackToDestructiveMigrationOnDowngrade(dropAllTables = false)
             .allowMainThreadQueries().build()
     }
 

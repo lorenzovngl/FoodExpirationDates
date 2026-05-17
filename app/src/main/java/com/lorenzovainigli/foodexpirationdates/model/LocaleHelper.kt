@@ -39,7 +39,7 @@ object LocaleHelper {
         val locale = if (language == Language.SYSTEM.code) {
             Locale.getDefault()
         } else {
-            Locale(language)
+            Locale.forLanguageTag(language)
         }
         Locale.setDefault(locale)
 
