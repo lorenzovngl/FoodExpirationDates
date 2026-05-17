@@ -190,6 +190,11 @@ fun FoodCard(
                         fontSize = 12.sp
                     )
                 }
+                Text(
+                    modifier = Modifier.alpha(.6f),
+                    text = stringResource(R.string.added_on, sdf.format(item.dateAdded)),
+                    fontSize = 10.sp
+                )
             }
             Text(
                 modifier = Modifier.padding(4.dp),
@@ -248,7 +253,8 @@ fun FoodCardPreview() {
                         expirationDate = item.expirationDate,
                         openingDate = if (index in listOf(2, 4)) item.expirationDate else null,
                         timeSpanDays = 0,
-                        quantity = item.quantity
+                        quantity = item.quantity,
+                        dateAdded = item.dateAdded
                     ),
                     onClickEdit = {},
                     onClickDelete = {},

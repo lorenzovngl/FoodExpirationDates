@@ -3,6 +3,7 @@ package com.lorenzovainigli.foodexpirationdates.di
 import android.app.Application
 import androidx.room.Room
 import com.lorenzovainigli.foodexpirationdates.model.AppDatabase
+import com.lorenzovainigli.foodexpirationdates.model.MIGRATION_3_4
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDatesRepositoryImpl
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
@@ -23,7 +24,8 @@ class AppModule {
             application,
             AppDatabase::class.java,
             "database.db"
-        ).fallbackToDestructiveMigration()
+        ).addMigrations(MIGRATION_3_4)
+            .fallbackToDestructiveMigration()
             .fallbackToDestructiveMigrationOnDowngrade()
             .allowMainThreadQueries().build()
     }

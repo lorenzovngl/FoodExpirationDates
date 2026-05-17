@@ -175,6 +175,28 @@ fun InsertScreen(
             datePickerState = datePickerExpDateState,
             label = stringResource(id = R.string.expiration_date)
         )
+        if (itemToEdit != null) {
+            Spacer(modifier = Modifier.height(16.dp))
+            TextField(
+                modifier = Modifier.fillMaxWidth(),
+                enabled = false,
+                label = {
+                    Text(text = stringResource(id = R.string.date_added))
+                },
+                value = run {
+                    val dateFormat = (DateFormat.getDateInstance(
+                        DateFormat.MEDIUM, Locale.getDefault()
+                    ) as SimpleDateFormat).toLocalizedPattern()
+                    val sdf = SimpleDateFormat(dateFormat, Locale.getDefault())
+                    sdf.format(itemToEdit.dateAdded)
+                },
+                onValueChange = {},
+                colors = TextFieldDefaults.colors(
+                    disabledTextColor = MaterialTheme.colorScheme.onSurface,
+                    disabledLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            )
+        }
         Spacer(modifier = Modifier.height(16.dp))
         var quantity by rememberSaveable {
             mutableIntStateOf(itemToEdit?.quantity ?: 1)

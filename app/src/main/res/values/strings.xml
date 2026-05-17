@@ -123,4 +123,6 @@
     <string name="quantity">Quantity</string>
     <string name="add">Add</string>
     <string name="remove">Remove</string>
+    <string name="date_added">Date added</string>
+    <string name="added_on">Added on %1$s</string>
 </resources>
