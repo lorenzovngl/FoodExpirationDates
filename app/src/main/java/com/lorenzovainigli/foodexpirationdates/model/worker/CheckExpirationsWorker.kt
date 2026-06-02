@@ -8,64 +8,46 @@ import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.LocaleHelper
 import com.lorenzovainigli.foodexpirationdates.model.NotificationManager.Companion.CHANNEL_REMINDERS_ID
+import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.entity.computeExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.showNotification
 import kotlinx.coroutines.flow.first
-import java.util.Calendar
+import java.time.Clock
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltWorker
 class CheckExpirationsWorker @Inject constructor(
     appContext: Context,
     params: WorkerParameters,
-    private val repository: ExpirationDateRepository
+    private val repository: ExpirationDateRepository,
+    private val clock: Clock
 ) : CoroutineWorker(appContext, params) {
 
     override suspend fun doWork(): Result {
-        val sb = StringBuilder()
-        val today = Calendar.getInstance()
-        val twoDaysAgo = Calendar.getInstance().apply {
-            add(Calendar.DAY_OF_MONTH, -2)
+        val nowMs = clock.millis()
+
+        val msInADay = TimeUnit.DAYS.toMillis(1)
+        val todayStartMs = nowMs
+        val yesterdayMs = todayStartMs - msInADay
+        val twoDaysAgoMs = todayStartMs - (2 * msInADay)
+        val tomorrowMs = todayStartMs + msInADay
+
+        val items = repository.getAll().first()
+        val expiringItems = items.filter {
+            computeExpirationDate(it) < tomorrowMs
         }
-        val yesterday = Calendar.getInstance().apply {
-            add(Calendar.DAY_OF_MONTH, -1)
-        }
-        val tomorrow = Calendar.getInstance().apply {
-            add(Calendar.DAY_OF_MONTH, 1)
-        }
-        val msInADay = (1000 * 60 * 60 * 24)
-        val filteredList = repository.getAll().first().filter {
-            computeExpirationDate(it) < tomorrow.time.time
-        }
-        if (filteredList.isEmpty()) {
+
+        if (expiringItems.isEmpty()) {
             return Result.success()
         }
-        filteredList.map {
-            val expDate = computeExpirationDate(it)
-            sb.append(it.foodName).append(" (")
-            if (expDate < twoDaysAgo.time.time) {
-                val days = (today.time.time - expDate) / msInADay
-                sb.append(applicationContext.getString(R.string.n_days_ago, days))
-            } else if (expDate < yesterday.time.time)
-                sb.append(applicationContext.getString(R.string.yesterday).lowercase())
-            else if (expDate < today.time.time) {
-                sb.append(applicationContext.getString(R.string.today).lowercase())
-            } else {
-                sb.append(applicationContext.getString(R.string.tomorrow).lowercase())
-            }
-            sb.append("), ")
-        }
-        var message = ""
-        if (sb.toString().length > 2)
-            message = sb.toString().substring(0, sb.toString().length - 2) + "."
-        val context = if (BuildConfig.DEBUG) {
-            LocaleHelper.setLocale(
-                context = applicationContext,
-                language = PreferencesRepository.getLanguage(applicationContext)
-            )
-        } else applicationContext
+
+        val message = buildExpirationMessage(expiringItems, todayStartMs, yesterdayMs, twoDaysAgoMs, msInADay)
+
+        val context = getLocalizedContext()
+
         showNotification(
             context = context,
             channelId = CHANNEL_REMINDERS_ID,
@@ -73,6 +55,41 @@ class CheckExpirationsWorker @Inject constructor(
             message = message
         )
         return Result.success()
+    }
+
+    private fun buildExpirationMessage(
+        items: List<ExpirationDate>,
+        todayMs: Long,
+        yesterdayMs: Long,
+        twoDaysAgoMs: Long,
+        msInADay: Long
+    ): String {
+        val joinedItems = items.joinToString(", ") { item ->
+            val expDateMs = computeExpirationDate(item)
+            val relativeTime = when {
+                expDateMs < twoDaysAgoMs -> {
+                    val days = (todayMs - expDateMs) / msInADay
+                    applicationContext.getString(R.string.n_days_ago, days)
+                }
+                expDateMs < yesterdayMs -> applicationContext.getString(R.string.yesterday).lowercase()
+                expDateMs < todayMs -> applicationContext.getString(R.string.today).lowercase()
+                else -> applicationContext.getString(R.string.tomorrow).lowercase()
+            }
+            "${item.foodName} ($relativeTime)"
+        }
+
+        return "$joinedItems."
+    }
+
+    private fun getLocalizedContext(): Context {
+        return if (BuildConfig.DEBUG) {
+            LocaleHelper.setLocale(
+                context = applicationContext,
+                language = PreferencesRepository.getLanguage(applicationContext)
+            )
+        } else {
+            applicationContext
+        }
     }
 
     companion object {
