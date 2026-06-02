@@ -15,6 +15,7 @@ import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.model.worker.CheckExpirationsWorker
+import com.lorenzovainigli.foodexpirationdates.util.TimeCalculator
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
 
@@ -74,14 +75,7 @@ class NotificationManager {
 
         fun scheduleDailyNotification(context: Context, hour: Int, minute: Int) {
             val currentTime = Calendar.getInstance()
-            val dueTime = Calendar.getInstance().apply {
-                set(Calendar.HOUR_OF_DAY, hour)
-                set(Calendar.MINUTE, minute)
-                set(Calendar.SECOND, 0)
-            }
-            if (currentTime > dueTime)
-                dueTime.add(Calendar.DAY_OF_MONTH, 1)
-            val initialDelay = dueTime.timeInMillis - currentTime.timeInMillis
+            val initialDelay = TimeCalculator.calculateDelayToNext(hour, minute, currentTime)
             val formattedTime = formatTimeDifference(initialDelay)
             if (BuildConfig.DEBUG) {
                 Toast.makeText(
