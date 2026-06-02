@@ -30,7 +30,7 @@ android {
 
     defaultConfig {
         applicationId = "com.lorenzovainigli.foodexpirationdates"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 36
         versionCode = 48
         versionName = "2.8.3"
