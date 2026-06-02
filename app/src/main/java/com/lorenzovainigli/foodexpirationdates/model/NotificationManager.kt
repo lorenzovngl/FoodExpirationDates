@@ -10,8 +10,8 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.model.worker.CheckExpirationsWorker
@@ -84,15 +84,13 @@ class NotificationManager {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-            val workRequest = PeriodicWorkRequestBuilder<CheckExpirationsWorker>(
-                1, TimeUnit.DAYS
-            )
+            val workRequest = OneTimeWorkRequestBuilder<CheckExpirationsWorker>()
                 .setInitialDelay(initialDelay, TimeUnit.MILLISECONDS)
                 .build()
             WorkManager.getInstance(context)
-                .enqueueUniquePeriodicWork(
+                .enqueueUniqueWork(
                     CheckExpirationsWorker.WORKER_ID,
-                    ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE,
+                    ExistingWorkPolicy.REPLACE,
                     workRequest
                 )
         }
