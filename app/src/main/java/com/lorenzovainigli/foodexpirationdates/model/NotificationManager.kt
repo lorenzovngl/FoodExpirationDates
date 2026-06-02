@@ -29,24 +29,21 @@ class NotificationManager {
         private var permissionGranted = false
 
         fun setupNotificationChannel(activity: ComponentActivity) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                // Channel for reminders
-                val channelReminders = NotificationChannel(
-                    CHANNEL_REMINDERS_ID,
-                    CHANNEL_REMINDERS_NAME,
-                    NotificationManager.IMPORTANCE_HIGH
-                )
-                val notificationManager = activity.getSystemService(Context.NOTIFICATION_SERVICE)
-                        as NotificationManager
-                notificationManager.createNotificationChannel(channelReminders)
-                // Channel for export done notification
-                val channelExportDone = NotificationChannel(
-                    CHANNEL_EXPORT_DONE_ID,
-                    CHANNEL_EXPORT_DONE_NAME,
-                    NotificationManager.IMPORTANCE_HIGH
-                )
-                notificationManager.createNotificationChannel(channelExportDone)
-            }
+            // Channel for reminders
+            val channelReminders = NotificationChannel(
+                CHANNEL_REMINDERS_ID,
+                CHANNEL_REMINDERS_NAME,
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            val notificationManager = activity.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channelReminders)
+            // Channel for export done notification
+            val channelExportDone = NotificationChannel(
+                CHANNEL_EXPORT_DONE_ID,
+                CHANNEL_EXPORT_DONE_NAME,
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            notificationManager.createNotificationChannel(channelExportDone)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 permissionGranted = activity.let {
                     ContextCompat.checkSelfPermission(
