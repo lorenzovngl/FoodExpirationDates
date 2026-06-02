@@ -41,6 +41,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.LifecycleResumeEffect
 import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.Language
@@ -49,10 +50,13 @@ import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepos
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.getScreenProtectionEnabled
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.setScreenProtectionEnabled
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
+import com.lorenzovainigli.foodexpirationdates.util.areNotificationsEnabled
+import com.lorenzovainigli.foodexpirationdates.util.openNotificationSettings
 import com.lorenzovainigli.foodexpirationdates.view.MainActivity
 import com.lorenzovainigli.foodexpirationdates.view.composable.AutoResizedText
 import com.lorenzovainigli.foodexpirationdates.view.composable.DateFormatDialog
 import com.lorenzovainigli.foodexpirationdates.view.composable.LanguagePickerDialog
+import com.lorenzovainigli.foodexpirationdates.view.composable.NotificationDisabledBanner
 import com.lorenzovainigli.foodexpirationdates.view.composable.NotificationTimeBottomSheet
 import com.lorenzovainigli.foodexpirationdates.view.composable.SettingsItem
 import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
@@ -141,6 +145,22 @@ fun SettingsScreen(
             .padding(10.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+
+        val context = LocalContext.current
+        var showPermissionBanner by remember {
+            mutableStateOf(!areNotificationsEnabled(context))
+        }
+        LifecycleResumeEffect(Unit) {
+            showPermissionBanner = !areNotificationsEnabled(context)
+            onPauseOrDispose { }
+        }
+        if (showPermissionBanner) {
+            NotificationDisabledBanner(
+                onSettingsClick = {
+                    openNotificationSettings(context)
+                }
+            )
+        }
 
         Text(
             text = stringResource(R.string.behaviour),
