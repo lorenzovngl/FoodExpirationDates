@@ -54,7 +54,6 @@ class MainActivity : ComponentActivity() {
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onResume() {
         super.onResume()
         val context = this

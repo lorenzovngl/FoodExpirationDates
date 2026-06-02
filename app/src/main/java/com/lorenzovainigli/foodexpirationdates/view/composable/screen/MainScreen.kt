@@ -101,7 +101,6 @@ fun MainScreen(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Preview
 @Composable
 fun MainScreenPreview() {

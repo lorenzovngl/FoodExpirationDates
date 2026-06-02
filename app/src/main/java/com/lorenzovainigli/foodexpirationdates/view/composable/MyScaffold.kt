@@ -52,7 +52,6 @@ data class NavigationItem(
     val showBadge: Boolean = false
 )
 
-@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyScaffold(
@@ -165,7 +164,6 @@ fun MyScaffold(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @PreviewLightDark
 @PreviewScreenSizes
 @Composable

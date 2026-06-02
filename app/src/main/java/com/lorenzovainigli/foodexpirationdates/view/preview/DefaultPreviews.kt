@@ -18,7 +18,6 @@ import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.SettingsScreen
 
 class DefaultPreviews {
-    @RequiresApi(Build.VERSION_CODES.O)
     @PreviewLightDark
     @Composable
     fun MainScreenPreview() {
@@ -35,7 +34,6 @@ class DefaultPreviews {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     @PreviewLightDark
     @PreviewDynamicColors
     @Composable
@@ -51,7 +49,6 @@ class DefaultPreviews {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     @PreviewLightDark
     @Composable
     fun InsertScreenPreview() {
@@ -68,7 +65,6 @@ class DefaultPreviews {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     @PreviewLightDark
     @Composable
     fun SettingsScreenPreview() {
@@ -85,7 +81,6 @@ class DefaultPreviews {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     @PreviewLightDark
     @Composable
     fun InfoScreenPreview() {

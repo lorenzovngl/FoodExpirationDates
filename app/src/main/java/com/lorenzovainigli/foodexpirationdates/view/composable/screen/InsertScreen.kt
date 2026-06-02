@@ -403,7 +403,6 @@ fun TextFieldDatePicker(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @PreviewLightDark
 @Composable
 fun InsertScreenPreview() {

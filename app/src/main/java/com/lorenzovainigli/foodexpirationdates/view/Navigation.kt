@@ -18,7 +18,6 @@ import com.lorenzovainigli.foodexpirationdates.view.composable.screen.MainScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.SettingsScreen
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun Navigation(
     activity: MainActivity? = null,

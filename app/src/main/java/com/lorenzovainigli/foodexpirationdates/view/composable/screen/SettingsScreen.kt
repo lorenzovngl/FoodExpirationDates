@@ -63,7 +63,6 @@ import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
-@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
@@ -395,7 +394,6 @@ fun SettingsScreen(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @PreviewLightDark
 @LanguagePreviews
 @PreviewScreenSizes
