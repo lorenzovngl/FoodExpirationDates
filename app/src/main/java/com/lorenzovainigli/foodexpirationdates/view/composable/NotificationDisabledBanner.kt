@@ -30,8 +30,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 
 @Composable
@@ -39,9 +41,9 @@ fun NotificationDisabledBanner(
     onSettingsClick: () -> Unit,
     modifier: Modifier = Modifier,
     icon: ImageVector = Icons.Default.Warning,
-    title: String = "Notifications disabled",
-    message: String = "You have permanently disabled notifications. To receive alerts about expiring food, you must enable them manually from the phone's Settings.",
-    buttonText: String = "Open Settings"
+    title: String = stringResource(R.string.notifications_disabled),
+    message: String = stringResource(R.string.notifications_disabled_message),
+    buttonText: String = stringResource(R.string.open_settings)
 ) {
     var expanded by remember { mutableStateOf(false) }
 

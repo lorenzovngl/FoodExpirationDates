@@ -120,4 +120,7 @@
     <string name="protect_your_screen">Защитить экран от скриншотов и записей экрана.</string>
     <string name="privacy">Приватность</string>
     <string name="monochrome_icons">Монохромные иконки</string>
+    <string name="notifications_disabled">Уведомления отключены</string>
+    <string name="notifications_disabled_message">Уведомления были полностью отключены. Чтобы получать оповещения о продуктах с приближающимся сроком годности, необходимо вручную включить уведомления в настройках смартфона.</string>
+    <string name="open_settings">Открыть настройки</string>
 </resources>

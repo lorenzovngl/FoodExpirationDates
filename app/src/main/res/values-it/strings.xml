@@ -123,4 +123,7 @@
     <string name="quantity">Quantità</string>
     <string name="add">Aggiungi</string>
     <string name="remove">Rimuovi</string>
+    <string name="notifications_disabled">Notifiche disabilitate</string>
+    <string name="notifications_disabled_message">Hai disattivato le notifiche in modo permanente. Per ricevere avvisi sulla scadenza degli alimenti, devi attivarle manualmente dalle impostazioni del telefono.</string>
+    <string name="open_settings">Apri impostazioni</string>
 </resources>

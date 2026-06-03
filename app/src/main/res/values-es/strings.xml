@@ -119,4 +119,7 @@
     <string name="quantity">Cantidad</string>
     <string name="add">Añadir</string>
     <string name="remove">Eliminar</string>
+    <string name="notifications_disabled">Notificaciones desactivadas</string>
+    <string name="notifications_disabled_message">Has desactivado las notificaciones de forma permanente. Para recibir alertas sobre alimentos a punto de caducar, debes activarlas manualmente desde los Ajustes del teléfono.</string>
+    <string name="open_settings">Abrir ajustes</string>
 </resources>
