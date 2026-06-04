@@ -8,6 +8,7 @@ import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.LocaleHelper
 import com.lorenzovainigli.foodexpirationdates.model.NotificationManager.Companion.CHANNEL_REMINDERS_ID
+import com.lorenzovainigli.foodexpirationdates.model.NotificationManager.Companion.scheduleDailyNotification
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.entity.computeExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
@@ -40,13 +41,14 @@ class CheckExpirationsWorker @Inject constructor(
             computeExpirationDate(it) < tomorrowMs
         }
 
+        val context = getLocalizedContext()
+
         if (expiringItems.isEmpty()) {
+            scheduleNextRun(context)
             return Result.success()
         }
 
         val message = buildExpirationMessage(expiringItems, todayStartMs, yesterdayMs, twoDaysAgoMs, msInADay)
-
-        val context = getLocalizedContext()
 
         showNotification(
             context = context,
@@ -54,7 +56,16 @@ class CheckExpirationsWorker @Inject constructor(
             title = context.getString(R.string.your_food_is_expiring),
             message = message
         )
+
+        scheduleNextRun(context)
         return Result.success()
+    }
+
+    private fun scheduleNextRun(context: Context) {
+        scheduleDailyNotification(
+            context = context,
+            hour = PreferencesRepository.getUserNotificationTimeHour(context),
+            minute = PreferencesRepository.getUserNotificationTimeMinute(context))
     }
 
     private fun buildExpirationMessage(
