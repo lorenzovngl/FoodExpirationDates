@@ -65,7 +65,7 @@
     <string name="contacts_text">Wenn Sie weitere Informationen zu dieser Anwendung erhalten, Feedback senden, einen Fehler melden, eine Funktion anfordern oder einfach den Entwickler kontaktieren möchten, senden Sie bitte eine E-Mail über die folgende Schaltfläche.\nWenn Sie Fehlerberichte und Funktionsanfragen haben, können Sie auch ein Issue im GitHub-Repository dieser Anwendung öffnen.</string>
     <string name="list">Liste</string>
     <string name="opening_date">Öffnungsdatum</string>
-    <string name="optional">optional</string>
+    <string name="optional">Optional</string>
     <string name="time_span">Zeitspanne</string>
     <string name="please_enter_a_valid_number">Bitte geben Sie eine gültige Nummer ein</string>
     <string name="ok">OK</string>
@@ -117,4 +117,7 @@
     <string name="quantity">Menge</string>
     <string name="add">Hinzufügen</string>
     <string name="remove">Entfernen</string>
+    <string name="notifications_disabled">Benachrichtigungen deaktiviert</string>
+    <string name="notifications_disabled_message">Sie haben Benachrichtigungen dauerhaft deaktiviert. Um Benachrichtigungen über abgelaufene Lebensmittel zu erhalten, müssen Sie diese manuell in den Einstellungen des Telefons aktivieren.</string>
+    <string name="open_settings">Einstellungen öffnen</string>
 </resources>
