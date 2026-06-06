@@ -5,6 +5,7 @@ import androidx.work.ListenableWorker.Result
 import androidx.work.WorkerParameters
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.LocaleHelper
+import com.lorenzovainigli.foodexpirationdates.model.NotificationManager.Companion.scheduleDailyNotification
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.entity.computeExpirationDate
@@ -63,6 +64,11 @@ class CheckExpirationsWorkerTest {
         }
 
         every { showNotification(any(), any(), any(), any()) } returns Unit
+
+        mockkObject(com.lorenzovainigli.foodexpirationdates.model.NotificationManager.Companion)
+        every {
+            scheduleDailyNotification(any(), any(), any())
+        } returns Unit
 
         every { mockContext.applicationContext } returns mockContext
 
