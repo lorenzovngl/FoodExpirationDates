@@ -62,10 +62,7 @@ class CheckExpirationsWorker @Inject constructor(
     }
 
     private fun scheduleNextRun(context: Context) {
-        scheduleDailyNotification(
-            context = context,
-            hour = PreferencesRepository.getUserNotificationTimeHour(context),
-            minute = PreferencesRepository.getUserNotificationTimeMinute(context))
+        scheduleDailyNotification(context = context)
     }
 
     private fun buildExpirationMessage(

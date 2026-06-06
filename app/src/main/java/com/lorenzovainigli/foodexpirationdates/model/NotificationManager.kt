@@ -6,6 +6,8 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
@@ -14,6 +16,7 @@ import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.lorenzovainigli.foodexpirationdates.BuildConfig
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.model.worker.CheckExpirationsWorker
 import com.lorenzovainigli.foodexpirationdates.util.TimeCalculator
 import java.util.Calendar
@@ -73,16 +76,23 @@ class NotificationManager {
             }
         }
 
-        fun scheduleDailyNotification(context: Context, hour: Int, minute: Int) {
+        fun scheduleDailyNotification(
+            context: Context,
+            hour: Int = PreferencesRepository.getUserNotificationTimeHour(context),
+            minute: Int = PreferencesRepository.getUserNotificationTimeMinute(context),
+            policy: ExistingWorkPolicy = ExistingWorkPolicy.REPLACE
+        ) {
             val currentTime = Calendar.getInstance()
             val initialDelay = TimeCalculator.calculateDelayToNext(hour, minute, currentTime)
-            val formattedTime = formatTimeDifference(initialDelay)
             if (BuildConfig.DEBUG) {
-                Toast.makeText(
-                    context,
-                    "Notification in $formattedTime",
-                    Toast.LENGTH_SHORT
-                ).show()
+                val formattedTime = formatTimeDifference(initialDelay)
+                Handler(Looper.getMainLooper()).post {
+                    Toast.makeText(
+                        context,
+                        "Notification in $formattedTime",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
             val workRequest = OneTimeWorkRequestBuilder<CheckExpirationsWorker>()
                 .setInitialDelay(initialDelay, TimeUnit.MILLISECONDS)
@@ -90,7 +100,7 @@ class NotificationManager {
             WorkManager.getInstance(context)
                 .enqueueUniqueWork(
                     CheckExpirationsWorker.WORKER_ID,
-                    ExistingWorkPolicy.REPLACE,
+                    policy,
                     workRequest
                 )
         }
