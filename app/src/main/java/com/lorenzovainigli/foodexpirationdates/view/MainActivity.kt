@@ -24,9 +24,11 @@ import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
+import androidx.work.ExistingWorkPolicy
 import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.model.LocaleHelper
-import com.lorenzovainigli.foodexpirationdates.model.NotificationManager
+import com.lorenzovainigli.foodexpirationdates.model.NotificationManager.Companion.scheduleDailyNotification
+import com.lorenzovainigli.foodexpirationdates.model.NotificationManager.Companion.setupNotificationChannel
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.checkAndSetSecureFlags
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
@@ -50,8 +52,11 @@ class MainActivity : ComponentActivity() {
 
         checkAndSetSecureFlags(context = this, window)
 
-        NotificationManager.setupNotificationChannel(this)
-
+        setupNotificationChannel(this)
+        scheduleDailyNotification(
+            context = this,
+            policy = ExistingWorkPolicy.KEEP
+        )
     }
 
     override fun onResume() {
