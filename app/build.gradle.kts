@@ -215,6 +215,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     implementation(libs.androidx.work.runtime.ktx)
+    testImplementation(libs.androidx.work.testing)
 
     // Firebase
     // https://firebase.google.com/docs/android/setup#available-libraries

@@ -62,6 +62,7 @@ androidx-test-rules = { module = "androidx.test:rules", version.ref = "test-rule
 androidx-test-runner = { module = "androidx.test:runner", version.ref = "test-runner" }
 androidx-uiautomator = { module = "androidx.test.uiautomator:uiautomator", version.ref = "uiautomator" }
 androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "work-runtime-ktx" }
+androidx-work-testing = { module = "androidx.work:work-testing", version.ref = "work-runtime-ktx" }
 barcode-scanning = { module = "com.google.mlkit:barcode-scanning", version.ref = "barcode-scanning" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose" }
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
