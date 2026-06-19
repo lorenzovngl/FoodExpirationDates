@@ -252,6 +252,8 @@ dependencies {
     testScreenshotImplementation(libs.junit)
     testScreenshotImplementation(platform(libs.compose.bom))
     testScreenshotImplementation(libs.ui.test.junit4)
+
+    ksp(libs.kotlin.metadata.jvm)
     
     // Add screenshot dependencies to standard testImplementation so they can be compiled
     configurations.getByName("testImplementation").extendsFrom(testScreenshotImplementation)
