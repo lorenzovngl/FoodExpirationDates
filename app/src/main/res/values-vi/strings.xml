@@ -116,4 +116,5 @@
     <string name="quantity">Số lượng</string>
     <string name="add">Thêm</string>
     <string name="remove">Xóa</string>
+    <string name="search">Tìm kiếm…</string>
 </resources>

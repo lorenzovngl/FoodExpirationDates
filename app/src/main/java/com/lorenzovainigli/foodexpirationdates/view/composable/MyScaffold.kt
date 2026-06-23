@@ -59,7 +59,7 @@ fun MyScaffold(
     navController: NavHostController,
     navDestination: String? = null,
     showSnackbar: MutableState<Boolean>,
-    searchQuery : MutableState<String> = mutableStateOf(""),
+    onSearchIconClick: () -> Unit = {},
     content: @Composable () -> Unit,
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
@@ -125,7 +125,7 @@ fun MyScaffold(
                 },
                 actions = {
                     if (destination?.contains(Screen.MainScreen.route) == true) {
-                        MainScreenMenu(activity, searchQuery)
+                        MainScreenMenu(activity, onSearchIconClick)
                     }
                 },
                 navigationIcon = {
@@ -177,10 +177,12 @@ fun MyScaffoldPreview() {
             MyScaffold(
                 navController = navController,
                 showSnackbar = showSnackbar,
+                onSearchIconClick = {}
             ) {
 
                 MainScreen(
                     navController = rememberNavController(),
+                    isSearchActive = false
                 )
             }
         }

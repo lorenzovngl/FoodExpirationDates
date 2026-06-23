@@ -126,4 +126,5 @@
     <string name="notifications_disabled">Bildirimler devre dışı</string>
     <string name="notifications_disabled_message">Bildirimleri kalıcı olarak devre dışı bıraktınız. Son kullanma tarihi yaklaşan gıdalarla ilgili uyarılar almak için, bunları telefonun Ayarlar bölümünden elle etkinleştirmelisiniz.</string>
     <string name="open_settings">Ayarları Aç</string>
+    <string name="search">Ara…</string>
 </resources>

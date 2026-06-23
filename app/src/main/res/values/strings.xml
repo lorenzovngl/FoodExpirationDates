@@ -126,4 +126,5 @@
     <string name="notifications_disabled">Notifications disabled</string>
     <string name="notifications_disabled_message">You have permanently disabled notifications. To receive alerts about expiring food, you must enable them manually from the phone\'s Settings.</string>
     <string name="open_settings">Open Settings</string>
+    <string name="search">Search…</string>
 </resources>

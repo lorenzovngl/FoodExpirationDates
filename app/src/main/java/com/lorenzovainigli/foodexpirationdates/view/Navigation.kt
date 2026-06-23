@@ -24,7 +24,8 @@ fun Navigation(
     navController: NavHostController,
     startDestination: String = Screen.MainScreen.route,
     showSnackbar: MutableState<Boolean>,
-    searchQuery: MutableState<String> = mutableStateOf("")
+    isSearchActive: Boolean = false,
+    onSearchBarClose: () -> Unit = {}
 ) {
     NavHost(
         modifier = Modifier.fillMaxSize(),
@@ -36,7 +37,8 @@ fun Navigation(
                 activity = activity,
                 navController = navController,
                 showSnackbar = showSnackbar,
-                searchQuery
+                isSearchActive = isSearchActive,
+                onSearchBarClose = onSearchBarClose,
             )
         }
         composable(

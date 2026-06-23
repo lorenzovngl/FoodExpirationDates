@@ -27,7 +27,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -44,6 +47,7 @@ import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.MainActivity
 import com.lorenzovainigli.foodexpirationdates.view.composable.FoodCard
+import com.lorenzovainigli.foodexpirationdates.view.composable.MySearchBar
 import java.util.Calendar
 import kotlin.math.min
 
@@ -52,7 +56,8 @@ fun MainScreen(
     activity: MainActivity? = null,
     navController: NavHostController,
     showSnackbar: MutableState<Boolean>? = null,
-    searchQuery: MutableState<String> = mutableStateOf("")
+    isSearchActive: Boolean = false,
+    onSearchBarClose: () -> Unit = {}
 ) {
     Box(
         modifier = Modifier
@@ -72,7 +77,8 @@ fun MainScreen(
                 items = items,
                 navController = navController,
                 showSnackbar = showSnackbar,
-                searchQuery = searchQuery
+                isSearchActive = isSearchActive,
+                onSearchBarClose = onSearchBarClose
             )
         }
         AnimatedVisibility(
@@ -108,6 +114,7 @@ fun MainScreenPreview() {
         Surface {
             MainScreen(
                 navController = rememberNavController(),
+                isSearchActive = true
             )
         }
     }
@@ -119,30 +126,44 @@ fun ListOfItems(
     items: List<ExpirationDate>,
     navController: NavHostController,
     showSnackbar: MutableState<Boolean>?,
-    searchQuery: MutableState<String> = mutableStateOf("")
+    isSearchActive: Boolean,
+    onSearchBarClose: () -> Unit = {}
 ) {
-    LazyColumn {
-        items(items, key = { it.id }) { item ->
-            AnimatedVisibility(
-                modifier = Modifier.animateItem(),
-                visible = item.foodName.contains(searchQuery.value, ignoreCase = true),
-                enter = fadeIn() + expandVertically(),
-                exit = fadeOut() + shrinkVertically()
-            ) {
-                FoodCard(
-                    item = item,
-                    onClickEdit = {
-                        navController.navigate(Screen.InsertScreen.route + "?itemId=${item.id}")
-                    },
-                    onClickDelete = {
-                        showSnackbar?.value = true
-                        activity?.viewModel?.deleteExpirationDate(item)
-                    }
-                )
-            }
+    var searchQuery by remember { mutableStateOf("") }
+    Column {
+        AnimatedVisibility(visible = isSearchActive) {
+            MySearchBar(
+                query = searchQuery,
+                onQueryChange = { searchQuery = it },
+                onClose = {
+                    searchQuery = ""
+                    onSearchBarClose()
+                }
+            )
         }
-        item {
-            Spacer(modifier = Modifier.height(70.dp))
+        LazyColumn {
+            items(items, key = { it.id }) { item ->
+                AnimatedVisibility(
+                    modifier = Modifier.animateItem(),
+                    visible = item.foodName.contains(searchQuery, ignoreCase = true),
+                    enter = fadeIn() + expandVertically(),
+                    exit = fadeOut() + shrinkVertically()
+                ) {
+                    FoodCard(
+                        item = item,
+                        onClickEdit = {
+                            navController.navigate(Screen.InsertScreen.route + "?itemId=${item.id}")
+                        },
+                        onClickDelete = {
+                            showSnackbar?.value = true
+                            activity?.viewModel?.deleteExpirationDate(item)
+                        }
+                    )
+                }
+            }
+            item {
+                Spacer(modifier = Modifier.height(70.dp))
+            }
         }
     }
 }
@@ -155,7 +176,8 @@ fun ListOfItemsPreview() {
             ListOfItems(
                 items = getItemsForPreview(LocalContext.current),
                 navController = rememberNavController(),
-                showSnackbar = null
+                showSnackbar = null,
+                isSearchActive = true
             )
         }
     }

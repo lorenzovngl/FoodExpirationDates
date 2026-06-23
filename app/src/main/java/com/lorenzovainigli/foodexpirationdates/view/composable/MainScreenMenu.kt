@@ -45,7 +45,7 @@ data class MenuItem(
 @Composable
 fun MainScreenMenu(
     activity: MainActivity? = null,
-    searchQuery: MutableState<String>
+    onSearchClick: () -> Unit
 ) {
     val viewModel = activity?.viewModel
     val exportTaskSuccess = viewModel?.exportTaskSuccess?.value
@@ -67,57 +67,16 @@ fun MainScreenMenu(
         }
     }
 
-    var isSearchBarExpanded by remember { mutableStateOf(false) }
     val focusRequester = remember { FocusRequester() }
 
-    LaunchedEffect(isSearchBarExpanded) {
-        if (isSearchBarExpanded) {
-            focusRequester.requestFocus()
-        }
-    }
-
-    AnimatedVisibility(visible = isSearchBarExpanded.not()) {
-        IconButton(
-            onClick = {
-                isSearchBarExpanded = true
-            }
-        ) {
-            Icon(
-                imageVector = Icons.Default.Search,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary
-            )
-        }
-    }
-    AnimatedVisibility(visible = isSearchBarExpanded) {
-        SearchBar(
-            inputField = {
-                SearchBarDefaults.InputField(
-                    modifier = Modifier.focusRequester(focusRequester),
-                    query = searchQuery.value,
-                    expanded = isSearchBarExpanded,
-                    onExpandedChange = { },
-                    onQueryChange = { searchQuery.value = it },
-                    onSearch = {},
-                    leadingIcon = {
-                        Icon(Icons.Default.Search, contentDescription = null)
-                    },
-                    trailingIcon = {
-                        IconButton(
-                            onClick = {
-                                isSearchBarExpanded = false
-                                searchQuery.value = ""
-                            }
-                        ) {
-                            Icon(Icons.Default.Close, contentDescription = null)
-                        }
-                    },
-                    placeholder = { Text("Search...") },
-                )
-            },
-            expanded = isSearchBarExpanded,
-            onExpandedChange = { isSearchBarExpanded = it },
-        ) {}
+    IconButton(
+        onClick = onSearchClick
+    ) {
+        Icon(
+            imageVector = Icons.Default.Search,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.primary
+        )
     }
     IconButton(
         onClick = { isExpanded = true }

@@ -98,4 +98,5 @@
     <string name="notifications_disabled">Les notifications sont désactivées</string>
     <string name="notifications_disabled_message">Les notifications ont été complètement désactivées. Pour recevoir des alertes concernant les aliments dont la date de péremption approche, vous devez activer manuellement les notifications dans les paramètres de votre smartphone.</string>
     <string name="open_settings">Ouvrir les paramètres</string>
+    <string name="search">Rechercher…</string>
 </resources>

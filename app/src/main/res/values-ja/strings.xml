@@ -124,4 +124,5 @@
     <string name="notifications_disabled">通知が無効になっています</string>
     <string name="notifications_disabled_message">通知を完全に無効にしました。賞味期限が近づいた食品に関するアラートを受け取るには、スマートフォンの「設定」から手動で通知を有効にする必要があります。</string>
     <string name="open_settings">設定を開く</string>
+    <string name="search">検索…</string>
 </resources>

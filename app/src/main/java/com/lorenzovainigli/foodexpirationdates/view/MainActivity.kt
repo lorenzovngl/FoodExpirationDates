@@ -16,8 +16,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
@@ -82,7 +84,6 @@ class MainActivity : ComponentActivity() {
                 SideEffect {
                     window.navigationBarColor = navBarColorArgb
                 }
-                val searchQuery = remember { mutableStateOf("") }
                 enableEdgeToEdge(
                     statusBarStyle = SystemBarStyle.auto(
                         lightScrim = android.graphics.Color.TRANSPARENT,
@@ -104,17 +105,19 @@ class MainActivity : ComponentActivity() {
                     val showSnackbar = remember {
                         mutableStateOf(false)
                     }
+                    var isSearchActive by remember { mutableStateOf(false) }
                     MyScaffold(
                         activity = this,
                         navController = navController,
                         showSnackbar = showSnackbar,
-                        searchQuery = searchQuery
+                        onSearchIconClick = { isSearchActive = true }
                     ) {
                         Navigation(
                             activity = this,
                             navController = navController,
                             showSnackbar = showSnackbar,
-                            searchQuery = searchQuery
+                            isSearchActive = isSearchActive,
+                            onSearchBarClose = { isSearchActive = false }
                         )
                     }
                 }

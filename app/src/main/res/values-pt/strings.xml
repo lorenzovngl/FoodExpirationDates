@@ -12,4 +12,5 @@
     <string name="food_name">Nome do Alimento</string>
     <string name="expiration_date">Data de validade</string>
     <string name="please_select_a_date">Selecione uma data</string>
+    <string name="search">Pesquisar…</string>
 </resources>
