@@ -38,7 +38,7 @@ splashscreen = "1.2.0"
 test-rules = "1.7.0"
 test-runner = "1.7.0"
 turbine = "1.2.1"
-uiautomator = "2.3.0"
+uiautomator = "2.4.0"
 work-runtime-ktx = "2.11.2"
 
 [libraries]
