@@ -15,22 +15,28 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.mlkit.vision.barcode.BarcodeScanning
-import com.lorenzovainigli.foodexpirationdates.model.repository.ConnectivityRepository
 import com.lorenzovainigli.foodexpirationdates.util.BarcodeValidator
 import com.lorenzovainigli.foodexpirationdates.view.BarcodeScannerActivity
 import com.lorenzovainigli.foodexpirationdates.view.composable.BarcodeScannerResult
 import com.lorenzovainigli.foodexpirationdates.view.composable.CameraPreview
 import com.lorenzovainigli.foodexpirationdates.viewmodel.APIServiceViewModel
 import com.lorenzovainigli.foodexpirationdates.viewmodel.APIServiceViewModel.*
+import com.lorenzovainigli.foodexpirationdates.viewmodel.ConnectivityViewModel
 
 @Composable
-fun BarCodeScannerScreen(activity: BarcodeScannerActivity) {
+fun BarCodeScannerScreen(
+    activity: BarcodeScannerActivity,
+    connectivityViewModel: ConnectivityViewModel = hiltViewModel()
+) {
     val context = LocalContext.current
     val apiServiceViewModel: APIServiceViewModel = activity.apiServiceViewModel
     val barcodeScannerState = apiServiceViewModel.barcodeScannerState.collectAsState()
@@ -41,7 +47,7 @@ fun BarCodeScannerScreen(activity: BarcodeScannerActivity) {
     val detectedProduct = apiServiceViewModel.product.collectAsState()
     val responseStatus = apiServiceViewModel.responseStatus.collectAsState()
     Log.i("detectedProduct", detectedProduct.value.toString())
-    val isOnline = ConnectivityRepository(context).isConnected.collectAsState(initial = false)
+    val isConnected by connectivityViewModel.isConnected.collectAsStateWithLifecycle()
     val controller = remember {
         LifecycleCameraController(context).apply {
             setEnabledUseCases(
@@ -55,7 +61,7 @@ fun BarCodeScannerScreen(activity: BarcodeScannerActivity) {
                     ContextCompat.getMainExecutor(context)
                 ) { result: MlKitAnalyzer.Result? ->
                     val barcodeResults = result?.getValue(barcodeScanner)
-                    if (!barcodeResults.isNullOrEmpty() && isOnline.value) {
+                    if (!barcodeResults.isNullOrEmpty() && isConnected) {
                         for (barcode in barcodeResults) {
                             barcode.displayValue?.let { code ->
                                 if (BarcodeValidator().isValidBarcode(barcode) && code != previousBarcodeDetected.value) {
@@ -93,7 +99,7 @@ fun BarCodeScannerScreen(activity: BarcodeScannerActivity) {
                     modifier = Modifier.fillMaxSize()
                 )
             }
-            if (!isOnline.value) {
+            if (!isConnected) {
                 BarcodeScannerResult(
                     activity = activity,
                     state = BarcodeScannerState.NO_CONNECTION
