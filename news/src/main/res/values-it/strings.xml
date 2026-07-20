@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="news_feed_url" translatable="false">https://scadenzealimenti.app/rss.xml</string>
+    <string name="news">Novità</string>
+    <string name="mark_as_read">Segna come letto</string>
+    <string name="mark_as_unread">Segna come da leggere</string>
+    <string name="mark_all_as_read">Segna tutti come letti</string>
+</resources>

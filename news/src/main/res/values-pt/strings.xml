@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="news">Novidades</string>
+    <string name="mark_as_read">Marcar como lido</string>
+    <string name="mark_as_unread">Marcar como não lido</string>
+    <string name="mark_all_as_read">Marcar tudo como lido</string>
+</resources>

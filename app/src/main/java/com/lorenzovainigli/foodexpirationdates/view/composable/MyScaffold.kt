@@ -49,7 +49,8 @@ data class NavigationItem(
     val route: String,
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector,
-    val showBadge: Boolean = false
+    val showBadge: Boolean = false,
+    val badgeNumber: Int? = null
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -111,6 +112,7 @@ fun MyScaffold(
                 title = when (destination) {
                     Screen.AboutScreen.route -> stringResource(id = R.string.about_this_app)
                     Screen.SettingsScreen.route -> stringResource(id = R.string.settings)
+                    Screen.NewsScreen.route -> stringResource(id = com.lorenzovainigli.news.R.string.news)
                     else -> {
                         if (destination?.contains(Screen.InsertScreen.route) == true) {
                             if (currentBackStackEntry?.arguments?.getString("itemId") != null){
@@ -129,7 +131,8 @@ fun MyScaffold(
                     }
                 },
                 navigationIcon = {
-                    if (destination?.contains(Screen.InsertScreen.route) == true) {
+                    if (destination?.contains(Screen.InsertScreen.route) == true ||
+                    destination?.contains(Screen.NewsScreen.route) == true) {
                         IconButton(
                             onClick = { navController.popBackStack() }
                         ) {

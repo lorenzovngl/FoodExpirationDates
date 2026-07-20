@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="news">Yenilikler</string>
+    <string name="mark_as_read">Okundu olarak işaretle</string>
+    <string name="mark_as_unread">Okunmadı olarak işaretle</string>
+    <string name="mark_all_as_read">Tümünü okundu olarak işaretle</string>
+</resources>

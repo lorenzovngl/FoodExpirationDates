@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="news">Новости</string>
+    <string name="mark_as_read">Отметить как прочитанное</string>
+    <string name="mark_as_unread">Отметить как непрочитанное</string>
+    <string name="mark_all_as_read">Отметить все как прочитанные</string>
+</resources>

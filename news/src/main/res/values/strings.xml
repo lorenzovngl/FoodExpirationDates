@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="news_feed_url" translatable="false">https://foodexpirationdates.app/rss.xml</string>
+    <string name="news">What\'s New</string>
+    <string name="mark_as_read">Mark as read</string>
+    <string name="mark_as_unread">Mark as unread</string>
+    <string name="mark_all_as_read">Mark all as read</string>
+</resources>

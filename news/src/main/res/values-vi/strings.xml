@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="news">Tin mới</string>
+    <string name="mark_as_read">Đánh dấu là đã đọc</string>
+    <string name="mark_as_unread">Đánh dấu là chưa đọc</string>
+    <string name="mark_all_as_read">Đánh dấu tất cả là đã đọc</string>
+</resources>

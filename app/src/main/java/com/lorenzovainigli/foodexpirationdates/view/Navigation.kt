@@ -17,6 +17,7 @@ import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InsertScre
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.MainScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.SettingsScreen
+import com.lorenzovainigli.news.presentation.route.NewsRoute
 
 @Composable
 fun Navigation(
@@ -61,6 +62,9 @@ fun Navigation(
         }
         composable(route = Screen.SettingsScreen.route){
             SettingsScreen(activity = activity)
+        }
+        composable(route = Screen.NewsScreen.route){
+            NewsRoute()
         }
     }
 }
