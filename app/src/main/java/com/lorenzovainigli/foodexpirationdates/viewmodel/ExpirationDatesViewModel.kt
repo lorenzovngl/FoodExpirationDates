@@ -1,5 +1,6 @@
 package com.lorenzovainigli.foodexpirationdates.viewmodel
 
+import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
 import androidx.compose.runtime.MutableState
@@ -28,6 +29,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.transform
@@ -55,11 +58,11 @@ class ExpirationDatesViewModel @Inject constructor(
     private val _deletedItem: MutableState<ExpirationDate?> = mutableStateOf(value = null)
     val deletedItem: State<ExpirationDate?> = _deletedItem
 
-    private val _exportTaskSuccess: MutableState<Boolean> = mutableStateOf(value = true)
-    val exportTaskSuccess: State<Boolean> = _exportTaskSuccess
+    private val _exportTaskSuccess = MutableStateFlow(true)
+    val exportTaskSuccess = _exportTaskSuccess.asStateFlow()
 
-    private val _notifyExportTaskDone: MutableState<Boolean> = mutableStateOf(value = false)
-    val notifyExportTaskDone: State<Boolean> = _notifyExportTaskDone
+    private val _notifyExportTaskDone = MutableStateFlow(false)
+    val notifyExportTaskDone = _notifyExportTaskDone.asStateFlow()
 
     fun getDates(): Flow<List<ExpirationDate>> {
         viewModelScope.launch {
@@ -128,13 +131,13 @@ class ExpirationDatesViewModel @Inject constructor(
         }
     }
 
-    fun importData(context: Context, uri: Uri?): OperationResult {
+    fun importData(contentResolver: ContentResolver, uri: Uri?): OperationResult {
         if (uri == null){
             return OperationResult(OperationResult.State.FAILURE, "File not found")
         }
         lateinit var csvData: List<Array<String>>
         try {
-            val fileInputStream = context.contentResolver.openInputStream(uri)
+            val fileInputStream = contentResolver.openInputStream(uri)
             val reader = CSVReader(InputStreamReader(fileInputStream))
             csvData = reader.readAll()
             reader.close()

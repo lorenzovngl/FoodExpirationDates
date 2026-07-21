@@ -1,8 +1,8 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable
 
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,6 +34,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -127,7 +128,35 @@ fun MyScaffold(
                 },
                 actions = {
                     if (destination?.contains(Screen.MainScreen.route) == true) {
-                        MainScreenMenu(activity, onSearchIconClick)
+                        val context = LocalContext.current
+                        val viewModel = activity?.viewModel
+                        val exportTaskSuccess = viewModel?.exportTaskSuccess?.collectAsStateWithLifecycle()
+                        val notifyExportTaskDone = viewModel?.notifyExportTaskDone?.collectAsStateWithLifecycle()
+
+                        val importFileLauncher = rememberLauncherForActivityResult(
+                            contract = ActivityResultContracts.OpenDocument()
+                        ) { uri ->
+                            if (uri != null) {
+                                viewModel?.importData(
+                                    contentResolver = context.contentResolver,
+                                    uri = uri
+                                )
+                            }
+                        }
+                        MainScreenMenu(
+                            exportTaskSuccess = exportTaskSuccess,
+                            notifyExportTaskDone = notifyExportTaskDone,
+                            onSearchClick = onSearchIconClick,
+                            onExportClick = {
+                                activity?.viewModel?.exportData(context)
+                            },
+                            onImportClick = {
+                                importFileLauncher.launch(arrayOf("*/*"))
+                            },
+                            onExportErrorDialogDismiss = {
+                                activity?.viewModel?.resetNotifyExportTaskDone()
+                            }
+                        )
                     }
                 },
                 navigationIcon = {
