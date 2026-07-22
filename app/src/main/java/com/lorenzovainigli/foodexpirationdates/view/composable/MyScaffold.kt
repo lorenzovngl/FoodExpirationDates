@@ -161,6 +161,19 @@ fun MyScaffold(
                                 activity?.viewModel?.resetNotifyExportTaskDone()
                             }
                         )
+                    } else if (destination?.contains(Screen.AboutScreen.route) != true &&
+                        destination?.contains(Screen.InsertScreen.route) != true){
+                        IconButton (
+                            onClick = {
+                                navController.navigate(Screen.AboutScreen.route)
+                            }
+                        ){
+                            Icon(
+                                imageVector = Icons.Outlined.Info,
+                                contentDescription = stringResource(R.string.about_this_app),
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        }
                     }
                 },
                 navigationIcon = {
