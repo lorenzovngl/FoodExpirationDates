@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -17,6 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,8 +26,13 @@ import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.util.OperationResult
 
+private sealed interface MenuIcon {
+    data class Vector(val imageVector: ImageVector) : MenuIcon
+    data class Resource(@DrawableRes val drawableId: Int) : MenuIcon
+}
+
 private data class MenuItem(
-    @DrawableRes val iconId: Int,
+    val icon: MenuIcon,
     val label: String,
     val onClick: () -> Unit = {}
 )
@@ -38,6 +45,7 @@ fun MainScreenMenu(
     onSearchClick: () -> Unit,
     onExportClick: () -> Unit,
     onImportClick: () -> Unit,
+    onInfoClick: () -> Unit,
     onExportErrorDialogDismiss: () -> Unit,
 ) {
     val operationResult = remember {
@@ -73,7 +81,7 @@ fun MainScreenMenu(
     ) {
         arrayOf(
             MenuItem(
-                iconId = R.drawable.ic_export,
+                icon = MenuIcon.Resource(R.drawable.ic_export),
                 label = stringResource(R.string.export_data),
                 onClick = {
                     isExpanded = false
@@ -81,21 +89,40 @@ fun MainScreenMenu(
                 }
             ),
             MenuItem(
-                iconId = R.drawable.ic_import,
+                icon =  MenuIcon.Resource(R.drawable.ic_import),
                 label = stringResource(R.string.import_data),
                 onClick = {
                     isExpanded = false
                     onImportClick()
                 }
+            ),
+            MenuItem(
+                icon = MenuIcon.Vector(Icons.Outlined.Info),
+                label = stringResource(R.string.about_this_app),
+                onClick = {
+                    isExpanded = false
+                    onInfoClick()
+                }
             )
         ).forEach {
             DropdownMenuItem(
                 leadingIcon = {
-                    Icon(
-                        painter = painterResource(id = it.iconId),
-                        contentDescription = stringResource(id = R.string.back),
-                        tint = MaterialTheme.colorScheme.primary
-                    )
+                    when (it.icon) {
+                        is MenuIcon.Vector -> {
+                            Icon(
+                                imageVector = it.icon.imageVector,
+                                contentDescription = it.label,
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                        is MenuIcon.Resource -> {
+                            Icon(
+                                painter = painterResource(it.icon.drawableId),
+                                contentDescription = it.label,
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    }
                 },
                 text = {
                     Text(it.label)
@@ -140,6 +167,7 @@ private fun MainScreenMenuPreview() {
             onSearchClick = {},
             onExportClick = {},
             onImportClick = {},
+            onInfoClick = {},
             onExportErrorDialogDismiss = {}
         )
     }

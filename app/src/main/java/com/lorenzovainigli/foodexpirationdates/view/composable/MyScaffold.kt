@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -153,6 +154,9 @@ fun MyScaffold(
                             onImportClick = {
                                 importFileLauncher.launch(arrayOf("*/*"))
                             },
+                            onInfoClick = {
+                                navController.navigate(Screen.AboutScreen.route)
+                            },
                             onExportErrorDialogDismiss = {
                                 activity?.viewModel?.resetNotifyExportTaskDone()
                             }
@@ -161,7 +165,7 @@ fun MyScaffold(
                 },
                 navigationIcon = {
                     if (destination?.contains(Screen.InsertScreen.route) == true ||
-                    destination?.contains(Screen.NewsScreen.route) == true) {
+                    destination?.contains(Screen.AboutScreen.route) == true) {
                         IconButton(
                             onClick = { navController.popBackStack() }
                         ) {

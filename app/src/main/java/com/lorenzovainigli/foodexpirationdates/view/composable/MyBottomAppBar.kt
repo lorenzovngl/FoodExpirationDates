@@ -70,12 +70,6 @@ fun MyBottomAppBar(
             showBadge = showPermissionBanner
         ),
         NavigationItem(
-            label = stringResource(id = R.string.about_this_app),
-            route = Screen.AboutScreen.route,
-            selectedIcon = Icons.Filled.Info,
-            unselectedIcon = Icons.Outlined.Info
-        ),
-        NavigationItem(
             label = stringResource(com.lorenzovainigli.news.R.string.news),
             route = Screen.NewsScreen.route,
             selectedIcon = Icons.AutoMirrored.Filled.Feed,
@@ -86,10 +80,10 @@ fun MyBottomAppBar(
     )
     NavigationBar(containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(TonalElevation.level2())) {
         var selectedItem = when (currentDestination) {
-            Screen.NewsScreen.route -> 3
-            Screen.AboutScreen.route -> 2
+            Screen.MainScreen.route -> 0
             Screen.SettingsScreen.route -> 1
-            else -> 0
+            Screen.NewsScreen.route -> 2
+            else -> -1
         }
         navigationItems.forEachIndexed { index, item ->
             NavigationBarItem(
