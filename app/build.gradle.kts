@@ -159,7 +159,7 @@ ksp {
 }
 
 dependencies {
-    implementation(project(":news"))
+    implementation(project(":feature:news"))
 
     implementation(libs.kotlin.stdlib)
     implementation(libs.core.ktx)

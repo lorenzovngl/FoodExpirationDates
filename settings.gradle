@@ -15,5 +15,5 @@ dependencyResolutionManagement {
 rootProject.name = "FoodExpirationDates"
 include ':app'
 include ':translation-analyzer'
-include ':news'
+include ':feature:news'
 includeBuild("build-logic")
