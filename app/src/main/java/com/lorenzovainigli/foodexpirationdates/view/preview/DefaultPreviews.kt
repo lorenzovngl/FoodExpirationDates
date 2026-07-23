@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.PreviewDynamicColors
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.navigation.compose.rememberNavController
@@ -16,6 +17,7 @@ import com.lorenzovainigli.foodexpirationdates.view.composable.MyScaffold
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InsertScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.SettingsScreen
+import com.lorenzovainigli.foodexpirationdates.view.composable.screen.getItemsForPreview
 
 class DefaultPreviews {
     @PreviewLightDark
@@ -44,7 +46,13 @@ class DefaultPreviews {
                 mutableStateOf(false)
             }
             MyScaffold(navController = navController, showSnackbar = showSnackbar) {
-                MainScreen(navController = navController)
+                MainScreen(
+                    items = getItemsForPreview(LocalContext.current),
+                    isSearchActive = true,
+                    onClickDelete = {},
+                    onClickEdit = {},
+                    onFloatingActionButtonClick = {}
+                )
             }
         }
     }

@@ -44,6 +44,7 @@ import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.MainActivity
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.MainScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
+import com.lorenzovainigli.foodexpirationdates.view.composable.screen.getItemsForPreview
 import kotlinx.coroutines.launch
 
 data class NavigationItem(
@@ -228,10 +229,12 @@ fun MyScaffoldPreview() {
                 showSnackbar = showSnackbar,
                 onSearchIconClick = {}
             ) {
-
                 MainScreen(
-                    navController = rememberNavController(),
-                    isSearchActive = false
+                    items = getItemsForPreview(LocalContext.current),
+                    isSearchActive = false,
+                    onClickDelete = {},
+                    onClickEdit = {},
+                    onFloatingActionButtonClick = {}
                 )
             }
         }

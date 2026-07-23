@@ -53,20 +53,19 @@ import kotlin.math.min
 
 @Composable
 fun MainScreen(
-    activity: MainActivity? = null,
-    navController: NavHostController,
+    items: List<ExpirationDate>,
     showSnackbar: MutableState<Boolean>? = null,
     isSearchActive: Boolean = false,
-    onSearchBarClose: () -> Unit = {}
+    onSearchBarClose: () -> Unit = {},
+    onClickDelete: (ExpirationDate) -> Unit,
+    onClickEdit: (ExpirationDate) -> Unit,
+    onFloatingActionButtonClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
             .padding(start = 4.dp, end = 4.dp)
             .fillMaxSize()
     ) {
-        val itemsState = activity?.viewModel?.getDates()?.collectAsState(emptyList())
-        val items = itemsState?.value ?: getItemsForPreview(LocalContext.current)
-
         AnimatedVisibility(
             visible = items.isNotEmpty(),
             enter = fadeIn() + expandVertically(),
@@ -77,12 +76,8 @@ fun MainScreen(
                 showSnackbar = showSnackbar,
                 isSearchActive = isSearchActive,
                 onSearchBarClose = onSearchBarClose,
-                onClickDelete = { item ->
-                    activity?.viewModel?.deleteExpirationDate(item)
-                },
-                onClickEdit = { item ->
-                    navController.navigate(Screen.InsertScreen.route + "?itemId=${item.id}")
-                }
+                onClickDelete = onClickDelete,
+                onClickEdit = onClickEdit
             )
         }
         AnimatedVisibility(
@@ -97,9 +92,7 @@ fun MainScreen(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(12.dp),
-            onClick = {
-                navController.navigate(Screen.InsertScreen.route)
-            },
+            onClick = onFloatingActionButtonClick,
             containerColor = MaterialTheme.colorScheme.tertiaryContainer,
             contentColor = MaterialTheme.colorScheme.onTertiaryContainer
         ) {
@@ -117,8 +110,11 @@ fun MainScreenPreview() {
     FoodExpirationDatesTheme {
         Surface {
             MainScreen(
-                navController = rememberNavController(),
-                isSearchActive = true
+                items = getItemsForPreview(LocalContext.current),
+                isSearchActive = true,
+                onClickDelete = {},
+                onClickEdit = {},
+                onFloatingActionButtonClick = {}
             )
         }
     }

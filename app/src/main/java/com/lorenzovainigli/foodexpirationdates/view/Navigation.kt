@@ -5,8 +5,10 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -17,6 +19,7 @@ import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InsertScre
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.MainScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.SettingsScreen
+import com.lorenzovainigli.foodexpirationdates.view.composable.screen.getItemsForPreview
 import com.lorenzovainigli.news.presentation.route.NewsRoute
 
 @Composable
@@ -34,12 +37,22 @@ fun Navigation(
         startDestination = startDestination
     ) {
         composable(route = Screen.MainScreen.route) {
+            val itemsState = activity?.viewModel?.getDates()?.collectAsState(emptyList())
+            val items = itemsState?.value ?: getItemsForPreview(LocalContext.current)
             MainScreen(
-                activity = activity,
-                navController = navController,
+                items = items,
                 showSnackbar = showSnackbar,
                 isSearchActive = isSearchActive,
                 onSearchBarClose = onSearchBarClose,
+                onClickDelete = { item ->
+                    activity?.viewModel?.deleteExpirationDate(item)
+                },
+                onClickEdit = { item ->
+                    navController.navigate(Screen.InsertScreen.route + "?itemId=${item.id}")
+                },
+                onFloatingActionButtonClick = {
+                    navController.navigate(Screen.InsertScreen.route)
+                }
             )
         }
         composable(
