@@ -73,12 +73,16 @@ fun MainScreen(
             exit = fadeOut() + shrinkVertically()
         ) {
             ListOfItems(
-                activity = activity,
                 items = items,
-                navController = navController,
                 showSnackbar = showSnackbar,
                 isSearchActive = isSearchActive,
-                onSearchBarClose = onSearchBarClose
+                onSearchBarClose = onSearchBarClose,
+                onClickDelete = { item ->
+                    activity?.viewModel?.deleteExpirationDate(item)
+                },
+                onClickEdit = { item ->
+                    navController.navigate(Screen.InsertScreen.route + "?itemId=${item.id}")
+                }
             )
         }
         AnimatedVisibility(
@@ -122,12 +126,12 @@ fun MainScreenPreview() {
 
 @Composable
 fun ListOfItems(
-    activity: MainActivity? = null,
     items: List<ExpirationDate>,
-    navController: NavHostController,
     showSnackbar: MutableState<Boolean>?,
     isSearchActive: Boolean,
-    onSearchBarClose: () -> Unit = {}
+    onSearchBarClose: () -> Unit = {},
+    onClickDelete: (ExpirationDate) -> Unit,
+    onClickEdit: (ExpirationDate) -> Unit
 ) {
     var searchQuery by remember { mutableStateOf("") }
     Column {
@@ -152,11 +156,11 @@ fun ListOfItems(
                     FoodCard(
                         item = item,
                         onClickEdit = {
-                            navController.navigate(Screen.InsertScreen.route + "?itemId=${item.id}")
+                            onClickEdit(item)
                         },
                         onClickDelete = {
                             showSnackbar?.value = true
-                            activity?.viewModel?.deleteExpirationDate(item)
+                            onClickDelete(item)
                         }
                     )
                 }
@@ -175,9 +179,10 @@ fun ListOfItemsPreview() {
         Surface {
             ListOfItems(
                 items = getItemsForPreview(LocalContext.current),
-                navController = rememberNavController(),
                 showSnackbar = null,
-                isSearchActive = true
+                isSearchActive = true,
+                onClickDelete = {},
+                onClickEdit = {}
             )
         }
     }
