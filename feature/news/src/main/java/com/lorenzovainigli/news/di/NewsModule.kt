@@ -11,6 +11,8 @@ import com.lorenzovainigli.news.data.remote.parser.RssNewsParser
 import com.lorenzovainigli.news.data.repository.NewsRepositoryImpl
 import com.lorenzovainigli.news.domain.repository.NewsRepository
 import com.lorenzovainigli.news.R
+import com.lorenzovainigli.news.data.preferences.NewsPreferencesRepositoryImpl
+import com.lorenzovainigli.news.domain.repository.NewsPreferencesRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -34,6 +36,12 @@ abstract class NewsModule {
     abstract fun bindNewsRemoteDataSource(
         impl: RssNewsRemoteDataSource
     ): NewsRemoteDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindNewsPreferencesRepository(
+        implementation: NewsPreferencesRepositoryImpl
+    ): NewsPreferencesRepository
 
     companion object {
 

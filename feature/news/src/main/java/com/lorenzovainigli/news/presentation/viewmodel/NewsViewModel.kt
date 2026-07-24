@@ -12,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,17 +39,42 @@ class NewsViewModel @Inject constructor(
                 errorMessage = null
             )
 
-            val result = refreshNewsUseCase()
+            val news = getLatestNewsUseCase()
 
             _uiState.value = _uiState.value.copy(
                 isLoading = false,
-                news = getLatestNewsUseCase(),
-                errorMessage = if (result.isFailure) {
-                    "Impossibile aggiornare le novità."
-                } else {
-                    null
-                }
+                news = news
             )
+        }
+    }
+
+    fun refreshNews() {
+        if (_uiState.value.isRefreshing) {
+            return
+        }
+
+        viewModelScope.launch {
+            _uiState.update {
+                it.copy(
+                    isRefreshing = true,
+                    errorMessage = null
+                )
+            }
+
+            val result = refreshNewsUseCase()
+            val news = getLatestNewsUseCase()
+
+            _uiState.update {
+                it.copy(
+                    isRefreshing = false,
+                    news = news,
+                    errorMessage = if (result.isFailure) {
+                        "Impossibile aggiornare le novità."
+                    } else {
+                        null
+                    }
+                )
+            }
         }
     }
 

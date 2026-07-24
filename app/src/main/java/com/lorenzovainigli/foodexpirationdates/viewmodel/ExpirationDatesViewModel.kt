@@ -24,6 +24,7 @@ import com.lorenzovainigli.foodexpirationdates.model.entity.toCSV
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
 import com.lorenzovainigli.foodexpirationdates.saveFileToExternalStorage
 import com.lorenzovainigli.foodexpirationdates.util.OperationResult
+import com.lorenzovainigli.news.data.worker.NewsWorkScheduler
 import com.opencsv.CSVReader
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
@@ -46,7 +47,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ExpirationDatesViewModel @Inject constructor(
-    private val repository: ExpirationDateRepository
+    private val repository: ExpirationDateRepository,
+    private val newsWorkScheduler: NewsWorkScheduler
 ) : ViewModel() {
 
     private var expirationDates: Flow<List<ExpirationDate>> = flowOf(emptyList())
@@ -63,6 +65,12 @@ class ExpirationDatesViewModel @Inject constructor(
 
     private val _notifyExportTaskDone = MutableStateFlow(false)
     val notifyExportTaskDone = _notifyExportTaskDone.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            newsWorkScheduler.scheduleRefreshIfNeeded()
+        }
+    }
 
     fun getDates(): Flow<List<ExpirationDate>> {
         viewModelScope.launch {

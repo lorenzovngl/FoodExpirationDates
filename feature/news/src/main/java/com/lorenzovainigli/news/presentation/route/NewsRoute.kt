@@ -32,6 +32,9 @@ fun NewsRoute(
         },
         onMarkAllAsRead = {
             viewModel.markAllAsRead()
+        },
+        onRefresh = {
+            viewModel.refreshNews()
         }
     )
 }
