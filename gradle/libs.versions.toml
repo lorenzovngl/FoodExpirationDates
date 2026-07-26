@@ -24,6 +24,7 @@ junit-jupiter = "6.1.2"
 kotlin = "2.4.10"
 kotlinx-coroutines-test = "1.11.0"
 ksp = "2.3.10"
+kxml2 = "2.3.0"
 lifecycle-runtime-ktx = "2.11.0"
 mockito = "5.23.0"
 mockito-kotlin = "6.3.0"
@@ -88,6 +89,7 @@ junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "jun
 kotlin-metadata-jvm = { module = "org.jetbrains.kotlin:kotlin-metadata-jvm", version.ref = "kotlin" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
+kxml2 = { module = "net.sf.kxml:kxml2", version.ref = "kxml2" }
 lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
 material3 = { group = "androidx.compose.material3", name = "material3" }
 material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }

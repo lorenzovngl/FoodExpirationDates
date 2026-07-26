@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+    <channel>
+        <item>
+            <guid>custom-guid-123</guid>
+            <title>Article with GUID</title>
+            <link>https://example.com/article</link>
+        </item>
+    </channel>
+</rss>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+    <channel>
+        <item>
+            <guid>article-1</guid>
+            <title>First article</title>
+            <link>https://example.com/1</link>
+            <description>First description</description>
+            <pubDate>Tue, 08 Jul 2025 12:00:00 GMT</pubDate>
+        </item>
+
+        <item>
+            <guid>article-2</guid>
+            <title>Second article</title>
+            <link>https://example.com/2</link>
+            <description>Second description</description>
+            <pubDate>Wed, 09 Jul 2025 14:30:00 GMT</pubDate>
+        </item>
+    </channel>
+</rss>

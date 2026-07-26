@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+    <channel>
+        <item>
+            <guid>article-1</guid>
+            <title>Article with invalid publication date</title>
+            <link>https://example.com/article</link>
+            <pubDate>not-a-valid-date</pubDate>
+        </item>
+    </channel>
+</rss>
