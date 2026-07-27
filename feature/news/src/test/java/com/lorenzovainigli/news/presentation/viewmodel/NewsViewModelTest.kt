@@ -1,5 +1,6 @@
 package com.lorenzovainigli.news.presentation.viewmodel
 
+import com.lorenzovainigli.news.R
 import com.lorenzovainigli.news.MainDispatcherRule
 import com.lorenzovainigli.news.domain.model.NewsItem
 import com.lorenzovainigli.news.domain.usecase.GetLatestNewsUseCase
@@ -69,7 +70,7 @@ class NewsViewModelTest {
 
         assertFalse(state.isLoading)
         assertEquals(news, state.news)
-        assertNull(state.errorMessage)
+        assertNull(state.errorMessageResId)
 
         verify(getLatestNewsUseCase).invoke()
     }
@@ -120,7 +121,7 @@ class NewsViewModelTest {
 
         assertFalse(state.isRefreshing)
         assertEquals(refreshedNews, state.news)
-        assertNull(state.errorMessage)
+        assertNull(state.errorMessageResId)
 
         verify(refreshNewsUseCase).invoke()
         verify(getLatestNewsUseCase, times(2)).invoke()
@@ -162,8 +163,8 @@ class NewsViewModelTest {
         assertFalse(state.isRefreshing)
         assertEquals(news, state.news)
         assertEquals(
-            "Impossibile aggiornare le novità.",
-            state.errorMessage
+            R.string.news_refresh_error,
+            state.errorMessageResId
         )
 
         verify(refreshNewsUseCase).invoke()

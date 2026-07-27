@@ -5,4 +5,9 @@
     <string name="mark_as_read">Mark as read</string>
     <string name="mark_as_unread">Mark as unread</string>
     <string name="mark_all_as_read">Mark all as read</string>
+    <string name="news_empty">No news available</string>
+    <string name="news_loading_error">Unable to load What\'s New</string>
+    <string name="news_refresh_error">Unable to refresh What\'s New</string>
+    <string name="connection_error">Connection error</string>
+    <string name="news_language_notice" />
 </resources>

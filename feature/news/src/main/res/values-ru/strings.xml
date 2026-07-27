@@ -4,4 +4,9 @@
     <string name="mark_as_read">Отметить как прочитанное</string>
     <string name="mark_as_unread">Отметить как непрочитанное</string>
     <string name="mark_all_as_read">Отметить все как прочитанные</string>
+    <string name="news_empty">Нет доступных новостей</string>
+    <string name="news_loading_error">Не удалось загрузить новости</string>
+    <string name="news_refresh_error">Не удалось обновить новости</string>
+    <string name="connection_error">Ошибка подключения</string>
+    <string name="news_language_notice">Этот раздел доступен только на итальянском и английском языках.</string>
 </resources>

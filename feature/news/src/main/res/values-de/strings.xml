@@ -4,4 +4,9 @@
     <string name="mark_as_read">Als gelesen markieren</string>
     <string name="mark_as_unread">Als ungelesen markieren</string>
     <string name="mark_all_as_read">Alle als gelesen markieren</string>
+    <string name="news_empty">Keine Neuigkeiten verfügbar</string>
+    <string name="news_loading_error">Neuigkeiten konnten nicht geladen werden</string>
+    <string name="news_refresh_error">Neuigkeiten konnten nicht aktualisiert werden</string>
+    <string name="connection_error">Verbindungsfehler</string>
+    <string name="news_language_notice">Dieser Bereich ist nur auf Italienisch und Englisch verfügbar.</string>
 </resources>

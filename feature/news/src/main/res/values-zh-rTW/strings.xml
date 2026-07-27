@@ -4,4 +4,9 @@
     <string name="mark_as_read">標示為已讀</string>
     <string name="mark_as_unread">標示為未讀</string>
     <string name="mark_all_as_read">全部標示為已讀</string>
+    <string name="news_empty">目前沒有最新消息</string>
+    <string name="news_loading_error">無法載入最新消息</string>
+    <string name="news_refresh_error">無法更新最新消息</string>
+    <string name="connection_error">連線錯誤</string>
+    <string name="news_language_notice">此區段僅提供義大利文和英文版本。</string>
 </resources>

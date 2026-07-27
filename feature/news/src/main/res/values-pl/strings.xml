@@ -4,4 +4,9 @@
     <string name="mark_as_read">Oznacz jako przeczytane</string>
     <string name="mark_as_unread">Oznacz jako nieprzeczytane</string>
     <string name="mark_all_as_read">Oznacz wszystkie jako przeczytane</string>
+    <string name="news_empty">Brak dostępnych nowości</string>
+    <string name="news_loading_error">Nie udało się wczytać nowości</string>
+    <string name="news_refresh_error">Nie udało się zaktualizować nowości</string>
+    <string name="connection_error">Błąd połączenia</string>
+    <string name="news_language_notice">Ta sekcja jest dostępna tylko w języku włoskim i angielskim.</string>
 </resources>

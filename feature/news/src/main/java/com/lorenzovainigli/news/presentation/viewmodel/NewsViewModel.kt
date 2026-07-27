@@ -2,6 +2,7 @@ package com.lorenzovainigli.news.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.lorenzovainigli.news.R
 import com.lorenzovainigli.news.domain.usecase.GetLatestNewsUseCase
 import com.lorenzovainigli.news.domain.usecase.MarkAllNewsAsReadUseCase
 import com.lorenzovainigli.news.domain.usecase.MarkNewsAsReadUseCase
@@ -36,7 +37,7 @@ class NewsViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(
                 isLoading = true,
-                errorMessage = null
+                errorMessageResId = null
             )
 
             val news = getLatestNewsUseCase()
@@ -57,7 +58,7 @@ class NewsViewModel @Inject constructor(
             _uiState.update {
                 it.copy(
                     isRefreshing = true,
-                    errorMessage = null
+                    errorMessageResId = null
                 )
             }
 
@@ -68,8 +69,8 @@ class NewsViewModel @Inject constructor(
                 it.copy(
                     isRefreshing = false,
                     news = news,
-                    errorMessage = if (result.isFailure) {
-                        "Impossibile aggiornare le novità."
+                    errorMessageResId = if (result.isFailure) {
+                        R.string.news_refresh_error
                     } else {
                         null
                     }

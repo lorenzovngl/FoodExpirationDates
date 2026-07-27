@@ -4,4 +4,9 @@
     <string name="mark_as_read">Đánh dấu là đã đọc</string>
     <string name="mark_as_unread">Đánh dấu là chưa đọc</string>
     <string name="mark_all_as_read">Đánh dấu tất cả là đã đọc</string>
+    <string name="news_empty">Không có tin mới</string>
+    <string name="news_loading_error">Không thể tải tin mới</string>
+    <string name="news_refresh_error">Không thể cập nhật tin mới</string>
+    <string name="connection_error">Lỗi kết nối</string>
+    <string name="news_language_notice">Mục này chỉ có sẵn bằng tiếng Ý và tiếng Anh.</string>
 </resources>

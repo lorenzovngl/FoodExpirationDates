@@ -5,4 +5,9 @@
     <string name="mark_as_read">Segna come letto</string>
     <string name="mark_as_unread">Segna come da leggere</string>
     <string name="mark_all_as_read">Segna tutti come letti</string>
+    <string name="news_empty">Nessuna novità disponibile</string>
+    <string name="news_loading_error">Impossibile caricare le novità</string>
+    <string name="news_refresh_error">Impossibile aggiornare le novità</string>
+    <string name="connection_error">Errore di connessione</string>
+    <string name="news_language_notice" />
 </resources>

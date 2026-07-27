@@ -4,4 +4,9 @@
     <string name="mark_as_read">Okundu olarak işaretle</string>
     <string name="mark_as_unread">Okunmadı olarak işaretle</string>
     <string name="mark_all_as_read">Tümünü okundu olarak işaretle</string>
+    <string name="news_empty">Mevcut yenilik yok</string>
+    <string name="news_loading_error">Yenilikler yüklenemedi</string>
+    <string name="news_refresh_error">Yenilikler güncellenemedi</string>
+    <string name="connection_error">Bağlantı hatası</string>
+    <string name="news_language_notice">Bu bölüm yalnızca İtalyanca ve İngilizce olarak kullanılabilir.</string>
 </resources>

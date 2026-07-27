@@ -4,4 +4,9 @@
     <string name="mark_as_read">既読にする</string>
     <string name="mark_as_unread">未読にする</string>
     <string name="mark_all_as_read">すべて既読にする</string>
+    <string name="news_empty">新着情報はありません</string>
+    <string name="news_loading_error">新着情報を読み込めませんでした</string>
+    <string name="news_refresh_error">新着情報を更新できませんでした</string>
+    <string name="connection_error">接続エラー</string>
+    <string name="news_language_notice">このセクションはイタリア語と英語でのみ利用できます。</string>
 </resources>

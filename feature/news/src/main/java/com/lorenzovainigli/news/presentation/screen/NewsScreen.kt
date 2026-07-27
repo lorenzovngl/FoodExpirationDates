@@ -8,7 +8,9 @@ import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.lorenzovainigli.news.R
 import com.lorenzovainigli.news.domain.model.NewsItem
 import com.lorenzovainigli.news.presentation.component.NewsContent
 import com.lorenzovainigli.news.presentation.state.NewsUiState
@@ -33,29 +35,39 @@ fun NewsScreen(
                 CircularProgressIndicator()
             }
         }
-
-        uiState.news.isEmpty() -> {
-            Box(
-                modifier = modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Text("Nessuna novità disponibile.")
-            }
-        }
-
         else -> {
             PullToRefreshBox(
                 isRefreshing = uiState.isRefreshing,
                 onRefresh = onRefresh,
                 modifier = modifier.fillMaxSize()
             ) {
-                NewsContent(
-                    uiState = uiState,
-                    onNewsClick = onNewsClick,
-                    onMarkAsRead = onMarkAsRead,
-                    onMarkAsUnread = onMarkAsUnread,
-                    onMarkAllAsRead = onMarkAllAsRead
-                )
+                when {
+                    uiState.errorMessageResId != null -> {
+                        Box(
+                            modifier = modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(stringResource(uiState.errorMessageResId))
+                        }
+                    }
+                    uiState.news.isEmpty() -> {
+                        Box(
+                            modifier = modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(stringResource(R.string.news_empty))
+                        }
+                    }
+                    else -> {
+                        NewsContent(
+                            uiState = uiState,
+                            onNewsClick = onNewsClick,
+                            onMarkAsRead = onMarkAsRead,
+                            onMarkAsUnread = onMarkAsUnread,
+                            onMarkAllAsRead = onMarkAllAsRead
+                        )
+                    }
+                }
             }
         }
     }
@@ -83,6 +95,21 @@ private fun NewsScreenEmptyPreview() {
         uiState = NewsUiState(
             isLoading = false,
             news = emptyList()
+        ),
+        onNewsClick = {},
+        onMarkAllAsRead = {},
+        onMarkAsRead = {},
+        onMarkAsUnread = {},
+        onRefresh = {}
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun NewsScreenErrorPreview() {
+    NewsScreen(
+        uiState = NewsUiState(
+            errorMessageResId = R.string.connection_error
         ),
         onNewsClick = {},
         onMarkAllAsRead = {},
