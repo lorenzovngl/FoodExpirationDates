@@ -1,19 +1,18 @@
 package com.lorenzovainigli.foodexpirationdates.view
 
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.surfaceColorAtElevation
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -28,22 +27,28 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import androidx.work.ExistingWorkPolicy
 import com.lorenzovainigli.foodexpirationdates.BuildConfig
+import com.lorenzovainigli.foodexpirationdates.analytics.LocalAnalyticsTracker
 import com.lorenzovainigli.foodexpirationdates.model.LocaleHelper
 import com.lorenzovainigli.foodexpirationdates.model.NotificationManager.Companion.scheduleDailyNotification
 import com.lorenzovainigli.foodexpirationdates.model.NotificationManager.Companion.setupNotificationChannel
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.checkAndSetSecureFlags
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
+import com.lorenzovainigli.foodexpirationdates.analytics.AnalyticsTracker
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyScaffold
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDatesViewModel
 import com.lorenzovainigli.foodexpirationdates.viewmodel.PreferencesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     val viewModel: ExpirationDatesViewModel by viewModels()
     val preferencesViewModel: PreferencesViewModel by viewModels()
+
+    @Inject
+    lateinit var analyticsTracker: AnalyticsTracker
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -106,19 +111,23 @@ class MainActivity : ComponentActivity() {
                         mutableStateOf(false)
                     }
                     var isSearchActive by remember { mutableStateOf(false) }
-                    MyScaffold(
-                        activity = this,
-                        navController = navController,
-                        showSnackbar = showSnackbar,
-                        onSearchIconClick = { isSearchActive = true }
+                    CompositionLocalProvider(
+                        LocalAnalyticsTracker provides analyticsTracker
                     ) {
-                        Navigation(
+                        MyScaffold(
                             activity = this,
                             navController = navController,
                             showSnackbar = showSnackbar,
-                            isSearchActive = isSearchActive,
-                            onSearchBarClose = { isSearchActive = false }
-                        )
+                            onSearchIconClick = { isSearchActive = true }
+                        ) {
+                            Navigation(
+                                activity = this,
+                                navController = navController,
+                                showSnackbar = showSnackbar,
+                                isSearchActive = isSearchActive,
+                                onSearchBarClose = { isSearchActive = false }
+                            )
+                        }
                     }
                 }
             }

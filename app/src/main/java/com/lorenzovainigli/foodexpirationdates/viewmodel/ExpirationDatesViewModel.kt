@@ -8,6 +8,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.lorenzovainigli.foodexpirationdates.analytics.AnalyticsEvent
 import com.lorenzovainigli.foodexpirationdates.model.entity.CSV_HEADER
 import com.lorenzovainigli.foodexpirationdates.model.entity.EXPIRATION_DATE
 import com.lorenzovainigli.foodexpirationdates.model.entity.EXPIRATION_DATE_INDEX
@@ -23,6 +24,7 @@ import com.lorenzovainigli.foodexpirationdates.model.entity.computeExpirationDat
 import com.lorenzovainigli.foodexpirationdates.model.entity.toCSV
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
 import com.lorenzovainigli.foodexpirationdates.saveFileToExternalStorage
+import com.lorenzovainigli.foodexpirationdates.analytics.AnalyticsTracker
 import com.lorenzovainigli.foodexpirationdates.util.OperationResult
 import com.lorenzovainigli.news.data.worker.NewsWorkScheduler
 import com.opencsv.CSVReader
@@ -48,7 +50,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ExpirationDatesViewModel @Inject constructor(
     private val repository: ExpirationDateRepository,
-    private val newsWorkScheduler: NewsWorkScheduler
+    private val newsWorkScheduler: NewsWorkScheduler,
+    private val analyticsTracker: AnalyticsTracker
 ) : ViewModel() {
 
     private var expirationDates: Flow<List<ExpirationDate>> = flowOf(emptyList())
@@ -104,6 +107,7 @@ class ExpirationDatesViewModel @Inject constructor(
         viewModelScope.launch {
             repository.addExpirationDate(expirationDate)
             expirationDates = repository.getAll()
+            analyticsTracker.logEvent(AnalyticsEvent.FOOD_ADDED)
         }
     }
 
@@ -111,6 +115,7 @@ class ExpirationDatesViewModel @Inject constructor(
         viewModelScope.launch {
             repository.deleteExpirationDate(expirationDate)
             expirationDates = repository.getAll()
+            analyticsTracker.logEvent(AnalyticsEvent.FOOD_DELETED)
         }
         _deletedItem.value = expirationDate
     }

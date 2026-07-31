@@ -1,12 +1,9 @@
 package com.lorenzovainigli.foodexpirationdates.view
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
@@ -14,6 +11,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.lorenzovainigli.foodexpirationdates.analytics.ScreenViewTracker
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InfoScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InsertScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.MainScreen
@@ -31,6 +29,11 @@ fun Navigation(
     isSearchActive: Boolean = false,
     onSearchBarClose: () -> Unit = {}
 ) {
+
+    ScreenViewTracker(
+        navController = navController
+    )
+
     NavHost(
         modifier = Modifier.fillMaxSize(),
         navController = navController,
