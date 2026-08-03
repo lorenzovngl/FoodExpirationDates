@@ -3,41 +3,46 @@ package com.lorenzovainigli.foodexpirationdates.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.lorenzovainigli.foodexpirationdates.feature.settings.presentation.model.SettingsUiState
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PreferencesViewModel @Inject constructor(): ViewModel() {
+class PreferencesViewModel @Inject constructor(
+    @ApplicationContext private val context: Context
+): ViewModel() {
 
-    private var _dateFormat = MutableStateFlow("")
-    private var dateFormat = _dateFormat.asStateFlow()
-
-    private var _notificationTimeHour = MutableStateFlow(0)
-    private var notificationTimeHour = _notificationTimeHour.asStateFlow()
-
-    private var _notificationTimeMinute = MutableStateFlow(0)
-    private var notificationTimeMinute = _notificationTimeMinute.asStateFlow()
+    private val _uiState = MutableStateFlow(SettingsUiState())
+    val uiState: StateFlow<SettingsUiState> = _uiState.asStateFlow()
 
     private var _themeMode = MutableStateFlow(0)
     private var themeMode = _themeMode.asStateFlow()
     private var _dynamicColors = MutableStateFlow(false)
     private var dynamicColors = _dynamicColors.asStateFlow()
-    private var _monochromeIcons = MutableStateFlow(true)
-    private var monochromeIcons = _monochromeIcons.asStateFlow()
-
     private var _topBarFont = MutableStateFlow(0)
     private var topbarFont = _topBarFont.asStateFlow()
 
-    fun getDateFormat(context: Context): StateFlow<String> {
+    init {
         viewModelScope.launch {
-            _dateFormat.value = PreferencesRepository.getUserDateFormat(context)
+            val dateFormat = PreferencesRepository.getUserDateFormat(context)
+            val notificationHour = PreferencesRepository.getUserNotificationTimeHour(context)
+            val notificationMinute = PreferencesRepository.getUserNotificationTimeMinute(context)
+
+            _uiState.update {
+                it.copy(
+                    dateFormat = dateFormat,
+                    notificationHour = notificationHour,
+                    notificationMinute = notificationMinute
+                )
+            }
         }
-        return dateFormat
     }
 
     fun setDateFormat(context: Context, format: String) {
@@ -46,22 +51,12 @@ class PreferencesViewModel @Inject constructor(): ViewModel() {
                 context = context,
                 dateFormat = format
             )
+            _uiState.update {
+                it.copy(
+                    dateFormat = format
+                )
+            }
         }
-        _dateFormat.value = format
-    }
-
-    fun getNotificationTimeHour(context: Context): StateFlow<Int> {
-        viewModelScope.launch {
-            _notificationTimeHour.value = PreferencesRepository.getUserNotificationTimeHour(context)
-        }
-        return notificationTimeHour
-    }
-
-    fun getNotificationTimeMinute(context: Context): StateFlow<Int> {
-        viewModelScope.launch {
-            _notificationTimeMinute.value = PreferencesRepository.getUserNotificationTimeMinute(context)
-        }
-        return notificationTimeMinute
     }
 
     fun setNotificationTime(context: Context, hour: Int, minute: Int) {
@@ -71,9 +66,11 @@ class PreferencesViewModel @Inject constructor(): ViewModel() {
                 hour = hour,
                 minute = minute
             )
+            _uiState.value = _uiState.value.copy(
+                notificationHour = hour,
+                notificationMinute = minute
+            )
         }
-        _notificationTimeHour.value = hour
-        _notificationTimeMinute.value = minute
     }
 
     fun getThemeMode(context: Context): StateFlow<Int> {
@@ -126,20 +123,15 @@ class PreferencesViewModel @Inject constructor(): ViewModel() {
         _dynamicColors.value = colors
     }
 
-    fun getMonochromeIcons(context: Context): StateFlow<Boolean> {
-        viewModelScope.launch {
-            _monochromeIcons.value = PreferencesRepository.getMonochromeIcons(context)
-        }
-        return monochromeIcons
-    }
-
     fun setMonochromeIcons(context: Context, icons: Boolean) {
         viewModelScope.launch {
             PreferencesRepository.setMonochromeIcons(
                 context = context,
                 monochromeIconsEnabled = icons
             )
+            _uiState.value = _uiState.value.copy(
+                monochromeIconsEnabled = icons
+            )
         }
-        _monochromeIcons.value = icons
     }
 }

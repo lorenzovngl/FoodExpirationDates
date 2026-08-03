@@ -11,6 +11,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.lorenzovainigli.foodexpirationdates.feature.settings.presentation.screen.SettingsRoute
 import com.lorenzovainigli.foodexpirationdates.analytics.ScreenViewTracker
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InfoScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InsertScreen
@@ -77,7 +78,7 @@ fun Navigation(
             InfoScreen()
         }
         composable(route = Screen.SettingsScreen.route){
-            SettingsScreen(activity = activity)
+            SettingsRoute()
         }
         composable(route = Screen.NewsScreen.route){
             NewsRoute()

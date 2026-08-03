@@ -1,10 +1,8 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable.screen
 
 import android.app.Activity
-import android.os.Build
 import android.util.Log
 import android.view.WindowManager
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -27,13 +25,13 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -44,15 +42,16 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.R
+import com.lorenzovainigli.foodexpirationdates.feature.settings.presentation.model.SettingsUiState
 import com.lorenzovainigli.foodexpirationdates.model.Language
-import com.lorenzovainigli.foodexpirationdates.model.NotificationManager
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.ThemeMode
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.TopBarFont
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.getScreenProtectionEnabled
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.setScreenProtectionEnabled
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.util.areNotificationsEnabled
 import com.lorenzovainigli.foodexpirationdates.util.openNotificationSettings
-import com.lorenzovainigli.foodexpirationdates.view.MainActivity
 import com.lorenzovainigli.foodexpirationdates.view.composable.AutoResizedText
 import com.lorenzovainigli.foodexpirationdates.view.composable.DateFormatDialog
 import com.lorenzovainigli.foodexpirationdates.view.composable.LanguagePickerDialog
@@ -66,22 +65,22 @@ import java.util.Calendar
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
-    activity: MainActivity? = null
+    state: SettingsUiState,
+    onDateFormatChange: (String) -> Unit,
+    onNotificationTimeChange: (Int, Int) -> Unit,
+    onThemeModeChange: (ThemeMode) -> Unit,
+    onDynamicColorsChange: (Boolean) -> Unit,
+    onTopBarFontChange: (TopBarFont) -> Unit,
+    onMonochromeIconsChange: (Boolean) -> Unit
 ) {
     val context = LocalContext.current
-    val prefsViewModel = activity?.preferencesViewModel
-    val darkThemeState = prefsViewModel?.getThemeMode(context)?.collectAsState()?.value
-        ?: PreferencesRepository.Companion.ThemeMode.SYSTEM.ordinal
-    val dynamicColorsState = prefsViewModel?.getDynamicColors(context)?.collectAsState()?.value
-        ?: false
-    val monochromeIconsState = prefsViewModel?.getMonochromeIcons(context)?.collectAsState()?.value
-        ?: true
-    val topBarFontState = prefsViewModel?.getTopBarFont(context)?.collectAsState()?.value
-        ?: PreferencesRepository.Companion.TopBarFont.NORMAL.ordinal
+    val configuration = LocalConfiguration.current
 
-    val dateFormat = prefsViewModel?.getDateFormat(context)?.collectAsState()?.value
-        ?: PreferencesRepository.getAvailOtherDateFormats()[0]
-    var sdf = SimpleDateFormat(dateFormat, context.resources.configuration.locales[0])
+    var sdf = SimpleDateFormat(
+        state.dateFormat,
+        configuration.locales[0]
+    )
+
     var isDateFormatDialogOpened by remember {
         mutableStateOf(false)
     }
@@ -89,40 +88,37 @@ fun SettingsScreen(
         mutableStateOf(false)
     }
 
-    val notificationTimeHour =
-        prefsViewModel?.getNotificationTimeHour(context)?.collectAsState()?.value
-            ?: 11
-    val notificationTimeMinute =
-        prefsViewModel?.getNotificationTimeMinute(context)?.collectAsState()?.value
-            ?: 0
-    val timePickerState =
-        rememberTimePickerState(notificationTimeHour, notificationTimeMinute, true)
+    val timePickerState = rememberTimePickerState(
+        initialHour = state.notificationHour,
+        initialMinute = state.notificationHour,
+        is24Hour = true
+    )
+
     var isNotificationTimeBottomSheetOpen by remember {
         mutableStateOf(false)
     }
 
     var isScreenProtectionEnabled by remember { mutableStateOf(getScreenProtectionEnabled(context)) }
 
-    prefsViewModel?.let {
-        DateFormatDialog(
-            isDialogOpen = isDateFormatDialogOpened,
-            onDismissRequest = {
-                sdf = SimpleDateFormat(dateFormat, context.resources.configuration.locales[0])
-                isDateFormatDialogOpened = false
-            },
-            onClickDate = it::setDateFormat
-        )
-    }
+    DateFormatDialog(
+        isDialogOpen = isDateFormatDialogOpened,
+        onDismissRequest = {
+            sdf = SimpleDateFormat(
+                state.dateFormat,
+                configuration.locales[0]
+            )
+            isDateFormatDialogOpened = false
+        },
+        onClickDate = { _, string ->
+            onDateFormatChange(string)
+        }
+    )
+
     if (isNotificationTimeBottomSheetOpen) {
         NotificationTimeBottomSheet(
             timePickerState = timePickerState,
             onDismissRequest = {
-                prefsViewModel?.setNotificationTime(
-                    context,
-                    timePickerState.hour, timePickerState.minute
-                )
-                NotificationManager.scheduleDailyNotification(
-                    context,
+                onNotificationTimeChange(
                     timePickerState.hour,
                     timePickerState.minute
                 )
@@ -130,14 +126,12 @@ fun SettingsScreen(
             }
         )
     }
-    prefsViewModel?.let {
-        LanguagePickerDialog(
-            isDialogOpen = isLanguagePickerDialogOpened,
-            onDismiss = {
-                isLanguagePickerDialogOpened = false
-            }
-        )
-    }
+    LanguagePickerDialog(
+        isDialogOpen = isLanguagePickerDialogOpened,
+        onDismiss = {
+            isLanguagePickerDialogOpened = false
+        }
+    )
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
@@ -261,27 +255,27 @@ fun SettingsScreen(
         SettingsItem(
             label = stringResource(R.string.theme)
         ) {
-            PreferencesRepository.Companion.ThemeMode.entries.forEach {
+            ThemeMode.entries.forEach {
                 Spacer(
                     modifier = Modifier
                         .fillMaxHeight()
                         .weight(0.1f)
                 )
-                if (it.ordinal == darkThemeState) {
+                if (it.ordinal == state.themeMode.ordinal) {
                     Button(onClick = {}) {
                         AutoResizedText(
-                            text = context.getString(it.label)
+                            text = stringResource(it.label)
                         )
                     }
                 }
-                if (it.ordinal != darkThemeState) {
+                if (it.ordinal != state.themeMode.ordinal) {
                     OutlinedButton(
                         onClick = {
-                            prefsViewModel?.setThemeMode(context, it)
+                            onThemeModeChange(it)
                         },
                     ) {
                         AutoResizedText(
-                            text = context.getString(it.label)
+                            text = stringResource(it.label)
                         )
                     }
                 }
@@ -301,36 +295,36 @@ fun SettingsScreen(
                     .fillMaxHeight()
             )
             Switch(
-                checked = dynamicColorsState,
+                checked = state.dynamicColorsEnabled,
                 onCheckedChange = {
-                    prefsViewModel?.setDynamicColors(context, it)
+                    onDynamicColorsChange(it)
                 }
             )
         }
         SettingsItem(
             label = stringResource(R.string.top_bar_font_style)
         ) {
-            PreferencesRepository.Companion.TopBarFont.entries.forEach { topBarFont ->
+            TopBarFont.entries.forEach { topBarFont ->
                 Spacer(
                     modifier = Modifier
                         .fillMaxHeight()
                         .weight(0.1f)
                 )
-                if (topBarFont.ordinal != topBarFontState) {
+                if (topBarFont.ordinal != state.topBarFont.ordinal) {
                     OutlinedButton(
                         onClick = {
-                            prefsViewModel?.setTopBarFont(context, topBarFont)
+                            onTopBarFontChange(topBarFont)
                         },
                     ) {
                         AutoResizedText(
-                            text = context.getString(topBarFont.label)
+                            text = stringResource(topBarFont.label)
                         )
                     }
                 }
-                if (topBarFont.ordinal == topBarFontState) {
+                if (topBarFont.ordinal == state.topBarFont.ordinal) {
                     Button(onClick = {}) {
                         AutoResizedText(
-                            text = context.getString(topBarFont.label)
+                            text = stringResource(topBarFont.label)
                         )
                     }
                 }
@@ -350,9 +344,9 @@ fun SettingsScreen(
                     .fillMaxHeight()
             )
             Switch(
-                checked = monochromeIconsState,
+                checked = state.monochromeIconsEnabled,
                 onCheckedChange = {
-                    prefsViewModel?.setMonochromeIcons(context, it)
+                    onMonochromeIconsChange(it)
                 }
             )
         }
@@ -401,7 +395,15 @@ fun SettingsScreen(
 fun SettingsScreenContentPreview() {
     FoodExpirationDatesTheme {
         Surface {
-            SettingsScreen()
+            SettingsScreen(
+                state = SettingsUiState(),
+                onDateFormatChange = {},
+                onNotificationTimeChange = { _, _ -> },
+                onThemeModeChange = {},
+                onDynamicColorsChange = {},
+                onTopBarFontChange = {},
+                onMonochromeIconsChange = {}
+            )
         }
     }
 }

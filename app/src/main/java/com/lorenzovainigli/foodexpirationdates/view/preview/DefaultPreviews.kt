@@ -9,6 +9,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.PreviewDynamicColors
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.navigation.compose.rememberNavController
+import com.lorenzovainigli.foodexpirationdates.feature.settings.presentation.screen.SettingsRoute
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.Navigation
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InfoScreen
@@ -84,7 +85,7 @@ class DefaultPreviews {
                 mutableStateOf(false)
             }
             MyScaffold(navController = navController, showSnackbar = showSnackbar) {
-                SettingsScreen()
+                SettingsRoute()
             }
         }
     }
