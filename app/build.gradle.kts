@@ -166,6 +166,7 @@ dependencies {
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.collections.immutable)
     testImplementation(kotlin("test"))
     testImplementation(libs.junit)
     testImplementation(libs.junit.jupiter)

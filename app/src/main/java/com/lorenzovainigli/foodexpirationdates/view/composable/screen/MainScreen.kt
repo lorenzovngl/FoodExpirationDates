@@ -40,13 +40,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.lorenzovainigli.foodexpirationdates.R
+import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.component.FoodCard
+import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.mapper.FoodCardUiModelMapper
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
-import com.lorenzovainigli.foodexpirationdates.view.MainActivity
-import com.lorenzovainigli.foodexpirationdates.view.composable.FoodCard
 import com.lorenzovainigli.foodexpirationdates.view.composable.MySearchBar
 import java.util.Calendar
 import kotlin.math.min
@@ -130,6 +128,7 @@ fun ListOfItems(
     onClickEdit: (ExpirationDate) -> Unit
 ) {
     var searchQuery by remember { mutableStateOf("") }
+    val mapper = FoodCardUiModelMapper(LocalContext.current)
     Column {
         AnimatedVisibility(visible = isSearchActive) {
             MySearchBar(
@@ -150,7 +149,7 @@ fun ListOfItems(
                     exit = fadeOut() + shrinkVertically()
                 ) {
                     FoodCard(
-                        item = item,
+                        item = mapper.map(item),
                         onClickEdit = {
                             onClickEdit(item)
                         },

@@ -22,6 +22,7 @@ hilt-common = "1.4.0"
 junit = "4.13.2"
 junit-jupiter = "6.1.2"
 kotlin = "2.4.10"
+kotlinx-collections-immutable = "0.5.1"
 kotlinx-coroutines-test = "1.11.0"
 ksp = "2.3.10"
 kxml2 = "2.3.0"
@@ -88,6 +89,7 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }
 kotlin-metadata-jvm = { module = "org.jetbrains.kotlin:kotlin-metadata-jvm", version.ref = "kotlin" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinx-collections-immutable" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
 kxml2 = { module = "net.sf.kxml:kxml2", version.ref = "kxml2" }
 lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
