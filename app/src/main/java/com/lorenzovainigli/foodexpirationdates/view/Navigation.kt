@@ -15,9 +15,7 @@ import com.lorenzovainigli.foodexpirationdates.analytics.ScreenViewTracker
 import com.lorenzovainigli.foodexpirationdates.feature.settings.presentation.route.SettingsRoute
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InfoScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InsertScreen
-import com.lorenzovainigli.foodexpirationdates.view.composable.screen.MainScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
-import com.lorenzovainigli.foodexpirationdates.view.composable.screen.getItemsForPreview
 import com.lorenzovainigli.news.presentation.route.NewsRoute
 
 @Composable
@@ -40,23 +38,23 @@ fun Navigation(
         startDestination = startDestination
     ) {
         composable(route = Screen.MainScreen.route) {
-            val itemsState = activity?.viewModel?.getDates()?.collectAsState(emptyList())
-            val items = itemsState?.value ?: getItemsForPreview(LocalContext.current)
-            MainScreen(
-                items = items,
-                showSnackbar = showSnackbar,
-                isSearchActive = isSearchActive,
-                onSearchBarClose = onSearchBarClose,
-                onClickDelete = { item ->
-                    activity?.viewModel?.deleteExpirationDate(item)
-                },
-                onClickEdit = { item ->
-                    navController.navigate(Screen.InsertScreen.route + "?itemId=${item.id}")
-                },
-                onFloatingActionButtonClick = {
-                    navController.navigate(Screen.InsertScreen.route)
-                }
-            )
+//            val itemsState = activity?.viewModel?.getDates()?.collectAsState(emptyList())
+//            val items = itemsState?.value ?: getItemsForPreview(LocalContext.current)
+//            MainScreen(
+//                items = items,
+//                showSnackbar = showSnackbar,
+//                isSearchActive = isSearchActive,
+//                onSearchBarClose = onSearchBarClose,
+//                onClickDelete = { item ->
+//                    activity?.viewModel?.deleteExpirationDate(item)
+//                },
+//                onClickEdit = { item ->
+//                    navController.navigate(Screen.InsertScreen.route + "?itemId=${item.id}")
+//                },
+//                onFloatingActionButtonClick = {
+//                    navController.navigate(Screen.InsertScreen.route)
+//                }
+//            )
         }
         composable(
             route = Screen.InsertScreen.route + "?itemId={itemId}",

@@ -11,11 +11,11 @@ import com.lorenzovainigli.foodexpirationdates.feature.settings.presentation.rou
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.Navigation
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InfoScreen
-import com.lorenzovainigli.foodexpirationdates.view.composable.screen.MainScreen
+import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.screen.FoodListScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyScaffold
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InsertScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
-import com.lorenzovainigli.foodexpirationdates.view.composable.screen.getItemsForPreview
+import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.preview.getItemsForPreview
 
 class DefaultPreviews {
     @PreviewLightDark
@@ -37,14 +37,14 @@ class DefaultPreviews {
     @PreviewLightDark
     @PreviewDynamicColors
     @Composable
-    fun MainScreenDynamicColorsPreview() {
+    fun FoodListScreenDynamicColorsPreview() {
         FoodExpirationDatesTheme {
             val navController = rememberNavController()
             val showSnackbar = remember {
                 mutableStateOf(false)
             }
             MyScaffold(navController = navController, showSnackbar = showSnackbar) {
-                MainScreen(
+                FoodListScreen(
                     items = getItemsForPreview(LocalContext.current),
                     isSearchActive = true,
                     onClickDelete = {},

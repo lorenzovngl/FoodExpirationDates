@@ -42,9 +42,9 @@ import androidx.navigation.compose.rememberNavController
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.MainActivity
-import com.lorenzovainigli.foodexpirationdates.view.composable.screen.MainScreen
+import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.screen.FoodListScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
-import com.lorenzovainigli.foodexpirationdates.view.composable.screen.getItemsForPreview
+import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.preview.getItemsForPreview
 import kotlinx.coroutines.launch
 
 data class NavigationItem(
@@ -229,7 +229,7 @@ fun MyScaffoldPreview() {
                 showSnackbar = showSnackbar,
                 onSearchIconClick = {}
             ) {
-                MainScreen(
+                FoodListScreen(
                     items = getItemsForPreview(LocalContext.current),
                     isSearchActive = false,
                     onClickDelete = {},

@@ -29,7 +29,7 @@ import com.lorenzovainigli.foodexpirationdates.view.composable.MyScaffold
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.ContributorsList
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InfoScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InsertScreen
-import com.lorenzovainigli.foodexpirationdates.view.composable.screen.MainScreen
+import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.screen.FoodListScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.feature.settings.presentation.screen.SettingsScreen
 import com.lorenzovainigli.foodexpirationdates.view.preview.PlayStoreScreenshot
@@ -65,7 +65,7 @@ open class Screenshot {
                         Screen.AboutScreen.route -> InfoScreen()
                         Screen.InsertScreen.route -> InsertScreen(navController = navController)
                         Screen.SettingsScreen.route -> SettingsScreen()
-                        else -> MainScreen(navController = navController)
+                        else -> FoodListScreen(navController = navController)
                     }
                 }
             }
