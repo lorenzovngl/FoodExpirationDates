@@ -1,4 +1,4 @@
-package com.lorenzovainigli.foodexpirationdates.view.composable.screen
+package com.lorenzovainigli.foodexpirationdates.feature.settings.presentation.screen
 
 import android.app.Activity
 import android.util.Log

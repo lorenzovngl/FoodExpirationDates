@@ -1,4 +1,4 @@
-package com.lorenzovainigli.foodexpirationdates.feature.settings.presentation.screen
+package com.lorenzovainigli.foodexpirationdates.feature.settings.presentation.route
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -6,7 +6,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.lorenzovainigli.foodexpirationdates.model.NotificationManager
-import com.lorenzovainigli.foodexpirationdates.view.composable.screen.SettingsScreen
+import com.lorenzovainigli.foodexpirationdates.feature.settings.presentation.screen.SettingsScreen
 import com.lorenzovainigli.foodexpirationdates.viewmodel.PreferencesViewModel
 
 @Composable

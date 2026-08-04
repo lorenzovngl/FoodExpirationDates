@@ -31,7 +31,7 @@ import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InfoScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InsertScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.MainScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
-import com.lorenzovainigli.foodexpirationdates.view.composable.screen.SettingsScreen
+import com.lorenzovainigli.foodexpirationdates.feature.settings.presentation.screen.SettingsScreen
 import com.lorenzovainigli.foodexpirationdates.view.preview.PlayStoreScreenshot
 import com.lorenzovainigli.foodexpirationdates.viewmodel.APIServiceViewModel.BarcodeScannerState
 
