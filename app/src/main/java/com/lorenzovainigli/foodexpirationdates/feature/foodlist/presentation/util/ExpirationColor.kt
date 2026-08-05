@@ -24,7 +24,7 @@ fun getExpirationColor(
     isDarkTheme: Boolean,
 ): Color =
     when (expirationStatus) {
-        ExpirationStatus.EXPIRED -> BaseExpiredColor.adjustForTheme(
+        ExpirationStatus.EXPIRED, ExpirationStatus.EXPIRES_TODAY -> BaseExpiredColor.adjustForTheme(
             isDarkTheme = !isDarkTheme,
         )
 

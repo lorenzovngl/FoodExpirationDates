@@ -65,7 +65,7 @@ fun FoodCard(
     )
     val foodNameTextColor = MaterialTheme.colorScheme.onSurface
     val daysRemainingTextColor = when (item.expirationStatus) {
-        ExpirationStatus.EXPIRED -> Color.White.copy(alpha = .9f)
+        ExpirationStatus.EXPIRED, ExpirationStatus.EXPIRES_TODAY -> Color.White.copy(alpha = .9f)
         else -> foodNameTextColor
     }
     Surface(
