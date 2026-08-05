@@ -55,10 +55,18 @@ fun Navigation(
                 }
             )
         ){ entry ->
+            val itemToEditId = entry.arguments?.getString("itemId")
             FoodEditorScreen(
-                activity = activity,
-                navController = navController,
-                itemId = entry.arguments?.getString("itemId")
+                itemToEdit = itemToEditId?.let {
+                    activity?.viewModel?.getExpirationDate(it.toInt())
+                },
+                onSave = { entry ->
+                    activity?.viewModel?.addExpirationDate(entry)
+                    navController.popBackStack()
+                },
+                onCancel = {
+                    navController.popBackStack()
+                }
             )
         }
         composable(route = Screen.AboutScreen.route){

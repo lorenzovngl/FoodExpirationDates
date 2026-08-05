@@ -66,7 +66,10 @@ class DefaultPreviews {
                 mutableStateOf(false)
             }
             MyScaffold(navController = navController, showSnackbar = showSnackbar) {
-                FoodEditorScreen(navController = navController)
+                FoodEditorScreen(
+                    onSave = { },
+                    onCancel = { }
+                )
             }
         }
     }

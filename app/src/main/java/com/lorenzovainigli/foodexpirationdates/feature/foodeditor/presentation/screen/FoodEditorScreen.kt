@@ -81,12 +81,11 @@ const val EXTRA_PRODUCT_NAME = "product_name"
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FoodEditorScreen(
-    activity: MainActivity? = null,
-    navController: NavController,
-    itemId: String? = null,
+    itemToEdit: ExpirationDate? = null,
+    onSave: (ExpirationDate) -> Unit,
+    onCancel: () -> Unit,
 ) {
     val context = LocalContext.current
-    val itemToEdit = itemId?.let { activity?.viewModel?.getExpirationDate(it.toInt()) }
     var foodNameToEdit = ""
     var expDate: Long? = null
     var openingDate: Long? = null
@@ -268,7 +267,7 @@ fun FoodEditorScreen(
         }
         Row {
             OutlinedButton(
-                onClick = { navController.popBackStack() },
+                onClick = onCancel,
                 modifier = Modifier
                     .weight(0.5f)
                     .padding(top = 8.dp, end = 4.dp),
@@ -296,12 +295,8 @@ fun FoodEditorScreen(
                     try {
                         if (foodName.isNotEmpty()) {
                             if (datePickerExpDateState.selectedDateMillis != null) {
-                                var id = 0
-                                if (itemToEdit != null) {
-                                    id = itemId.toInt()
-                                }
                                 val entry = ExpirationDate(
-                                    id = id,
+                                    id = itemToEdit?.id ?: 0,
                                     foodName = foodName,
                                     expirationDate = datePickerExpDateState.selectedDateMillis!!,
                                     openingDate = if (checkedOpeningDateState) datePickerOpeningDateState.selectedDateMillis else null,
@@ -316,25 +311,24 @@ fun FoodEditorScreen(
                                     } else null,
                                     quantity = quantity
                                 )
-                                activity?.viewModel?.addExpirationDate(entry)
-                                navController.popBackStack()
+                                onSave(entry)
                             } else {
                                 Toast.makeText(
-                                    activity,
+                                    context,
                                     R.string.please_select_a_date,
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
                         } else {
                             Toast.makeText(
-                                activity,
+                                context,
                                 R.string.please_enter_a_food_name,
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
                     } catch (e: Exception) {
                         Toast.makeText(
-                            activity,
+                            context,
                             e.message,
                             Toast.LENGTH_SHORT
                         ).show()
@@ -406,7 +400,10 @@ fun TextFieldDatePicker(
 fun FoodEditorScreenPreview() {
     FoodExpirationDatesTheme {
         Surface {
-            FoodEditorScreen(navController = rememberNavController())
+            FoodEditorScreen(
+                onSave = { },
+                onCancel = { }
+            )
         }
     }
 }
