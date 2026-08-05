@@ -111,15 +111,6 @@ class ExpirationDatesViewModel @Inject constructor(
         }
     }
 
-    fun deleteExpirationDate(expirationDate: ExpirationDate) {
-        viewModelScope.launch {
-            repository.deleteExpirationDate(expirationDate)
-            expirationDates = repository.getAll()
-            analyticsTracker.logEvent(AnalyticsEvent.FOOD_DELETED)
-        }
-        _deletedItem.value = expirationDate
-    }
-
     fun exportData(context: Context) {
         viewModelScope.launch {
             try {

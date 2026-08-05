@@ -18,6 +18,6 @@ interface ExpirationDatesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(date: ExpirationDate)
 
-    @Delete
-    fun delete(date: ExpirationDate)
+    @Query("DELETE FROM expiration_dates WHERE id = :id")
+    suspend fun deleteById(id: Int)
 }
