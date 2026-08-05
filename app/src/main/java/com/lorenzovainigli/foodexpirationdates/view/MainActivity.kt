@@ -54,8 +54,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        val splashScreen = installSplashScreen()
-        splashScreen.setKeepOnScreenCondition { viewModel.isSplashScreenLoading.value }
+//        val splashScreen = installSplashScreen()
+//        splashScreen.setKeepOnScreenCondition { viewModel.isSplashScreenLoading.value }
 
         checkAndSetSecureFlags(context = this, window)
 
