@@ -19,7 +19,7 @@ import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.component.FOOD_CARD
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.component.TEST_TAG_DELETE_ITEM
 import com.lorenzovainigli.foodexpirationdates.view.composable.TEST_TAG_INSERT_DATE
-import com.lorenzovainigli.foodexpirationdates.view.composable.screen.TEST_TAG_INSERT_ITEM
+import com.lorenzovainigli.foodexpirationdates.feature.foodeditor.presentation.screen.TEST_TAG_INSERT_ITEM
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

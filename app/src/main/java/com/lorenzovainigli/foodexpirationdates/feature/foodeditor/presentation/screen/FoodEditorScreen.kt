@@ -1,15 +1,13 @@
-package com.lorenzovainigli.foodexpirationdates.view.composable.screen
+package com.lorenzovainigli.foodexpirationdates.feature.foodeditor.presentation.screen
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultRegistryOwner
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -82,7 +80,7 @@ const val EXTRA_PRODUCT_NAME = "product_name"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun InsertScreen(
+fun FoodEditorScreen(
     activity: MainActivity? = null,
     navController: NavController,
     itemId: String? = null,
@@ -405,10 +403,10 @@ fun TextFieldDatePicker(
 
 @PreviewLightDark
 @Composable
-fun InsertScreenPreview() {
+fun FoodEditorScreenPreview() {
     FoodExpirationDatesTheme {
         Surface {
-            InsertScreen(navController = rememberNavController())
+            FoodEditorScreen(navController = rememberNavController())
         }
     }
 }

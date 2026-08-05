@@ -3,9 +3,7 @@ package com.lorenzovainigli.foodexpirationdates.view
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -14,7 +12,7 @@ import androidx.navigation.navArgument
 import com.lorenzovainigli.foodexpirationdates.analytics.ScreenViewTracker
 import com.lorenzovainigli.foodexpirationdates.feature.settings.presentation.route.SettingsRoute
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InfoScreen
-import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InsertScreen
+import com.lorenzovainigli.foodexpirationdates.feature.foodeditor.presentation.screen.FoodEditorScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.route.FoodListRoute
 import com.lorenzovainigli.news.presentation.route.NewsRoute
@@ -57,7 +55,7 @@ fun Navigation(
                 }
             )
         ){ entry ->
-            InsertScreen(
+            FoodEditorScreen(
                 activity = activity,
                 navController = navController,
                 itemId = entry.arguments?.getString("itemId")

@@ -13,7 +13,7 @@ import com.lorenzovainigli.foodexpirationdates.view.Navigation
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InfoScreen
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.screen.FoodListScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyScaffold
-import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InsertScreen
+import com.lorenzovainigli.foodexpirationdates.feature.foodeditor.presentation.screen.FoodEditorScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.preview.getItemsForPreview
 
@@ -57,7 +57,7 @@ class DefaultPreviews {
 
     @PreviewLightDark
     @Composable
-    fun InsertScreenPreview() {
+    fun FoodEditorScreenPreview() {
         FoodExpirationDatesTheme(
             dynamicColor = false
         ) {
@@ -66,7 +66,7 @@ class DefaultPreviews {
                 mutableStateOf(false)
             }
             MyScaffold(navController = navController, showSnackbar = showSnackbar) {
-                InsertScreen(navController = navController)
+                FoodEditorScreen(navController = navController)
             }
         }
     }

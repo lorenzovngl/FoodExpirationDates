@@ -28,7 +28,7 @@ import com.lorenzovainigli.foodexpirationdates.view.composable.BarcodeScannerRes
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyScaffold
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.ContributorsList
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InfoScreen
-import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InsertScreen
+import com.lorenzovainigli.foodexpirationdates.feature.foodeditor.presentation.screen.FoodEditorScreen
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.screen.FoodListScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.feature.settings.presentation.screen.SettingsScreen
@@ -63,7 +63,7 @@ open class Screenshot {
                     // Navigation composable not work here
                     when (navDestination) {
                         Screen.AboutScreen.route -> InfoScreen()
-                        Screen.InsertScreen.route -> InsertScreen(navController = navController)
+                        Screen.InsertScreen.route -> FoodEditorScreen(navController = navController)
                         Screen.SettingsScreen.route -> SettingsScreen()
                         else -> FoodListScreen(navController = navController)
                     }

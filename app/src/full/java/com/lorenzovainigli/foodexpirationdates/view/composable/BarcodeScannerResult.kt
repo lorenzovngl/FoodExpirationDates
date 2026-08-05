@@ -47,7 +47,7 @@ import com.lorenzovainigli.foodexpirationdates.model.OpenFoodFactsJsonResponse
 import com.lorenzovainigli.foodexpirationdates.model.Product
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.BarcodeScannerActivity
-import com.lorenzovainigli.foodexpirationdates.view.composable.screen.EXTRA_PRODUCT_NAME
+import com.lorenzovainigli.foodexpirationdates.feature.foodeditor.presentation.screen.EXTRA_PRODUCT_NAME
 import com.lorenzovainigli.foodexpirationdates.viewmodel.APIServiceViewModel.*
 
 @Composable
