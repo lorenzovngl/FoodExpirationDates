@@ -7,15 +7,17 @@ import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.mod
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.entity.computeExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
+import dagger.hilt.android.qualifiers.ApplicationContext
 import java.text.SimpleDateFormat
 import java.time.Clock
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.temporal.ChronoUnit
+import javax.inject.Inject
 
-class FoodCardUiModelMapper(
-    private val context: Context,
+class FoodCardUiModelMapper @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val clock: Clock = Clock.systemDefaultZone(),
 ) {
 
@@ -42,6 +44,7 @@ class FoodCardUiModelMapper(
             isOpened = item.openingDate != null,
             expirationStatus = when {
                 daysUntilExpiration < 0 -> ExpirationStatus.EXPIRED
+                daysUntilExpiration < 1 -> ExpirationStatus.EXPIRES_TODAY
                 daysUntilExpiration <= 7 -> ExpirationStatus.EXPIRING_SOON
                 else -> ExpirationStatus.VALID
             },
