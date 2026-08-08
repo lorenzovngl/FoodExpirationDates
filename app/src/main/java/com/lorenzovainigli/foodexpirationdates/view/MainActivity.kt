@@ -22,7 +22,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import androidx.work.ExistingWorkPolicy
@@ -31,6 +30,7 @@ import com.lorenzovainigli.foodexpirationdates.analytics.LocalAnalyticsTracker
 import com.lorenzovainigli.foodexpirationdates.model.LocaleHelper
 import com.lorenzovainigli.foodexpirationdates.model.NotificationManager.Companion.scheduleDailyNotification
 import com.lorenzovainigli.foodexpirationdates.model.NotificationManager.Companion.setupNotificationChannel
+import com.lorenzovainigli.foodexpirationdates.model.ReviewManager
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.checkAndSetSecureFlags
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
@@ -50,12 +50,12 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var analyticsTracker: AnalyticsTracker
 
+    @Inject
+    lateinit var reviewManager: ReviewManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
-//        val splashScreen = installSplashScreen()
-//        splashScreen.setKeepOnScreenCondition { viewModel.isSplashScreenLoading.value }
 
         checkAndSetSecureFlags(context = this, window)
 
@@ -64,6 +64,15 @@ class MainActivity : ComponentActivity() {
             context = this,
             policy = ExistingWorkPolicy.KEEP
         )
+
+        val count = preferencesViewModel.incrementAppOpenCount()
+        val reviewDone = preferencesViewModel.getReviewDone()
+        if (!reviewDone && (count == 5 || count == 10 || count == 30)) {
+            reviewManager.requestReview(this, isAutomatic = true)
+            if (count == 30) {
+                preferencesViewModel.setReviewDone(true)
+            }
+        }
     }
 
     override fun onResume() {
@@ -123,9 +132,7 @@ class MainActivity : ComponentActivity() {
                             Navigation(
                                 activity = this,
                                 navController = navController,
-                                showSnackbar = showSnackbar,
-                                isSearchActive = isSearchActive,
-                                onSearchBarClose = { isSearchActive = false }
+                                reviewManager = reviewManager
                             )
                         }
                     }

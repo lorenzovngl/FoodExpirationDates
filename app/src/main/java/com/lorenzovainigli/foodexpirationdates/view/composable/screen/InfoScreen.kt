@@ -1,6 +1,8 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable.screen
 
+import android.app.Activity
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -12,7 +14,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Edit
@@ -49,6 +50,7 @@ import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.WEBSITE_URL_EN
 import com.lorenzovainigli.foodexpirationdates.WEBSITE_URL_IT
 import com.lorenzovainigli.foodexpirationdates.model.Platform
+import com.lorenzovainigli.foodexpirationdates.model.ReviewManager
 import com.lorenzovainigli.foodexpirationdates.model.contributors
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.composable.AppDescription
@@ -59,7 +61,8 @@ import java.util.Locale
 
 @Composable
 fun InfoScreen(
-    context: Context = LocalContext.current
+    context: Context = LocalContext.current,
+    reviewManager: ReviewManager? = null
 ) {
     val uriHandler = LocalUriHandler.current
     Column(
@@ -137,9 +140,14 @@ fun InfoScreen(
                 iconImageVector = Icons.Outlined.Edit,
                 text = stringResource(id = R.string.write_a_review),
                 onClick = {
-                    uriHandler.openUri(
-                        uri = PLAY_STORE_URL
-                    )
+                    val activity = context.findActivity()
+                    if (reviewManager != null && activity != null) {
+                        reviewManager.requestReview(activity)
+                    } else {
+                        uriHandler.openUri(
+                            uri = PLAY_STORE_URL
+                        )
+                    }
                 },
             ),
             TextIconButtonData(
@@ -261,7 +269,14 @@ fun ContributorsList(
     }
 }
 
-private fun String.asListItem() = "  • $this"
+fun Context.findActivity(): Activity? {
+    var context = this
+    while (context is ContextWrapper) {
+        if (context is Activity) return context
+        context = context.baseContext
+    }
+    return null
+}
 
 @PreviewLightDark
 @Composable

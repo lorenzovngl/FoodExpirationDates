@@ -29,7 +29,7 @@ class DefaultPreviews {
                 mutableStateOf(false)
             }
             MyScaffold(navController = navController, showSnackbar = showSnackbar) {
-                Navigation(navController = navController, showSnackbar = showSnackbar, startDestination = Screen.AboutScreen.route)
+                Navigation(navController = navController, startDestination = Screen.AboutScreen.route)
             }
         }
     }

@@ -88,7 +88,7 @@ fun PlayStoreScreenshotPreview() {
             MyScaffold(navController = navController, showSnackbar = showSnackbar) {
                 Navigation(
                     navController = navController ,
-                    showSnackbar = showSnackbar,
+                    //showSnackbar = showSnackbar,
                     startDestination = Screen.AboutScreen.route
                 )
             }

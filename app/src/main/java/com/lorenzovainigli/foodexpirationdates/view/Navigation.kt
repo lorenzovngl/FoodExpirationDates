@@ -2,7 +2,6 @@ package com.lorenzovainigli.foodexpirationdates.view
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -15,6 +14,7 @@ import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InfoScreen
 import com.lorenzovainigli.foodexpirationdates.feature.foodeditor.presentation.screen.FoodEditorScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.route.FoodListRoute
+import com.lorenzovainigli.foodexpirationdates.model.ReviewManager
 import com.lorenzovainigli.news.presentation.route.NewsRoute
 
 @Composable
@@ -22,9 +22,7 @@ fun Navigation(
     activity: MainActivity? = null,
     navController: NavHostController,
     startDestination: String = Screen.MainScreen.route,
-    showSnackbar: MutableState<Boolean>,
-    isSearchActive: Boolean = false,
-    onSearchBarClose: () -> Unit = {}
+    reviewManager: ReviewManager? = null
 ) {
 
     ScreenViewTracker(
@@ -42,7 +40,7 @@ fun Navigation(
                     navController.navigate(Screen.InsertScreen.route)
                 },
                 onEditFoodItem = { id ->
-                    navController.navigate(Screen.InsertScreen.route + "?itemId=${id}")
+                    navController.navigate(Screen.InsertScreen.route + "?itemId=$id")
                 }
             )
         }
@@ -70,7 +68,9 @@ fun Navigation(
             )
         }
         composable(route = Screen.AboutScreen.route){
-            InfoScreen()
+            InfoScreen(
+                reviewManager = reviewManager
+            )
         }
         composable(route = Screen.SettingsScreen.route){
             SettingsRoute()
