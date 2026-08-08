@@ -25,6 +25,8 @@ class PreferencesRepository {
         const val KEY_DYNAMIC_COLORS = "dynamic_colors"
         const val KEY_MONOCHROME_ICONS = "monochrome_icons"
         const val KEY_LANGUAGE = "language"
+        const val KEY_APP_OPEN_COUNT = "app_open_count"
+        const val KEY_REVIEW_DONE = "review_done"
         private val availLocaleDateFormats = arrayOf(DateFormat.SHORT, DateFormat.MEDIUM)
         private val availOtherDateFormats =
             arrayOf(
@@ -179,13 +181,13 @@ class PreferencesRepository {
             context: Context,
             sharedPrefs: String = SHARED_PREFS_NAME,
         ): Boolean {
-            try {
-                return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
+            return try {
+                context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
                     .getBoolean(KEY_DYNAMIC_COLORS, false)
             } catch (e: Exception){
                 e.printStackTrace()
+                false
             }
-            return false
         }
 
         fun setDynamicColors(
@@ -193,12 +195,12 @@ class PreferencesRepository {
             sharedPrefs: String = SHARED_PREFS_NAME,
             dynamicColorsEnabled: Boolean
         ): Boolean {
-            try {
+            return try {
                 context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
                     .edit { putBoolean(KEY_DYNAMIC_COLORS, dynamicColorsEnabled) }
-                return true
+                true
             } catch (_: Exception){
-                return false
+                false
             }
         }
 
@@ -220,12 +222,12 @@ class PreferencesRepository {
             sharedPrefs: String = SHARED_PREFS_NAME,
             monochromeIconsEnabled: Boolean
         ): Boolean {
-            try {
+            return try {
                 context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
                     .edit { putBoolean(KEY_MONOCHROME_ICONS, monochromeIconsEnabled) }
-                return true
+                true
             } catch (_: Exception){
-                return false
+                false
             }
         }
 
@@ -250,6 +252,28 @@ class PreferencesRepository {
         ) {
             return context.getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
                 .edit { putString(KEY_LANGUAGE, language) }
+        }
+
+        fun getAppOpenCount(context: Context): Int {
+            return context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+                .getInt(KEY_APP_OPEN_COUNT, 0)
+        }
+
+        fun incrementAppOpenCount(context: Context): Int {
+            val count = getAppOpenCount(context) + 1
+            context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+                .edit { putInt(KEY_APP_OPEN_COUNT, count) }
+            return count
+        }
+
+        fun getReviewDone(context: Context): Boolean {
+            return context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+                .getBoolean(KEY_REVIEW_DONE, false)
+        }
+
+        fun setReviewDone(context: Context, done: Boolean) {
+            context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+                .edit { putBoolean(KEY_REVIEW_DONE, done) }
         }
     }
 }
