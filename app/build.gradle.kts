@@ -244,6 +244,10 @@ dependencies {
     "fullImplementation"(libs.androidx.camera.mlkit.vision)
     "fullImplementation"(libs.barcode.scanning)
 
+    // Play Review
+    "fullImplementation"(libs.play.review)
+    "fullImplementation"(libs.play.review.ktx)
+
     // Retrofit
     "fullImplementation"(libs.retrofit)
     "fullImplementation"(libs.converter.gson)

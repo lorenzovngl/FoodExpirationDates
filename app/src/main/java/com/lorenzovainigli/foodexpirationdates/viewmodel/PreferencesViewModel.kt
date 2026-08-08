@@ -134,4 +134,16 @@ class PreferencesViewModel @Inject constructor(
             )
         }
     }
+
+    fun incrementAppOpenCount(): Int {
+        return PreferencesRepository.incrementAppOpenCount(context)
+    }
+
+    fun getReviewDone(): Boolean {
+        return PreferencesRepository.getReviewDone(context)
+    }
+
+    fun setReviewDone(done: Boolean) {
+        PreferencesRepository.setReviewDone(context, done)
+    }
 }
