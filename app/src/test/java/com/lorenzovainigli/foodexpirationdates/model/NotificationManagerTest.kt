@@ -15,7 +15,9 @@ import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
 import com.lorenzovainigli.foodexpirationdates.model.worker.CheckExpirationsWorker
 import io.mockk.coEvery
+import io.mockk.every
 import io.mockk.mockk
+import io.mockk.mockkObject
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
@@ -41,6 +43,15 @@ class NotificationWorkManagerTest {
     @Before
     fun setup() {
         context = ApplicationProvider.getApplicationContext()
+
+        mockkObject(LocaleHelper)
+
+        every {
+            LocaleHelper.setLocale(
+                context = any(),
+                language = any()
+            )
+        } returns context
 
         // Create a custom WorkerFactory to manually inject our mocks into the HiltWorker
         val customWorkerFactory = object : WorkerFactory() {

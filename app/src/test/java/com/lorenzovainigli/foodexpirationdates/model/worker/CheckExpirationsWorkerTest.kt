@@ -25,6 +25,7 @@ import org.junit.Before
 import org.junit.Test
 import java.time.Clock
 import java.time.Instant
+import java.time.LocalDate
 import java.time.ZoneId
 
 class CheckExpirationsWorkerTest {
@@ -40,9 +41,12 @@ class CheckExpirationsWorkerTest {
     private val fixedInstant = Instant.parse("2026-06-01T10:00:00Z")
     private val fixedClock = Clock.fixed(fixedInstant, ZoneId.of("UTC"))
 
-    // Time constants based on the fixed clock
-    private val msInADay = 86400000L
-    private val todayMs = fixedInstant.toEpochMilli()
+    private val today = LocalDate.now(fixedClock)
+
+    private fun millis(date: LocalDate): Long =
+        date.atStartOfDay(fixedClock.zone)
+            .toInstant()
+            .toEpochMilli()
 
     @Before
     fun setUp() {
@@ -101,10 +105,10 @@ class CheckExpirationsWorkerTest {
         val safeFood = ExpirationDate(
             id = 1,
             foodName = "Pasta",
-            expirationDate = todayMs + (7 * msInADay)
+            expirationDate = millis(today.plusDays(7))
         )
 
-        every { computeExpirationDate(safeFood) } returns todayMs + (7 * msInADay)
+        every { computeExpirationDate(safeFood) } returns millis(today.plusDays(7))
 
         coEvery { mockRepository.getAll() } returns flowOf(listOf(safeFood))
 
@@ -118,7 +122,7 @@ class CheckExpirationsWorkerTest {
 
     @Test
     fun `doWork formats message correctly when there is only a single expiring item`() = runTest {
-        val expirationToday = todayMs - 1000L
+        val expirationToday = millis(today)
         val singleFood = ExpirationDate(id = 1, foodName = "Milk", expirationDate = expirationToday)
 
         every { computeExpirationDate(singleFood) } returns expirationToday
@@ -143,7 +147,7 @@ class CheckExpirationsWorkerTest {
     @Test
     fun `doWork correctly formats multiple items sharing the exact same expiration window`() = runTest {
         // Arrange: Two distinct items both expiring today
-        val expirationToday = todayMs - 1000L
+        val expirationToday = millis(today)
         val firstFood = ExpirationDate(id = 1, foodName = "Milk", expirationDate = expirationToday)
         val secondFood = ExpirationDate(id = 2, foodName = "Yogurt", expirationDate = expirationToday)
 
@@ -170,13 +174,11 @@ class CheckExpirationsWorkerTest {
 
     @Test
     fun `doWork formats message correctly and shows notification for mixed expirations`() = runTest {
-        val oneHour = 60 * 60 * 1000L
-
-        val expirationTomorrow = todayMs + oneHour
-        val expirationToday = todayMs - oneHour
-        val expirationYesterday = todayMs - msInADay - oneHour
-        val expirationPast = todayMs - (3 * msInADay)
-        val expirationSafe = todayMs + (2 * msInADay)
+        val expirationToday = millis(today)
+        val expirationTomorrow = millis(today.plusDays(1))
+        val expirationYesterday = millis(today.minusDays(1))
+        val expirationPast = millis(today.minusDays(3))
+        val expirationSafe = millis(today.plusDays(2))
 
         val foodToday = ExpirationDate(id = 1, foodName = "Milk", expirationDate = expirationToday)
         val foodTomorrow = ExpirationDate(id = 2, foodName = "Eggs", expirationDate = expirationTomorrow)
@@ -213,7 +215,7 @@ class CheckExpirationsWorkerTest {
     @Test
     fun `doWork accurately calculates relative days elapsed for heavily outdated items`() = runTest {
         val daysPast = 45L
-        val expirationPast = todayMs - (daysPast * msInADay) - 1000L
+        val expirationPast = millis(today.minusDays(daysPast))
 
         val oldFood = ExpirationDate(id = 1, foodName = "Canned Beans", expirationDate = expirationPast)
 

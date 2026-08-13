@@ -16,7 +16,10 @@ import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepos
 import com.lorenzovainigli.foodexpirationdates.showNotification
 import kotlinx.coroutines.flow.first
 import java.time.Clock
-import java.util.concurrent.TimeUnit
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.temporal.ChronoUnit
 import javax.inject.Inject
 
 @HiltWorker
@@ -28,37 +31,49 @@ class CheckExpirationsWorker @Inject constructor(
 ) : CoroutineWorker(appContext, params) {
 
     override suspend fun doWork(): Result {
-        val nowMs = clock.millis()
+        val zoneId = ZoneId.systemDefault()
 
-        val msInADay = TimeUnit.DAYS.toMillis(1)
-        val todayStartMs = nowMs
-        val yesterdayMs = todayStartMs - msInADay
-        val twoDaysAgoMs = todayStartMs - (2 * msInADay)
-        val tomorrowMs = todayStartMs + msInADay
+        val today = Instant.ofEpochMilli(clock.millis())
+            .atZone(zoneId)
+            .toLocalDate()
 
-        val items = repository.getAll().first()
-        val expiringItems = items.filter {
-            computeExpirationDate(it) < tomorrowMs
-        }
+        val tomorrow = today.plusDays(1)
 
         val context = getLocalizedContext()
 
-        if (expiringItems.isEmpty()) {
+        return try {
+            val items = repository.getAll().first()
+
+            val expiringItems = items.filter { item ->
+                val expirationDate = Instant
+                    .ofEpochMilli(computeExpirationDate(item))
+                    .atZone(zoneId)
+                    .toLocalDate()
+
+                !expirationDate.isAfter(tomorrow)
+            }
+
+            if (expiringItems.isNotEmpty()) {
+                val message = buildExpirationMessage(
+                    items = expiringItems,
+                    today = today,
+                    zoneId = zoneId
+                )
+
+                showNotification(
+                    context = context,
+                    channelId = CHANNEL_REMINDERS_ID,
+                    title = context.getString(R.string.your_food_is_expiring),
+                    message = message
+                )
+            }
+
+            Result.success()
+        } catch (_: Exception){
+            Result.success()
+        } finally {
             scheduleNextRun(context)
-            return Result.success()
         }
-
-        val message = buildExpirationMessage(expiringItems, todayStartMs, yesterdayMs, twoDaysAgoMs, msInADay)
-
-        showNotification(
-            context = context,
-            channelId = CHANNEL_REMINDERS_ID,
-            title = context.getString(R.string.your_food_is_expiring),
-            message = message
-        )
-
-        scheduleNextRun(context)
-        return Result.success()
     }
 
     private fun scheduleNextRun(context: Context) {
@@ -67,26 +82,30 @@ class CheckExpirationsWorker @Inject constructor(
 
     private fun buildExpirationMessage(
         items: List<ExpirationDate>,
-        todayMs: Long,
-        yesterdayMs: Long,
-        twoDaysAgoMs: Long,
-        msInADay: Long
+        today: LocalDate,
+        zoneId: ZoneId
     ): String {
-        val joinedItems = items.joinToString(", ") { item ->
-            val expDateMs = computeExpirationDate(item)
-            val relativeTime = when {
-                expDateMs < twoDaysAgoMs -> {
-                    val days = (todayMs - expDateMs) / msInADay
+        return items.joinToString(", ", postfix = ".") { item ->
+            val expirationDate = Instant.ofEpochMilli(computeExpirationDate(item))
+                .atZone(zoneId)
+                .toLocalDate()
+
+            val label = when {
+                expirationDate == today -> applicationContext.getString(R.string.today).lowercase()
+                expirationDate == today.plusDays(1) -> applicationContext.getString(R.string.tomorrow).lowercase()
+                expirationDate == today.minusDays(1) -> applicationContext.getString(R.string.yesterday).lowercase()
+                expirationDate.isBefore(today) -> {
+                    val days = ChronoUnit.DAYS.between(expirationDate, today)
                     applicationContext.getString(R.string.n_days_ago, days)
                 }
-                expDateMs < yesterdayMs -> applicationContext.getString(R.string.yesterday).lowercase()
-                expDateMs < todayMs -> applicationContext.getString(R.string.today).lowercase()
-                else -> applicationContext.getString(R.string.tomorrow).lowercase()
+                else -> {
+                    val daysUntil = ChronoUnit.DAYS.between(today, expirationDate)
+                    applicationContext.getString(R.string.in_n_days, daysUntil)
+                }
             }
-            "${item.foodName} ($relativeTime)"
-        }
 
-        return "$joinedItems."
+            "${item.foodName} ($label)"
+        }
     }
 
     private fun getLocalizedContext(): Context {
