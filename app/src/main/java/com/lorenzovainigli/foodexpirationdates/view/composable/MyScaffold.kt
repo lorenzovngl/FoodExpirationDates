@@ -28,6 +28,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -35,6 +36,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -45,6 +48,8 @@ import com.lorenzovainigli.foodexpirationdates.view.MainActivity
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.screen.FoodListScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.preview.getItemsForPreview
+import com.lorenzovainigli.foodexpirationdates.util.areNotificationsEnabled
+import com.lorenzovainigli.foodexpirationdates.viewmodel.MyBottomAppBarViewModel
 import kotlinx.coroutines.launch
 
 data class NavigationItem(
@@ -110,8 +115,8 @@ fun MyScaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
             val destination = navDestination ?: currentBackStackEntry?.destination?.route
+            val topBarFont = activity?.preferencesViewModel?.getTopBarFont(context)?.collectAsStateWithLifecycle()
             MyTopAppBar(
-                activity = activity,
                 title = when (destination) {
                     Screen.AboutScreen.route -> stringResource(id = R.string.about_this_app)
                     Screen.SettingsScreen.route -> stringResource(id = R.string.settings)
@@ -128,6 +133,7 @@ fun MyScaffold(
                         }
                     }
                 },
+                topBarFont = topBarFont?.value,
                 actions = {
                     if (destination?.contains(Screen.MainScreen.route) == true) {
                         val context = LocalContext.current
@@ -197,9 +203,23 @@ fun MyScaffold(
         bottomBar = {
             val destination = navDestination ?: currentBackStackEntry?.destination?.route
             if (destination !in noBottomBarRoutes) {
+                val context = LocalContext.current
+                var showPermissionBanner by remember {
+                    mutableStateOf(!areNotificationsEnabled(context))
+                }
+                LifecycleResumeEffect(Unit) {
+                    showPermissionBanner = !areNotificationsEnabled(context)
+                    onPauseOrDispose { }
+                }
+                val viewModel: MyBottomAppBarViewModel = hiltViewModel()
+                val unreadNewsCount by viewModel.unreadNewsCount.collectAsStateWithLifecycle()
                 MyBottomAppBar(
-                    navController = navController,
-                    currentDestination = navDestination ?: currentBackStackEntry?.destination?.route
+                    currentDestination = navDestination ?: currentBackStackEntry?.destination?.route,
+                    onNavigationItemClick = {
+                        navController.navigate(it.route)
+                    },
+                    showPermissionBanner = showPermissionBanner,
+                    unreadNewsCount = unreadNewsCount
                 )
             }
         }

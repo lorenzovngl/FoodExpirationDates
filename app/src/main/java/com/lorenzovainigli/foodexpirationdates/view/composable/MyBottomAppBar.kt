@@ -42,19 +42,11 @@ import com.lorenzovainigli.foodexpirationdates.viewmodel.MyBottomAppBarViewModel
 
 @Composable
 fun MyBottomAppBar(
-    navController: NavHostController,
-    currentDestination: String?
+    currentDestination: String?,
+    onNavigationItemClick: (NavigationItem) -> Unit,
+    showPermissionBanner: Boolean,
+    unreadNewsCount: Int
 ){
-    val context = LocalContext.current
-    var showPermissionBanner by remember {
-        mutableStateOf(!areNotificationsEnabled(context))
-    }
-    LifecycleResumeEffect(Unit) {
-        showPermissionBanner = !areNotificationsEnabled(context)
-        onPauseOrDispose { }
-    }
-    val viewModel: MyBottomAppBarViewModel = hiltViewModel()
-    val unreadNewsCount by viewModel.unreadNewsCount.collectAsStateWithLifecycle()
     val navigationItems = listOf(
         NavigationItem(
             label = stringResource(id = R.string.list),
@@ -90,7 +82,7 @@ fun MyBottomAppBar(
                 selected = selectedItem == index,
                 onClick = {
                     selectedItem = index
-                    navController.navigate(item.route)
+                    onNavigationItemClick(item)
                 },
                 icon = {
                     BadgedBox(
@@ -132,8 +124,10 @@ fun MyBottomAppBarPreview(){
     FoodExpirationDatesTheme {
         Surface {
             MyBottomAppBar(
-                navController = rememberNavController(),
-                currentDestination = Screen.AboutScreen.route
+                currentDestination = Screen.AboutScreen.route,
+                onNavigationItemClick = {},
+                showPermissionBanner = false,
+                unreadNewsCount = 1
             )
         }
     }
