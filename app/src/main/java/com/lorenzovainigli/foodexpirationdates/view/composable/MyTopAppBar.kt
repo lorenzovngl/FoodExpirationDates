@@ -24,7 +24,6 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -35,7 +34,6 @@ import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
-import com.lorenzovainigli.foodexpirationdates.view.MainActivity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -45,8 +43,8 @@ fun MyTopAppBar(
     actions: @Composable RowScope.() -> Unit,
     navigationIcon: @Composable () -> Unit,
     scrollBehavior: TopAppBarScrollBehavior,
+    monochromeIcons: Boolean
 ) {
-    val context = LocalContext.current
 
     LargeTopAppBar(
         title = {
@@ -55,7 +53,6 @@ fun MyTopAppBar(
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                val monochromeIcons = PreferencesRepository.getMonochromeIcons(context)
                 Canvas(
                     modifier = Modifier
                         .size(36.dp)
@@ -118,6 +115,7 @@ fun MyTopAppBarPreview(){
             },
             scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(),
             actions = {},
+            monochromeIcons = false
         )
     }
 }

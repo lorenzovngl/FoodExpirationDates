@@ -48,6 +48,7 @@ import com.lorenzovainigli.foodexpirationdates.view.MainActivity
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.screen.FoodListScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.preview.getItemsForPreview
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.util.areNotificationsEnabled
 import com.lorenzovainigli.foodexpirationdates.viewmodel.MyBottomAppBarViewModel
 import kotlinx.coroutines.launch
@@ -197,7 +198,8 @@ fun MyScaffold(
                         }
                     }
                 },
-                scrollBehavior = scrollBehavior
+                scrollBehavior = scrollBehavior,
+                monochromeIcons = PreferencesRepository.getMonochromeIcons(context)
             )
         },
         bottomBar = {
