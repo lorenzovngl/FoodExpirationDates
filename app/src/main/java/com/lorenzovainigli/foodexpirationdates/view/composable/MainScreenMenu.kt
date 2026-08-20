@@ -18,7 +18,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -40,6 +43,7 @@ private data class MenuItem(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreenMenu(
+    modifier: Modifier = Modifier,
     exportTaskSuccess: State<Boolean>?,
     notifyExportTaskDone: State<Boolean>?,
     onSearchClick: () -> Unit,
@@ -56,6 +60,7 @@ fun MainScreenMenu(
     }
 
     IconButton(
+        modifier = modifier,
         onClick = onSearchClick
     ) {
         Icon(
@@ -65,6 +70,7 @@ fun MainScreenMenu(
         )
     }
     IconButton(
+        modifier = modifier,
         onClick = { isExpanded = true }
     ) {
         Icon(
