@@ -1,21 +1,27 @@
 package com.lorenzovainigli.foodexpirationdates.view
 
+import android.content.Intent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.lorenzovainigli.foodexpirationdates.PLAY_STORE_URL
+import com.lorenzovainigli.foodexpirationdates.WEBSITE_URL_EN
+import com.lorenzovainigli.foodexpirationdates.WEBSITE_URL_IT
 import com.lorenzovainigli.foodexpirationdates.analytics.ScreenViewTracker
 import com.lorenzovainigli.foodexpirationdates.feature.settings.presentation.route.SettingsRoute
-import com.lorenzovainigli.foodexpirationdates.view.composable.screen.InfoScreen
 import com.lorenzovainigli.foodexpirationdates.feature.foodeditor.presentation.screen.FoodEditorScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.route.FoodListRoute
+import com.lorenzovainigli.foodexpirationdates.feature.info.presentation.route.InfoRoute
 import com.lorenzovainigli.foodexpirationdates.model.ReviewManager
 import com.lorenzovainigli.news.presentation.route.NewsRoute
+import java.util.Locale
 
 @Composable
 fun Navigation(
@@ -68,8 +74,30 @@ fun Navigation(
             )
         }
         composable(route = Screen.AboutScreen.route){
-            InfoScreen(
-                reviewManager = reviewManager
+            val uriHandler = LocalUriHandler.current
+            InfoRoute(
+                onClickShare = {
+                    val sendIntent: Intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(
+                            Intent.EXTRA_TEXT,
+                            if (Locale.getDefault().language == "it") WEBSITE_URL_IT
+                            else WEBSITE_URL_EN
+                        )
+                        type = "text/plain"
+                    }
+                    val shareIntent = Intent.createChooser(sendIntent, null)
+                    activity?.startActivity(shareIntent)
+                },
+                onClickReview = {
+                    if (reviewManager != null && activity != null) {
+                        reviewManager.requestReview(activity)
+                    } else {
+                        uriHandler.openUri(
+                            uri = PLAY_STORE_URL
+                        )
+                    }
+                },
             )
         }
         composable(route = Screen.SettingsScreen.route){
@@ -80,18 +108,3 @@ fun Navigation(
         }
     }
 }
-
-//@RequiresApi(Build.VERSION_CODES.O)
-//@Preview
-//@Composable
-//fun NavigationPreview(){
-//    FoodExpirationDatesTheme {
-//        Surface(modifier = Modifier.fillMaxSize()) {
-//            Navigation(
-//                navController = rememberNavController(),
-//                coroutineScope = rememberCoroutineScope(),
-//                snackbarHostState = SnackbarHostState()
-//            )
-//        }
-//    }
-//}

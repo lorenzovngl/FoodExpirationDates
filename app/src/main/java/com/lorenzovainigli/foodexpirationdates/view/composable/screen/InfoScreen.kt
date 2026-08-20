@@ -1,9 +1,5 @@
 package com.lorenzovainigli.foodexpirationdates.view.composable.screen
 
-import android.app.Activity
-import android.content.Context
-import android.content.ContextWrapper
-import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -28,41 +24,31 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.LinkAnnotation
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.withLink
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.DEVELOPER_EMAIL
 import com.lorenzovainigli.foodexpirationdates.GITHUB_URL
-import com.lorenzovainigli.foodexpirationdates.PLAY_STORE_URL
 import com.lorenzovainigli.foodexpirationdates.PRIVACY_POLICY_URL
 import com.lorenzovainigli.foodexpirationdates.R
-import com.lorenzovainigli.foodexpirationdates.WEBSITE_URL_EN
-import com.lorenzovainigli.foodexpirationdates.WEBSITE_URL_IT
 import com.lorenzovainigli.foodexpirationdates.model.Platform
-import com.lorenzovainigli.foodexpirationdates.model.ReviewManager
 import com.lorenzovainigli.foodexpirationdates.model.contributors
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.composable.AppDescription
 import com.lorenzovainigli.foodexpirationdates.view.composable.LinkText
 import com.lorenzovainigli.foodexpirationdates.view.composable.TextIconButton
 import com.lorenzovainigli.foodexpirationdates.view.composable.TextIconButtonData
-import java.util.Locale
 
 @Composable
 fun InfoScreen(
-    context: Context = LocalContext.current,
-    reviewManager: ReviewManager? = null
+    onClickShare: () -> Unit,
+    onClickReview: () -> Unit = {},
+    versionText: String,
 ) {
     val uriHandler = LocalUriHandler.current
     Column(
@@ -90,11 +76,7 @@ fun InfoScreen(
         Text(
             modifier = Modifier.align(Alignment.CenterHorizontally),
             style = MaterialTheme.typography.bodySmall,
-            text = if (BuildConfig.DEBUG) "Build ${BuildConfig.APP_VERSION_LABEL}"
-            else stringResource(
-                id = R.string.version_x,
-                BuildConfig.APP_VERSION_LABEL
-            ),
+            text = versionText,
             textAlign = TextAlign.Center
         )
         AppDescription()
@@ -139,33 +121,12 @@ fun InfoScreen(
             TextIconButtonData(
                 iconImageVector = Icons.Outlined.Edit,
                 text = stringResource(id = R.string.write_a_review),
-                onClick = {
-                    val activity = context.findActivity()
-                    if (reviewManager != null && activity != null) {
-                        reviewManager.requestReview(activity)
-                    } else {
-                        uriHandler.openUri(
-                            uri = PLAY_STORE_URL
-                        )
-                    }
-                },
+                onClick = onClickReview
             ),
             TextIconButtonData(
                 iconImageVector = Icons.Outlined.Share,
                 text = stringResource(id = R.string.share),
-                onClick = {
-                    val sendIntent: Intent = Intent().apply {
-                        action = Intent.ACTION_SEND
-                        putExtra(
-                            Intent.EXTRA_TEXT,
-                            if (Locale.getDefault().language == "it") WEBSITE_URL_IT
-                            else WEBSITE_URL_EN
-                        )
-                        type = "text/plain"
-                    }
-                    val shareIntent = Intent.createChooser(sendIntent, null)
-                    context.startActivity(shareIntent)
-                },
+                onClick = onClickShare
             ),
         ).forEach {
             Row(
@@ -269,21 +230,15 @@ fun ContributorsList(
     }
 }
 
-fun Context.findActivity(): Activity? {
-    var context = this
-    while (context is ContextWrapper) {
-        if (context is Activity) return context
-        context = context.baseContext
-    }
-    return null
-}
-
 @PreviewLightDark
 @Composable
 fun InfoScreenPreview() {
     FoodExpirationDatesTheme {
         Surface (modifier = Modifier.fillMaxHeight()) {
-            InfoScreen()
+            InfoScreen(
+                onClickShare = {},
+                versionText = "Version 1.0"
+            )
         }
     }
 }
