@@ -101,7 +101,7 @@ class DefaultPreviews {
                 mutableStateOf(false)
             }
             MyScaffold(navController = navController, showSnackbar = showSnackbar) {
-                InfoScreen()
+//                InfoScreen()
             }
         }
     }
