@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.app.cash.paparazzi)
     alias(libs.plugins.com.google.devtools.ksp)
     alias(libs.plugins.compose)
+    alias(libs.plugins.screenshot)
 }
 
 val buildFossProperty = "buildFoss"
@@ -128,6 +129,7 @@ android {
     lint {
         abortOnError = false
     }
+    experimentalProperties["android.experimental.enableScreenshotTest"] = true
 }
 
 configurations {
@@ -264,6 +266,9 @@ dependencies {
     
     // Add screenshot dependencies to standard testImplementation so they can be compiled
     configurations.getByName("testImplementation").extendsFrom(testScreenshotImplementation)
+
+    // Screnshot testing
+    screenshotTestImplementation(libs.screenshot.validation.api)
 }
 
 if (!buildFoss){

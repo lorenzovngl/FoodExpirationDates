@@ -38,6 +38,7 @@ play-review = "2.0.2"
 retrofit = "3.0.0"
 robolectric = "4.16.1"
 room = "2.8.4"
+screenshot = "0.0.1-alpha16"
 splashscreen = "1.2.0"
 test-rules = "1.7.0"
 test-runner = "1.7.0"
@@ -114,6 +115,7 @@ ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+screenshot-validation-api = {group = "com.android.tools.screenshot", name = "screenshot-validation-api", version.ref = "screenshot"}
 
 [plugins]
 app-cash-paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi"}
@@ -124,5 +126,6 @@ com-google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
 compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot" }
 
 [bundles]
