@@ -39,7 +39,7 @@ fun ScreenshotHeader(text: String) {
             text = text,
             style = MaterialTheme.typography.headlineLarge,
             fontSize = fontSize,
-            fontWeight = FontWeight(200),
+            fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onPrimaryContainer,
             textAlign = TextAlign.Center
         )
@@ -54,7 +54,7 @@ fun ScreenshotHeaderPreview() {
         stringArrayResource(id = R.array.screenshot_titles).forEach {
             Text(text = "Length = ${it.length}")
             ScreenshotHeader(
-                text = "$it."
+                text = it
             )
         }
     }
