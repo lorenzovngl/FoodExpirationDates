@@ -33,7 +33,6 @@ mockk = "1.14.11"
 mockwebserver = "5.5.0"
 navigation-compose = "2.9.8"
 opencsv = "5.12.0"
-paparazzi = "2.0.0-alpha05"
 play-review = "2.0.2"
 retrofit = "3.0.0"
 robolectric = "4.16.1"
@@ -118,7 +117,6 @@ ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview
 screenshot-validation-api = {group = "com.android.tools.screenshot", name = "screenshot-validation-api", version.ref = "screenshot"}
 
 [plugins]
-app-cash-paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi"}
 com-android-application = { id = "com.android.application", version.ref = "agp" }
 com-android-library = {id = "com.android.library", version.ref = "agp"}
 com-google-dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "dagger-hilt"}

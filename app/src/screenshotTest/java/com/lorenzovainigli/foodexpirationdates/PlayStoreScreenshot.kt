@@ -38,7 +38,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
-import com.lorenzovainigli.foodexpirationdates.view.preview.ScreenshotHeader
 
 const val PREVIEW_DEVICE = "spec:width=1080px,height=1920px,dpi=320"
 

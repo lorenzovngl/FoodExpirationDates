@@ -6,7 +6,6 @@ plugins {
     id("git-info")
     alias(libs.plugins.com.android.application)
     alias(libs.plugins.com.google.dagger.hilt.android)
-    alias(libs.plugins.app.cash.paparazzi)
     alias(libs.plugins.com.google.devtools.ksp)
     alias(libs.plugins.compose)
     alias(libs.plugins.screenshot)
@@ -105,11 +104,6 @@ android {
 
     sourceSets {
         getByName("debug").assets.directories.add(("$projectDir/schemas")) // Room
-
-        getByName("test") {
-            java.directories.add("src/testScreenshot/java")
-            resources.directories.add("src/testScreenshot/resources")
-        }
     }
 
     compileOptions {
@@ -257,15 +251,7 @@ dependencies {
     // Coil
     "fullImplementation"(libs.coil.compose)
 
-    val testScreenshotImplementation by configurations.creating
-    testScreenshotImplementation(libs.junit)
-    testScreenshotImplementation(platform(libs.compose.bom))
-    testScreenshotImplementation(libs.ui.test.junit4)
-
     ksp(libs.kotlin.metadata.jvm)
-    
-    // Add screenshot dependencies to standard testImplementation so they can be compiled
-    configurations.getByName("testImplementation").extendsFrom(testScreenshotImplementation)
 
     // Screnshot testing
     screenshotTestImplementation(libs.screenshot.validation.api)
