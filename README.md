@@ -57,13 +57,13 @@ This simple app helps you avoid forgetting to consume foods that are about to ex
 
 <div align="center">
 
-| | | | |
-|-|-|-|-|
-| <img width="150px" src="screenshots/screenshot_ScreenshotEnglish_screen1MainActivity.png"> | <img width="150px" src="screenshots/screenshot_ScreenshotEnglish_screen2InsertActivity.png"> | <img width="150px" src="screenshots/screenshot_ScreenshotEnglish_screenBarcodeScanner.png"> | <img width="150px" src="screenshots/screenshot_ScreenshotEnglish_screen3SettingsActivity.png"> | 
+|                                                                                                | | | |
+|------------------------------------------------------------------------------------------------|-|-|-|
+| <img width="150px" src="screenshots/Screen1FoodList.png"> | <img width="150px" src="screenshots/Screen2FoodEditor.png"> | <img width="150px" src="screenshots/Screen3BarcodeScanner.png"> | <img width="150px" src="screenshots/Screen4Settings.png"> | 
 
 | | | | |
 |-|-|-|-|
-| <img width="150px" src="screenshots/screenshot_ScreenshotEnglish_screen4InfoActivity.png"> | <img width="150px" src="screenshots/screenshot_ScreenshotEnglish_screen5DarkMode.png"> | <img width="150px" src="screenshots/screenshot_ScreenshotEnglish_screen6DynamicColors.png"> | <img width="150px" src="screenshots/screenshot_ScreenshotEnglish_screenMadeWithHeart.png"> |
+| <img width="150px" src="screenshots/Screen5Info.png"> | <img width="150px" src="screenshots/Screen6DarkTheme.png"> | <img width="150px" src="screenshots/Screen7DynamicColors.png"> | <img width="150px" src="screenshots/Screen8MadeWithHeart.png"> |
 
 </div>
 
