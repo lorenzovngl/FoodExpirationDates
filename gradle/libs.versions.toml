@@ -9,6 +9,7 @@ camera-core = "1.6.1"
 camera-mlkit-vision = "1.6.1"
 coil-compose = "2.7.0"
 converter-gson = "3.0.0"
+core = "1.7.0"
 core-ktx = "1.19.0"
 dagger-hilt = "2.60.1"
 datastore-preferences = "1.2.1"
@@ -52,6 +53,7 @@ androidx-camera-core = { module = "androidx.camera:camera-core", version.ref = "
 androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "camera-core" }
 androidx-camera-mlkit-vision = { module = "androidx.camera:camera-mlkit-vision", version.ref = "camera-mlkit-vision" }
 androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "camera-core" }
+androidx-core = { module = "androidx.test:core", version.ref = "core" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore-preferences" }
 androidx-hilt-common = { module = "androidx.hilt:hilt-common", version.ref = "hilt-common" }
 androidx-hilt-lifecycle-viewmodel-compose = { module = "androidx.hilt:hilt-lifecycle-viewmodel-compose", version.ref = "hilt-common" }

@@ -164,6 +164,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.collections.immutable)
     testImplementation(kotlin("test"))
+    testImplementation(libs.androidx.core)
     testImplementation(libs.junit)
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.mockito.core)
