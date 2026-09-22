@@ -25,8 +25,7 @@ class PreferencesRepository {
         const val KEY_DYNAMIC_COLORS = "dynamic_colors"
         const val KEY_MONOCHROME_ICONS = "monochrome_icons"
         const val KEY_LANGUAGE = "language"
-        const val KEY_APP_OPEN_COUNT = "app_open_count"
-        const val KEY_REVIEW_DONE = "review_done"
+        const val KEY_FOOD_ADDED_COUNT = "food_added_count"
         private val availLocaleDateFormats = arrayOf(DateFormat.SHORT, DateFormat.MEDIUM)
         private val availOtherDateFormats =
             arrayOf(
@@ -254,26 +253,20 @@ class PreferencesRepository {
                 .edit { putString(KEY_LANGUAGE, language) }
         }
 
-        fun getAppOpenCount(context: Context): Int {
-            return context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
-                .getInt(KEY_APP_OPEN_COUNT, 0)
+        fun getFoodAddedCount(context: Context): Int {
+            return context
+                .getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+                .getInt(KEY_FOOD_ADDED_COUNT, 0)
         }
 
-        fun incrementAppOpenCount(context: Context): Int {
-            val count = getAppOpenCount(context) + 1
-            context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
-                .edit { putInt(KEY_APP_OPEN_COUNT, count) }
+        fun incrementFoodAddedCount(context: Context): Int {
+            val count = getFoodAddedCount(context) + 1
+            context
+                .getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+                .edit {
+                    putInt(KEY_FOOD_ADDED_COUNT, count)
+                }
             return count
-        }
-
-        fun getReviewDone(context: Context): Boolean {
-            return context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
-                .getBoolean(KEY_REVIEW_DONE, false)
-        }
-
-        fun setReviewDone(context: Context, done: Boolean) {
-            context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
-                .edit { putBoolean(KEY_REVIEW_DONE, done) }
         }
     }
 }

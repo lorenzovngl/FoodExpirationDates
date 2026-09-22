@@ -28,7 +28,7 @@ fun Navigation(
     activity: MainActivity? = null,
     navController: NavHostController,
     startDestination: String = Screen.MainScreen.route,
-    reviewManager: ReviewManager? = null
+    reviewManager: ReviewManager
 ) {
 
     ScreenViewTracker(
@@ -47,7 +47,15 @@ fun Navigation(
                 },
                 onEditFoodItem = { id ->
                     navController.navigate(Screen.InsertScreen.route + "?itemId=$id")
-                }
+                },
+                onRequestReview = {
+                    activity?.let {
+                        reviewManager.requestReview(
+                            activity = it,
+                            isAutomatic = true,
+                        )
+                    }
+                },
             )
         }
         composable(
@@ -90,7 +98,7 @@ fun Navigation(
                     activity?.startActivity(shareIntent)
                 },
                 onClickReview = {
-                    if (reviewManager != null && activity != null) {
+                    if (activity != null) {
                         reviewManager.requestReview(activity)
                     } else {
                         uriHandler.openUri(

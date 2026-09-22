@@ -1,5 +1,6 @@
 package com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.viewmodel
 
+import android.content.Context
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -12,9 +13,13 @@ import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.mod
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.entity.computeExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.collections.immutable.toImmutableList
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
@@ -25,7 +30,8 @@ import javax.inject.Inject
 class FoodListViewModel @Inject constructor(
     private val repository: ExpirationDateRepository,
     private val foodCardUiModelMapper: FoodCardUiModelMapper,
-    private val analyticsTracker: AnalyticsTracker
+    private val analyticsTracker: AnalyticsTracker,
+    @ApplicationContext private val context: Context
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(FoodListUiState())
@@ -36,6 +42,9 @@ class FoodListViewModel @Inject constructor(
 
     private val _deletedItem: MutableState<ExpirationDate?> = mutableStateOf(value = null)
     val deletedItem: State<ExpirationDate?> = _deletedItem
+
+    private val _requestReview = MutableSharedFlow<Unit>()
+    val requestReview = _requestReview.asSharedFlow()
 
     init {
         observeFoodItems()
@@ -70,6 +79,12 @@ class FoodListViewModel @Inject constructor(
         viewModelScope.launch {
             repository.addExpirationDate(expirationDate)
             analyticsTracker.logEvent(AnalyticsEvent.FOOD_ADDED)
+
+            val count = PreferencesRepository.incrementFoodAddedCount(context)
+
+            if (count % 50 == 0) {
+                _requestReview.emit(Unit)
+            }
         }
     }
 

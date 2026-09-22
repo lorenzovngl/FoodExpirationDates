@@ -64,15 +64,6 @@ class MainActivity : ComponentActivity() {
             context = this,
             policy = ExistingWorkPolicy.KEEP
         )
-
-        val count = preferencesViewModel.incrementAppOpenCount()
-        val reviewDone = preferencesViewModel.getReviewDone()
-        if (!reviewDone && (count == 5 || count == 10 || count == 30)) {
-            reviewManager.requestReview(this, isAutomatic = true)
-            if (count == 30) {
-                preferencesViewModel.setReviewDone(true)
-            }
-        }
     }
 
     override fun onResume() {

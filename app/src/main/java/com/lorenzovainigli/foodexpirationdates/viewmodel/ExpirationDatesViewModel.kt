@@ -25,14 +25,18 @@ import com.lorenzovainigli.foodexpirationdates.model.entity.toCSV
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
 import com.lorenzovainigli.foodexpirationdates.saveFileToExternalStorage
 import com.lorenzovainigli.foodexpirationdates.analytics.AnalyticsTracker
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.util.OperationResult
 import com.lorenzovainigli.news.data.worker.NewsWorkScheduler
 import com.opencsv.CSVReader
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
@@ -51,7 +55,8 @@ import javax.inject.Inject
 class ExpirationDatesViewModel @Inject constructor(
     private val repository: ExpirationDateRepository,
     private val newsWorkScheduler: NewsWorkScheduler,
-    private val analyticsTracker: AnalyticsTracker
+    private val analyticsTracker: AnalyticsTracker,
+    @ApplicationContext private val context: Context
 ) : ViewModel() {
 
     private var expirationDates: Flow<List<ExpirationDate>> = flowOf(emptyList())
@@ -68,6 +73,9 @@ class ExpirationDatesViewModel @Inject constructor(
 
     private val _notifyExportTaskDone = MutableStateFlow(false)
     val notifyExportTaskDone = _notifyExportTaskDone.asStateFlow()
+
+    private val _requestReview = MutableSharedFlow<Unit>()
+    val requestReview = _requestReview.asSharedFlow()
 
     init {
         viewModelScope.launch {
@@ -108,6 +116,12 @@ class ExpirationDatesViewModel @Inject constructor(
             repository.addExpirationDate(expirationDate)
             expirationDates = repository.getAll()
             analyticsTracker.logEvent(AnalyticsEvent.FOOD_ADDED)
+
+            val count = PreferencesRepository.incrementFoodAddedCount(context)
+
+            if (count % 50 == 0) {
+                _requestReview.emit(Unit)
+            }
         }
     }
 
