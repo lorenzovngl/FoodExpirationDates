@@ -35,6 +35,7 @@ import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepos
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.checkAndSetSecureFlags
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.analytics.AnalyticsTracker
+import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.viewmodel.FoodListViewModel
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyScaffold
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDatesViewModel
 import com.lorenzovainigli.foodexpirationdates.viewmodel.PreferencesViewModel
@@ -45,6 +46,7 @@ import javax.inject.Inject
 class MainActivity : ComponentActivity() {
 
     val viewModel: ExpirationDatesViewModel by viewModels()
+    val foodListViewModel: FoodListViewModel by viewModels()
     val preferencesViewModel: PreferencesViewModel by viewModels()
 
     @Inject

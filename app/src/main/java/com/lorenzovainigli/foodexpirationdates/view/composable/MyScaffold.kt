@@ -96,7 +96,7 @@ fun MyScaffold(
                 when (snackbarResult) {
                     SnackbarResult.ActionPerformed -> {
                         deletedItem?.let {
-                            activity.viewModel.addExpirationDate(it)
+                            activity.foodListViewModel.addFoodItem(it)
                         }
                     }
 
