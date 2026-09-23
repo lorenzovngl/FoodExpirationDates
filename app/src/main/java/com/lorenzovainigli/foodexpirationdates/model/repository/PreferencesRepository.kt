@@ -15,7 +15,7 @@ class PreferencesRepository {
 
     companion object {
 
-        private const val SHARED_PREFS_NAME = "shared_pref"
+        const val SHARED_PREFS_NAME = "shared_pref"
         const val KEY_DATE_FORMAT = "date_format"
         const val KEY_SCREEN_PROTECTION = "screen_protection"
         const val KEY_NOTIFICATION_TIME_HOUR = "notification_time_hour"

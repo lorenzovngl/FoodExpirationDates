@@ -14,6 +14,7 @@ import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.entity.computeExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
+import com.lorenzovainigli.foodexpirationdates.model.review.ReviewRequestStrategy
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.collections.immutable.toImmutableList
@@ -31,7 +32,7 @@ class FoodListViewModel @Inject constructor(
     private val repository: ExpirationDateRepository,
     private val foodCardUiModelMapper: FoodCardUiModelMapper,
     private val analyticsTracker: AnalyticsTracker,
-    @ApplicationContext private val context: Context
+    private val reviewRequestStrategy: ReviewRequestStrategy
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(FoodListUiState())
@@ -80,9 +81,7 @@ class FoodListViewModel @Inject constructor(
             repository.addExpirationDate(expirationDate)
             analyticsTracker.logEvent(AnalyticsEvent.FOOD_ADDED)
 
-            val count = PreferencesRepository.incrementFoodAddedCount(context)
-
-            if (count % 50 == 0) {
+            if (reviewRequestStrategy.onFoodAdded()) {
                 _requestReview.emit(Unit)
             }
         }

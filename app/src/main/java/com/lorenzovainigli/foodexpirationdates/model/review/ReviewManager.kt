@@ -1,4 +1,4 @@
-package com.lorenzovainigli.foodexpirationdates.model
+package com.lorenzovainigli.foodexpirationdates.model.review
 
 import android.app.Activity
 

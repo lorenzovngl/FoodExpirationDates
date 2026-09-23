@@ -19,7 +19,7 @@ import com.lorenzovainigli.foodexpirationdates.feature.foodeditor.presentation.s
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.route.FoodListRoute
 import com.lorenzovainigli.foodexpirationdates.feature.info.presentation.route.InfoRoute
-import com.lorenzovainigli.foodexpirationdates.model.ReviewManager
+import com.lorenzovainigli.foodexpirationdates.model.review.ReviewManager
 import com.lorenzovainigli.news.presentation.route.NewsRoute
 import java.util.Locale
 
@@ -73,7 +73,7 @@ fun Navigation(
                     activity?.viewModel?.getExpirationDate(it.toInt())
                 },
                 onSave = { entry ->
-                    activity?.viewModel?.addExpirationDate(entry)
+                    activity?.foodListViewModel?.addFoodItem(entry)
                     navController.popBackStack()
                 },
                 onCancel = {

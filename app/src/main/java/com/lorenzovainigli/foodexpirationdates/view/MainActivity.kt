@@ -30,7 +30,7 @@ import com.lorenzovainigli.foodexpirationdates.analytics.LocalAnalyticsTracker
 import com.lorenzovainigli.foodexpirationdates.model.LocaleHelper
 import com.lorenzovainigli.foodexpirationdates.model.NotificationManager.Companion.scheduleDailyNotification
 import com.lorenzovainigli.foodexpirationdates.model.NotificationManager.Companion.setupNotificationChannel
-import com.lorenzovainigli.foodexpirationdates.model.ReviewManager
+import com.lorenzovainigli.foodexpirationdates.model.review.ReviewManager
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.checkAndSetSecureFlags
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
