@@ -1,7 +1,7 @@
 package com.lorenzovainigli.foodexpirationdates.di
 
-import com.lorenzovainigli.foodexpirationdates.model.ReviewManager
 import com.lorenzovainigli.foodexpirationdates.model.ReviewManagerImpl
+import com.lorenzovainigli.foodexpirationdates.model.review.ReviewManager
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

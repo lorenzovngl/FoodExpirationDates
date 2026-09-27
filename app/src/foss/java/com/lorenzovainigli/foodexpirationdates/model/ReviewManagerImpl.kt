@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import com.lorenzovainigli.foodexpirationdates.PLAY_STORE_URL
+import com.lorenzovainigli.foodexpirationdates.model.review.ReviewManager
 import javax.inject.Inject
 
 class ReviewManagerImpl @Inject constructor() : ReviewManager {
