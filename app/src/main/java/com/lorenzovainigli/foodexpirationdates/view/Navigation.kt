@@ -3,8 +3,10 @@ package com.lorenzovainigli.foodexpirationdates.view
 import android.content.Intent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -18,6 +20,7 @@ import com.lorenzovainigli.foodexpirationdates.feature.settings.presentation.rou
 import com.lorenzovainigli.foodexpirationdates.feature.foodeditor.presentation.screen.FoodEditorScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.route.FoodListRoute
+import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.viewmodel.FoodListViewModel
 import com.lorenzovainigli.foodexpirationdates.feature.info.presentation.route.InfoRoute
 import com.lorenzovainigli.foodexpirationdates.model.review.ReviewManager
 import com.lorenzovainigli.news.presentation.route.NewsRoute
@@ -35,6 +38,18 @@ fun Navigation(
         navController = navController
     )
 
+    val foodListViewModel: FoodListViewModel = hiltViewModel()
+    LaunchedEffect(foodListViewModel) {
+        foodListViewModel.requestReview.collect {
+            activity?.let {
+                reviewManager.requestReview(
+                    activity = it,
+                    isAutomatic = false,
+                )
+            }
+        }
+    }
+
     NavHost(
         modifier = Modifier.fillMaxSize(),
         navController = navController,
@@ -42,20 +57,13 @@ fun Navigation(
     ) {
         composable(route = Screen.MainScreen.route) {
             FoodListRoute(
+                viewModel = foodListViewModel,
                 onAddFoodItem = {
                     navController.navigate(Screen.InsertScreen.route)
                 },
                 onEditFoodItem = { id ->
                     navController.navigate(Screen.InsertScreen.route + "?itemId=$id")
-                },
-                onRequestReview = {
-                    activity?.let {
-                        reviewManager.requestReview(
-                            activity = it,
-                            isAutomatic = true,
-                        )
-                    }
-                },
+                }
             )
         }
         composable(

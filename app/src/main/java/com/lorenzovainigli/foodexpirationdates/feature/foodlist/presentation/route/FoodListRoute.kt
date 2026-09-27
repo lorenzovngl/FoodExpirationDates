@@ -12,18 +12,10 @@ import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDatesViewMode
 @Composable
 fun FoodListRoute(
     viewModel: FoodListViewModel = hiltViewModel(),
-    viewModelOld: ExpirationDatesViewModel = hiltViewModel(),
     onEditFoodItem: (Int) -> Unit,
-    onAddFoodItem: () -> Unit,
-    onRequestReview: () -> Unit,
+    onAddFoodItem: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    LaunchedEffect(viewModel) {
-        viewModelOld.requestReview.collect {
-            onRequestReview()
-        }
-    }
 
     FoodListScreen(
         items = uiState.items,
