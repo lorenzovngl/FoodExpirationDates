@@ -83,7 +83,7 @@ fun MyScaffold(
     if (showSnackbar.value){
         coroutineScope.launch {
             try {
-                val deletedItem = activity?.viewModel?.deletedItem?.value
+                val deletedItem = activity?.foodListViewModel?.deletedItem?.value
                 val snackbarResult =
                     snackbarHostState.showSnackbar(
                         message = context.resources.getString(
@@ -256,7 +256,8 @@ fun MyScaffoldPreview() {
                     isSearchActive = false,
                     onClickDelete = {},
                     onClickEdit = {},
-                    onFloatingActionButtonClick = {}
+                    onFloatingActionButtonClick = {},
+                    showSnackbar = null
                 )
             }
         }

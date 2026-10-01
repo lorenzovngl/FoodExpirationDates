@@ -2,6 +2,7 @@ package com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.ro
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -12,6 +13,7 @@ import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDatesViewMode
 @Composable
 fun FoodListRoute(
     viewModel: FoodListViewModel = hiltViewModel(),
+    showSnackbar: MutableState<Boolean>?,
     onEditFoodItem: (Int) -> Unit,
     onAddFoodItem: () -> Unit
 ) {
@@ -19,6 +21,7 @@ fun FoodListRoute(
 
     FoodListScreen(
         items = uiState.items,
+        showSnackbar = showSnackbar,
         onClickDelete = viewModel::deleteFoodItem,
         onClickEdit = { itemId ->
             onEditFoodItem(itemId)

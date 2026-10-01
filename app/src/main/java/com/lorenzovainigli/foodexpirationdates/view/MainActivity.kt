@@ -124,6 +124,7 @@ class MainActivity : ComponentActivity() {
                         ) {
                             Navigation(
                                 activity = this,
+                                showSnackbar = showSnackbar,
                                 navController = navController,
                                 reviewManager = reviewManager
                             )

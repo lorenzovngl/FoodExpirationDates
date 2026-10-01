@@ -65,9 +65,6 @@ class ExpirationDatesViewModel @Inject constructor(
     private val _isSplashScreenLoading: MutableState<Boolean> = mutableStateOf(value = true)
     val isSplashScreenLoading: State<Boolean> = _isSplashScreenLoading
 
-    private val _deletedItem: MutableState<ExpirationDate?> = mutableStateOf(value = null)
-    val deletedItem: State<ExpirationDate?> = _deletedItem
-
     private val _exportTaskSuccess = MutableStateFlow(true)
     val exportTaskSuccess = _exportTaskSuccess.asStateFlow()
 

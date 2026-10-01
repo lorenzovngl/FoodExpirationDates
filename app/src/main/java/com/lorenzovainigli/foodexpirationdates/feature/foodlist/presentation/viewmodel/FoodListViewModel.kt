@@ -89,8 +89,8 @@ class FoodListViewModel @Inject constructor(
 
     fun deleteFoodItem(itemId: Int) {
         viewModelScope.launch {
-            repository.deleteExpirationDate(itemId)
             _deletedItem.value = repository.getOne(itemId)
+            repository.deleteExpirationDate(itemId)
             analyticsTracker.logEvent(AnalyticsEvent.FOOD_DELETED)
         }
     }

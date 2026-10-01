@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -25,10 +26,12 @@ import com.lorenzovainigli.foodexpirationdates.feature.info.presentation.route.I
 import com.lorenzovainigli.foodexpirationdates.model.review.ReviewManager
 import com.lorenzovainigli.news.presentation.route.NewsRoute
 import java.util.Locale
+import kotlin.Boolean
 
 @Composable
 fun Navigation(
     activity: MainActivity? = null,
+    showSnackbar: MutableState<Boolean>?,
     navController: NavHostController,
     startDestination: String = Screen.MainScreen.route,
     reviewManager: ReviewManager
@@ -58,6 +61,7 @@ fun Navigation(
         composable(route = Screen.MainScreen.route) {
             FoodListRoute(
                 viewModel = foodListViewModel,
+                showSnackbar = showSnackbar,
                 onAddFoodItem = {
                     navController.navigate(Screen.InsertScreen.route)
                 },
