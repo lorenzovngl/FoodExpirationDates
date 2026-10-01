@@ -30,7 +30,7 @@ import kotlin.Boolean
 
 @Composable
 fun Navigation(
-    activity: MainActivity? = null,
+    activity: MainActivity,
     showSnackbar: MutableState<Boolean>?,
     isSearchActive: Boolean = false,
     navController: NavHostController,
@@ -125,7 +125,7 @@ fun Navigation(
             )
         }
         composable(route = Screen.SettingsScreen.route){
-            SettingsRoute()
+            SettingsRoute(activity.preferencesViewModel)
         }
         composable(route = Screen.NewsScreen.route){
             NewsRoute()

@@ -18,26 +18,18 @@ fun SettingsRoute(
 
     SettingsScreen(
         state = state,
-        onDateFormatChange = {
-            viewModel.setDateFormat(context, it)
-        },
+        onDateFormatChange = viewModel::setDateFormat,
         onNotificationTimeChange = { hour, minute ->
-            viewModel.setNotificationTime(context, hour, minute)
+            viewModel.setNotificationTime(hour, minute)
             NotificationManager.scheduleDailyNotification(
                 context, hour, minute
             )
         },
-        onThemeModeChange = {
-            viewModel.setThemeMode(context, it)
-        },
-        onDynamicColorsChange = {
-            viewModel.setDynamicColors(context, it)
-        },
-        onTopBarFontChange = {
-            viewModel.setTopBarFont(context, it)
-        },
-        onMonochromeIconsChange = {
-            viewModel.setMonochromeIcons(context, it)
-        }
+        onThemeModeChange = viewModel::setThemeMode,
+        onDynamicColorsChange = viewModel::setDynamicColors,
+        onTopBarFontChange = viewModel::setTopBarFont,
+        onMonochromeIconsChange = viewModel::setMonochromeIcons,
+        onScreenProtectionChange = viewModel::setScreenProtectionEnabled,
+        onLanguageChange = viewModel::setLanguage
     )
 }

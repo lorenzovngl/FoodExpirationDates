@@ -56,6 +56,7 @@ class ExpirationDatesViewModel @Inject constructor(
     private val repository: ExpirationDateRepository,
     private val newsWorkScheduler: NewsWorkScheduler,
     private val analyticsTracker: AnalyticsTracker,
+    private val preferencesRepository: PreferencesRepository,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
 
@@ -114,7 +115,7 @@ class ExpirationDatesViewModel @Inject constructor(
             expirationDates = repository.getAll()
             analyticsTracker.logEvent(AnalyticsEvent.FOOD_ADDED)
 
-            val count = PreferencesRepository.incrementFoodAddedCount(context)
+            val count = preferencesRepository.incrementFoodAddedCount()
 
             if (count % 50 == 0) {
                 _requestReview.emit(Unit)

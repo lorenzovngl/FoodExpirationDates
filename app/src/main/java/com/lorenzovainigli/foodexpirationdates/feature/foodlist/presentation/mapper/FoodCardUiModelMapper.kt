@@ -21,7 +21,7 @@ class FoodCardUiModelMapper @Inject constructor(
     private val clock: Clock = Clock.systemDefaultZone(),
 ) {
 
-    fun map(item: ExpirationDate): FoodCardUiModel {
+    fun map(item: ExpirationDate, dateFormat: String): FoodCardUiModel {
         val zoneId = clock.zone
         val today = LocalDate.now(clock)
 
@@ -39,6 +39,7 @@ class FoodCardUiModelMapper @Inject constructor(
             expirationText = formatExpirationText(
                 expirationTimestamp = expirationTimestamp,
                 daysUntilExpiration = daysUntilExpiration,
+                dateFormat = dateFormat,
             ),
             daysUntilExpiration = daysUntilExpiration,
             isOpened = item.openingDate != null,
@@ -54,6 +55,7 @@ class FoodCardUiModelMapper @Inject constructor(
     private fun formatExpirationText(
         expirationTimestamp: Long,
         daysUntilExpiration: Int,
+        dateFormat: String,
     ): String =
         when {
             daysUntilExpiration < -1 ->
@@ -77,11 +79,10 @@ class FoodCardUiModelMapper @Inject constructor(
                     daysUntilExpiration,
                 )
 
-            else -> formatDate(expirationTimestamp)
+            else -> formatDate(expirationTimestamp, dateFormat)
         }
 
-    private fun formatDate(timestamp: Long): String {
-        val dateFormat = PreferencesRepository.getUserDateFormat(context)
+    private fun formatDate(timestamp: Long, dateFormat: String): String {
         val locale = context.resources.configuration.locales[0]
 
         return SimpleDateFormat(dateFormat, locale).format(timestamp)

@@ -27,6 +27,7 @@ class CheckExpirationsWorker @Inject constructor(
     appContext: Context,
     params: WorkerParameters,
     private val repository: ExpirationDateRepository,
+    private val preferencesRepository: PreferencesRepository,
     private val clock: Clock
 ) : CoroutineWorker(appContext, params) {
 
@@ -77,7 +78,11 @@ class CheckExpirationsWorker @Inject constructor(
     }
 
     private fun scheduleNextRun(context: Context) {
-        scheduleDailyNotification(context = context)
+        scheduleDailyNotification(
+            context = context,
+            hour = preferencesRepository.getUserNotificationTimeHour(),
+            minute = preferencesRepository.getUserNotificationTimeMinute()
+        )
     }
 
     private fun buildExpirationMessage(
@@ -112,7 +117,7 @@ class CheckExpirationsWorker @Inject constructor(
         return if (BuildConfig.DEBUG) {
             LocaleHelper.setLocale(
                 context = applicationContext,
-                language = PreferencesRepository.getLanguage(applicationContext)
+                language = preferencesRepository.getLanguage()
             )
         } else {
             applicationContext

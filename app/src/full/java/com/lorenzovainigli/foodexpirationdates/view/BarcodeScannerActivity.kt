@@ -10,8 +10,9 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
@@ -34,20 +35,17 @@ class BarcodeScannerActivity: ComponentActivity() {
             permission = Manifest.permission.CAMERA
         )
 //        try {
-            val context = this
             setContent {
                 val prefsViewModel: PreferencesViewModel = viewModel()
-                val darkThemeState = prefsViewModel.getThemeMode(context).collectAsState().value
-                val dynamicColorsState =
-                    prefsViewModel.getDynamicColors(context).collectAsState().value
-                val isInDarkTheme = when (darkThemeState) {
-                    PreferencesRepository.Companion.ThemeMode.LIGHT.ordinal -> false
-                    PreferencesRepository.Companion.ThemeMode.DARK.ordinal -> true
+                val prefsUiState by prefsViewModel.uiState.collectAsStateWithLifecycle()
+                val isInDarkTheme = when (prefsUiState.themeMode) {
+                    PreferencesRepository.ThemeMode.LIGHT -> false
+                    PreferencesRepository.ThemeMode.DARK -> true
                     else -> isSystemInDarkTheme()
                 }
                 FoodExpirationDatesTheme(
                     darkTheme = isInDarkTheme,
-                    dynamicColor = dynamicColorsState
+                    dynamicColor = prefsUiState.dynamicColorsEnabled
                 ) {
                     Surface(
                         modifier = Modifier

@@ -4,134 +4,81 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lorenzovainigli.foodexpirationdates.feature.settings.presentation.model.SettingsUiState
+import com.lorenzovainigli.foodexpirationdates.model.Language
+import com.lorenzovainigli.foodexpirationdates.model.LocaleHelper
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class PreferencesViewModel @Inject constructor(
-    @ApplicationContext private val context: Context
+    @ApplicationContext val context: Context,
+    private val preferencesRepository: PreferencesRepository
 ): ViewModel() {
 
-    private val _uiState = MutableStateFlow(SettingsUiState())
-    val uiState: StateFlow<SettingsUiState> = _uiState.asStateFlow()
-
-    private var _themeMode = MutableStateFlow(0)
-    private var themeMode = _themeMode.asStateFlow()
-    private var _dynamicColors = MutableStateFlow(false)
-    private var dynamicColors = _dynamicColors.asStateFlow()
-    private var _topBarFont = MutableStateFlow(0)
-    private var topbarFont = _topBarFont.asStateFlow()
-
-    init {
-        viewModelScope.launch {
-            val dateFormat = PreferencesRepository.getUserDateFormat(context)
-            val notificationHour = PreferencesRepository.getUserNotificationTimeHour(context)
-            val notificationMinute = PreferencesRepository.getUserNotificationTimeMinute(context)
-
-            _uiState.update {
-                it.copy(
-                    dateFormat = dateFormat,
-                    notificationHour = notificationHour,
-                    notificationMinute = notificationMinute
-                )
-            }
-        }
-    }
-
-    fun setDateFormat(context: Context, format: String) {
-        viewModelScope.launch {
-            PreferencesRepository.setUserDateFormat(
-                context = context,
-                dateFormat = format
+    val uiState: StateFlow<SettingsUiState> =
+        preferencesRepository.settingsFlow
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5_000),
+                initialValue = SettingsUiState()
             )
-            _uiState.update {
-                it.copy(
-                    dateFormat = format
-                )
-            }
-        }
+
+    fun setDateFormat(format: String) {
+        preferencesRepository.setUserDateFormat(
+            dateFormat = format
+        )
     }
 
-    fun setNotificationTime(context: Context, hour: Int, minute: Int) {
-        viewModelScope.launch {
-            PreferencesRepository.setUserNotificationTime(
-                context = context,
-                hour = hour,
-                minute = minute
-            )
-            _uiState.value = _uiState.value.copy(
-                notificationHour = hour,
-                notificationMinute = minute
-            )
-        }
+    fun setNotificationTime(hour: Int, minute: Int) {
+        preferencesRepository.setUserNotificationTime(
+            hour = hour,
+            minute = minute
+        )
     }
 
-    fun getThemeMode(context: Context): StateFlow<Int> {
-        viewModelScope.launch {
-            _themeMode.value = PreferencesRepository.getThemeMode(context)
-        }
-        return themeMode
-    }
-    fun setThemeMode(context: Context, theme: PreferencesRepository.Companion.ThemeMode) {
-        viewModelScope.launch {
-            PreferencesRepository.setThemeMode(
-                context = context,
-                themeMode = theme
-            )
-        }
-        _themeMode.value = theme.ordinal
+    fun setThemeMode(theme: PreferencesRepository.ThemeMode) {
+        preferencesRepository.setThemeMode(
+            themeMode = theme
+        )
     }
 
-    fun getTopBarFont(context: Context):StateFlow<Int> {
-        viewModelScope.launch {
-            _topBarFont.value  = PreferencesRepository.getTopBarFont(context)
-        }
-        return topbarFont
+    fun setTopBarFont(topBarFont: PreferencesRepository.TopBarFont) {
+        preferencesRepository.setTopBarFont(
+            topBarFont = topBarFont
+        )
     }
 
-    fun setTopBarFont(context: Context, topBarFont: PreferencesRepository.Companion.TopBarFont) {
-        viewModelScope.launch {
-            PreferencesRepository.setTopBarFont(
-                context = context,
-                topBarFont = topBarFont
-            )
-        }
-        _topBarFont.value = topBarFont.ordinal
+    fun setDynamicColors(enabled: Boolean) {
+        preferencesRepository.setDynamicColors(
+            enabled = enabled
+        )
     }
 
-    fun getDynamicColors(context: Context): StateFlow<Boolean> {
-        viewModelScope.launch {
-            _dynamicColors.value = PreferencesRepository.getDynamicColors(context)
-        }
-        return dynamicColors
+    fun setMonochromeIcons(enabled: Boolean) {
+        preferencesRepository.setMonochromeIcons(
+            enabled = enabled
+        )
     }
 
-    fun setDynamicColors(context: Context, colors: Boolean) {
-        viewModelScope.launch {
-            PreferencesRepository.setDynamicColors(
-                context = context,
-                dynamicColorsEnabled = colors
-            )
-        }
-        _dynamicColors.value = colors
+    fun setScreenProtectionEnabled(enabled: Boolean) {
+        preferencesRepository.setScreenProtectionEnabled(
+            enabled = enabled
+        )
     }
 
-    fun setMonochromeIcons(context: Context, icons: Boolean) {
-        viewModelScope.launch {
-            PreferencesRepository.setMonochromeIcons(
-                context = context,
-                monochromeIconsEnabled = icons
-            )
-            _uiState.value = _uiState.value.copy(
-                monochromeIconsEnabled = icons
-            )
-        }
+    fun setLanguage(language: Language) {
+        preferencesRepository.setLanguage(
+            language = language.code
+        )
+        LocaleHelper.changeLanguage(context, language.code)
     }
 }

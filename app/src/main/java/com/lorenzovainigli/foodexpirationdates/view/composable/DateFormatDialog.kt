@@ -12,11 +12,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Surface
@@ -34,6 +31,8 @@ import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
@@ -44,11 +43,11 @@ fun DateFormatDialog(
     isDialogOpen: Boolean = true,
     onDismissRequest: () -> Unit = {},
     onClickDate: (Context, String) -> Unit = { _, _ -> },
-    currentFormat: String? = null
+    currentFormat: String,
+    availableLocaleFormats: ImmutableList<String>,
+    availableOtherFormats: ImmutableList<String>
 ) {
     if (isDialogOpen) {
-        val context = LocalContext.current
-        val selectedFormat = currentFormat ?: PreferencesRepository.getUserDateFormat(context)
         Dialog(onDismissRequest = onDismissRequest) {
             Card(
                 modifier = Modifier.testTag(DateFormatDialog),
@@ -77,10 +76,10 @@ fun DateFormatDialog(
                         style = MaterialTheme.typography.titleSmall,
                         color = MaterialTheme.colorScheme.primary
                     )
-                    PreferencesRepository.getAvailLocaleDateFormats().forEach { item ->
+                    availableLocaleFormats.forEach { item ->
                         DateFormatRow(
                             item = item,
-                            isSelected = item == selectedFormat,
+                            isSelected = item == currentFormat,
                             onDismissRequest = onDismissRequest,
                             onClick = onClickDate
                         )
@@ -91,10 +90,10 @@ fun DateFormatDialog(
                         style = MaterialTheme.typography.titleSmall,
                         color = MaterialTheme.colorScheme.primary
                     )
-                    PreferencesRepository.getAvailOtherDateFormats().forEach { item ->
+                    availableOtherFormats.forEach { item ->
                         DateFormatRow(
                             item = item,
-                            isSelected = item == selectedFormat,
+                            isSelected = item == currentFormat,
                             onDismissRequest = onDismissRequest,
                             onClick = onClickDate
                         )
@@ -161,7 +160,11 @@ fun DateFormatDialogPreview() {
         Surface(
             color = MaterialTheme.colorScheme.surface
         ) {
-            DateFormatDialog(currentFormat = "dd/MM/yyyy")
+            DateFormatDialog(
+                currentFormat = "dd/MM/yyyy",
+                availableLocaleFormats = emptyList<String>().toImmutableList(),
+                availableOtherFormats = emptyList<String>().toImmutableList()
+            )
         }
     }
 }

@@ -44,11 +44,8 @@ import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.feature.settings.presentation.model.SettingsUiState
 import com.lorenzovainigli.foodexpirationdates.model.Language
-import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
-import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.ThemeMode
-import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.TopBarFont
-import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.getScreenProtectionEnabled
-import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.setScreenProtectionEnabled
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.ThemeMode
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.TopBarFont
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.util.areNotificationsEnabled
 import com.lorenzovainigli.foodexpirationdates.util.openNotificationSettings
@@ -71,9 +68,10 @@ fun SettingsScreen(
     onThemeModeChange: (ThemeMode) -> Unit,
     onDynamicColorsChange: (Boolean) -> Unit,
     onTopBarFontChange: (TopBarFont) -> Unit,
-    onMonochromeIconsChange: (Boolean) -> Unit
+    onMonochromeIconsChange: (Boolean) -> Unit,
+    onScreenProtectionChange: (Boolean) -> Unit,
+    onLanguageChange: (Language) -> Unit
 ) {
-    val context = LocalContext.current
     val configuration = LocalConfiguration.current
 
     var sdf = SimpleDateFormat(
@@ -98,8 +96,6 @@ fun SettingsScreen(
         mutableStateOf(false)
     }
 
-    var isScreenProtectionEnabled by remember { mutableStateOf(getScreenProtectionEnabled(context)) }
-
     DateFormatDialog(
         isDialogOpen = isDateFormatDialogOpened,
         onDismissRequest = {
@@ -111,7 +107,10 @@ fun SettingsScreen(
         },
         onClickDate = { _, string ->
             onDateFormatChange(string)
-        }
+        },
+        currentFormat = state.dateFormat,
+        availableLocaleFormats = state.availLocaleDateFormats,
+        availableOtherFormats = state.availOtherDateFormats
     )
 
     if (isNotificationTimeBottomSheetOpen) {
@@ -128,6 +127,8 @@ fun SettingsScreen(
     }
     LanguagePickerDialog(
         isDialogOpen = isLanguagePickerDialogOpened,
+        storedLanguage = state.language,
+        onLanguageChange = onLanguageChange,
         onDismiss = {
             isLanguagePickerDialogOpened = false
         }
@@ -227,12 +228,9 @@ fun SettingsScreen(
             ) {
                 Switch(
                     modifier = Modifier.padding(start = 4.dp),
-                    checked = isScreenProtectionEnabled,
+                    checked = state.screenProtectionEnabled,
                     onCheckedChange = { enabled ->
-                        isScreenProtectionEnabled = enabled
-
-                        setScreenProtectionEnabled(context, enabled)
-
+                        onScreenProtectionChange(enabled)
                         if (enabled) {
                             (context as Activity).window.setFlags(
                                 WindowManager.LayoutParams.FLAG_SECURE,
@@ -372,7 +370,7 @@ fun SettingsScreen(
                         modifier = Modifier.clickable {
                             isLanguagePickerDialogOpened = true
                         },
-                        text = Language.fromCode(PreferencesRepository.getLanguage(context)).label,
+                        text = state.language.label,
                         style = MaterialTheme.typography.headlineSmall.copy(
                             color = MaterialTheme.colorScheme.onSurface
                         )
@@ -402,7 +400,9 @@ fun SettingsScreenContentPreview() {
                 onThemeModeChange = {},
                 onDynamicColorsChange = {},
                 onTopBarFontChange = {},
-                onMonochromeIconsChange = {}
+                onMonochromeIconsChange = {},
+                onScreenProtectionChange = {},
+                onLanguageChange = {}
             )
         }
     }

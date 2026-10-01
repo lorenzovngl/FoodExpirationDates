@@ -37,12 +37,12 @@ import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 @Composable
 fun LanguagePickerDialog(
     isDialogOpen: Boolean = true,
+    storedLanguage: Language,
+    onLanguageChange: (Language) -> Unit = {},
     onDismiss: () -> Unit = {}
 ) {
     if (isDialogOpen) {
-        val context = LocalContext.current
-        val storedLanguage = PreferencesRepository.getLanguage(context)
-        var selectedLanguage = remember {
+        val selectedLanguage = remember {
             mutableStateOf(storedLanguage)
         }
         Dialog(
@@ -72,20 +72,20 @@ fun LanguagePickerDialog(
                             Row(
                                 modifier = Modifier.fillMaxWidth(1f).clickable(
                                         onClick = {
-                                            selectedLanguage.value = language.code
+                                            selectedLanguage.value = language
                                         }),
                                 horizontalArrangement = Arrangement.Start,
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 RadioButton(
-                                    selected = selectedLanguage.value == language.code,
+                                    selected = selectedLanguage.value == language,
                                     onClick = {
-                                        selectedLanguage.value = language.code
+                                        selectedLanguage.value = language
                                     }
                                 )
                                 Text(
                                     text = language.label,
-                                    color = if (selectedLanguage.value == language.code)
+                                    color = if (selectedLanguage.value == language)
                                         MaterialTheme.colorScheme.primary
                                     else Color.Unspecified
                                 )
@@ -95,11 +95,12 @@ fun LanguagePickerDialog(
                     Button(
                         modifier = Modifier.align(Alignment.End),
                         onClick = {
-                            LocaleHelper.changeLanguage(context, selectedLanguage.value)
-                            PreferencesRepository.setLanguage(
-                                context,
-                                language = selectedLanguage.value
-                            )
+                            onLanguageChange(selectedLanguage.value)
+//                            LocaleHelper.changeLanguage(context, selectedLanguage.value.code)
+//                            PreferencesRepository.setLanguage(
+//                                context,
+//                                language = selectedLanguage.value
+//                            )
                         }
                     ) {
                         Text(stringResource(R.string.apply))
@@ -115,7 +116,9 @@ fun LanguagePickerDialog(
 fun LanguagePickerDialogPreview() {
     FoodExpirationDatesTheme {
         Surface {
-            LanguagePickerDialog()
+            LanguagePickerDialog(
+                storedLanguage = Language.SYSTEM
+            )
         }
     }
 }

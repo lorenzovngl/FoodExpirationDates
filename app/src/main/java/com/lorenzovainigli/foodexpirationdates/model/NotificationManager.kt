@@ -78,8 +78,8 @@ class NotificationManager {
 
         fun scheduleDailyNotification(
             context: Context,
-            hour: Int = PreferencesRepository.getUserNotificationTimeHour(context),
-            minute: Int = PreferencesRepository.getUserNotificationTimeMinute(context),
+            hour: Int,
+            minute: Int,
             policy: ExistingWorkPolicy = ExistingWorkPolicy.REPLACE
         ) {
             val currentTime = Calendar.getInstance()

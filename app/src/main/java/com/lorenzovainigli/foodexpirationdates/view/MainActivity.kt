@@ -14,7 +14,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -22,6 +21,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import androidx.work.ExistingWorkPolicy
@@ -32,10 +32,10 @@ import com.lorenzovainigli.foodexpirationdates.model.NotificationManager.Compani
 import com.lorenzovainigli.foodexpirationdates.model.NotificationManager.Companion.setupNotificationChannel
 import com.lorenzovainigli.foodexpirationdates.model.review.ReviewManager
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
-import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository.Companion.checkAndSetSecureFlags
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.analytics.AnalyticsTracker
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.viewmodel.FoodListViewModel
+import com.lorenzovainigli.foodexpirationdates.model.Language
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyScaffold
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDatesViewModel
 import com.lorenzovainigli.foodexpirationdates.viewmodel.PreferencesViewModel
@@ -55,36 +55,40 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var reviewManager: ReviewManager
 
+    @Inject
+    lateinit var preferencesRepository: PreferencesRepository
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        checkAndSetSecureFlags(context = this, window)
+        preferencesRepository.checkAndSetSecureFlags(window)
 
         setupNotificationChannel(this)
         scheduleDailyNotification(
             context = this,
+            hour = preferencesRepository.getUserNotificationTimeHour(),
+            minute = preferencesRepository.getUserNotificationTimeMinute(),
             policy = ExistingWorkPolicy.KEEP
         )
     }
 
     override fun onResume() {
         super.onResume()
-        val context = this
 
         setContent {
 
             val prefsViewModel: PreferencesViewModel = viewModel()
-            val darkThemeState = prefsViewModel.getThemeMode(context).collectAsState().value
-            val dynamicColorsState = prefsViewModel.getDynamicColors(context).collectAsState().value
-            val isInDarkTheme = when (darkThemeState) {
-                PreferencesRepository.Companion.ThemeMode.LIGHT.ordinal -> false
-                PreferencesRepository.Companion.ThemeMode.DARK.ordinal -> true
+            val prefsUiState by prefsViewModel.uiState.collectAsStateWithLifecycle()
+            val isInDarkTheme = when (prefsUiState.themeMode) {
+                PreferencesRepository.ThemeMode.LIGHT -> false
+                PreferencesRepository.ThemeMode.DARK -> true
                 else -> isSystemInDarkTheme()
             }
             FoodExpirationDatesTheme(
                 darkTheme = isInDarkTheme,
-                dynamicColor = dynamicColorsState
+                dynamicColor = prefsUiState.dynamicColorsEnabled
             ) {
                 val navBarColor = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp)
                 val navBarColorArgb = navBarColor.toArgb()
@@ -139,8 +143,19 @@ class MainActivity : ComponentActivity() {
 
     override fun attachBaseContext(newBase: Context) {
         if (BuildConfig.DEBUG) {
-            val locale = PreferencesRepository.getLanguage(newBase)
-            super.attachBaseContext(LocaleHelper.setLocale(newBase, locale))
+            val preferences = newBase.getSharedPreferences(
+                PreferencesRepository.SHARED_PREFS_NAME,
+                Context.MODE_PRIVATE
+            )
+
+            val locale = preferences.getString(
+                PreferencesRepository.KEY_LANGUAGE,
+                Language.SYSTEM.code
+            ) ?: Language.SYSTEM.code
+
+            super.attachBaseContext(
+                LocaleHelper.setLocale(newBase, locale)
+            )
         } else {
             super.attachBaseContext(newBase)
         }

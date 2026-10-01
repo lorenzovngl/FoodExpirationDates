@@ -39,7 +39,7 @@ import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
 @Composable
 fun MyTopAppBar(
     title: String,
-    topBarFont: Int? = PreferencesRepository.Companion.TopBarFont.NORMAL.ordinal,
+    topBarFont: Int? = PreferencesRepository.TopBarFont.NORMAL.ordinal,
     actions: @Composable RowScope.() -> Unit,
     navigationIcon: @Composable () -> Unit,
     scrollBehavior: TopAppBarScrollBehavior,
@@ -78,9 +78,9 @@ fun MyTopAppBar(
                     text = title,
                     color = MaterialTheme.colorScheme.primary,
                     fontWeight = when (topBarFont) {
-                        PreferencesRepository.Companion.TopBarFont.NORMAL.ordinal -> FontWeight.Normal
-                        PreferencesRepository.Companion.TopBarFont.BOLD.ordinal -> FontWeight.Medium
-                        PreferencesRepository.Companion.TopBarFont.EXTRA_BOLD.ordinal -> FontWeight.Bold
+                        PreferencesRepository.TopBarFont.NORMAL.ordinal -> FontWeight.Normal
+                        PreferencesRepository.TopBarFont.BOLD.ordinal -> FontWeight.Medium
+                        PreferencesRepository.TopBarFont.EXTRA_BOLD.ordinal -> FontWeight.Bold
                         else -> null
                     }
                 )

@@ -22,6 +22,8 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -30,6 +32,7 @@ import javax.inject.Inject
 @HiltViewModel
 class FoodListViewModel @Inject constructor(
     private val repository: ExpirationDateRepository,
+    private val preferencesRepository: PreferencesRepository,
     private val foodCardUiModelMapper: FoodCardUiModelMapper,
     private val analyticsTracker: AnalyticsTracker,
     private val reviewRequestStrategy: ReviewRequestStrategy
@@ -53,20 +56,29 @@ class FoodListViewModel @Inject constructor(
 
     private fun observeFoodItems() {
         viewModelScope.launch {
-            repository.getAll()
-                .map { expirationDates ->
-                    expirationDates
-                        .sortedBy(::computeExpirationDate)
-                        .map(foodCardUiModelMapper::map)
-                        .toImmutableList()
-                }.collect { items ->
-                    _uiState.update {
-                        it.copy(
-                            items = items,
-                            isLoading = false,
+            combine(
+                repository.getAll(),
+                preferencesRepository.settingsFlow
+                    .map { it.dateFormat }
+                    .distinctUntilChanged(),
+            ) { expirationDates, dateFormat ->
+                expirationDates
+                    .sortedBy(::computeExpirationDate)
+                    .map { item ->
+                        foodCardUiModelMapper.map(
+                            item = item,
+                            dateFormat = dateFormat,
                         )
                     }
+                    .toImmutableList()
+            }.collect { items ->
+                _uiState.update {
+                    it.copy(
+                        items = items,
+                        isLoading = false,
+                    )
                 }
+            }
         }
     }
 

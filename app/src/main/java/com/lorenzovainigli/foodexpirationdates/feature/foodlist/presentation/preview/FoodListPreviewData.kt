@@ -5,6 +5,7 @@ import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.mapper.FoodCardUiModelMapper
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.model.FoodCardUiModel
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import java.util.Calendar
@@ -26,7 +27,8 @@ fun getItemsForPreview(context: Context): ImmutableList<FoodCardUiModel> {
                     foodName = foods[i],
                     expirationDate = cal.time.time,
                     quantity = quantities[i],
-                )
+                ),
+                dateFormat = "d MMM"
             )
         )
     }

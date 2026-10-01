@@ -1,6 +1,7 @@
 package com.lorenzovainigli.foodexpirationdates.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.lorenzovainigli.foodexpirationdates.model.AppDatabase
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
@@ -32,11 +33,5 @@ class AppModule {
     @Singleton
     fun provideExpirationDateRepository(database: AppDatabase): ExpirationDateRepository {
         return ExpirationDatesRepositoryImpl(database.expirationDatesDao)
-    }
-
-    @Provides
-    @Singleton
-    fun providePreferencesRepository(): PreferencesRepository {
-        return PreferencesRepository()
     }
 }

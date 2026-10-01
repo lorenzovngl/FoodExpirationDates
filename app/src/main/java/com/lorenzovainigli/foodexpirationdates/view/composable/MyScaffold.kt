@@ -48,7 +48,6 @@ import com.lorenzovainigli.foodexpirationdates.view.MainActivity
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.screen.FoodListScreen
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.preview.getItemsForPreview
-import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.util.areNotificationsEnabled
 import com.lorenzovainigli.foodexpirationdates.viewmodel.MyBottomAppBarViewModel
 import kotlinx.coroutines.launch
@@ -116,7 +115,7 @@ fun MyScaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
             val destination = navDestination ?: currentBackStackEntry?.destination?.route
-            val topBarFont = activity?.preferencesViewModel?.getTopBarFont(context)?.collectAsStateWithLifecycle()
+            val prefsUiState = activity?.preferencesViewModel?.uiState?.collectAsStateWithLifecycle()
             MyTopAppBar(
                 title = when (destination) {
                     Screen.AboutScreen.route -> stringResource(id = R.string.about_this_app)
@@ -134,7 +133,7 @@ fun MyScaffold(
                         }
                     }
                 },
-                topBarFont = topBarFont?.value,
+                topBarFont = prefsUiState?.value?.topBarFont?.ordinal,
                 actions = {
                     if (destination?.contains(Screen.MainScreen.route) == true) {
                         val context = LocalContext.current
@@ -199,7 +198,7 @@ fun MyScaffold(
                     }
                 },
                 scrollBehavior = scrollBehavior,
-                monochromeIcons = PreferencesRepository.getMonochromeIcons(context)
+                monochromeIcons = prefsUiState?.value?.monochromeIconsEnabled == true
             )
         },
         bottomBar = {
