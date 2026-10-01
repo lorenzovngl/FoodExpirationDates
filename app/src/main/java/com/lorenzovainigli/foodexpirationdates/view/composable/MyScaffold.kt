@@ -254,6 +254,7 @@ fun MyScaffoldPreview() {
                 FoodListScreen(
                     items = getItemsForPreview(LocalContext.current),
                     isSearchActive = false,
+                    onSearchBarClose = {},
                     onClickDelete = {},
                     onClickEdit = {},
                     onFloatingActionButtonClick = {},

@@ -32,9 +32,11 @@ import kotlin.Boolean
 fun Navigation(
     activity: MainActivity? = null,
     showSnackbar: MutableState<Boolean>?,
+    isSearchActive: Boolean = false,
     navController: NavHostController,
     startDestination: String = Screen.MainScreen.route,
-    reviewManager: ReviewManager
+    reviewManager: ReviewManager,
+    onSearchBarClose: () -> Unit
 ) {
 
     ScreenViewTracker(
@@ -62,12 +64,14 @@ fun Navigation(
             FoodListRoute(
                 viewModel = foodListViewModel,
                 showSnackbar = showSnackbar,
+                isSearchActive = isSearchActive,
                 onAddFoodItem = {
                     navController.navigate(Screen.InsertScreen.route)
                 },
                 onEditFoodItem = { id ->
                     navController.navigate(Screen.InsertScreen.route + "?itemId=$id")
-                }
+                },
+                onSearchBarClose = onSearchBarClose
             )
         }
         composable(

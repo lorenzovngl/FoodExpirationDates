@@ -126,6 +126,8 @@ class MainActivity : ComponentActivity() {
                                 activity = this,
                                 showSnackbar = showSnackbar,
                                 navController = navController,
+                                isSearchActive = isSearchActive,
+                                onSearchBarClose = { isSearchActive = false },
                                 reviewManager = reviewManager
                             )
                         }

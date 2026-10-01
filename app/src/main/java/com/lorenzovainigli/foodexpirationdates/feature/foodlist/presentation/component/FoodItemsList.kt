@@ -32,7 +32,7 @@ fun FoodItemsList(
     items: ImmutableList<FoodCardUiModel>,
     showSnackbar: MutableState<Boolean>?,
     isSearchActive: Boolean,
-    onSearchBarClose: () -> Unit = {},
+    onSearchBarClose: () -> Unit,
     onClickDelete: (Int) -> Unit,
     onClickEdit: (Int) -> Unit
 ) {
@@ -84,6 +84,7 @@ fun FoodItemsListPreview() {
                 items = getItemsForPreview(LocalContext.current),
                 showSnackbar = null,
                 isSearchActive = true,
+                onSearchBarClose = {},
                 onClickDelete = {},
                 onClickEdit = {}
             )

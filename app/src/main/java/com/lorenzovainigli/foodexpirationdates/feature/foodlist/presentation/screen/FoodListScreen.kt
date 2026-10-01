@@ -34,8 +34,8 @@ import kotlinx.collections.immutable.ImmutableList
 fun FoodListScreen(
     items: ImmutableList<FoodCardUiModel>,
     showSnackbar: MutableState<Boolean>? ,
-    isSearchActive: Boolean = false,
-    onSearchBarClose: () -> Unit = {},
+    isSearchActive: Boolean,
+    onSearchBarClose: () -> Unit,
     onClickDelete: (Int) -> Unit,
     onClickEdit: (Int) -> Unit,
     onFloatingActionButtonClick: () -> Unit
@@ -91,6 +91,7 @@ fun FoodListScreenPreview() {
             FoodListScreen(
                 items = getItemsForPreview(LocalContext.current),
                 isSearchActive = true,
+                onSearchBarClose = {},
                 onClickDelete = {},
                 onClickEdit = {},
                 onFloatingActionButtonClick = {},
