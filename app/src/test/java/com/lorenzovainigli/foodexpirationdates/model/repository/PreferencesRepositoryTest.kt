@@ -6,144 +6,143 @@ import io.mockk.Runs
 import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
+import io.mockk.verify
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
+import org.junit.Before
 import org.junit.Test
 
 class PreferencesRepositoryTest {
 
-    @Test
-    fun `getDynamicColors() - SharedPreferences throws exception`() {
-        val context = mockk<Context>()
-        val sharedPrefs: SharedPreferences = mockk()
-        every { sharedPrefs.getBoolean(any(), any()) } throws RuntimeException("SharedPrefs Error")
-        every { context.getSharedPreferences(any<String>(), any<Int>()) } returns sharedPrefs
-        val result = PreferencesRepository.getDynamicColors(context, "")
-        assertFalse(result)
-    }
+    private lateinit var context: Context
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
 
-    @Test
-    fun `getDynamicColors() - SharedPreferences returns the expected value`() {
-        val context = mockk<Context>()
-        val sharedPrefs: SharedPreferences = mockk()
-        every { sharedPrefs.getBoolean(any(), any()) } returns true
-        every { context.getSharedPreferences(any<String>(), any<Int>()) } returns sharedPrefs
-        val result = PreferencesRepository.getDynamicColors(context, "")
-        assertTrue(result)
-    }
+    private lateinit var repository: PreferencesRepository
 
-    @Test
-    fun `getDynamicColors() - Invalid sharedPrefs name`() {
-        val context = mockk<Context>()
-        val invalidSharedPrefsName = "invalid_name"
+    @Before
+    fun setUp() {
+        context = mockk()
+        sharedPreferences = mockk()
+        editor = mockk()
+
         every {
-            context.getSharedPreferences(invalidSharedPrefsName, any<Int>())
-        } throws RuntimeException("SharedPrefs Error")
-        val result = PreferencesRepository.getDynamicColors(context, invalidSharedPrefsName)
-        assertFalse(result)
-    }
+            context.getSharedPreferences(
+                PreferencesRepository.SHARED_PREFS_NAME,
+                Context.MODE_PRIVATE,
+            )
+        } returns sharedPreferences
 
-    @Test
-    fun `setDynamicColors() - SharedPreferences throws exception`() {
-        val context = mockk<Context>()
-        val sharedPrefsEditor: SharedPreferences.Editor = mockk(relaxed = true)
-        val sharedPrefs: SharedPreferences = mockk()
-        every { sharedPrefs.edit() } returns sharedPrefsEditor
-        every { sharedPrefsEditor.putBoolean(any(), any()) } throws RuntimeException("SharedPrefs Error")
-        every { context.getSharedPreferences(any<String>(), any<Int>()) } returns sharedPrefs
-        val result = PreferencesRepository.setDynamicColors(context, "", true)
-        assertFalse(result)
-    }
-
-    @Test
-    fun `setDynamicColors() - SharedPreferences successfully sets the value`() {
-        val context = mockk<Context>()
-        val sharedPrefsEditor: SharedPreferences.Editor = mockk(relaxed = true)
-        val sharedPrefs: SharedPreferences = mockk()
-        every { sharedPrefs.edit() } returns sharedPrefsEditor
-        every { sharedPrefsEditor.putBoolean(any(), any()) } returns sharedPrefsEditor
-        every { sharedPrefsEditor.apply() } just Runs
-        every { context.getSharedPreferences(any<String>(), any<Int>()) } returns sharedPrefs
-        val result = PreferencesRepository.setDynamicColors(context, "", true)
-        assertTrue(result)
-    }
-
-    @Test
-    fun `setDynamicColors() - Invalid sharedPrefs name`() {
-        val context = mockk<Context>()
-        val invalidSharedPrefsName = "invalid_name"
         every {
-            context.getSharedPreferences(invalidSharedPrefsName, any<Int>())
-        } throws RuntimeException("SharedPrefs Error")
-        val result = PreferencesRepository.setDynamicColors(context, invalidSharedPrefsName, true)
-        assertFalse(result)
-    }
+            sharedPreferences.edit()
+        } returns editor
 
-    @Test
-    fun `getMonochromeIcons() - SharedPreferences throws exception`() {
-        val context = mockk<Context>()
-        val sharedPrefs: SharedPreferences = mockk()
-        every { sharedPrefs.getBoolean(any(), any()) } throws RuntimeException("SharedPrefs Error")
-        every { context.getSharedPreferences(any<String>(), any<Int>()) } returns sharedPrefs
-        val result = PreferencesRepository.getMonochromeIcons(context, "")
-        assertTrue(result)
-    }
-
-    @Test
-    fun `getMonochromeIcons() - SharedPreferences returns the expected value`() {
-        val context = mockk<Context>()
-        val sharedPrefs: SharedPreferences = mockk()
-        every { sharedPrefs.getBoolean(any(), any()) } returns false
-        every { context.getSharedPreferences(any<String>(), any<Int>()) } returns sharedPrefs
-        val result = PreferencesRepository.getMonochromeIcons(context, "")
-        assertFalse(result)
-    }
-
-    @Test
-    fun `getMonochromeIcons() - Invalid sharedPrefs name`() {
-        val context = mockk<Context>()
-        val invalidSharedPrefsName = "invalid_name"
         every {
-            context.getSharedPreferences(invalidSharedPrefsName, any<Int>())
-        } throws RuntimeException("SharedPrefs Error")
-        val result = PreferencesRepository.getMonochromeIcons(context, invalidSharedPrefsName)
-        assertTrue(result)
+            editor.apply()
+        } just Runs
+
+        repository = PreferencesRepository(context)
     }
 
     @Test
-    fun `setMonochromeIcons() - SharedPreferences throws exception`() {
-        val context = mockk<Context>()
-        val sharedPrefsEditor: SharedPreferences.Editor = mockk(relaxed = true)
-        val sharedPrefs: SharedPreferences = mockk()
-        every { sharedPrefs.edit() } returns sharedPrefsEditor
-        every { sharedPrefsEditor.putBoolean(any(), any()) } throws RuntimeException("SharedPrefs Error")
-        every { context.getSharedPreferences(any<String>(), any<Int>()) } returns sharedPrefs
-        val result = PreferencesRepository.setMonochromeIcons(context, "", true)
-        assertFalse(result)
-    }
-
-    @Test
-    fun `setMonochromeIcons() - SharedPreferences successfully sets the value`() {
-        val context = mockk<Context>()
-        val sharedPrefsEditor: SharedPreferences.Editor = mockk(relaxed = true)
-        val sharedPrefs: SharedPreferences = mockk()
-        every { sharedPrefs.edit() } returns sharedPrefsEditor
-        every { sharedPrefsEditor.putBoolean(any(), any()) } returns sharedPrefsEditor
-        every { sharedPrefsEditor.apply() } just Runs
-        every { context.getSharedPreferences(any<String>(), any<Int>()) } returns sharedPrefs
-        val result = PreferencesRepository.setMonochromeIcons(context, "", true)
-        assertTrue(result)
-    }
-
-    @Test
-    fun `setMonochromeIcons() - Invalid sharedPrefs name`() {
-        val context = mockk<Context>()
-        val invalidSharedPrefsName = "invalid_name"
+    fun `getDynamicColors returns true when enabled`() {
         every {
-            context.getSharedPreferences(invalidSharedPrefsName, any<Int>())
-        } throws RuntimeException("SharedPrefs Error")
-        val result = PreferencesRepository.setMonochromeIcons(context, invalidSharedPrefsName, true)
+            sharedPreferences.getBoolean(
+                PreferencesRepository.KEY_DYNAMIC_COLORS,
+                false,
+            )
+        } returns true
+
+        val result = repository.getDynamicColors()
+
+        assertTrue(result)
+    }
+
+    @Test
+    fun `getDynamicColors returns false when disabled`() {
+        every {
+            sharedPreferences.getBoolean(
+                PreferencesRepository.KEY_DYNAMIC_COLORS,
+                false,
+            )
+        } returns false
+
+        val result = repository.getDynamicColors()
+
         assertFalse(result)
     }
 
+    @Test
+    fun `setDynamicColors stores expected value`() {
+        every {
+            editor.putBoolean(
+                PreferencesRepository.KEY_DYNAMIC_COLORS,
+                true,
+            )
+        } returns editor
+
+        repository.setDynamicColors(true)
+
+        verify {
+            editor.putBoolean(
+                PreferencesRepository.KEY_DYNAMIC_COLORS,
+                true,
+            )
+        }
+
+        verify {
+            editor.apply()
+        }
+    }
+
+    @Test
+    fun `getMonochromeIcons returns true when enabled`() {
+        every {
+            sharedPreferences.getBoolean(
+                PreferencesRepository.KEY_MONOCHROME_ICONS,
+                true,
+            )
+        } returns true
+
+        val result = repository.getMonochromeIcons()
+
+        assertTrue(result)
+    }
+
+    @Test
+    fun `getMonochromeIcons returns false when disabled`() {
+        every {
+            sharedPreferences.getBoolean(
+                PreferencesRepository.KEY_MONOCHROME_ICONS,
+                true,
+            )
+        } returns false
+
+        val result = repository.getMonochromeIcons()
+
+        assertFalse(result)
+    }
+
+    @Test
+    fun `setMonochromeIcons stores expected value`() {
+        every {
+            editor.putBoolean(
+                PreferencesRepository.KEY_MONOCHROME_ICONS,
+                false,
+            )
+        } returns editor
+
+        repository.setMonochromeIcons(false)
+
+        verify {
+            editor.putBoolean(
+                PreferencesRepository.KEY_MONOCHROME_ICONS,
+                false,
+            )
+        }
+
+        verify {
+            editor.apply()
+        }
+    }
 }

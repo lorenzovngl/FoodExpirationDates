@@ -9,6 +9,7 @@ import com.lorenzovainigli.foodexpirationdates.model.NotificationManager.Compani
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.entity.computeExpirationDate
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.showNotification
 import io.mockk.coEvery
 import io.mockk.every
@@ -36,6 +37,7 @@ class CheckExpirationsWorkerTest {
     private val mockContext = mockk<Context>(relaxed = true)
     private val mockParams = mockk<WorkerParameters>(relaxed = true)
     private val mockRepository = mockk<ExpirationDateRepository>()
+    private val mockPrefRepository = mockk<PreferencesRepository>(relaxed = true)
 
     // Fix the time
     private val fixedInstant = Instant.parse("2026-06-01T10:00:00Z")
@@ -80,6 +82,7 @@ class CheckExpirationsWorkerTest {
             appContext = mockContext,
             params = mockParams,
             repository = mockRepository,
+            preferencesRepository = mockPrefRepository,
             clock = fixedClock
         )
     }

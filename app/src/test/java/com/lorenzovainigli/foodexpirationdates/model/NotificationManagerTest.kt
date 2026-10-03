@@ -13,6 +13,7 @@ import androidx.work.testing.WorkManagerTestInitHelper
 import com.lorenzovainigli.foodexpirationdates.model.NotificationManager.Companion.scheduleDailyNotification
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
+import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.model.worker.CheckExpirationsWorker
 import io.mockk.coEvery
 import io.mockk.every
@@ -38,6 +39,7 @@ class NotificationWorkManagerTest {
 
     // Mocks for dependencies
     private val mockRepository = mockk<ExpirationDateRepository>(relaxed = true)
+    private val mockPrefRepository = mockk<PreferencesRepository>(relaxed = true)
     private val fixedClock = Clock.fixed(Instant.parse("2026-06-04T10:00:00Z"), ZoneId.of("UTC"))
 
     @Before
@@ -61,7 +63,7 @@ class NotificationWorkManagerTest {
                 workerParameters: WorkerParameters
             ): ListenableWorker? {
                 return if (workerClassName == CheckExpirationsWorker::class.java.name) {
-                    CheckExpirationsWorker(appContext, workerParameters, mockRepository, fixedClock)
+                    CheckExpirationsWorker(appContext, workerParameters, mockRepository, mockPrefRepository, fixedClock)
                 } else {
                     null
                 }
