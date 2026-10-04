@@ -10,9 +10,9 @@ class FirebaseAnalyticsTracker @Inject constructor(
     private val firebaseAnalytics: FirebaseAnalytics
 ) : AnalyticsTracker {
 
-    override fun logEvent(event: AnalyticsEvent/*, params: Map<String, Any?>*/) {
+    override fun logEvent(event: AnalyticsEvent, params: Map<String, Any?>) {
         firebaseAnalytics.logEvent(event.tag) {
-            /*params.forEach { (key, value) ->
+            params.forEach { (key, value) ->
                 when (value) {
                     is String -> param(key, value)
                     is Long -> param(key, value)
@@ -20,9 +20,9 @@ class FirebaseAnalyticsTracker @Inject constructor(
                     is Double -> param(key, value)
                     is Boolean -> param(key, value.toString())
                 }
-            }*/
+            }
         }
-        Log.d(TAG, "Logged event: ${event.tag}"/* with params: $params"*/)
+        Log.d(TAG, "Logged event: ${event.tag} with params: $params")
     }
 
     override fun logScreenView(screen: Screen) {

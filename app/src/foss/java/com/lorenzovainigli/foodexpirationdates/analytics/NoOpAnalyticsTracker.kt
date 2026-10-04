@@ -5,7 +5,7 @@ import jakarta.inject.Inject
 
 class NoOpAnalyticsTracker @Inject constructor() : AnalyticsTracker {
 
-    override fun logEvent(event: AnalyticsEvent) {
+    override fun logEvent(event: AnalyticsEvent, params: Map<String, Any?>) {
         // No analytics in the FOSS flavor.
     }
 
