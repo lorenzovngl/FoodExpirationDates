@@ -137,7 +137,7 @@ fun MyScaffold(
                 actions = {
                     if (destination?.contains(Screen.MainScreen.route) == true) {
                         val context = LocalContext.current
-                        val viewModel = activity?.viewModel
+                        val viewModel = activity?.foodListViewModel
                         val exportTaskSuccess = viewModel?.exportTaskSuccess?.collectAsStateWithLifecycle()
                         val notifyExportTaskDone = viewModel?.notifyExportTaskDone?.collectAsStateWithLifecycle()
 
@@ -156,7 +156,7 @@ fun MyScaffold(
                             notifyExportTaskDone = notifyExportTaskDone,
                             onSearchClick = onSearchIconClick,
                             onExportClick = {
-                                activity?.viewModel?.exportData(context)
+                                activity?.foodListViewModel?.exportData()
                             },
                             onImportClick = {
                                 importFileLauncher.launch(arrayOf("*/*"))
@@ -165,7 +165,7 @@ fun MyScaffold(
                                 navController.navigate(Screen.AboutScreen.route)
                             },
                             onExportErrorDialogDismiss = {
-                                activity?.viewModel?.resetNotifyExportTaskDone()
+                                activity?.foodListViewModel?.resetNotifyExportTaskDone()
                             }
                         )
                     } else if (destination?.contains(Screen.AboutScreen.route) != true &&

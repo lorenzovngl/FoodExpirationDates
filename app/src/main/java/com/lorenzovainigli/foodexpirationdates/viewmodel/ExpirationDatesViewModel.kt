@@ -66,12 +66,6 @@ class ExpirationDatesViewModel @Inject constructor(
     private val _isSplashScreenLoading: MutableState<Boolean> = mutableStateOf(value = true)
     val isSplashScreenLoading: State<Boolean> = _isSplashScreenLoading
 
-    private val _exportTaskSuccess = MutableStateFlow(true)
-    val exportTaskSuccess = _exportTaskSuccess.asStateFlow()
-
-    private val _notifyExportTaskDone = MutableStateFlow(false)
-    val notifyExportTaskDone = _notifyExportTaskDone.asStateFlow()
-
     private val _requestReview = MutableSharedFlow<Unit>()
     val requestReview = _requestReview.asSharedFlow()
 
@@ -121,76 +115,6 @@ class ExpirationDatesViewModel @Inject constructor(
                 _requestReview.emit(Unit)
             }
         }
-    }
-
-    fun exportData(context: Context) {
-        viewModelScope.launch {
-            try {
-                val timeStamp: String =
-                    SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
-                val fileName = "fed_data_$timeStamp.csv"
-                val file = File(context.filesDir, fileName)
-                val fileWriter = FileWriter(file)
-                fileWriter.appendLine(CSV_HEADER)
-                for (entry in expirationDates.first()) {
-                    fileWriter.appendLine(entry.toCSV())
-                }
-                fileWriter.flush()
-                fileWriter.close()
-                saveFileToExternalStorage(context, "file://${file.path}", file.name)
-                _exportTaskSuccess.value = true
-            } catch (e: IOException) {
-                e.printStackTrace()
-                _exportTaskSuccess.value = false
-            }
-            _notifyExportTaskDone.value = true
-        }
-    }
-
-    fun importData(contentResolver: ContentResolver, uri: Uri?): OperationResult {
-        if (uri == null){
-            return OperationResult(OperationResult.State.FAILURE, "File not found")
-        }
-        lateinit var csvData: List<Array<String>>
-        try {
-            val fileInputStream = contentResolver.openInputStream(uri)
-            val reader = CSVReader(InputStreamReader(fileInputStream))
-            csvData = reader.readAll()
-            reader.close()
-        } catch (e: Exception){
-            return  OperationResult(OperationResult.State.FAILURE, "Error reading file")
-        }
-        if (!validateCsv(csvData)){
-            return  OperationResult(OperationResult.State.FAILURE, "File not valid")
-        }
-        try {
-            for (row in csvData.drop(1)) {
-                val expirationDate = ExpirationDate(
-                    id = 0,
-                    foodName = row[FOOD_NAME_INDEX],
-                    expirationDate = row[EXPIRATION_DATE_INDEX].toLong(),
-                    openingDate = row[OPENING_DATE_INDEX].let { if (it != "null") it.toLong() else null },
-                    timeSpanDays = row[TIME_SPAN_DAYS_INDEX].let { if (it != "null") it.toInt() else null },
-                    quantity = row[QUANTITY_INDEX].toInt()
-                )
-                addExpirationDate(expirationDate)
-            }
-        } catch (e: Exception){
-            OperationResult(OperationResult.State.FAILURE, "Error inserting data")
-        }
-        return  OperationResult(OperationResult.State.SUCCESS, "Data imported correctly")
-    }
-
-    private fun validateCsv(csvData: List<Array<String>>): Boolean {
-        val header = csvData[0]
-        return !(header[FOOD_NAME_INDEX] != FOOD_NAME ||
-                header[EXPIRATION_DATE_INDEX] != EXPIRATION_DATE ||
-                header[OPENING_DATE_INDEX] != OPENING_DATE ||
-                header[TIME_SPAN_DAYS_INDEX] != TIME_SPAN_DAYS)
-    }
-
-    fun resetNotifyExportTaskDone(){
-        _notifyExportTaskDone.value = false
     }
 
 }

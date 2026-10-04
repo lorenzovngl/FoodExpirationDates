@@ -1,6 +1,7 @@
 package com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.viewmodel
 
-import android.content.Context
+import android.content.ContentResolver
+import android.net.Uri
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -8,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lorenzovainigli.foodexpirationdates.analytics.AnalyticsEvent
 import com.lorenzovainigli.foodexpirationdates.analytics.AnalyticsTracker
+import com.lorenzovainigli.foodexpirationdates.feature.foodlist.data.importexport.ExpirationDateImportExportManager
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.mapper.FoodCardUiModelMapper
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.model.FoodListUiState
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
@@ -15,8 +17,8 @@ import com.lorenzovainigli.foodexpirationdates.model.entity.computeExpirationDat
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.model.review.ReviewRequestStrategy
+import com.lorenzovainigli.foodexpirationdates.util.OperationResult
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -35,7 +37,8 @@ class FoodListViewModel @Inject constructor(
     private val preferencesRepository: PreferencesRepository,
     private val foodCardUiModelMapper: FoodCardUiModelMapper,
     private val analyticsTracker: AnalyticsTracker,
-    private val reviewRequestStrategy: ReviewRequestStrategy
+    private val reviewRequestStrategy: ReviewRequestStrategy,
+    private val importExportManager: ExpirationDateImportExportManager
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(FoodListUiState())
@@ -49,6 +52,15 @@ class FoodListViewModel @Inject constructor(
 
     private val _requestReview = MutableSharedFlow<Unit>()
     val requestReview = _requestReview.asSharedFlow()
+
+    private val _exportTaskSuccess = MutableStateFlow(true)
+    val exportTaskSuccess = _exportTaskSuccess.asStateFlow()
+
+    private val _notifyExportTaskDone = MutableStateFlow(false)
+    val notifyExportTaskDone = _notifyExportTaskDone.asStateFlow()
+
+    private val _importResult = MutableStateFlow<OperationResult?>(null)
+    val importResult = _importResult.asStateFlow()
 
     init {
         observeFoodItems()
@@ -105,6 +117,36 @@ class FoodListViewModel @Inject constructor(
             repository.deleteExpirationDate(itemId)
             analyticsTracker.logEvent(AnalyticsEvent.FOOD_DELETED)
         }
+    }
+
+    fun exportData() {
+        viewModelScope.launch {
+            val result = importExportManager.export()
+
+            _exportTaskSuccess.value = result.state == OperationResult.State.SUCCESS
+
+            _notifyExportTaskDone.value = true
+        }
+    }
+
+    fun resetNotifyExportTaskDone() {
+        _notifyExportTaskDone.value = false
+    }
+
+    fun importData(
+        contentResolver: ContentResolver,
+        uri: Uri?,
+    ) {
+        viewModelScope.launch {
+            _importResult.value = importExportManager.import(
+                contentResolver = contentResolver,
+                uri = uri,
+            )
+        }
+    }
+
+    fun resetImportResult() {
+        _importResult.value = null
     }
 
 }
