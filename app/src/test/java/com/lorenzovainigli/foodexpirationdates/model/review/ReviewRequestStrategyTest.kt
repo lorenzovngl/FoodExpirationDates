@@ -11,7 +11,8 @@ class ReviewRequestStrategyTest {
         val strategy = ReviewRequestStrategy(preferences)
 
         repeat(49) {
-            assertFalse(strategy.onFoodAdded())
+            val result = strategy.onFoodAdded()
+            assertFalse(result.shouldRequestReview)
         }
     }
 
@@ -20,7 +21,10 @@ class ReviewRequestStrategyTest {
         val preferences = FakeReviewPreferences(initialCount = 49)
         val strategy = ReviewRequestStrategy(preferences)
 
-        assertTrue(strategy.onFoodAdded())
+        val result = strategy.onFoodAdded()
+
+        assertTrue(result.shouldRequestReview)
+        assertEquals(50, result.foodCount)
     }
 
     @Test
@@ -28,7 +32,10 @@ class ReviewRequestStrategyTest {
         val preferences = FakeReviewPreferences(initialCount = 50)
         val strategy = ReviewRequestStrategy(preferences)
 
-        assertFalse(strategy.onFoodAdded())
+        val result = strategy.onFoodAdded()
+
+        assertFalse(result.shouldRequestReview)
+        assertEquals(51, result.foodCount)
     }
 
     @Test
@@ -36,7 +43,10 @@ class ReviewRequestStrategyTest {
         val preferences = FakeReviewPreferences(initialCount = 99)
         val strategy = ReviewRequestStrategy(preferences)
 
-        assertTrue(strategy.onFoodAdded())
+        val result = strategy.onFoodAdded()
+
+        assertTrue(result.shouldRequestReview)
+        assertEquals(100, result.foodCount)
     }
 
 }
