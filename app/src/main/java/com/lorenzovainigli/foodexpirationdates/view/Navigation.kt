@@ -45,11 +45,12 @@ fun Navigation(
 
     val foodListViewModel: FoodListViewModel = hiltViewModel()
     LaunchedEffect(foodListViewModel) {
-        foodListViewModel.requestReview.collect {
+        foodListViewModel.requestReview.collect { request ->
             activity?.let {
                 reviewManager.requestReview(
                     activity = it,
-                    isAutomatic = false,
+                    isAutomatic = request.isAutomatic,
+                    foodCount = request.foodCount,
                 )
             }
         }

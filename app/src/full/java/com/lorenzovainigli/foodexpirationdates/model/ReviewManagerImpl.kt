@@ -16,11 +16,15 @@ class ReviewManagerImpl @Inject constructor(
     override fun requestReview(
         activity: Activity,
         isAutomatic: Boolean,
+        foodCount: Int?,
         onComplete: () -> Unit
     ) {
         analyticsTracker.logEvent(
             AnalyticsEvent.REVIEW_REQUESTED,
-            mapOf("automatic" to isAutomatic)
+            mapOf(
+                "automatic" to isAutomatic,
+                "food_count" to foodCount
+            )
         )
         val manager = ReviewManagerFactory.create(activity)
         val request = manager.requestReviewFlow()

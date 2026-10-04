@@ -6,9 +6,12 @@ class ReviewRequestStrategy @Inject constructor(
     private val preferences: ReviewPreferences,
 ) {
 
-    fun onFoodAdded(): Boolean {
+    fun onFoodAdded(): ReviewTriggerResult {
         val count = preferences.incrementFoodAddedCount()
-        return count % REVIEW_INTERVAL == 0
+        return ReviewTriggerResult(
+            shouldRequestReview = count % REVIEW_INTERVAL == 0,
+            foodCount = count,
+        )
     }
 
     companion object {

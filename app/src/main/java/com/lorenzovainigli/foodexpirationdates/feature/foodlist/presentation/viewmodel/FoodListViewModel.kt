@@ -16,6 +16,7 @@ import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.entity.computeExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
+import com.lorenzovainigli.foodexpirationdates.model.review.ReviewRequest
 import com.lorenzovainigli.foodexpirationdates.model.review.ReviewRequestStrategy
 import com.lorenzovainigli.foodexpirationdates.util.OperationResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -50,7 +51,7 @@ class FoodListViewModel @Inject constructor(
     private val _deletedItem: MutableState<ExpirationDate?> = mutableStateOf(value = null)
     val deletedItem: State<ExpirationDate?> = _deletedItem
 
-    private val _requestReview = MutableSharedFlow<Unit>()
+    private val _requestReview = MutableSharedFlow<ReviewRequest>()
     val requestReview = _requestReview.asSharedFlow()
 
     private val _exportTaskSuccess = MutableStateFlow(true)
@@ -105,8 +106,15 @@ class FoodListViewModel @Inject constructor(
             repository.addExpirationDate(expirationDate)
             analyticsTracker.logEvent(AnalyticsEvent.FOOD_ADDED)
 
-            if (reviewRequestStrategy.onFoodAdded()) {
-                _requestReview.emit(Unit)
+            val result = reviewRequestStrategy.onFoodAdded()
+
+            if (result.shouldRequestReview) {
+                _requestReview.emit(
+                    ReviewRequest(
+                        foodCount = result.foodCount,
+                        isAutomatic = false,
+                    )
+                )
             }
         }
     }
