@@ -46,7 +46,7 @@ fun Navigation(
     val foodListViewModel: FoodListViewModel = hiltViewModel()
     LaunchedEffect(foodListViewModel) {
         foodListViewModel.requestReview.collect { request ->
-            activity?.let {
+            activity.let {
                 reviewManager.requestReview(
                     activity = it,
                     isAutomatic = request.isAutomatic,
@@ -87,10 +87,10 @@ fun Navigation(
             val itemToEditId = entry.arguments?.getString("itemId")
             FoodEditorScreen(
                 itemToEdit = itemToEditId?.let {
-                    activity?.viewModel?.getExpirationDate(it.toInt())
+                    activity.viewModel.getExpirationDate(it.toInt())
                 },
                 onSave = { entry ->
-                    activity?.foodListViewModel?.addFoodItem(entry)
+                    activity.foodListViewModel.addFoodItem(entry)
                     navController.popBackStack()
                 },
                 onCancel = {
@@ -112,16 +112,12 @@ fun Navigation(
                         type = "text/plain"
                     }
                     val shareIntent = Intent.createChooser(sendIntent, null)
-                    activity?.startActivity(shareIntent)
+                    activity.startActivity(shareIntent)
                 },
                 onClickReview = {
-                    if (activity != null) {
-                        reviewManager.requestReview(activity)
-                    } else {
-                        uriHandler.openUri(
-                            uri = PLAY_STORE_URL
-                        )
-                    }
+                    uriHandler.openUri(
+                        uri = PLAY_STORE_URL
+                    )
                 },
             )
         }
