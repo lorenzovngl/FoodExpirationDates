@@ -44,7 +44,7 @@ test-rules = "1.7.0"
 test-runner = "1.7.0"
 turbine = "1.2.1"
 uiautomator = "2.4.0"
-work-runtime-ktx = "2.11.2"
+work-runtime-ktx = "2.12.0"
 
 [libraries]
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
