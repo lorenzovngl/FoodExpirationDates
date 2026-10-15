@@ -127,6 +127,13 @@ class FoodListViewModel @Inject constructor(
         }
     }
 
+    fun deleteAllFoodItems() {
+        viewModelScope.launch {
+            repository.deleteAll()
+            analyticsTracker.logEvent(AnalyticsEvent.FOOD_DELETED)
+        }
+    }
+
     fun exportData() {
         viewModelScope.launch {
             val result = importExportManager.export()
