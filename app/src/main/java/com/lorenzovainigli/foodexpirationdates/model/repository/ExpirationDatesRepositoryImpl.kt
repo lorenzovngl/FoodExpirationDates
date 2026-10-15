@@ -24,4 +24,8 @@ class ExpirationDatesRepositoryImpl @Inject constructor(
     override suspend fun deleteExpirationDate(id: Int) {
         expirationDateDao.deleteById(id)
     }
+
+    override suspend fun deleteAll() {
+        expirationDateDao.deleteAll()
+    }
 }

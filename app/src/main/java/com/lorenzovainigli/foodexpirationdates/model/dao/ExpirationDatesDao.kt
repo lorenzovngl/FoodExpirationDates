@@ -20,4 +20,7 @@ interface ExpirationDatesDao {
 
     @Query("DELETE FROM expiration_dates WHERE id = :id")
     suspend fun deleteById(id: Int)
+
+    @Query("DELETE FROM expiration_dates")
+    suspend fun deleteAll()
 }
