@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Food Expiration Dates</string>
     <string name="app_name_short">Food Expirations</string>
     <string name="n_days_ago">%1$d days ago</string>
@@ -83,6 +83,9 @@
     <string name="data_export_error">An error occurred during data export.</string>
     <string name="export_data">Export data</string>
     <string name="import_data">Import data</string>
+    <string name="clear_all_items" tools:ignore="MissingTranslation">Clear all items</string>
+    <string name="clear_all_items_confirmation" tools:ignore="MissingTranslation">Are you sure you want to delete all items? This action cannot be undone.</string>
+    <string name="delete_all" tools:ignore="MissingTranslation">Delete all</string>
     <string name="data_exported">Data exported</string>
     <string name="connection_error">Connection error</string>
     <string name="getting_product_info">Getting product info…</string>
