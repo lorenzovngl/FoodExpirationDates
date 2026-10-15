@@ -12,4 +12,6 @@ interface ExpirationDateRepository {
     suspend fun addExpirationDate(expirationDate: ExpirationDate)
 
     suspend fun deleteExpirationDate(id: Int)
+
+    suspend fun deleteAll()
 }

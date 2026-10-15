@@ -122,4 +122,15 @@ class ExpirationDateRepositoryTest {
         val retrievedItem = dao.getOne(id = insertedId)
         assertNull(retrievedItem)
     }
+
+    @Test
+    fun deleteAllTest() = runBlocking {
+        val item1 = ExpirationDate(id = 1, foodName = "Cheese", expirationDate = System.currentTimeMillis())
+        val item2 = ExpirationDate(id = 2, foodName = "Milk", expirationDate = System.currentTimeMillis())
+        repository.addExpirationDate(item1)
+        repository.addExpirationDate(item2)
+        repository.deleteAll()
+        val list = repository.getAll().firstOrNull()
+        assertEquals(0, list?.size ?: 0)
+    }
 }

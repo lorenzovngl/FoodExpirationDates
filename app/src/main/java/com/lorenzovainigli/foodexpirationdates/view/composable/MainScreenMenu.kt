@@ -4,13 +4,18 @@ import androidx.annotation.DrawableRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -49,6 +54,7 @@ fun MainScreenMenu(
     onSearchClick: () -> Unit,
     onExportClick: () -> Unit,
     onImportClick: () -> Unit,
+    onClearAllClick: () -> Unit = {},
     onInfoClick: () -> Unit,
     onExportErrorDialogDismiss: () -> Unit,
 ) {
@@ -56,6 +62,9 @@ fun MainScreenMenu(
         mutableStateOf(OperationResult())
     }
     var isExpanded by remember {
+        mutableStateOf(false)
+    }
+    var showClearAllConfirmationDialog by remember {
         mutableStateOf(false)
     }
 
@@ -103,6 +112,14 @@ fun MainScreenMenu(
                 }
             ),
             MenuItem(
+                icon = MenuIcon.Vector(Icons.Outlined.Delete),
+                label = stringResource(R.string.clear_all_items),
+                onClick = {
+                    isExpanded = false
+                    showClearAllConfirmationDialog = true
+                }
+            ),
+            MenuItem(
                 icon = MenuIcon.Vector(Icons.Outlined.Info),
                 label = stringResource(R.string.about_this_app),
                 onClick = {
@@ -136,6 +153,34 @@ fun MainScreenMenu(
                 onClick = it.onClick
             )
         }
+    }
+    if (showClearAllConfirmationDialog) {
+        AlertDialog(
+            onDismissRequest = { showClearAllConfirmationDialog = false },
+            title = { Text(stringResource(id = R.string.clear_all_items)) },
+            text = { Text(stringResource(id = R.string.clear_all_items_confirmation)) },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        showClearAllConfirmationDialog = false
+                        onClearAllClick()
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.error,
+                        contentColor = MaterialTheme.colorScheme.onError
+                    )
+                ) {
+                    Text(stringResource(id = R.string.delete_all))
+                }
+            },
+            dismissButton = {
+                OutlinedButton(
+                    onClick = { showClearAllConfirmationDialog = false }
+                ) {
+                    Text(stringResource(id = R.string.cancel))
+                }
+            }
+        )
     }
     if (notifyExportTaskDone?.value == true && exportTaskSuccess?.value == false) {
         ErrorDialog(
