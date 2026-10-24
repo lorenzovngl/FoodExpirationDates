@@ -88,7 +88,7 @@ fun SettingsScreen(
 
     val timePickerState = rememberTimePickerState(
         initialHour = state.notificationHour,
-        initialMinute = state.notificationHour,
+        initialMinute = state.notificationMinute,
         is24Hour = true
     )
 
@@ -192,7 +192,7 @@ fun SettingsScreen(
             if (timePickerState.hour < 10) {
                 text += "0"
             }
-            text = timePickerState.hour.toString() + ":"
+            text += timePickerState.hour.toString() + ":"
             if (timePickerState.minute < 10) {
                 text += "0"
             }
