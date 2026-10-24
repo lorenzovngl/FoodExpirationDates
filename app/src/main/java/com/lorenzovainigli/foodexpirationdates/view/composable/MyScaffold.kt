@@ -161,6 +161,9 @@ fun MyScaffold(
                             onImportClick = {
                                 importFileLauncher.launch(arrayOf("*/*"))
                             },
+                            onClearAllClick = {
+                                activity?.foodListViewModel?.deleteAllFoodItems()
+                            },
                             onInfoClick = {
                                 navController.navigate(Screen.AboutScreen.route)
                             },

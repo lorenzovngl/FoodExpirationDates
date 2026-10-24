@@ -4,6 +4,8 @@ import androidx.room.Room.inMemoryDatabaseBuilder
 import androidx.test.platform.app.InstrumentationRegistry
 import com.lorenzovainigli.foodexpirationdates.model.AppDatabase
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
@@ -84,5 +86,24 @@ class ExpirationDatesDaoTest {
         dao?.delete(insertedItem)
         val retrievedItem = dao?.getOne(id = id)
         assertNull(retrievedItem)
+    }
+
+    @Test
+    fun deleteAllExpirationDatesTest() = runBlocking {
+        val item1 = ExpirationDate(
+            id = 1,
+            foodName = "Cheese",
+            expirationDate = System.currentTimeMillis()
+        )
+        val item2 = ExpirationDate(
+            id = 2,
+            foodName = "Milk",
+            expirationDate = System.currentTimeMillis()
+        )
+        dao?.insert(item1)
+        dao?.insert(item2)
+        dao?.deleteAll()
+        val list = dao?.getAll()?.firstOrNull()
+        assertEquals(0, list?.size ?: 0)
     }
 }
