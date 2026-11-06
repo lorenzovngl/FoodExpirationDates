@@ -3,6 +3,7 @@ package com.lorenzovainigli.foodexpirationdates.view.composable
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,7 +11,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.Feed
+import androidx.compose.material.icons.automirrored.filled.List
+import androidx.compose.material.icons.automirrored.outlined.Feed
+import androidx.compose.material.icons.automirrored.outlined.List
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -21,7 +30,10 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteItem
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -30,10 +42,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -43,23 +55,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.lorenzovainigli.foodexpirationdates.R
-import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
-import com.lorenzovainigli.foodexpirationdates.view.MainActivity
-import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.screen.FoodListScreen
-import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.preview.getItemsForPreview
+import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.screen.FoodListScreen
+import com.lorenzovainigli.foodexpirationdates.navigation.NavigationItem
+import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.util.areNotificationsEnabled
+import com.lorenzovainigli.foodexpirationdates.view.MainActivity
+import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.viewmodel.MyBottomAppBarViewModel
 import kotlinx.coroutines.launch
-
-data class NavigationItem(
-    val label: String,
-    val route: String,
-    val selectedIcon: ImageVector,
-    val unselectedIcon: ImageVector,
-    val showBadge: Boolean = false,
-    val badgeNumber: Int? = null
-)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -109,131 +113,195 @@ fun MyScaffold(
         }
         showSnackbar.value = false
     }
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        contentWindowInsets = WindowInsets.safeDrawing,
-        snackbarHost = { SnackbarHost(snackbarHostState) },
-        topBar = {
-            val destination = navDestination ?: currentBackStackEntry?.destination?.route
-            val prefsUiState = activity?.preferencesViewModel?.uiState?.collectAsStateWithLifecycle()
-            MyTopAppBar(
-                title = when (destination) {
-                    Screen.AboutScreen.route -> stringResource(id = R.string.about_this_app)
-                    Screen.SettingsScreen.route -> stringResource(id = R.string.settings)
-                    Screen.NewsScreen.route -> stringResource(id = com.lorenzovainigli.news.R.string.news)
-                    else -> {
-                        if (destination?.contains(Screen.InsertScreen.route) == true) {
-                            if (currentBackStackEntry?.arguments?.getString("itemId") != null){
-                                stringResource(id = R.string.edit_item)
-                            } else {
-                                stringResource(id = R.string.add_item)
+    var showPermissionBanner by remember {
+        mutableStateOf(!areNotificationsEnabled(context))
+    }
+    LifecycleResumeEffect(Unit) {
+        showPermissionBanner = !areNotificationsEnabled(context)
+        onPauseOrDispose { }
+    }
+    val viewModel: MyBottomAppBarViewModel = hiltViewModel()
+    val unreadNewsCount by viewModel.unreadNewsCount.collectAsStateWithLifecycle()
+    val navigationItems = listOf(
+        NavigationItem(
+            label = stringResource(id = R.string.list),
+            route = Screen.MainScreen.route,
+            selectedIcon = Icons.AutoMirrored.Filled.List,
+            unselectedIcon = Icons.AutoMirrored.Outlined.List
+        ),
+        NavigationItem(
+            label = stringResource(id = R.string.settings),
+            route = Screen.SettingsScreen.route,
+            selectedIcon = Icons.Filled.Settings,
+            unselectedIcon = Icons.Outlined.Settings,
+            showBadge = showPermissionBanner
+        ),
+        NavigationItem(
+            label = stringResource(com.lorenzovainigli.news.R.string.news),
+            route = Screen.NewsScreen.route,
+            selectedIcon = Icons.AutoMirrored.Filled.Feed,
+            unselectedIcon = Icons.AutoMirrored.Outlined.Feed,
+            showBadge = unreadNewsCount > 0,
+            badgeNumber = unreadNewsCount
+        )
+    )
+    NavigationSuiteScaffold(
+        navigationItemVerticalArrangement = Arrangement.Center,
+        navigationItems = {
+            val currentDestination = navDestination ?: currentBackStackEntry?.destination?.route
+            var selectedItem = when (currentDestination) {
+                Screen.MainScreen.route -> 0
+                Screen.SettingsScreen.route -> 1
+                Screen.NewsScreen.route -> 2
+                else -> -1
+            }
+            navigationItems.forEachIndexed { index, item ->
+                NavigationSuiteItem(
+                    selected = selectedItem == index,
+                    onClick = {
+                        selectedItem = index
+                        navController.navigate(item.route)
+                    },
+                    icon = {
+                        BadgedBox(
+                            badge = {
+                                if (item.showBadge) {
+                                    Badge {
+                                        item.badgeNumber?.let {
+                                            Text("${item.badgeNumber}")
+                                        }
+                                    }
+                                }
                             }
-                        } else {
-                            stringResource(id = R.string.app_name)
-                        }
-                    }
-                },
-                topBarFont = prefsUiState?.value?.topBarFont?.ordinal,
-                actions = {
-                    if (destination?.contains(Screen.MainScreen.route) == true) {
-                        val context = LocalContext.current
-                        val viewModel = activity?.foodListViewModel
-                        val exportTaskSuccess = viewModel?.exportTaskSuccess?.collectAsStateWithLifecycle()
-                        val notifyExportTaskDone = viewModel?.notifyExportTaskDone?.collectAsStateWithLifecycle()
-
-                        val importFileLauncher = rememberLauncherForActivityResult(
-                            contract = ActivityResultContracts.OpenDocument()
-                        ) { uri ->
-                            if (uri != null) {
-                                viewModel?.importData(
-                                    contentResolver = context.contentResolver,
-                                    uri = uri
-                                )
-                            }
-                        }
-                        MainScreenMenu(
-                            exportTaskSuccess = exportTaskSuccess,
-                            notifyExportTaskDone = notifyExportTaskDone,
-                            onSearchClick = onSearchIconClick,
-                            onExportClick = {
-                                activity?.foodListViewModel?.exportData()
-                            },
-                            onImportClick = {
-                                importFileLauncher.launch(arrayOf("*/*"))
-                            },
-                            onClearAllClick = {
-                                activity?.foodListViewModel?.deleteAllFoodItems()
-                            },
-                            onInfoClick = {
-                                navController.navigate(Screen.AboutScreen.route)
-                            },
-                            onExportErrorDialogDismiss = {
-                                activity?.foodListViewModel?.resetNotifyExportTaskDone()
-                            }
-                        )
-                    } else if (destination?.contains(Screen.AboutScreen.route) != true &&
-                        destination?.contains(Screen.InsertScreen.route) != true){
-                        IconButton (
-                            onClick = {
-                                navController.navigate(Screen.AboutScreen.route)
-                            }
-                        ){
-                            Icon(
-                                imageVector = Icons.Outlined.Info,
-                                contentDescription = stringResource(R.string.about_this_app),
-                                tint = MaterialTheme.colorScheme.primary
-                            )
-                        }
-                    }
-                },
-                navigationIcon = {
-                    if (destination?.contains(Screen.InsertScreen.route) == true ||
-                    destination?.contains(Screen.AboutScreen.route) == true) {
-                        IconButton(
-                            onClick = { navController.popBackStack() }
                         ) {
                             Icon(
-                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = stringResource(id = R.string.back),
-                                tint = MaterialTheme.colorScheme.primary
+                                imageVector = when (selectedItem == index) {
+                                    true -> item.selectedIcon
+                                    else -> item.unselectedIcon
+                                },
+                                contentDescription = item.label
                             )
                         }
-                    }
-                },
-                scrollBehavior = scrollBehavior,
-                monochromeIcons = prefsUiState?.value?.monochromeIconsEnabled == true
-            )
-        },
-        bottomBar = {
-            val destination = navDestination ?: currentBackStackEntry?.destination?.route
-            if (destination !in noBottomBarRoutes) {
-                val context = LocalContext.current
-                var showPermissionBanner by remember {
-                    mutableStateOf(!areNotificationsEnabled(context))
-                }
-                LifecycleResumeEffect(Unit) {
-                    showPermissionBanner = !areNotificationsEnabled(context)
-                    onPauseOrDispose { }
-                }
-                val viewModel: MyBottomAppBarViewModel = hiltViewModel()
-                val unreadNewsCount by viewModel.unreadNewsCount.collectAsStateWithLifecycle()
-                MyBottomAppBar(
-                    currentDestination = navDestination ?: currentBackStackEntry?.destination?.route,
-                    onNavigationItemClick = {
-                        navController.navigate(it.route)
                     },
-                    showPermissionBanner = showPermissionBanner,
-                    unreadNewsCount = unreadNewsCount
+                    label = {
+                        Text(
+                            text = item.label,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
                 )
             }
         }
-    ) { padding ->
-        Column(
-            modifier = Modifier
-                .padding(padding)
-                .fillMaxSize()
-        ) {
-            content()
+    ) {
+        Scaffold(
+            modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+            contentWindowInsets = WindowInsets.safeDrawing,
+            snackbarHost = { SnackbarHost(snackbarHostState) },
+            topBar = {
+                val destination = navDestination ?: currentBackStackEntry?.destination?.route
+                val prefsUiState =
+                    activity?.preferencesViewModel?.uiState?.collectAsStateWithLifecycle()
+                MyTopAppBar(
+                    title = when (destination) {
+                        Screen.AboutScreen.route -> stringResource(id = R.string.about_this_app)
+                        Screen.SettingsScreen.route -> stringResource(id = R.string.settings)
+                        Screen.NewsScreen.route -> stringResource(id = com.lorenzovainigli.news.R.string.news)
+                        else -> {
+                            if (destination?.contains(Screen.InsertScreen.route) == true) {
+                                if (currentBackStackEntry?.arguments?.getString("itemId") != null) {
+                                    stringResource(id = R.string.edit_item)
+                                } else {
+                                    stringResource(id = R.string.add_item)
+                                }
+                            } else {
+                                stringResource(id = R.string.app_name)
+                            }
+                        }
+                    },
+                    topBarFont = prefsUiState?.value?.topBarFont?.ordinal,
+                    actions = {
+                        if (destination?.contains(Screen.MainScreen.route) == true) {
+                            val context = LocalContext.current
+                            val viewModel = activity?.foodListViewModel
+                            val exportTaskSuccess =
+                                viewModel?.exportTaskSuccess?.collectAsStateWithLifecycle()
+                            val notifyExportTaskDone =
+                                viewModel?.notifyExportTaskDone?.collectAsStateWithLifecycle()
+
+                            val importFileLauncher = rememberLauncherForActivityResult(
+                                contract = ActivityResultContracts.OpenDocument()
+                            ) { uri ->
+                                if (uri != null) {
+                                    viewModel?.importData(
+                                        contentResolver = context.contentResolver,
+                                        uri = uri
+                                    )
+                                }
+                            }
+                            MainScreenMenu(
+                                exportTaskSuccess = exportTaskSuccess,
+                                notifyExportTaskDone = notifyExportTaskDone,
+                                onSearchClick = onSearchIconClick,
+                                onExportClick = {
+                                    activity?.foodListViewModel?.exportData()
+                                },
+                                onImportClick = {
+                                    importFileLauncher.launch(arrayOf("*/*"))
+                                },
+                                onClearAllClick = {
+                                    activity?.foodListViewModel?.deleteAllFoodItems()
+                                },
+                                onInfoClick = {
+                                    navController.navigate(Screen.AboutScreen.route)
+                                },
+                                onExportErrorDialogDismiss = {
+                                    activity?.foodListViewModel?.resetNotifyExportTaskDone()
+                                }
+                            )
+                        } else if (destination?.contains(Screen.AboutScreen.route) != true &&
+                            destination?.contains(Screen.InsertScreen.route) != true
+                        ) {
+                            IconButton(
+                                onClick = {
+                                    navController.navigate(Screen.AboutScreen.route)
+                                }
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.Info,
+                                    contentDescription = stringResource(R.string.about_this_app),
+                                    tint = MaterialTheme.colorScheme.primary
+                                )
+                            }
+                        }
+                    },
+                    navigationIcon = {
+                        if (destination?.contains(Screen.InsertScreen.route) == true ||
+                            destination?.contains(Screen.AboutScreen.route) == true
+                        ) {
+                            IconButton(
+                                onClick = { navController.popBackStack() }
+                            ) {
+                                Icon(
+                                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                    contentDescription = stringResource(id = R.string.back),
+                                    tint = MaterialTheme.colorScheme.primary
+                                )
+                            }
+                        }
+                    },
+                    scrollBehavior = scrollBehavior,
+                    monochromeIcons = prefsUiState?.value?.monochromeIconsEnabled == true
+                )
+            }
+        ) { padding ->
+            Column(
+                modifier = Modifier
+                    .padding(padding)
+                    .fillMaxSize()
+            ) {
+                content()
+            }
         }
     }
 }

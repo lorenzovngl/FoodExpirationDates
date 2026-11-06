@@ -16,6 +16,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldDefaults
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -45,6 +48,21 @@ fun MyTopAppBar(
     scrollBehavior: TopAppBarScrollBehavior,
     monochromeIcons: Boolean
 ) {
+    val navigationSuiteType =
+        NavigationSuiteScaffoldDefaults.navigationSuiteType(
+            currentWindowAdaptiveInfoV2()
+        )
+
+    val isNavigationRail =
+        navigationSuiteType == NavigationSuiteType.WideNavigationRailCollapsed ||
+                navigationSuiteType == NavigationSuiteType.WideNavigationRailExpanded
+
+    val topBarColors = TopAppBarDefaults.topAppBarColors(
+        scrolledContainerColor =  if (isNavigationRail)
+            MaterialTheme.colorScheme.surface
+        else
+            MaterialTheme.colorScheme.surfaceColorAtElevation(TonalElevation.level2())
+    )
 
     LargeTopAppBar(
         title = {
@@ -89,9 +107,7 @@ fun MyTopAppBar(
         actions = actions,
         navigationIcon = navigationIcon,
         scrollBehavior = scrollBehavior,
-        colors = TopAppBarDefaults.topAppBarColors(
-            scrolledContainerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(TonalElevation.level2())
-        )
+        colors = topBarColors
     )
 }
 

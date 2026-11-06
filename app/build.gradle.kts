@@ -187,6 +187,7 @@ dependencies {
     // https://developer.android.com/jetpack/compose/bom/bom-mapping
     implementation(platform(libs.compose.bom))
     implementation(libs.material3)
+    implementation(libs.androidx.material3.adaptive.navigation.suite)
     implementation(libs.material.icons.extended)
     implementation(libs.runtime.livedata)
     implementation(libs.ui)
