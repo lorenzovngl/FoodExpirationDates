@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Lebensmittelverfallsdatum</string>
     <string name="app_name_short">Lebensmittelverfall</string>
     <string name="n_days_ago">Vor %1$d Tag(en)</string>
@@ -21,7 +21,7 @@
     <string name="write_a_review">Eine Rezension schreiben</string>
     <string name="source_code">Quelltext</string>
     <string name="features">Funktionen</string>
-    <string name="feature_list">- Anzeige einer Liste mit Lebensmittelverfallsdaten in aufsteigender zeitlicher Reihenfolge \n - Einträge hinzufügen, bearbeiten und löschen \n - Produktabfrage mittels Strichtcodescanner und Open Food Facts API \n - Öffnungsdatum \n - Benachrichtigungen</string>
+    <string name="feature_list">- Anzeige einer Liste mit Lebensmittelverfallsdaten in aufsteigender zeitlicher Reihenfolge \n - Einträge hinzufügen, bearbeiten und löschen \n - Produktabfrage mittels Strichcodescanner und Open Food Facts API \n - Öffnungsdatum \n - Benachrichtigungen</string>
     <string name="support_this_project">Dieses Projekt unterstützen</string>
     <string name="report_a_bug">Fehler melden</string>
     <string name="version_x">Version %1$s</string>
@@ -121,4 +121,6 @@
     <string name="notifications_disabled_message">Sie haben Benachrichtigungen dauerhaft deaktiviert. Um Benachrichtigungen über abgelaufene Lebensmittel zu erhalten, müssen Sie diese manuell in den Einstellungen des Telefons aktivieren.</string>
     <string name="open_settings">Einstellungen öffnen</string>
     <string name="search">Suchen…</string>
+    <string name="clear_all_items_confirmation" tools:ignore="MissingTranslation">Möchten Sie wirklich alle Einträge löschen? Dies kann nicht rückgängig gemacht werden.</string>
+    <string name="delete_all" tools:ignore="MissingTranslation">Alles löschen</string>
 </resources>
