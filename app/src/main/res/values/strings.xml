@@ -130,4 +130,36 @@
     <string name="notifications_disabled_message">You have permanently disabled notifications. To receive alerts about expiring food, you must enable them manually from the phone\'s Settings.</string>
     <string name="open_settings">Open Settings</string>
     <string name="search">Search…</string>
+
+    <!-- Onboarding - Navigation -->
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_back">Back</string>
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_get_started">Get started</string>
+
+    <!-- Onboarding - Welcome Page -->
+    <string name="onboarding_welcome_title">Welcome to %1$s!</string>
+    <string name="onboarding_welcome_description">Keeping track of expiration dates isn\'t always easy, especially when your fridge and pantry are full.\n\n%1$s helps you remember what you have at home, keep an eye on upcoming expiration dates, and make better use of your food before it goes to waste.</string>
+
+    <!-- Onboarding - Manage Food Page -->
+    <string name="onboarding_manage_title">Your food, organized</string>
+    <string name="onboarding_manage_description">Add the food you buy and enter its expiration date. Your items will be automatically organized by date, making it easy to see what needs your attention first.\n\nYou can also search for items, update their details, and keep your list organized as you use or replace your food.</string>
+
+    <!-- Onboarding - Notification Permission Page -->
+    <string name="onboarding_notifications_title">Never miss an expiration date</string>
+    <string name="onboarding_notifications_description">Enable notifications to receive reminders before your food expires.</string>
+    <string name="onboarding_notifications_enable">Enable notifications</string>
+    <string name="onboarding_notifications_enabled">Notifications are enabled!</string>
+    <string name="onboarding_notifications_optional">You can also continue without notifications and enable them later in Settings.</string>
+
+    <!-- Onboarding - Notification Time Page -->
+    <string name="onboarding_time_title">Choose your reminder time</string>
+    <string name="onboarding_time_description">When would you like to receive your daily food expiration reminders?</string>
+    <string name="onboarding_time_save">Save reminder time</string>
+    <string name="onboarding_time_saved">Reminder time saved!</string>
+
+    <!-- Onboarding - Ready Page -->
+    <string name="onboarding_ready_title">You\'re all set!</string>
+    <string name="onboarding_ready_description">You\'re ready to start keeping track of your food and its expiration dates.\n\nStart by adding a few items from your fridge or pantry. As your list grows, %1$s will help you see what to use first and stay on top of your food.</string>
+    <string name="onboarding_ready_hint">You can always adjust your preferences later in Settings.</string>
 </resources>

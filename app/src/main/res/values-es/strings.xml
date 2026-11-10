@@ -123,4 +123,38 @@
     <string name="notifications_disabled_message">Has desactivado las notificaciones de forma permanente. Para recibir alertas sobre alimentos a punto de caducar, debes activarlas manualmente desde los Ajustes del teléfono.</string>
     <string name="open_settings">Abrir ajustes</string>
     <string name="search">Buscar…</string>
+
+
+    <!-- Onboarding - Navigation -->
+    <string name="onboarding_next">Siguiente</string>
+    <string name="onboarding_back">Atrás</string>
+    <string name="onboarding_skip">Omitir</string>
+    <string name="onboarding_get_started">Empezar</string>
+
+    <!-- Onboarding - Welcome Page -->
+    <string name="onboarding_welcome_title">¡Te damos la bienvenida a %1$s!</string>
+    <string name="onboarding_welcome_description">No siempre es fácil llevar un control de las fechas de caducidad, especialmente cuando el frigorífico y la despensa están llenos.\n\n%1$s te ayuda a recordar qué alimentos tienes en casa, estar al tanto de las próximas fechas de caducidad y aprovechar mejor la comida antes de que se desperdicie.</string>
+
+    <!-- Onboarding - Manage Food Page -->
+    <string name="onboarding_manage_title">Tus alimentos, en orden</string>
+    <string name="onboarding_manage_description">Añade los alimentos que compras e introduce su fecha de caducidad. Se ordenarán automáticamente por fecha para que puedas ver fácilmente cuáles debes consumir primero.\n\nTambién puedes buscar alimentos, editar sus datos y mantener tu lista actualizada a medida que los consumes o compras otros nuevos.</string>
+
+    <!-- Onboarding - Notification Permission Page -->
+    <string name="onboarding_notifications_title">No olvides las fechas de caducidad</string>
+    <string name="onboarding_notifications_description">Activa las notificaciones para recibir recordatorios antes de que caduquen tus alimentos.</string>
+    <string name="onboarding_notifications_enable">Activar notificaciones</string>
+    <string name="onboarding_notifications_enabled">¡Las notificaciones están activadas!</string>
+    <string name="onboarding_notifications_optional">También puedes continuar sin notificaciones y activarlas más tarde desde Ajustes.</string>
+
+    <!-- Onboarding - Notification Time Page -->
+    <string name="onboarding_time_title">Elige la hora de los recordatorios</string>
+    <string name="onboarding_time_description">¿A qué hora prefieres recibir los recordatorios diarios sobre las fechas de caducidad de tus alimentos?</string>
+    <string name="onboarding_time_save">Guardar hora</string>
+    <string name="onboarding_time_saved">¡Hora de los recordatorios guardada!</string>
+
+    <!-- Onboarding - Ready Page -->
+    <string name="onboarding_ready_title">¡Todo listo!</string>
+    <string name="onboarding_ready_description">Ya puedes empezar a llevar un control de tus alimentos y sus fechas de caducidad.\n\nEmpieza añadiendo algunos alimentos de tu frigorífico o despensa. A medida que crezca tu lista, %1$s te ayudará a saber qué consumir primero y a mantener las fechas de caducidad bajo control.</string>
+    <string name="onboarding_ready_hint">Puedes cambiar tus preferencias en cualquier momento desde Ajustes.</string>
+
 </resources>

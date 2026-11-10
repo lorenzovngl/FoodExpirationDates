@@ -156,6 +156,7 @@ ksp {
 
 dependencies {
     implementation(project(":feature:news"))
+    implementation(project(":feature:onboarding"))
 
     implementation(libs.kotlin.stdlib)
     implementation(libs.core.ktx)

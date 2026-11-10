@@ -9,6 +9,7 @@ sealed class Screen(
     data object AboutScreen : Screen("about_screen", "About Screen")
     data object SettingsScreen : Screen("setting_screen", "Settings Screen")
     data object NewsScreen : Screen("news_screen", "News Screen")
+    data object OnboardingScreen : Screen("onboarding", "Onboarding")
 
     companion object {
         fun fromRoute(route: String?): Screen? {
@@ -19,6 +20,7 @@ sealed class Screen(
                 AboutScreen.route -> AboutScreen
                 SettingsScreen.route -> SettingsScreen
                 NewsScreen.route -> NewsScreen
+                OnboardingScreen.route -> OnboardingScreen
                 else -> null
             }
         }

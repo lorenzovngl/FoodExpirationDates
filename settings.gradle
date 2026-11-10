@@ -16,4 +16,5 @@ rootProject.name = "FoodExpirationDates"
 include ':app'
 include ':translation-analyzer'
 include ':feature:news'
+include ':feature:onboarding'
 includeBuild("build-logic")

@@ -125,4 +125,36 @@
     <string name="notifications_disabled_message">通知を完全に無効にしました。賞味期限が近づいた食品に関するアラートを受け取るには、スマートフォンの「設定」から手動で通知を有効にする必要があります。</string>
     <string name="open_settings">設定を開く</string>
     <string name="search">検索…</string>
+
+    <!-- Onboarding - Navigation -->
+    <string name="onboarding_next">次へ</string>
+    <string name="onboarding_back">戻る</string>
+    <string name="onboarding_skip">スキップ</string>
+    <string name="onboarding_get_started">はじめる</string>
+
+    <!-- Onboarding - Welcome Page -->
+    <string name="onboarding_welcome_title">%1$sへようこそ！</string>
+    <string name="onboarding_welcome_description">冷蔵庫や食品棚に食べ物がたくさんあると、賞味期限や消費期限をすべて把握するのは大変です。\n\n%1$sを使えば、家にある食品とその期限を簡単に管理できます。期限が近づいている食品を確認し、食品を無駄なく使い切るのに役立ちます。</string>
+
+    <!-- Onboarding - Manage Food Page -->
+    <string name="onboarding_manage_title">食品をわかりやすく管理</string>
+    <string name="onboarding_manage_description">購入した食品とその期限を登録しましょう。食品は期限が近い順に自動で並ぶので、どれから使えばよいかひと目でわかります。\n\n食品の検索や詳細の編集もできます。食品を使ったり、新しく購入したりしたときは、リストを更新して整理しておきましょう。</string>
+
+    <!-- Onboarding - Notification Permission Page -->
+    <string name="onboarding_notifications_title">食品の期限を見逃さない</string>
+    <string name="onboarding_notifications_description">通知を有効にすると、食品の期限が近づいたときにリマインダーを受け取れます。</string>
+    <string name="onboarding_notifications_enable">通知を有効にする</string>
+    <string name="onboarding_notifications_enabled">通知が有効になりました！</string>
+    <string name="onboarding_notifications_optional">通知を有効にせずに続けることもできます。あとから設定画面で有効にできます。</string>
+
+    <!-- Onboarding - Notification Time Page -->
+    <string name="onboarding_time_title">通知する時刻を選択</string>
+    <string name="onboarding_time_description">食品の期限に関する毎日のリマインダーを、何時に受け取りたいですか？</string>
+    <string name="onboarding_time_save">通知時刻を保存</string>
+    <string name="onboarding_time_saved">通知時刻を保存しました！</string>
+
+    <!-- Onboarding - Ready Page -->
+    <string name="onboarding_ready_title">準備ができました！</string>
+    <string name="onboarding_ready_description">これで、食品とその期限を管理する準備が整いました。\n\nまずは冷蔵庫や食品棚にある食品をいくつか登録してみましょう。リストに食品を追加していくと、%1$sがどの食品から使えばよいかを確認し、期限を管理するのに役立ちます。</string>
+    <string name="onboarding_ready_hint">設定はあとからいつでも変更できます。</string>
 </resources>

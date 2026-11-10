@@ -123,4 +123,37 @@
     <string name="search">Suchen…</string>
     <string name="clear_all_items_confirmation" tools:ignore="MissingTranslation">Möchten Sie wirklich alle Einträge löschen? Dies kann nicht rückgängig gemacht werden.</string>
     <string name="delete_all" tools:ignore="MissingTranslation">Alles löschen</string>
+
+
+    <!-- Onboarding - Navigation -->
+    <string name="onboarding_next">Weiter</string>
+    <string name="onboarding_back">Zurück</string>
+    <string name="onboarding_skip">Überspringen</string>
+    <string name="onboarding_get_started">Loslegen</string>
+
+    <!-- Onboarding - Welcome Page -->
+    <string name="onboarding_welcome_title">Willkommen bei %1$s!</string>
+    <string name="onboarding_welcome_description">Es ist nicht immer einfach, den Überblick über die Haltbarkeitsdaten von Lebensmitteln zu behalten, besonders wenn Kühlschrank und Vorratsschrank gut gefüllt sind.\n\n%1$s hilft Ihnen dabei, Ihre Lebensmittelvorräte im Blick zu behalten, bevorstehende Ablaufdaten rechtzeitig zu erkennen und Lebensmittel besser zu nutzen, statt sie wegzuwerfen.</string>
+
+    <!-- Onboarding - Manage Food Page -->
+    <string name="onboarding_manage_title">Ihre Lebensmittel, gut organisiert</string>
+    <string name="onboarding_manage_description">Fügen Sie Ihre eingekauften Lebensmittel hinzu und geben Sie das jeweilige Haltbarkeitsdatum ein. Die Einträge werden automatisch nach Datum sortiert, sodass Sie sofort erkennen können, welche Lebensmittel Sie zuerst verbrauchen sollten.\n\nSie können außerdem nach Lebensmitteln suchen, ihre Angaben bearbeiten und Ihre Liste aktualisieren, wenn Sie etwas verbrauchen oder neu einkaufen.</string>
+
+    <!-- Onboarding - Notification Permission Page -->
+    <string name="onboarding_notifications_title">Keine Haltbarkeitsdaten mehr verpassen</string>
+    <string name="onboarding_notifications_description">Aktivieren Sie Benachrichtigungen, um rechtzeitig an bevorstehende Haltbarkeitsdaten Ihrer Lebensmittel erinnert zu werden.</string>
+    <string name="onboarding_notifications_enable">Benachrichtigungen aktivieren</string>
+    <string name="onboarding_notifications_enabled">Benachrichtigungen sind aktiviert!</string>
+    <string name="onboarding_notifications_optional">Sie können auch ohne Benachrichtigungen fortfahren und diese später in den Einstellungen aktivieren.</string>
+
+    <!-- Onboarding - Notification Time Page -->
+    <string name="onboarding_time_title">Uhrzeit für Erinnerungen wählen</string>
+    <string name="onboarding_time_description">Um wie viel Uhr möchten Sie Ihre täglichen Erinnerungen an die Haltbarkeitsdaten Ihrer Lebensmittel erhalten?</string>
+    <string name="onboarding_time_save">Uhrzeit speichern</string>
+    <string name="onboarding_time_saved">Uhrzeit für Erinnerungen gespeichert!</string>
+
+    <!-- Onboarding - Ready Page -->
+    <string name="onboarding_ready_title">Alles ist bereit!</string>
+    <string name="onboarding_ready_description">Jetzt können Sie damit beginnen, Ihre Lebensmittel und deren Haltbarkeitsdaten im Blick zu behalten.\n\nFügen Sie zunächst einige Lebensmittel aus Ihrem Kühlschrank oder Vorratsschrank hinzu. Wenn Ihre Liste wächst, hilft Ihnen %1$s dabei, zu erkennen, was Sie zuerst verbrauchen sollten, und die Haltbarkeitsdaten im Blick zu behalten.</string>
+    <string name="onboarding_ready_hint">Sie können Ihre Einstellungen jederzeit später ändern.</string>
 </resources>

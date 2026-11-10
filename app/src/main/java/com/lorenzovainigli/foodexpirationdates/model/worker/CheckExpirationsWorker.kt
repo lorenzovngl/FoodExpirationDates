@@ -1,6 +1,7 @@
 package com.lorenzovainigli.foodexpirationdates.model.worker
 
 import android.content.Context
+import android.util.Log
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
@@ -14,6 +15,7 @@ import com.lorenzovainigli.foodexpirationdates.model.entity.computeExpirationDat
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.showNotification
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.first
 import java.time.Clock
 import java.time.Instant
@@ -70,8 +72,11 @@ class CheckExpirationsWorker @Inject constructor(
             }
 
             Result.success()
-        } catch (_: Exception){
-            Result.success()
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            Log.e("CheckExpirationsWorker", "Expiration check failed", e)
+            Result.retry()
         } finally {
             scheduleNextRun(context)
         }

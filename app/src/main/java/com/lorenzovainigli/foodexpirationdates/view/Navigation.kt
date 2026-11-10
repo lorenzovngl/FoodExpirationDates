@@ -24,6 +24,7 @@ import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.rou
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.viewmodel.FoodListViewModel
 import com.lorenzovainigli.foodexpirationdates.feature.info.presentation.route.InfoRoute
 import com.lorenzovainigli.foodexpirationdates.model.review.ReviewManager
+import com.lorenzovainigli.foodexpirationdates.onboarding.AppOnboardingScreen
 import com.lorenzovainigli.news.presentation.route.NewsRoute
 import java.util.Locale
 import kotlin.Boolean
@@ -61,6 +62,31 @@ fun Navigation(
         navController = navController,
         startDestination = startDestination
     ) {
+        composable(route = Screen.OnboardingScreen.route) {
+            AppOnboardingScreen(
+                initialNotificationHour = activity.preferencesRepository.getUserNotificationTimeHour(),
+                initialNotificationMinute = activity.preferencesRepository.getUserNotificationTimeMinute(),
+                onNotificationTimeSelected = { hour, minute ->
+                    activity.preferencesViewModel.setNotificationTime(
+                        hour = hour,
+                        minute = minute
+                    )
+                },
+                onAnalyticsEvent = { event, params ->
+                    activity.analyticsTracker.logEvent(event, params)
+                },
+                onComplete = {
+                    activity.preferencesViewModel.completeOnboarding()
+
+                    navController.navigate(Screen.MainScreen.route) {
+                        popUpTo(Screen.OnboardingScreen.route) {
+                            inclusive = true
+                        }
+                        launchSingleTop = true
+                    }
+                }
+            )
+        }
         composable(route = Screen.MainScreen.route) {
             FoodListRoute(
                 viewModel = foodListViewModel,

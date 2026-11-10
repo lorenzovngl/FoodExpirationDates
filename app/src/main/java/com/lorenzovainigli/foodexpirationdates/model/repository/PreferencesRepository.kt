@@ -23,7 +23,7 @@ import javax.inject.Singleton
 
 @Singleton
 class PreferencesRepository @Inject constructor(
-    @ApplicationContext context: Context
+    @ApplicationContext private val context: Context
 ) {
 
     companion object {
@@ -39,6 +39,8 @@ class PreferencesRepository @Inject constructor(
         const val KEY_MONOCHROME_ICONS = "monochrome_icons"
         const val KEY_LANGUAGE = "language"
         const val KEY_FOOD_ADDED_COUNT = "food_added_count"
+        const val KEY_ONBOARDING_COMPLETED_VERSION = "onboarding_completed_version"
+        const val CURRENT_ONBOARDING_VERSION = 1
 
         private val availLocaleDateFormats = arrayOf(
             DateFormat.SHORT,
@@ -316,5 +318,65 @@ class PreferencesRepository @Inject constructor(
         }
 
         return count
+    }
+
+    // Onboarding
+
+    fun getOnboardingCompletedVersion(): Int {
+        return preferences.getInt(
+            KEY_ONBOARDING_COMPLETED_VERSION,
+            0
+        )
+    }
+
+    fun isOnboardingCompleted(): Boolean {
+        return getOnboardingCompletedVersion() >= CURRENT_ONBOARDING_VERSION
+    }
+
+    fun completeOnboarding() {
+        preferences.edit(commit = true) {
+            putInt(
+                KEY_ONBOARDING_COMPLETED_VERSION,
+                CURRENT_ONBOARDING_VERSION
+            )
+        }
+    }
+
+    private fun hasLegacyPreferences(): Boolean {
+        return listOf(
+            KEY_DATE_FORMAT,
+            KEY_SCREEN_PROTECTION,
+            KEY_NOTIFICATION_TIME_HOUR,
+            KEY_NOTIFICATION_TIME_MINUTE,
+            KEY_THEME_MODE,
+            KEY_TOP_BAR_FONT,
+            KEY_DYNAMIC_COLORS,
+            KEY_MONOCHROME_ICONS,
+            KEY_LANGUAGE,
+            KEY_FOOD_ADDED_COUNT
+        ).any { key ->
+            preferences.contains(key)
+        }
+    }
+
+    fun migrateOnboardingPreferences() {
+        if (preferences.contains(KEY_ONBOARDING_COMPLETED_VERSION)) {
+            return
+        }
+
+        val hasExistingData = hasLegacyPreferences()
+
+        val wasUpdated = runCatching {
+            val packageInfo = context.packageManager.getPackageInfo(
+                context.packageName,
+                0
+            )
+
+            packageInfo.lastUpdateTime > packageInfo.firstInstallTime
+        }.getOrDefault(false)
+
+        if (hasExistingData || wasUpdated) {
+            completeOnboarding()
+        }
     }
 }

@@ -130,4 +130,36 @@
     <string name="notifications_disabled_message">Hai disattivato le notifiche in modo permanente. Per ricevere avvisi sulla scadenza degli alimenti, devi attivarle manualmente dalle impostazioni del telefono.</string>
     <string name="open_settings">Apri impostazioni</string>
     <string name="search">Cerca…</string>
+
+    <!-- Onboarding - Navigation -->
+    <string name="onboarding_next">Avanti</string>
+    <string name="onboarding_back">Indietro</string>
+    <string name="onboarding_skip">Salta</string>
+    <string name="onboarding_get_started">Inizia</string>
+
+    <!-- Onboarding - Welcome Page -->
+    <string name="onboarding_welcome_title">Ti diamo il benvenuto in %1$s!</string>
+    <string name="onboarding_welcome_description">Tenere traccia delle date di scadenza non è sempre facile, soprattutto quando il frigorifero e la dispensa sono pieni.\n\n%1$s ti aiuta a ricordare quali alimenti hai in casa, a tenere d\'occhio le scadenze imminenti e a utilizzare al meglio il cibo prima che venga sprecato.</string>
+
+    <!-- Onboarding - Manage Food Page -->
+    <string name="onboarding_manage_title">I tuoi alimenti, in ordine</string>
+    <string name="onboarding_manage_description">Aggiungi gli alimenti che acquisti e inserisci la loro data di scadenza. Verranno ordinati automaticamente per data, così potrai vedere facilmente quali consumare prima.\n\nPuoi anche cercare gli alimenti, modificarne i dettagli e mantenere aggiornata la tua lista man mano che li consumi o ne acquisti di nuovi.</string>
+
+    <!-- Onboarding - Notification Permission Page -->
+    <string name="onboarding_notifications_title">Non dimenticare le scadenze</string>
+    <string name="onboarding_notifications_description">Attiva le notifiche per ricevere promemoria prima che i tuoi alimenti scadano.</string>
+    <string name="onboarding_notifications_enable">Attiva le notifiche</string>
+    <string name="onboarding_notifications_enabled">Le notifiche sono attive!</string>
+    <string name="onboarding_notifications_optional">Puoi continuare anche senza notifiche e attivarle in seguito dalle Impostazioni.</string>
+
+    <!-- Onboarding - Notification Time Page -->
+    <string name="onboarding_time_title">Scegli l’orario dei promemoria</string>
+    <string name="onboarding_time_description">A che ora preferisci ricevere i promemoria giornalieri sulle scadenze dei tuoi alimenti?</string>
+    <string name="onboarding_time_save">Salva l’orario</string>
+    <string name="onboarding_time_saved">Orario dei promemoria salvato!</string>
+
+    <!-- Onboarding - Ready Page -->
+    <string name="onboarding_ready_title">È tutto pronto!</string>
+    <string name="onboarding_ready_description">Ora puoi iniziare a tenere traccia dei tuoi alimenti e delle relative scadenze.\n\nComincia aggiungendo qualche alimento dal frigorifero o dalla dispensa. Man mano che la lista cresce, %1$s ti aiuterà a capire cosa consumare prima e a tenere sotto controllo le scadenze.</string>
+    <string name="onboarding_ready_hint">Puoi modificare le tue preferenze in qualsiasi momento dalle Impostazioni.</string>
 </resources>

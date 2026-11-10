@@ -117,4 +117,37 @@
     <string name="add">Dodaj</string>
     <string name="remove">Usuń</string>
     <string name="search">Szukaj…</string>
+
+
+    <!-- Onboarding - Navigation -->
+    <string name="onboarding_next">Dalej</string>
+    <string name="onboarding_back">Wstecz</string>
+    <string name="onboarding_skip">Pomiń</string>
+    <string name="onboarding_get_started">Rozpocznij</string>
+
+    <!-- Onboarding - Welcome Page -->
+    <string name="onboarding_welcome_title">Witamy w %1$s!</string>
+    <string name="onboarding_welcome_description">Kontrolowanie terminów ważności produktów spożywczych nie zawsze jest łatwe, szczególnie gdy lodówka i spiżarnia są pełne.\n\n%1$s pomaga sprawdzać, jakie produkty masz w domu, śledzić zbliżające się terminy ważności i lepiej wykorzystywać żywność, zanim się zmarnuje.</string>
+
+    <!-- Onboarding - Manage Food Page -->
+    <string name="onboarding_manage_title">Twoje produkty pod kontrolą</string>
+    <string name="onboarding_manage_description">Dodawaj kupione produkty i wprowadzaj ich terminy ważności. Produkty będą automatycznie sortowane według daty, dzięki czemu łatwo sprawdzisz, które należy zużyć w pierwszej kolejności.\n\nMożesz także wyszukiwać produkty, edytować ich szczegóły i aktualizować listę w miarę zużywania żywności lub robienia nowych zakupów.</string>
+
+    <!-- Onboarding - Notification Permission Page -->
+    <string name="onboarding_notifications_title">Nie przegap terminów ważności</string>
+    <string name="onboarding_notifications_description">Włącz powiadomienia, aby otrzymywać przypomnienia przed upływem terminów ważności produktów.</string>
+    <string name="onboarding_notifications_enable">Włącz powiadomienia</string>
+    <string name="onboarding_notifications_enabled">Powiadomienia są włączone!</string>
+    <string name="onboarding_notifications_optional">Możesz kontynuować bez powiadomień i włączyć je później w ustawieniach.</string>
+
+    <!-- Onboarding - Notification Time Page -->
+    <string name="onboarding_time_title">Wybierz godzinę przypomnień</string>
+    <string name="onboarding_time_description">O której godzinie chcesz otrzymywać codzienne przypomnienia o terminach ważności produktów?</string>
+    <string name="onboarding_time_save">Zapisz godzinę</string>
+    <string name="onboarding_time_saved">Godzina przypomnień została zapisana!</string>
+
+    <!-- Onboarding - Ready Page -->
+    <string name="onboarding_ready_title">Wszystko gotowe!</string>
+    <string name="onboarding_ready_description">Możesz już zacząć kontrolować swoje produkty spożywcze i ich terminy ważności.\n\nNa początek dodaj kilka produktów z lodówki lub spiżarni. W miarę rozbudowy listy %1$s pomoże Ci ustalić, co warto zużyć najpierw, i śledzić terminy ważności produktów.</string>
+    <string name="onboarding_ready_hint">W każdej chwili możesz zmienić swoje preferencje w ustawieniach.</string>
 </resources>

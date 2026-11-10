@@ -99,4 +99,37 @@
     <string name="notifications_disabled_message">Les notifications ont été complètement désactivées. Pour recevoir des alertes concernant les aliments dont la date de péremption approche, vous devez activer manuellement les notifications dans les paramètres de votre smartphone.</string>
     <string name="open_settings">Ouvrir les paramètres</string>
     <string name="search">Rechercher…</string>
+
+
+    <!-- Onboarding - Navigation -->
+    <string name="onboarding_next">Suivant</string>
+    <string name="onboarding_back">Retour</string>
+    <string name="onboarding_skip">Passer</string>
+    <string name="onboarding_get_started">Commencer</string>
+
+    <!-- Onboarding - Welcome Page -->
+    <string name="onboarding_welcome_title">Bienvenue sur %1$s !</string>
+    <string name="onboarding_welcome_description">Il n’est pas toujours facile de suivre les dates de péremption, surtout lorsque le réfrigérateur et les placards sont bien remplis.\n\n%1$s vous aide à savoir quels aliments vous avez chez vous, à surveiller les dates de péremption à venir et à mieux utiliser vos aliments avant qu’ils ne soient gaspillés.</string>
+
+    <!-- Onboarding - Manage Food Page -->
+    <string name="onboarding_manage_title">Vos aliments, bien organisés</string>
+    <string name="onboarding_manage_description">Ajoutez les aliments que vous achetez et indiquez leur date de péremption. Ils seront automatiquement classés par date, afin que vous puissiez facilement voir lesquels consommer en priorité.\n\nVous pouvez également rechercher des aliments, modifier leurs informations et tenir votre liste à jour au fur et à mesure que vous les consommez ou en achetez de nouveaux.</string>
+
+    <!-- Onboarding - Notification Permission Page -->
+    <string name="onboarding_notifications_title">Ne manquez aucune date de péremption</string>
+    <string name="onboarding_notifications_description">Activez les notifications pour recevoir des rappels avant que vos aliments n’arrivent à leur date de péremption.</string>
+    <string name="onboarding_notifications_enable">Activer les notifications</string>
+    <string name="onboarding_notifications_enabled">Les notifications sont activées !</string>
+    <string name="onboarding_notifications_optional">Vous pouvez également continuer sans notifications et les activer plus tard dans les paramètres.</string>
+
+    <!-- Onboarding - Notification Time Page -->
+    <string name="onboarding_time_title">Choisissez l’heure des rappels</string>
+    <string name="onboarding_time_description">À quelle heure souhaitez-vous recevoir les rappels quotidiens concernant les dates de péremption de vos aliments ?</string>
+    <string name="onboarding_time_save">Enregistrer l’heure</string>
+    <string name="onboarding_time_saved">Heure des rappels enregistrée !</string>
+
+    <!-- Onboarding - Ready Page -->
+    <string name="onboarding_ready_title">Tout est prêt !</string>
+    <string name="onboarding_ready_description">Vous pouvez maintenant commencer à suivre vos aliments et leurs dates de péremption.\n\nCommencez par ajouter quelques aliments de votre réfrigérateur ou de vos placards. À mesure que votre liste s’agrandit, %1$s vous aidera à identifier les aliments à consommer en priorité et à garder un œil sur leurs dates de péremption.</string>
+    <string name="onboarding_ready_hint">Vous pouvez modifier vos préférences à tout moment dans les paramètres.</string>
 </resources>

@@ -124,4 +124,38 @@
     <string name="notifications_disabled_message">Уведомления были полностью отключены. Чтобы получать оповещения о продуктах с приближающимся сроком годности, необходимо вручную включить уведомления в настройках смартфона.</string>
     <string name="open_settings">Открыть настройки</string>
     <string name="search">Поиск…</string>
+
+
+    <!-- Onboarding - Navigation -->
+    <string name="onboarding_next">Далее</string>
+    <string name="onboarding_back">Назад</string>
+    <string name="onboarding_skip">Пропустить</string>
+    <string name="onboarding_get_started">Начать</string>
+
+    <!-- Onboarding - Welcome Page -->
+    <string name="onboarding_welcome_title">Добро пожаловать в %1$s!</string>
+    <string name="onboarding_welcome_description">Следить за сроками годности продуктов не всегда просто, особенно когда холодильник и кладовая заполнены.\n\nС помощью %1$s вы сможете легко отслеживать, какие продукты есть дома, проверять приближающиеся сроки годности и использовать продукты вовремя, чтобы сократить количество пищевых отходов.</string>
+
+    <!-- Onboarding - Manage Food Page -->
+    <string name="onboarding_manage_title">Все продукты под контролем</string>
+    <string name="onboarding_manage_description">Добавляйте купленные продукты и указывайте сроки их годности. Продукты будут автоматически отсортированы по дате, чтобы вы сразу видели, какие из них нужно использовать в первую очередь.\n\nВы также можете искать продукты, изменять их данные и поддерживать список в актуальном состоянии по мере использования продуктов или покупки новых.</string>
+
+    <!-- Onboarding - Notification Permission Page -->
+    <string name="onboarding_notifications_title">Не забывайте о сроках годности</string>
+    <string name="onboarding_notifications_description">Включите уведомления, чтобы получать напоминания до истечения срока годности продуктов.</string>
+    <string name="onboarding_notifications_enable">Включить уведомления</string>
+    <string name="onboarding_notifications_enabled">Уведомления включены!</string>
+    <string name="onboarding_notifications_optional">Вы можете продолжить без уведомлений и включить их позже в настройках.</string>
+
+    <!-- Onboarding - Notification Time Page -->
+    <string name="onboarding_time_title">Выберите время напоминаний</string>
+    <string name="onboarding_time_description">В какое время вы хотели бы получать ежедневные напоминания о сроках годности продуктов?</string>
+    <string name="onboarding_time_save">Сохранить время</string>
+    <string name="onboarding_time_saved">Время напоминаний сохранено!</string>
+
+    <!-- Onboarding - Ready Page -->
+    <string name="onboarding_ready_title">Всё готово!</string>
+    <string name="onboarding_ready_description">Теперь можно начать отслеживать продукты и сроки их годности.\n\nДля начала добавьте несколько продуктов из холодильника или кладовой. По мере заполнения списка %1$s поможет вам определять, какие продукты стоит использовать в первую очередь, и следить за сроками их годности.</string>
+    <string name="onboarding_ready_hint">Вы всегда можете изменить свои предпочтения позже в настройках.</string>
+
 </resources>

@@ -29,6 +29,7 @@ import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepos
 import com.lorenzovainigli.foodexpirationdates.model.review.ReviewManager
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyScaffold
+import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDatesViewModel
 import com.lorenzovainigli.foodexpirationdates.viewmodel.PreferencesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,6 +54,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        preferencesRepository.migrateOnboardingPreferences()
 
         enableEdgeToEdge()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -99,12 +102,19 @@ class MainActivity : ComponentActivity() {
         val showSnackbar = remember { mutableStateOf(false) }
         var isSearchActive by remember { mutableStateOf(false) }
 
+        val startDestination = if (preferencesRepository.isOnboardingCompleted()) {
+            Screen.MainScreen.route
+        } else {
+            Screen.OnboardingScreen.route
+        }
+
         CompositionLocalProvider(
             LocalAnalyticsTracker provides analyticsTracker
         ) {
             MyScaffold(
                 activity = this,
                 navController = navController,
+                startDestination = startDestination,
                 showSnackbar = showSnackbar,
                 onSearchIconClick = { isSearchActive = true }
             ) {
@@ -112,6 +122,7 @@ class MainActivity : ComponentActivity() {
                     activity = this,
                     showSnackbar = showSnackbar,
                     navController = navController,
+                    startDestination = startDestination,
                     isSearchActive = isSearchActive,
                     onSearchBarClose = { isSearchActive = false },
                     reviewManager = reviewManager

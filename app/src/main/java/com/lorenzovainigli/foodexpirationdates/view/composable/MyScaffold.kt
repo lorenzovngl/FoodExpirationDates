@@ -70,7 +70,7 @@ import kotlinx.coroutines.launch
 fun MyScaffold(
     activity: MainActivity? = null,
     navController: NavHostController,
-    navDestination: String? = null,
+    startDestination: String = Screen.MainScreen.route,
     showSnackbar: MutableState<Boolean>,
     onSearchIconClick: () -> Unit = {},
     content: @Composable () -> Unit,
@@ -79,6 +79,11 @@ fun MyScaffold(
     val coroutineScope = rememberCoroutineScope()
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
+
+    val currentDestination = currentBackStackEntry?.destination?.route ?: startDestination
+
+    val isOnboarding = currentDestination == Screen.OnboardingScreen.route
+
     val context = LocalContext.current
 
     val noBottomBarRoutes = listOf(Screen.InsertScreen.route + "?itemId={itemId}")
@@ -145,10 +150,18 @@ fun MyScaffold(
             badgeNumber = unreadNewsCount
         )
     )
+    if (isOnboarding) {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            content()
+        }
+        return
+    }
     NavigationSuiteScaffold(
         navigationItemVerticalArrangement = Arrangement.Center,
         navigationItems = {
-            val currentDestination = navDestination ?: currentBackStackEntry?.destination?.route
             var selectedItem = when (currentDestination) {
                 Screen.MainScreen.route -> 0
                 Screen.SettingsScreen.route -> 1
@@ -199,16 +212,15 @@ fun MyScaffold(
             contentWindowInsets = WindowInsets.safeDrawing,
             snackbarHost = { SnackbarHost(snackbarHostState) },
             topBar = {
-                val destination = navDestination ?: currentBackStackEntry?.destination?.route
                 val prefsUiState =
                     activity?.preferencesViewModel?.uiState?.collectAsStateWithLifecycle()
                 MyTopAppBar(
-                    title = when (destination) {
+                    title = when (currentDestination) {
                         Screen.AboutScreen.route -> stringResource(id = R.string.about_this_app)
                         Screen.SettingsScreen.route -> stringResource(id = R.string.settings)
                         Screen.NewsScreen.route -> stringResource(id = com.lorenzovainigli.news.R.string.news)
                         else -> {
-                            if (destination?.contains(Screen.InsertScreen.route) == true) {
+                            if (currentDestination.contains(Screen.InsertScreen.route)) {
                                 if (currentBackStackEntry?.arguments?.getString("itemId") != null) {
                                     stringResource(id = R.string.edit_item)
                                 } else {
@@ -221,7 +233,7 @@ fun MyScaffold(
                     },
                     topBarFont = prefsUiState?.value?.topBarFont?.ordinal,
                     actions = {
-                        if (destination?.contains(Screen.MainScreen.route) == true) {
+                        if (currentDestination.contains(Screen.MainScreen.route)) {
                             val context = LocalContext.current
                             val viewModel = activity?.foodListViewModel
                             val exportTaskSuccess =
@@ -259,8 +271,7 @@ fun MyScaffold(
                                     activity?.foodListViewModel?.resetNotifyExportTaskDone()
                                 }
                             )
-                        } else if (destination?.contains(Screen.AboutScreen.route) != true &&
-                            destination?.contains(Screen.InsertScreen.route) != true
+                        } else if (!currentDestination.contains(Screen.AboutScreen.route) && !currentDestination.contains(Screen.InsertScreen.route)
                         ) {
                             IconButton(
                                 onClick = {
@@ -276,9 +287,7 @@ fun MyScaffold(
                         }
                     },
                     navigationIcon = {
-                        if (destination?.contains(Screen.InsertScreen.route) == true ||
-                            destination?.contains(Screen.AboutScreen.route) == true
-                        ) {
+                        if (currentDestination.contains(Screen.InsertScreen.route) || currentDestination.contains(Screen.AboutScreen.route)) {
                             IconButton(
                                 onClick = { navController.popBackStack() }
                             ) {

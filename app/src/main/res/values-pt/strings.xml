@@ -13,4 +13,38 @@
     <string name="expiration_date">Data de validade</string>
     <string name="please_select_a_date">Selecione uma data</string>
     <string name="search">Pesquisar…</string>
+
+
+    <!-- Onboarding - Navigation -->
+    <string name="onboarding_next">Próximo</string>
+    <string name="onboarding_back">Voltar</string>
+    <string name="onboarding_skip">Pular</string>
+    <string name="onboarding_get_started">Começar</string>
+
+    <!-- Onboarding - Welcome Page -->
+    <string name="onboarding_welcome_title">Boas-vindas ao %1$s!</string>
+    <string name="onboarding_welcome_description">Nem sempre é fácil acompanhar os prazos de validade dos alimentos, especialmente quando a geladeira e a despensa estão cheias.\n\nO %1$s ajuda você a lembrar quais alimentos tem em casa, acompanhar as datas de validade que estão se aproximando e aproveitar melhor os alimentos antes que sejam desperdiçados.</string>
+
+    <!-- Onboarding - Manage Food Page -->
+    <string name="onboarding_manage_title">Seus alimentos, organizados</string>
+    <string name="onboarding_manage_description">Adicione os alimentos que você compra e informe suas datas de validade. Eles serão organizados automaticamente por data, para que você possa identificar facilmente quais devem ser consumidos primeiro.\n\nVocê também pode pesquisar alimentos, editar suas informações e manter sua lista atualizada conforme consome os produtos ou faz novas compras.</string>
+
+    <!-- Onboarding - Notification Permission Page -->
+    <string name="onboarding_notifications_title">Não perca nenhuma data de validade</string>
+    <string name="onboarding_notifications_description">Ative as notificações para receber lembretes antes que seus alimentos vençam.</string>
+    <string name="onboarding_notifications_enable">Ativar notificações</string>
+    <string name="onboarding_notifications_enabled">As notificações estão ativadas!</string>
+    <string name="onboarding_notifications_optional">Você também pode continuar sem notificações e ativá-las mais tarde nas Configurações.</string>
+
+    <!-- Onboarding - Notification Time Page -->
+    <string name="onboarding_time_title">Escolha o horário dos lembretes</string>
+    <string name="onboarding_time_description">Em que horário você gostaria de receber os lembretes diários sobre a validade dos seus alimentos?</string>
+    <string name="onboarding_time_save">Salvar horário</string>
+    <string name="onboarding_time_saved">Horário dos lembretes salvo!</string>
+
+    <!-- Onboarding - Ready Page -->
+    <string name="onboarding_ready_title">Tudo pronto!</string>
+    <string name="onboarding_ready_description">Agora você pode começar a acompanhar seus alimentos e suas datas de validade.\n\nComece adicionando alguns alimentos da geladeira ou da despensa. Conforme sua lista crescer, o %1$s ajudará você a identificar o que consumir primeiro e a manter as datas de validade sob controle.</string>
+    <string name="onboarding_ready_hint">Você pode alterar suas preferências a qualquer momento nas Configurações.</string>
+
 </resources>

@@ -3,9 +3,11 @@ package com.lorenzovainigli.foodexpirationdates.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.work.ExistingWorkPolicy
 import com.lorenzovainigli.foodexpirationdates.feature.settings.presentation.model.SettingsUiState
 import com.lorenzovainigli.foodexpirationdates.model.Language
 import com.lorenzovainigli.foodexpirationdates.model.LocaleHelper
+import com.lorenzovainigli.foodexpirationdates.model.NotificationManager
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -39,9 +41,26 @@ class PreferencesViewModel @Inject constructor(
     }
 
     fun setNotificationTime(hour: Int, minute: Int) {
+        require(hour in 0..23)
+        require(minute in 0..59)
+
+        if (
+            preferencesRepository.getUserNotificationTimeHour() == hour &&
+            preferencesRepository.getUserNotificationTimeMinute() == minute
+        ) {
+            return
+        }
+
         preferencesRepository.setUserNotificationTime(
             hour = hour,
             minute = minute
+        )
+
+        NotificationManager.scheduleDailyNotification(
+            context = context,
+            hour = hour,
+            minute = minute,
+            policy = ExistingWorkPolicy.REPLACE
         )
     }
 
@@ -80,5 +99,9 @@ class PreferencesViewModel @Inject constructor(
             language = language.code
         )
         LocaleHelper.changeLanguage(context, language.code)
+    }
+
+    fun completeOnboarding() {
+        preferencesRepository.completeOnboarding()
     }
 }
