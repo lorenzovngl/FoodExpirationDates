@@ -121,6 +121,7 @@
     <string name="notifications_disabled_message">Sie haben Benachrichtigungen dauerhaft deaktiviert. Um Benachrichtigungen über abgelaufene Lebensmittel zu erhalten, müssen Sie diese manuell in den Einstellungen des Telefons aktivieren.</string>
     <string name="open_settings">Einstellungen öffnen</string>
     <string name="search">Suchen…</string>
+    <string name="clear_all_items">Alle Einträge löschen</string>
     <string name="clear_all_items_confirmation" tools:ignore="MissingTranslation">Möchten Sie wirklich alle Einträge löschen? Dies kann nicht rückgängig gemacht werden.</string>
     <string name="delete_all" tools:ignore="MissingTranslation">Alles löschen</string>
 

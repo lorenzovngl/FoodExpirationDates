@@ -47,4 +47,12 @@
     <string name="onboarding_ready_description">Agora você pode começar a acompanhar seus alimentos e suas datas de validade.\n\nComece adicionando alguns alimentos da geladeira ou da despensa. Conforme sua lista crescer, o %1$s ajudará você a identificar o que consumir primeiro e a manter as datas de validade sob controle.</string>
     <string name="onboarding_ready_hint">Você pode alterar suas preferências a qualquer momento nas Configurações.</string>
 
+    <string name="clear_all_items">Excluir todos os itens</string>
+    <string name="clear_all_items_confirmation">Tem certeza de que deseja excluir todos os itens? Esta ação não pode ser desfeita.</string>
+    <string name="delete_all">Excluir tudo</string>
+
+    <string name="data_export_success">Dados exportados com sucesso.</string>
+    <string name="data_export_error">Ocorreu um erro ao exportar os dados.</string>
+    <string name="export_data">Exportar dados</string>
+    <string name="import_data">Importar dados</string>
 </resources>

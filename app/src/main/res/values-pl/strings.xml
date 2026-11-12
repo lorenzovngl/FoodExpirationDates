@@ -150,4 +150,8 @@
     <string name="onboarding_ready_title">Wszystko gotowe!</string>
     <string name="onboarding_ready_description">Możesz już zacząć kontrolować swoje produkty spożywcze i ich terminy ważności.\n\nNa początek dodaj kilka produktów z lodówki lub spiżarni. W miarę rozbudowy listy %1$s pomoże Ci ustalić, co warto zużyć najpierw, i śledzić terminy ważności produktów.</string>
     <string name="onboarding_ready_hint">W każdej chwili możesz zmienić swoje preferencje w ustawieniach.</string>
+
+    <string name="clear_all_items">Usuń wszystkie elementy</string>
+    <string name="clear_all_items_confirmation">Czy na pewno chcesz usunąć wszystkie elementy? Tej operacji nie można cofnąć.</string>
+    <string name="delete_all">Usuń wszystko</string>
 </resources>

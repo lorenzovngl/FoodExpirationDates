@@ -132,4 +132,14 @@
     <string name="onboarding_ready_title">Tout est prêt !</string>
     <string name="onboarding_ready_description">Vous pouvez maintenant commencer à suivre vos aliments et leurs dates de péremption.\n\nCommencez par ajouter quelques aliments de votre réfrigérateur ou de vos placards. À mesure que votre liste s’agrandit, %1$s vous aidera à identifier les aliments à consommer en priorité et à garder un œil sur leurs dates de péremption.</string>
     <string name="onboarding_ready_hint">Vous pouvez modifier vos préférences à tout moment dans les paramètres.</string>
+
+    <string name="clear_all_items">Supprimer tous les éléments</string>
+    <string name="clear_all_items_confirmation">Voulez-vous vraiment supprimer tous les éléments ? Cette action est irréversible.</string>
+    <string name="delete_all">Tout supprimer</string>
+
+    <string name="data_export_success">Données exportées avec succès.</string>
+    <string name="data_export_error">Une erreur est survenue lors de l\'exportation des données.</string>
+    <string name="export_data">Exporter les données</string>
+    <string name="import_data">Importer les données</string>
+
 </resources>

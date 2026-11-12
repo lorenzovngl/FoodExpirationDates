@@ -157,4 +157,8 @@
     <string name="onboarding_ready_title">準備ができました！</string>
     <string name="onboarding_ready_description">これで、食品とその期限を管理する準備が整いました。\n\nまずは冷蔵庫や食品棚にある食品をいくつか登録してみましょう。リストに食品を追加していくと、%1$sがどの食品から使えばよいかを確認し、期限を管理するのに役立ちます。</string>
     <string name="onboarding_ready_hint">設定はあとからいつでも変更できます。</string>
+
+    <string name="clear_all_items">すべてのアイテムを削除</string>
+    <string name="clear_all_items_confirmation">すべてのアイテムを削除してもよろしいですか？この操作は取り消せません。</string>
+    <string name="delete_all">すべて削除</string>
 </resources>

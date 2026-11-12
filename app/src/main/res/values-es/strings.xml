@@ -76,6 +76,9 @@
     <string name="data_export_error">Se ha producido un error durante la exportación de datos.</string>
     <string name="export_data">Exportar datos</string>
     <string name="import_data">Importar datos</string>
+    <string name="clear_all_items">Eliminar todos los elementos</string>
+    <string name="clear_all_items_confirmation">¿Seguro que quieres eliminar todos los elementos? Esta acción no se puede deshacer.</string>
+    <string name="delete_all">Eliminar todo</string>
     <string name="data_exported">Datos exportados</string>
     <string-array name="example_foods">
         <item>Huevos</item>

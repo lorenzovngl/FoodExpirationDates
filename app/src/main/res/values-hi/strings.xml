@@ -51,4 +51,8 @@
     <string name="quantity">मात्रा</string>
     <string name="add">जोड़ें</string>
     <string name="remove">हटाना</string>
+    <string name="data_export_success">डेटा सफलतापूर्वक निर्यात किया गया।</string>
+    <string name="data_export_error">डेटा निर्यात करते समय कोई त्रुटि हुई।</string>
+    <string name="export_data">डेटा निर्यात करें</string>
+    <string name="import_data">डेटा आयात करें</string>
 </resources>
