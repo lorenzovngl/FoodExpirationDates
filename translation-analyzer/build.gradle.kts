@@ -92,7 +92,8 @@ fun parseXML(default: File, translation: File) {
     }
     if (locale != null) {
         results = results.plus(locale to percent)
-        File(path("shields", "translations", "${localeKey}.json"))
+        rootProject.file("shields/translations/$localeKey.json")
+            .apply { parentFile.mkdirs() }
             .writeText(
                 JsonEntry(
                     label = locale,
@@ -115,7 +116,7 @@ fun countStrings(file: File): Int {
 tasks.register("analyzeTranslations") {
     doLast {
         println("Computing translation statistics...")
-        analyzeTranslations(System.getProperty("user.dir"))
+        analyzeTranslations(rootProject.projectDir.absolutePath)
         println(
             "Translation statistics: ${
                 results.sortedBy { 
