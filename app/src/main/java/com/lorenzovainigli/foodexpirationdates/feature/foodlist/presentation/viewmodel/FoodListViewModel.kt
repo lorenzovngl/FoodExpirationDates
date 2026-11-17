@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.lorenzovainigli.foodexpirationdates.analytics.AnalyticsEvent
 import com.lorenzovainigli.foodexpirationdates.analytics.AnalyticsTracker
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.data.importexport.ExpirationDateImportExportManager
+import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.event.FoodDeletedEvent
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.mapper.FoodCardUiModelMapper
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.model.FoodListUiState
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
@@ -21,6 +22,8 @@ import com.lorenzovainigli.foodexpirationdates.model.review.ReviewRequestStrateg
 import com.lorenzovainigli.foodexpirationdates.util.OperationResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.toImmutableList
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -28,6 +31,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -48,9 +52,6 @@ class FoodListViewModel @Inject constructor(
     private val _selectedItem = MutableStateFlow<ExpirationDate?>(null)
     val selectedItem = _selectedItem.asStateFlow()
 
-    private val _deletedItem: MutableState<ExpirationDate?> = mutableStateOf(value = null)
-    val deletedItem: State<ExpirationDate?> = _deletedItem
-
     private val _requestReview = MutableSharedFlow<ReviewRequest>()
     val requestReview = _requestReview.asSharedFlow()
 
@@ -62,6 +63,9 @@ class FoodListViewModel @Inject constructor(
 
     private val _importResult = MutableStateFlow<OperationResult?>(null)
     val importResult = _importResult.asStateFlow()
+
+    private val _foodDeletedEvents = Channel<FoodDeletedEvent>(Channel.BUFFERED)
+    val foodDeletedEvents: Flow<FoodDeletedEvent> = _foodDeletedEvents.receiveAsFlow()
 
     init {
         observeFoodItems()
@@ -121,9 +125,12 @@ class FoodListViewModel @Inject constructor(
 
     fun deleteFoodItem(itemId: Int) {
         viewModelScope.launch {
-            _deletedItem.value = repository.getOne(itemId)
+            val item = repository.getOne(itemId)
             repository.deleteExpirationDate(itemId)
             analyticsTracker.logEvent(AnalyticsEvent.FOOD_DELETED)
+            _foodDeletedEvents.send(
+                FoodDeletedEvent(item = item)
+            )
         }
     }
 
@@ -131,6 +138,12 @@ class FoodListViewModel @Inject constructor(
         viewModelScope.launch {
             repository.deleteAll()
             analyticsTracker.logEvent(AnalyticsEvent.FOOD_DELETED)
+        }
+    }
+
+    fun undoDelete(item: ExpirationDate) {
+        viewModelScope.launch {
+            repository.addExpirationDate(item)
         }
     }
 

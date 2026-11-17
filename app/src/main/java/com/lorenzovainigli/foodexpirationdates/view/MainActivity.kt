@@ -28,7 +28,7 @@ import com.lorenzovainigli.foodexpirationdates.model.NotificationManager.Compani
 import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import com.lorenzovainigli.foodexpirationdates.model.review.ReviewManager
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
-import com.lorenzovainigli.foodexpirationdates.view.composable.MyScaffold
+import com.lorenzovainigli.foodexpirationdates.view.composable.scaffold.MyScaffoldRoute
 import com.lorenzovainigli.foodexpirationdates.view.composable.screen.Screen
 import com.lorenzovainigli.foodexpirationdates.viewmodel.ExpirationDatesViewModel
 import com.lorenzovainigli.foodexpirationdates.viewmodel.PreferencesViewModel
@@ -111,11 +111,9 @@ class MainActivity : ComponentActivity() {
         CompositionLocalProvider(
             LocalAnalyticsTracker provides analyticsTracker
         ) {
-            MyScaffold(
-                activity = this,
+            MyScaffoldRoute(
                 navController = navController,
                 startDestination = startDestination,
-                showSnackbar = showSnackbar,
                 onSearchIconClick = { isSearchActive = true }
             ) {
                 Navigation(
