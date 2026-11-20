@@ -3,6 +3,9 @@ package com.lorenzovainigli.foodexpirationdates.model.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 
 @Entity(tableName = "expiration_dates")
@@ -51,6 +54,28 @@ fun computeExpirationDate(
     }
 }
 
-fun ExpirationDate.toCSV(): String{
-    return "$foodName,$expirationDate,$openingDate,$timeSpanDays,$quantity"
+fun ExpirationDate.toCSV(): String {
+    val formatter = DateTimeFormatter.ISO_LOCAL_DATE
+    val zone = ZoneId.systemDefault()
+
+    fun Long.toDateString(): String =
+        Instant.ofEpochMilli(this)
+            .atZone(zone)
+            .toLocalDate()
+            .format(formatter)
+
+    return listOf(
+        "\"${foodName.replace("\"", "\"\"")}\"",
+        expirationDate.toDateString(),
+        openingDate?.toDateString() ?: "null",
+        timeSpanDays?.toString() ?: "null",
+        quantity.toString()
+    ).joinToString(",")
+}
+
+private fun Long.toCsvDate(): String {
+    return Instant.ofEpochMilli(this)
+        .atZone(ZoneId.systemDefault())
+        .toLocalDate()
+        .toString()
 }

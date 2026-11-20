@@ -27,6 +27,8 @@ import java.io.FileWriter
 import java.io.IOException
 import java.io.InputStreamReader
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.ZoneId
 import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
@@ -136,10 +138,10 @@ class ExpirationDateImportExportManager @Inject constructor(
         return ExpirationDate(
             id = 0,
             foodName = row[FOOD_NAME_INDEX],
-            expirationDate = row[EXPIRATION_DATE_INDEX].toLong(),
+            expirationDate = parseDate(row[EXPIRATION_DATE_INDEX]),
             openingDate = row[OPENING_DATE_INDEX]
-                .takeUnless { it == "null" }
-                ?.toLong(),
+                .takeUnless { it.isBlank() || it.equals("null", ignoreCase = true) }
+                ?.let(::parseDate),
             timeSpanDays = row[TIME_SPAN_DAYS_INDEX]
                 .takeUnless { it == "null" }
                 ?.toInt(),
@@ -161,5 +163,13 @@ class ExpirationDateImportExportManager @Inject constructor(
                 header[EXPIRATION_DATE_INDEX] == EXPIRATION_DATE &&
                 header[OPENING_DATE_INDEX] == OPENING_DATE &&
                 header[TIME_SPAN_DAYS_INDEX] == TIME_SPAN_DAYS
+    }
+
+    private fun parseDate(value: String): Long {
+        return value.toLongOrNull()
+            ?: LocalDate.parse(value)
+                .atStartOfDay(ZoneId.systemDefault())
+                .toInstant()
+                .toEpochMilli()
     }
 }
