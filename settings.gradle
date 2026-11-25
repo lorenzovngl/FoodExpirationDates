@@ -4,7 +4,15 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
+    plugins {
+        id("com.android.settings") version "9.5.2" apply false
+    }
 }
+
+plugins {
+    id("com.android.settings")
+}
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -12,6 +20,21 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
+android {
+    compileSdk {
+        version = release(37) {
+            minorApiLevel = 2
+        }
+    }
+    minSdk {
+        version = release(26)
+    }
+    targetSdk {
+        version = release(37)
+    }
+}
+
 rootProject.name = "FoodExpirationDates"
 include ':app'
 include ':translation-analyzer'

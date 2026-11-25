@@ -6,13 +6,8 @@ plugins {
 
 android {
     namespace = "com.lorenzovainigli.onboarding"
-    compileSdk {
-        version = release(37)
-    }
 
     defaultConfig {
-        minSdk = 26
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {

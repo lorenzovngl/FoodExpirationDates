@@ -26,16 +26,9 @@ try {
 
 android {
     namespace = "com.lorenzovainigli.foodexpirationdates"
-    compileSdk {
-        version = release(37) {
-            minorApiLevel = 2
-        }
-    }
 
     defaultConfig {
         applicationId = "com.lorenzovainigli.foodexpirationdates"
-        minSdk = 26
-        targetSdk = 37
         versionCode = 81
         versionName = "2.13"
 
