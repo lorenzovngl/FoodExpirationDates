@@ -9,4 +9,6 @@
     <string name="news_refresh_error">Nie udało się zaktualizować nowości</string>
     <string name="connection_error">Błąd połączenia</string>
     <string name="news_language_notice">Ta sekcja jest dostępna tylko w języku włoskim i angielskim.</string>
+    <string name="news_retry">Spróbuj ponownie</string>
+    <string name="news_pull_to_refresh">Przeciągnij w dół, aby odświeżyć</string>
 </resources>

@@ -9,4 +9,6 @@
     <string name="news_refresh_error">無法更新最新消息</string>
     <string name="connection_error">連線錯誤</string>
     <string name="news_language_notice">此區段僅提供義大利文和英文版本。</string>
+    <string name="news_retry">重試</string>
+    <string name="news_pull_to_refresh">下拉以重新整理</string>
 </resources>

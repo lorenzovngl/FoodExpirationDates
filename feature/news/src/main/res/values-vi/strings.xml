@@ -9,4 +9,6 @@
     <string name="news_refresh_error">Không thể cập nhật tin mới</string>
     <string name="connection_error">Lỗi kết nối</string>
     <string name="news_language_notice">Mục này chỉ có sẵn bằng tiếng Ý và tiếng Anh.</string>
+    <string name="news_retry">Thử lại</string>
+    <string name="news_pull_to_refresh">Kéo xuống để làm mới</string>
 </resources>

@@ -9,4 +9,6 @@
     <string name="news_refresh_error">Não foi possível atualizar as novidades</string>
     <string name="connection_error">Erro de ligação</string>
     <string name="news_language_notice">Esta secção está disponível apenas em italiano e inglês.</string>
+    <string name="news_retry">Tentar novamente</string>
+    <string name="news_pull_to_refresh">Deslize para baixo para atualizar</string>
 </resources>

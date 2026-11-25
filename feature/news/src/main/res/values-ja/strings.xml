@@ -9,4 +9,6 @@
     <string name="news_refresh_error">新着情報を更新できませんでした</string>
     <string name="connection_error">接続エラー</string>
     <string name="news_language_notice">このセクションはイタリア語と英語でのみ利用できます。</string>
+    <string name="news_retry">再試行</string>
+    <string name="news_pull_to_refresh">下に引っ張って更新</string>
 </resources>

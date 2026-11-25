@@ -9,4 +9,6 @@
     <string name="news_refresh_error">Yenilikler güncellenemedi</string>
     <string name="connection_error">Bağlantı hatası</string>
     <string name="news_language_notice">Bu bölüm yalnızca İtalyanca ve İngilizce olarak kullanılabilir.</string>
+    <string name="news_retry">Tekrar dene</string>
+    <string name="news_pull_to_refresh">Yenilemek için aşağı çekin</string>
 </resources>

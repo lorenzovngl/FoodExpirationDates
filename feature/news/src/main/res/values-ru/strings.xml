@@ -9,4 +9,6 @@
     <string name="news_refresh_error">Не удалось обновить новости</string>
     <string name="connection_error">Ошибка подключения</string>
     <string name="news_language_notice">Этот раздел доступен только на итальянском и английском языках.</string>
+    <string name="news_retry">Повторить</string>
+    <string name="news_pull_to_refresh">Потяните вниз, чтобы обновить</string>
 </resources>
