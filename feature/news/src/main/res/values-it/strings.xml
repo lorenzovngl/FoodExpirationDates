@@ -10,4 +10,6 @@
     <string name="news_refresh_error">Impossibile aggiornare le novità</string>
     <string name="connection_error">Errore di connessione</string>
     <string name="news_language_notice" />
+    <string name="news_retry">Riprova</string>
+    <string name="news_pull_to_refresh">Trascina verso il basso per aggiornare</string>
 </resources>
