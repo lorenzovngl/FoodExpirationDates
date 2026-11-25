@@ -5,11 +5,12 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.lorenzovainigli.foodexpirationdates.model.AppDatabase
 import com.lorenzovainigli.foodexpirationdates.model.dao.ExpirationDatesDao
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
-import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
@@ -37,100 +38,95 @@ class ExpirationDateRepositoryTest {
     }
 
     @Test
-    fun insertExpirationDateTest() {
+    fun insertExpirationDateTest() = runTest {
         val foodName = "Cheese"
         val expirationDate = System.currentTimeMillis()
+
         val insertedItem = ExpirationDate(
             id = 0,
             foodName = foodName,
             expirationDate = expirationDate
         )
-        val list: MutableList<ExpirationDate> = mutableListOf()
-        runBlocking {
-            repository.addExpirationDate(insertedItem)
-            val retrievedItem = dao.getAll().firstOrNull()
-            retrievedItem?.forEach {
-                list.add(it)
-            }
-        }
-        assertEquals(list.size, 1)
-        assertEquals(list[0].foodName, foodName)
-        assertEquals(list[0].expirationDate, expirationDate)
+
+        repository.addExpirationDate(insertedItem)
+
+        val list = dao.getAll().first()
+
+        assertEquals(1, list.size)
+        assertEquals(foodName, list[0].foodName)
+        assertEquals(expirationDate, list[0].expirationDate)
     }
 
     @Test
-    fun updateExpirationDateTest() {
-        var foodName = "Cheese"
+    fun updateExpirationDateTest() = runTest {
         val expirationDate = System.currentTimeMillis()
-        val insertedItem = ExpirationDate(
-            id = 0,
-            foodName = foodName,
-            expirationDate = expirationDate
-        )
-        dao.insert(insertedItem)
-        var insertedId = 0
-        runBlocking {
-            val item = dao.getAll().firstOrNull()
-            item?.forEach {
-                insertedId = it.id
-            }
-        }
-        insertedItem.id = insertedId
-        foodName = "Tomato"
-        insertedItem.foodName = foodName
-        insertedItem.expirationDate = expirationDate + 1
-        val list: MutableList<ExpirationDate> = mutableListOf()
-        runBlocking {
-            repository.addExpirationDate(insertedItem)
-            val retrievedItem = dao.getAll().firstOrNull()
-            retrievedItem?.forEach {
-                list.add(it)
-            }
-        }
-        assertEquals(list.size, 1)
-        assertEquals(list[0].foodName, foodName)
-        assertEquals(list[0].expirationDate, expirationDate + 1)
-    }
 
-    @Test
-    fun deleteExpirationDateTest() {
-        val expirationDate = System.currentTimeMillis()
         val insertedItem = ExpirationDate(
             id = 0,
             foodName = "Cheese",
             expirationDate = expirationDate
         )
+
         dao.insert(insertedItem)
-        var insertedId = 0
-        runBlocking {
-            val item = dao.getAll().firstOrNull()
-            item?.forEach {
-                insertedId = it.id
-            }
-        }
-        insertedItem.id = insertedId
-        dao.delete(insertedItem)
-        val list: MutableList<ExpirationDate> = mutableListOf()
-        runBlocking {
-            repository.deleteExpirationDate(insertedItem)
-            val retrievedItem = dao.getAll().firstOrNull()
-            retrievedItem?.forEach {
-                list.add(it)
-            }
-        }
-        assertEquals(list.size, 0)
-        val retrievedItem = dao.getOne(id = insertedId)
-        assertNull(retrievedItem)
+
+        val item = dao.getAll().first().single()
+        val insertedId = item.id
+
+        item.foodName = "Tomato"
+        item.expirationDate = expirationDate + 1
+
+        repository.addExpirationDate(item)
+
+        val list = dao.getAll().first()
+
+        assertEquals(1, list.size)
+        assertEquals(insertedId, list[0].id)
+        assertEquals("Tomato", list[0].foodName)
+        assertEquals(expirationDate + 1, list[0].expirationDate)
     }
 
     @Test
-    fun deleteAllTest() = runBlocking {
-        val item1 = ExpirationDate(id = 1, foodName = "Cheese", expirationDate = System.currentTimeMillis())
-        val item2 = ExpirationDate(id = 2, foodName = "Milk", expirationDate = System.currentTimeMillis())
+    fun deleteExpirationDateTest() = runTest {
+        val insertedItem = ExpirationDate(
+            id = 0,
+            foodName = "Cheese",
+            expirationDate = System.currentTimeMillis()
+        )
+
+        dao.insert(insertedItem)
+
+        val item = dao.getAll().first().single()
+
+        repository.deleteExpirationDate(item.id)
+
+        val list = dao.getAll().first()
+
+        assertTrue(list.none { it.id == item.id })
+        assertEquals(0, list.size)
+    }
+
+    @Test
+    fun deleteAllTest() = runTest {
+        val item1 = ExpirationDate(
+            id = 1,
+            foodName = "Cheese",
+            expirationDate = System.currentTimeMillis()
+        )
+
+        val item2 = ExpirationDate(
+            id = 2,
+            foodName = "Milk",
+            expirationDate = System.currentTimeMillis()
+        )
+
         repository.addExpirationDate(item1)
         repository.addExpirationDate(item2)
+
+        assertEquals(2, dao.getAll().first().size)
+
         repository.deleteAll()
-        val list = repository.getAll().firstOrNull()
-        assertEquals(0, list?.size ?: 0)
+
+        assertEquals(0, dao.getAll().first().size)
+        assertEquals(0, repository.getAll().first().size)
     }
 }

@@ -177,6 +177,7 @@ dependencies {
     androidTestImplementation(libs.androidx.test.rules)
     androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation(libs.androidx.uiautomator)
+    androidTestImplementation(libs.turbine)
 
     // Jetpack Compose
     // https://developer.android.com/jetpack/compose/bom
