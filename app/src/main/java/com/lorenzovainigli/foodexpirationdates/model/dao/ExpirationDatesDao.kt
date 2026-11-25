@@ -10,13 +10,13 @@ interface ExpirationDatesDao {
     fun getAll(): Flow<List<ExpirationDate>>
 
     @Query("SELECT * FROM expiration_dates WHERE id = :id")
-    fun getOne(id: Int): ExpirationDate
+    suspend fun getOne(id: Int): ExpirationDate
 
     @Insert
-    fun insertAll(dates: List<ExpirationDate>)
+    suspend fun insertAll(dates: List<ExpirationDate>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(date: ExpirationDate)
+    suspend fun insert(date: ExpirationDate)
 
     @Query("DELETE FROM expiration_dates WHERE id = :id")
     suspend fun deleteById(id: Int)
