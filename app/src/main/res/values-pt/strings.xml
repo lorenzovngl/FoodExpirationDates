@@ -55,4 +55,20 @@
     <string name="data_export_error">Ocorreu um erro ao exportar os dados.</string>
     <string name="export_data">Exportar dados</string>
     <string name="import_data">Importar dados</string>
+
+    <string name="food_quantity_title">Quantidade de alimento</string>
+    <string name="food_quantity_package_count">Número de embalagens</string>
+    <string name="food_quantity_package_count_description">Embalagens ou unidades</string>
+    <string name="food_quantity_content_per_package">Conteúdo por embalagem</string>
+    <string name="food_quantity_precision">Precisão</string>
+    <string name="food_quantity_unit">Unidade</string>
+    <string name="food_quantity_increase">Aumentar</string>
+    <string name="food_quantity_decrease">Diminuir</string>
+    <string name="food_quantity_total">QUANTIDADE TOTAL</string>
+
+    <plurals name="food_quantity_packages">
+        <item quantity="one">%d embalagem</item>
+        <item quantity="many">%d embalagens</item>
+        <item quantity="other">%d embalagens</item>
+    </plurals>
 </resources>

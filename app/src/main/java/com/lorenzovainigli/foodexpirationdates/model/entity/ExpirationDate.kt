@@ -15,7 +15,9 @@ data class ExpirationDate(
     @ColumnInfo(name = "expiration_date") var expirationDate: Long,
     @ColumnInfo(name = "opening_date") var openingDate: Long? = null,
     @ColumnInfo(name = "time_span_days") var timeSpanDays: Int? = null,
-    @ColumnInfo(name = "quantity", defaultValue = "1") var quantity: Int = 1
+    @ColumnInfo(name = "quantity", defaultValue = "1") var quantity: Int = 1,
+    @ColumnInfo(name = "content_per_package") var contentPerPackage: Int? = null,
+    @ColumnInfo(name = "measurement_unit") var measurementUnit: MeasurementUnit? = null,
 )
 
 const val FOOD_NAME_INDEX = 0
@@ -28,8 +30,12 @@ const val TIME_SPAN_DAYS_INDEX = 3
 const val TIME_SPAN_DAYS = "TIME_SPAN_DAYS"
 const val QUANTITY_INDEX = 4
 const val QUANTITY = "QUANTITY"
+const val CONTENT_PER_PACKAGE_INDEX = 5
+const val CONTENT_PER_PACKAGE = "CONTENT_PER_PACKAGE"
+const val MEASUREMENT_UNIT_INDEX = 6
+const val MEASUREMENT_UNIT = "MEASUREMENT_UNIT"
 
-const val CSV_HEADER = "$FOOD_NAME,$EXPIRATION_DATE,$OPENING_DATE,$TIME_SPAN_DAYS,$QUANTITY"
+const val CSV_HEADER = "$FOOD_NAME,$EXPIRATION_DATE,$OPENING_DATE,$TIME_SPAN_DAYS,$QUANTITY,$CONTENT_PER_PACKAGE,$MEASUREMENT_UNIT"
 
 fun computeExpirationDate(
     item: ExpirationDate
@@ -69,7 +75,9 @@ fun ExpirationDate.toCSV(): String {
         expirationDate.toDateString(),
         openingDate?.toDateString() ?: "null",
         timeSpanDays?.toString() ?: "null",
-        quantity.toString()
+        quantity.toString(),
+        contentPerPackage.toString(),
+        measurementUnit?.name
     ).joinToString(",")
 }
 

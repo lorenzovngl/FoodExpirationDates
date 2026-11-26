@@ -31,4 +31,12 @@ class MigrationTest {
         }
         helper.runMigrationsAndValidate(TEST_DB, 3, true)
     }
+
+    @Test
+    fun migrate3To4() {
+        helper.createDatabase(TEST_DB, 3).apply {
+            close()
+        }
+        helper.runMigrationsAndValidate(TEST_DB, 4, true)
+    }
 }

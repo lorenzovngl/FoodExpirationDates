@@ -96,4 +96,18 @@
     <string name="add">新增</string>
     <string name="remove">移除</string>
     <string name="search">搜尋…</string>
+
+    <string name="food_quantity_title">食品數量</string>
+    <string name="food_quantity_package_count">包裝數量</string>
+    <string name="food_quantity_package_count_description">包裝或件數</string>
+    <string name="food_quantity_content_per_package">每份包裝的內容量</string>
+    <string name="food_quantity_precision">精度</string>
+    <string name="food_quantity_unit">單位</string>
+    <string name="food_quantity_increase">增加</string>
+    <string name="food_quantity_decrease">減少</string>
+    <string name="food_quantity_total">總數量</string>
+
+    <plurals name="food_quantity_packages">
+        <item quantity="other">%d 個包裝</item>
+    </plurals>
 </resources>

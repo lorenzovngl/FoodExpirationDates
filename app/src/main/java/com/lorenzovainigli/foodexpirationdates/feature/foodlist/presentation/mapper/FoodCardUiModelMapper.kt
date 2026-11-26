@@ -2,11 +2,14 @@ package com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.ma
 
 import android.content.Context
 import com.lorenzovainigli.foodexpirationdates.R
+import com.lorenzovainigli.foodexpirationdates.feature.foodeditor.presentation.component.FoodQuantity
+import com.lorenzovainigli.foodexpirationdates.feature.foodeditor.presentation.component.QuantityUnit
+import com.lorenzovainigli.foodexpirationdates.feature.foodeditor.presentation.screen.toSummary
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.model.ExpirationStatus
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.model.FoodCardUiModel
+import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.model.QuantityVisualType
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
 import com.lorenzovainigli.foodexpirationdates.model.entity.computeExpirationDate
-import com.lorenzovainigli.foodexpirationdates.model.repository.PreferencesRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.text.SimpleDateFormat
 import java.time.Clock
@@ -32,10 +35,29 @@ class FoodCardUiModelMapper @Inject constructor(
             .between(today, expirationDate)
             .toInt()
 
+        val packageInfo = item.contentPerPackage
+            ?.takeIf { it > 0 }
+            ?.let { content ->
+                val unit = item.measurementUnit
+                    ?.let { QuantityUnit.valueOf(it.name) }
+                    ?: QuantityUnit.GRAM
+
+                FoodQuantity(
+                    packageCount = 1,
+                    contentPerPackage = content,
+                    unit = unit,
+                ).toSummary { count ->
+                    context.resources.getQuantityString(
+                        R.plurals.food_quantity_packages,
+                        count,
+                        count
+                    )
+                }.first
+            }
+
         return FoodCardUiModel(
             id = item.id,
             foodName = item.foodName,
-            quantity = item.quantity,
             expirationText = formatExpirationText(
                 expirationTimestamp = expirationTimestamp,
                 daysUntilExpiration = daysUntilExpiration,
@@ -49,6 +71,11 @@ class FoodCardUiModelMapper @Inject constructor(
                 daysUntilExpiration <= 7 -> ExpirationStatus.EXPIRING_SOON
                 else -> ExpirationStatus.VALID
             },
+            packageCount = item.quantity,
+            packageInfo = packageInfo,
+            quantityVisualType = mapQuantityVisualType(
+                item.measurementUnit?.let { QuantityUnit.valueOf(it.name) }
+            ),
         )
     }
 
@@ -94,3 +121,14 @@ private fun Long.toLocalDate(zoneId: ZoneId): LocalDate =
         .ofEpochMilli(this)
         .atZone(zoneId)
         .toLocalDate()
+
+private fun mapQuantityVisualType(unit: QuantityUnit?): QuantityVisualType {
+    return when (unit) {
+        null -> QuantityVisualType.PACKAGE
+        QuantityUnit.GRAM,
+        QuantityUnit.KILOGRAM -> QuantityVisualType.WEIGHT
+        QuantityUnit.MILLILITER,
+        QuantityUnit.CENTILITER,
+        QuantityUnit.LITER -> QuantityVisualType.LIQUID
+    }
+}

@@ -161,4 +161,18 @@
     <string name="clear_all_items">すべてのアイテムを削除</string>
     <string name="clear_all_items_confirmation">すべてのアイテムを削除してもよろしいですか？この操作は取り消せません。</string>
     <string name="delete_all">すべて削除</string>
+
+    <string name="food_quantity_title">食品の数量</string>
+    <string name="food_quantity_package_count">パッケージ数</string>
+    <string name="food_quantity_package_count_description">パッケージまたは個数</string>
+    <string name="food_quantity_content_per_package">1パッケージあたりの内容量</string>
+    <string name="food_quantity_precision">調整幅</string>
+    <string name="food_quantity_unit">単位</string>
+    <string name="food_quantity_increase">増やす</string>
+    <string name="food_quantity_decrease">減らす</string>
+    <string name="food_quantity_total">合計数量</string>
+
+    <plurals name="food_quantity_packages">
+        <item quantity="other">%d パッケージ</item>
+    </plurals>
 </resources>

@@ -162,4 +162,20 @@
     <string name="onboarding_ready_title">È tutto pronto!</string>
     <string name="onboarding_ready_description">Ora puoi iniziare a tenere traccia dei tuoi alimenti e delle relative scadenze.\n\nComincia aggiungendo qualche alimento dal frigorifero o dalla dispensa. Man mano che la lista cresce, %1$s ti aiuterà a capire cosa consumare prima e a tenere sotto controllo le scadenze.</string>
     <string name="onboarding_ready_hint">Puoi modificare le tue preferenze in qualsiasi momento dalle Impostazioni.</string>
+
+    <string name="food_quantity_title">Quantità alimento</string>
+    <string name="food_quantity_package_count">Numero di confezioni</string>
+    <string name="food_quantity_package_count_description">Confezioni o pezzi</string>
+    <string name="food_quantity_content_per_package">Contenuto per confezione</string>
+    <string name="food_quantity_precision">Precisione</string>
+    <string name="food_quantity_unit">Unità</string>
+    <string name="food_quantity_increase">Aumenta</string>
+    <string name="food_quantity_decrease">Diminuisci</string>
+    <string name="food_quantity_total">QUANTITÀ TOTALE</string>
+
+    <plurals name="food_quantity_packages">
+        <item quantity="one">%d confezione</item>
+        <item quantity="many">%d confezioni</item>
+        <item quantity="other">%d confezioni</item>
+    </plurals>
 </resources>

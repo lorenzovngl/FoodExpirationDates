@@ -8,32 +8,26 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Circle
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.MoreHoriz
-import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
-import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -49,22 +43,22 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lorenzovainigli.foodexpirationdates.R
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.model.ExpirationStatus
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.model.FoodCardUiModel
+import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.model.QuantityVisualType
+import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.preview.getItemsForPreview
 import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.util.getExpirationColor
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.ui.theme.LocalSpacing
 import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
-import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.preview.getItemsForPreview
 
 const val FOOD_CARD = "FoodCard"
 const val TEST_TAG_DELETE_ITEM = "Delete item"
@@ -111,42 +105,21 @@ fun FoodCard(
                     )
                 )
             ListItem(
-                modifier = modifier.padding(0.dp),
-                headlineContent = {
-                    Text(
-                        text = item.foodName,
-                        color = foodNameTextColor,
-                        fontSize = 18.sp
-                    )
-                },
-                overlineContent = {
-                    if (item.isOpened) {
+                modifier = modifier,
+                overlineContent = if (item.isOpened) {
+                    {
                         Text(
                             modifier = Modifier.alpha(.8f),
                             text = stringResource(R.string.opened).uppercase()
                         )
                     }
-                },
-                leadingContent = {
-                    Box(
-                        modifier = Modifier
-                            .size(24.dp)
-                            .clip(RoundedCornerShape(16.dp))
-                            .border(
-                                width = 1.dp,
-                                color = foodNameTextColor,
-                                shape = RoundedCornerShape(16.dp)
-                            ),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = item.quantity.toString(),
-                            fontSize = 12.sp,
-                            lineHeight = 1.sp,
-                            color = foodNameTextColor.copy(alpha = 0.9f),
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
+                } else null,
+                supportingContent = {
+                    PackageQuantityRow(
+                        packageCount = item.packageCount,
+                        unitText = item.packageInfo,
+                        icon = quantityIcon(item.quantityVisualType)
+                    )
                 },
                 trailingContent = {
                     Row(
@@ -256,8 +229,71 @@ fun FoodCard(
                 colors = ListItemDefaults.colors(
                     containerColor = Color.Transparent
                 )
+            ) {
+                Text(
+                    text = item.foodName,
+                    color = foodNameTextColor,
+                    fontSize = 18.sp
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun PackageQuantityRow(
+    packageCount: Int,
+    icon: ImageVector,
+    unitText: String?,
+    modifier: Modifier = Modifier,
+    maxVisibleIcons: Int = 5,
+) {
+    val visibleIcons = minOf(packageCount, maxVisibleIcons)
+    val extraCount = (packageCount - maxVisibleIcons).coerceAtLeast(0)
+
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            repeat(visibleIcons) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    modifier = Modifier.size(8.dp),
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+
+        if (extraCount > 0) {
+            Text(
+                modifier = Modifier.padding(start = 6.dp),
+                text = "+$extraCount",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
+
+        if (!unitText.isNullOrBlank()) {
+            Text(
+                modifier = Modifier.padding(start = 6.dp),
+                text = "× $unitText",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+    }
+}
+
+@Composable
+private fun quantityIcon(
+    type: QuantityVisualType,
+): ImageVector {
+    return when (type) {
+        QuantityVisualType.PACKAGE -> Icons.Default.Circle
+        QuantityVisualType.WEIGHT -> Icons.Default.Circle
+        QuantityVisualType.LIQUID -> Icons.Default.Circle
     }
 }
 

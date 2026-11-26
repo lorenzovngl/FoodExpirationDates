@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.Uri
 import com.lorenzovainigli.foodexpirationdates.model.entity.CSV_HEADER
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
+import com.lorenzovainigli.foodexpirationdates.model.entity.MeasurementUnit
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
 import com.lorenzovainigli.foodexpirationdates.util.OperationResult
 import io.mockk.coEvery
@@ -26,6 +27,14 @@ import java.time.LocalDate
 import java.time.ZoneId
 
 class ExpirationDateImportExportManagerTest {
+
+    companion object {
+        private const val LEGACY_CSV_HEADER_V1 =
+            "FOOD_NAME,EXPIRATION_DATE,OPENING_DATE,TIME_SPAN_DAYS"
+
+        private const val LEGACY_CSV_HEADER_V2 =
+            "$LEGACY_CSV_HEADER_V1,QUANTITY"
+    }
 
     @get:Rule
     val temporaryFolder = TemporaryFolder()
@@ -50,6 +59,10 @@ class ExpirationDateImportExportManagerTest {
             context.filesDir
         } returns temporaryFolder.root
 
+        coEvery {
+            repository.addExpirationDate(any())
+        } returns Unit
+
         manager = ExpirationDateImportExportManager(
             context = context,
             repository = repository,
@@ -57,7 +70,7 @@ class ExpirationDateImportExportManagerTest {
         )
     }
 
-    // region Import
+    // region Import - Error handling
 
     @Test
     fun `import returns failure when uri is null`() = runTest {
@@ -71,9 +84,7 @@ class ExpirationDateImportExportManagerTest {
             result.state,
         )
 
-        coVerify(exactly = 0) {
-            repository.addExpirationDate(any())
-        }
+        verifyNoInsertions()
     }
 
     @Test
@@ -82,19 +93,14 @@ class ExpirationDateImportExportManagerTest {
             contentResolver.openInputStream(uri)
         } returns null
 
-        val result = manager.import(
-            contentResolver = contentResolver,
-            uri = uri,
-        )
+        val result = manager.import(contentResolver, uri)
 
         assertEquals(
             OperationResult.State.FAILURE,
             result.state,
         )
 
-        coVerify(exactly = 0) {
-            repository.addExpirationDate(any())
-        }
+        verifyNoInsertions()
     }
 
     @Test
@@ -103,81 +109,179 @@ class ExpirationDateImportExportManagerTest {
             contentResolver.openInputStream(uri)
         } throws RuntimeException("Cannot read file")
 
-        val result = manager.import(
-            contentResolver = contentResolver,
-            uri = uri,
-        )
+        val result = manager.import(contentResolver, uri)
 
         assertEquals(
             OperationResult.State.FAILURE,
             result.state,
         )
 
-        coVerify(exactly = 0) {
-            repository.addExpirationDate(any())
-        }
+        verifyNoInsertions()
     }
 
     @Test
     fun `import returns failure for empty csv`() = runTest {
         mockCsv("")
 
-        val result = manager.import(
-            contentResolver = contentResolver,
-            uri = uri,
-        )
+        val result = manager.import(contentResolver, uri)
 
         assertEquals(
             OperationResult.State.FAILURE,
             result.state,
         )
 
-        coVerify(exactly = 0) {
+        verifyNoInsertions()
+    }
+
+    @Test
+    fun `import returns failure for invalid header`() = runTest {
+        mockCsv(
+            """
+            invalid,header,opening,timeSpan,quantity
+            Milk,1700000000000,null,null,1
+            """.trimIndent()
+        )
+
+        val result = manager.import(contentResolver, uri)
+
+        assertEquals(
+            OperationResult.State.FAILURE,
+            result.state,
+        )
+
+        verifyNoInsertions()
+    }
+
+    @Test
+    fun `import returns failure for invalid optional columns`() = runTest {
+        mockCsv(
+            """
+            $LEGACY_CSV_HEADER_V2,PRICE,COLOR
+            Milk,2026-11-25,null,null,2,500,GRAM
+            """.trimIndent()
+        )
+
+        val result = manager.import(contentResolver, uri)
+
+        assertEquals(
+            OperationResult.State.FAILURE,
+            result.state,
+        )
+
+        verifyNoInsertions()
+    }
+
+    @Test
+    fun `import returns failure when numeric value is malformed`() = runTest {
+        mockCsv(
+            """
+            $LEGACY_CSV_HEADER_V2
+            Milk,not_a_timestamp,null,null,1
+            """.trimIndent()
+        )
+
+        val result = manager.import(contentResolver, uri)
+
+        assertEquals(
+            OperationResult.State.FAILURE,
+            result.state,
+        )
+
+        verifyNoInsertions()
+    }
+
+    @Test
+    fun `import returns failure when repository insertion throws`() = runTest {
+        mockCsv(
+            """
+            $LEGACY_CSV_HEADER_V2
+            Milk,1700000000000,null,null,1
+            """.trimIndent()
+        )
+
+        coEvery {
+            repository.addExpirationDate(any())
+        } throws RuntimeException("Database error")
+
+        val result = manager.import(contentResolver, uri)
+
+        assertEquals(
+            OperationResult.State.FAILURE,
+            result.state,
+        )
+
+        coVerify(exactly = 1) {
             repository.addExpirationDate(any())
         }
     }
 
     @Test
-    fun `import returns failure for invalid header`() = runTest {
-        val csv = """
-            invalid,header,opening,timeSpan,quantity
-            Milk,1700000000000,null,null,1
-        """.trimIndent()
-
-        mockCsv(csv)
-
-        val result = manager.import(
-            contentResolver = contentResolver,
-            uri = uri,
+    fun `import inserts no rows when one row is invalid`() = runTest {
+        mockCsv(
+            """
+            $CSV_HEADER
+            Milk,2026-11-25,null,null,2,500,MILLILITER
+            Pasta,2026-11-26,null,null,1,250,GRAM
+            Yogurt,2026-11-27,null,null,3,125,INVALID_UNIT
+            """.trimIndent()
         )
+
+        val result = manager.import(contentResolver, uri)
 
         assertEquals(
             OperationResult.State.FAILURE,
             result.state,
         )
 
-        coVerify(exactly = 0) {
-            repository.addExpirationDate(any())
+        verifyNoInsertions()
+    }
+
+    // endregion
+
+    // region Import - Backward compatibility
+
+    @Test
+    fun `import supports legacy csv without quantity`() = runTest {
+        mockCsv(
+            """
+            $LEGACY_CSV_HEADER_V1
+            Milk,2026-11-25,null,null
+            """.trimIndent()
+        )
+
+        val result = manager.import(contentResolver, uri)
+
+        assertEquals(
+            OperationResult.State.SUCCESS,
+            result.state,
+        )
+
+        coVerify(exactly = 1) {
+            repository.addExpirationDate(
+                match {
+                    it.id == 0 &&
+                            it.foodName == "Milk" &&
+                            it.expirationDate == dateToEpoch("2026-11-25") &&
+                            it.openingDate == null &&
+                            it.timeSpanDays == null &&
+                            it.quantity == 1 &&
+                            it.contentPerPackage == null &&
+                            it.measurementUnit == null
+                }
+            )
         }
     }
 
     @Test
     fun `import inserts valid expiration date`() = runTest {
-        val csv = """
-            $CSV_HEADER
+        mockCsv(
+            """
+            $LEGACY_CSV_HEADER_V2
             Milk,1700000000000,null,null,2
-        """.trimIndent()
-
-        mockCsv(csv)
-
-        coEvery {
-            repository.addExpirationDate(any())
-        } returns Unit
-
-        val result = manager.import(
-            contentResolver = contentResolver,
-            uri = uri,
+            """.trimIndent()
         )
+
+        val result = manager.import(contentResolver, uri)
 
         assertEquals(
             OperationResult.State.SUCCESS,
@@ -192,43 +296,9 @@ class ExpirationDateImportExportManagerTest {
                             it.expirationDate == 1700000000000L &&
                             it.openingDate == null &&
                             it.timeSpanDays == null &&
-                            it.quantity == 2
-                }
-            )
-        }
-    }
-
-    @Test
-    fun `import correctly parses optional values`() = runTest {
-        val csv = """
-            $CSV_HEADER
-            Yogurt,1700000000000,1699000000000,5,3
-        """.trimIndent()
-
-        mockCsv(csv)
-
-        coEvery {
-            repository.addExpirationDate(any())
-        } returns Unit
-
-        val result = manager.import(
-            contentResolver = contentResolver,
-            uri = uri,
-        )
-
-        assertEquals(
-            OperationResult.State.SUCCESS,
-            result.state,
-        )
-
-        coVerify {
-            repository.addExpirationDate(
-                match {
-                    it.foodName == "Yogurt" &&
-                            it.expirationDate == 1700000000000L &&
-                            it.openingDate == 1699000000000L &&
-                            it.timeSpanDays == 5 &&
-                            it.quantity == 3
+                            it.quantity == 2 &&
+                            it.contentPerPackage == null &&
+                            it.measurementUnit == null
                 }
             )
         }
@@ -236,23 +306,16 @@ class ExpirationDateImportExportManagerTest {
 
     @Test
     fun `import inserts all rows`() = runTest {
-        val csv = """
-            $CSV_HEADER
+        mockCsv(
+            """
+            $LEGACY_CSV_HEADER_V2
             Milk,1700000000000,null,null,1
             Yogurt,1701000000000,null,5,2
             Cheese,1702000000000,1701500000000,null,3
-        """.trimIndent()
-
-        mockCsv(csv)
-
-        coEvery {
-            repository.addExpirationDate(any())
-        } returns Unit
-
-        val result = manager.import(
-            contentResolver = contentResolver,
-            uri = uri,
+            """.trimIndent()
         )
+
+        val result = manager.import(contentResolver, uri)
 
         assertEquals(
             OperationResult.State.SUCCESS,
@@ -265,181 +328,277 @@ class ExpirationDateImportExportManagerTest {
     }
 
     @Test
-    fun `import returns failure when numeric value is malformed`() = runTest {
-        val csv = """
+    fun `import supports missing trailing optional columns`() = runTest {
+        mockCsv(
+            """
             $CSV_HEADER
-            Milk,not_a_timestamp,null,null,1
-        """.trimIndent()
-
-        mockCsv(csv)
-
-        val result = manager.import(
-            contentResolver = contentResolver,
-            uri = uri,
+            Milk,2026-11-25,null,null,2
+            """.trimIndent()
         )
-
-        assertEquals(
-            OperationResult.State.FAILURE,
-            result.state,
-        )
-    }
-
-    @Test
-    fun `import returns failure when repository insertion throws`() = runTest {
-        val csv = """
-            $CSV_HEADER
-            Milk,1700000000000,null,null,1
-        """.trimIndent()
-
-        mockCsv(csv)
-
-        coEvery {
-            repository.addExpirationDate(any())
-        } throws RuntimeException("Database error")
-
-        val result = manager.import(
-            contentResolver = contentResolver,
-            uri = uri,
-        )
-
-        assertEquals(
-            OperationResult.State.FAILURE,
-            result.state,
-        )
-    }
-
-    // endregion
-
-    // region Export
-
-    @Test
-    fun `export creates csv containing header and data`() = runTest {
-        val expirationDate = ExpirationDate(
-            id = 1,
-            foodName = "Milk",
-            expirationDate = 1700000000000L,
-            openingDate = null,
-            timeSpanDays = null,
-            quantity = 2,
-        )
-
-        coEvery {
-            repository.getAll()
-        } returns flowOf(
-            listOf(expirationDate)
-        )
-
-        val result = manager.export()
-
-        assertEquals(
-            OperationResult.State.SUCCESS,
-            result.state,
-        )
-
-        val exportedFile = temporaryFolder.root
-            .listFiles()
-            ?.singleOrNull { it.extension == "csv" }
-
-        assertTrue(exportedFile != null)
-
-        val content = exportedFile!!.readText()
-
-        assertTrue(content.contains(CSV_HEADER))
-        assertTrue(content.contains("Milk"))
-
-        verify {
-            fileExporter.export(
-                source = exportedFile,
-                fileName = exportedFile.name,
-            )
-        }
-    }
-
-    @Test
-    fun `export creates csv with all entries`() = runTest {
-        val items = listOf(
-            ExpirationDate(
-                id = 1,
-                foodName = "Milk",
-                expirationDate = 1700000000000L,
-                openingDate = null,
-                timeSpanDays = null,
-                quantity = 1,
-            ),
-            ExpirationDate(
-                id = 2,
-                foodName = "Cheese",
-                expirationDate = 1701000000000L,
-                openingDate = null,
-                timeSpanDays = null,
-                quantity = 2,
-            ),
-        )
-
-        coEvery {
-            repository.getAll()
-        } returns flowOf(items)
-
-        val result = manager.export()
-
-        assertEquals(
-            OperationResult.State.SUCCESS,
-            result.state,
-        )
-
-        val file = findExportedCsv()
-        val content = file.readText()
-
-        assertTrue(content.contains("Milk"))
-        assertTrue(content.contains("Cheese"))
-
-        verify {
-            fileExporter.export(
-                source = file,
-                fileName = file.name,
-            )
-        }
-    }
-
-    // endregion
-
-    private fun mockCsv(content: String) {
-        every {
-            contentResolver.openInputStream(uri)
-        } answers {
-            ByteArrayInputStream(
-                content.toByteArray()
-            )
-        }
-    }
-
-    private fun findExportedCsv(): File {
-        return requireNotNull(
-            temporaryFolder.root
-                .listFiles()
-                ?.singleOrNull {
-                    it.extension == "csv"
-                }
-        )
-    }
-
-
-    @Test
-    fun `import correctly parses ISO dates`() = runTest {
-        val csv = """
-        $CSV_HEADER
-        Milk,2026-11-25,2026-11-19,5,2
-    """.trimIndent()
-
-        mockCsv(csv)
-
-        coEvery {
-            repository.addExpirationDate(any())
-        } returns Unit
 
         val result = manager.import(contentResolver, uri)
 
-        assertEquals(OperationResult.State.SUCCESS, result.state)
+        assertEquals(
+            OperationResult.State.SUCCESS,
+            result.state,
+        )
+
+        coVerify(exactly = 1) {
+            repository.addExpirationDate(
+                match {
+                    it.foodName == "Milk" &&
+                            it.quantity == 2 &&
+                            it.contentPerPackage == null &&
+                            it.measurementUnit == null
+                }
+            )
+        }
+    }
+
+    // endregion
+
+    // region Import - Optional values
+
+    @Test
+    fun `import correctly parses optional values`() = runTest {
+        mockCsv(
+            """
+            $CSV_HEADER
+            Yogurt,1700000000000,1699000000000,5,3,125,GRAM
+            """.trimIndent()
+        )
+
+        val result = manager.import(contentResolver, uri)
+
+        assertEquals(
+            OperationResult.State.SUCCESS,
+            result.state,
+        )
+
+        coVerify(exactly = 1) {
+            repository.addExpirationDate(
+                match {
+                    it.id == 0 &&
+                            it.foodName == "Yogurt" &&
+                            it.expirationDate == 1700000000000L &&
+                            it.openingDate == 1699000000000L &&
+                            it.timeSpanDays == 5 &&
+                            it.quantity == 3 &&
+                            it.contentPerPackage == 125 &&
+                            it.measurementUnit == MeasurementUnit.GRAM
+                }
+            )
+        }
+    }
+
+    @Test
+    fun `import supports blank optional values`() = runTest {
+        mockCsv(
+            """
+            $CSV_HEADER
+            Pasta,2026-11-25,,,,,
+            """.trimIndent()
+        )
+
+        val result = manager.import(contentResolver, uri)
+
+        assertEquals(
+            OperationResult.State.SUCCESS,
+            result.state,
+        )
+
+        coVerify(exactly = 1) {
+            repository.addExpirationDate(
+                match {
+                    it.foodName == "Pasta" &&
+                            it.openingDate == null &&
+                            it.timeSpanDays == null &&
+                            it.quantity == 1 &&
+                            it.contentPerPackage == null &&
+                            it.measurementUnit == null
+                }
+            )
+        }
+    }
+
+    @Test
+    fun `import supports case insensitive null values`() = runTest {
+        mockCsv(
+            """
+            $CSV_HEADER
+            Pasta,2026-11-25,NULL,Null,nUlL,NULL,Null
+            """.trimIndent()
+        )
+
+        val result = manager.import(contentResolver, uri)
+
+        assertEquals(
+            OperationResult.State.SUCCESS,
+            result.state,
+        )
+
+        coVerify(exactly = 1) {
+            repository.addExpirationDate(
+                match {
+                    it.foodName == "Pasta" &&
+                            it.openingDate == null &&
+                            it.timeSpanDays == null &&
+                            it.quantity == 1 &&
+                            it.contentPerPackage == null &&
+                            it.measurementUnit == null
+                }
+            )
+        }
+    }
+
+    @Test
+    fun `import supports null content and measurement unit`() = runTest {
+        mockCsv(
+            """
+            $CSV_HEADER
+            Eggs,2026-11-25,null,null,6,null,null
+            """.trimIndent()
+        )
+
+        val result = manager.import(contentResolver, uri)
+
+        assertEquals(
+            OperationResult.State.SUCCESS,
+            result.state,
+        )
+
+        coVerify(exactly = 1) {
+            repository.addExpirationDate(
+                match {
+                    it.foodName == "Eggs" &&
+                            it.quantity == 6 &&
+                            it.contentPerPackage == null &&
+                            it.measurementUnit == null
+                }
+            )
+        }
+    }
+
+    @Test
+    fun `import returns failure for malformed quantity`() = runTest {
+        mockCsv(
+            """
+            $CSV_HEADER
+            Milk,2026-11-25,null,null,abc,500,MILLILITER
+            """.trimIndent()
+        )
+
+        val result = manager.import(contentResolver, uri)
+
+        assertEquals(
+            OperationResult.State.FAILURE,
+            result.state,
+        )
+
+        verifyNoInsertions()
+    }
+
+    // endregion
+
+    // region Import - Measurement units
+
+    @Test
+    fun `import supports all measurement units`() = runTest {
+        val csv = buildString {
+            appendLine(CSV_HEADER)
+
+            MeasurementUnit.entries.forEach { unit ->
+                appendLine(
+                    "Food_${unit.name},2026-11-25,null,null,2,100,${unit.name}"
+                )
+            }
+        }
+
+        mockCsv(csv)
+
+        val result = manager.import(contentResolver, uri)
+
+        assertEquals(
+            OperationResult.State.SUCCESS,
+            result.state,
+        )
+
+        coVerify(exactly = MeasurementUnit.entries.size) {
+            repository.addExpirationDate(any())
+        }
+
+        MeasurementUnit.entries.forEach { unit ->
+            coVerify(exactly = 1) {
+                repository.addExpirationDate(
+                    match {
+                        it.foodName == "Food_${unit.name}" &&
+                                it.expirationDate == dateToEpoch("2026-11-25") &&
+                                it.quantity == 2 &&
+                                it.contentPerPackage == 100 &&
+                                it.measurementUnit == unit
+                    }
+                )
+            }
+        }
+    }
+
+    @Test
+    fun `import returns failure for invalid measurement unit`() = runTest {
+        mockCsv(
+            """
+            $CSV_HEADER
+            Milk,2026-11-25,null,null,2,500,INVALID_UNIT
+            """.trimIndent()
+        )
+
+        val result = manager.import(contentResolver, uri)
+
+        assertEquals(
+            OperationResult.State.FAILURE,
+            result.state,
+        )
+
+        verifyNoInsertions()
+    }
+
+    @Test
+    fun `import returns failure for malformed content per package`() = runTest {
+        mockCsv(
+            """
+            $CSV_HEADER
+            Milk,2026-11-25,null,null,2,abc,MILLILITER
+            """.trimIndent()
+        )
+
+        val result = manager.import(contentResolver, uri)
+
+        assertEquals(
+            OperationResult.State.FAILURE,
+            result.state,
+        )
+
+        verifyNoInsertions()
+    }
+
+    // endregion
+
+    // region Import - Date formats
+
+    @Test
+    fun `import correctly parses ISO dates`() = runTest {
+        mockCsv(
+            """
+            $CSV_HEADER
+            Milk,2026-11-25,2026-11-19,5,2,500,MILLILITER
+            """.trimIndent()
+        )
+
+        val result = manager.import(contentResolver, uri)
+
+        assertEquals(
+            OperationResult.State.SUCCESS,
+            result.state,
+        )
 
         coVerify(exactly = 1) {
             repository.addExpirationDate(
@@ -448,7 +607,9 @@ class ExpirationDateImportExportManagerTest {
                             it.expirationDate == dateToEpoch("2026-11-25") &&
                             it.openingDate == dateToEpoch("2026-11-19") &&
                             it.timeSpanDays == 5 &&
-                            it.quantity == 2
+                            it.quantity == 2 &&
+                            it.contentPerPackage == 500 &&
+                            it.measurementUnit == MeasurementUnit.MILLILITER
                 }
             )
         }
@@ -456,20 +617,19 @@ class ExpirationDateImportExportManagerTest {
 
     @Test
     fun `import correctly parses ISO dates with null optional values`() = runTest {
-        val csv = """
-        $CSV_HEADER
-        Pasta,2027-06-15,null,null,4
-    """.trimIndent()
-
-        mockCsv(csv)
-
-        coEvery {
-            repository.addExpirationDate(any())
-        } returns Unit
+        mockCsv(
+            """
+            $CSV_HEADER
+            Pasta,2027-06-15,null,null,4,null,null
+            """.trimIndent()
+        )
 
         val result = manager.import(contentResolver, uri)
 
-        assertEquals(OperationResult.State.SUCCESS, result.state)
+        assertEquals(
+            OperationResult.State.SUCCESS,
+            result.state,
+        )
 
         coVerify(exactly = 1) {
             repository.addExpirationDate(
@@ -478,7 +638,9 @@ class ExpirationDateImportExportManagerTest {
                             it.expirationDate == dateToEpoch("2027-06-15") &&
                             it.openingDate == null &&
                             it.timeSpanDays == null &&
-                            it.quantity == 4
+                            it.quantity == 4 &&
+                            it.contentPerPackage == null &&
+                            it.measurementUnit == null
                 }
             )
         }
@@ -489,22 +651,21 @@ class ExpirationDateImportExportManagerTest {
         val epochExpiration = dateToEpoch("2026-12-10")
         val epochOpening = dateToEpoch("2026-11-10")
 
-        val csv = """
-        $CSV_HEADER
-        Milk,$epochExpiration,null,null,1
-        Yogurt,2026-12-15,2026-11-15,5,2
-        Cheese,2026-12-20,$epochOpening,null,3
-    """.trimIndent()
-
-        mockCsv(csv)
-
-        coEvery {
-            repository.addExpirationDate(any())
-        } returns Unit
+        mockCsv(
+            """
+            $LEGACY_CSV_HEADER_V2
+            Milk,$epochExpiration,null,null,1
+            Yogurt,2026-12-15,2026-11-15,5,2
+            Cheese,2026-12-20,$epochOpening,null,3
+            """.trimIndent()
+        )
 
         val result = manager.import(contentResolver, uri)
 
-        assertEquals(OperationResult.State.SUCCESS, result.state)
+        assertEquals(
+            OperationResult.State.SUCCESS,
+            result.state,
+        )
 
         coVerify(exactly = 3) {
             repository.addExpirationDate(any())
@@ -542,40 +703,191 @@ class ExpirationDateImportExportManagerTest {
 
     @Test
     fun `import returns failure for invalid ISO date`() = runTest {
-        val csv = """
-        $CSV_HEADER
-        Milk,2026-13-45,null,null,1
-    """.trimIndent()
-
-        mockCsv(csv)
+        mockCsv(
+            """
+            $CSV_HEADER
+            Milk,2026-13-45,null,null,1,null,null
+            """.trimIndent()
+        )
 
         val result = manager.import(contentResolver, uri)
 
-        assertEquals(OperationResult.State.FAILURE, result.state)
+        assertEquals(
+            OperationResult.State.FAILURE,
+            result.state,
+        )
 
-        coVerify(exactly = 0) {
-            repository.addExpirationDate(any())
-        }
+        verifyNoInsertions()
     }
 
     @Test
     fun `import returns failure for unsupported date format`() = runTest {
-        val csv = """
-        $CSV_HEADER
-        Milk,25/11/2026,null,null,1
-    """.trimIndent()
-
-        mockCsv(csv)
+        mockCsv(
+            """
+            $CSV_HEADER
+            Milk,25/11/2026,null,null,1,null,null
+            """.trimIndent()
+        )
 
         val result = manager.import(contentResolver, uri)
 
-        assertEquals(OperationResult.State.FAILURE, result.state)
+        assertEquals(
+            OperationResult.State.FAILURE,
+            result.state,
+        )
 
-        coVerify(exactly = 0) {
-            repository.addExpirationDate(any())
+        verifyNoInsertions()
+    }
+
+    // endregion
+
+    // region Export
+
+    @Test
+    fun `export creates csv containing header and data`() = runTest {
+        val expirationDate = ExpirationDate(
+            id = 1,
+            foodName = "Milk",
+            expirationDate = dateToEpoch("2026-11-25"),
+            openingDate = null,
+            timeSpanDays = null,
+            quantity = 2,
+            contentPerPackage = 500,
+            measurementUnit = MeasurementUnit.MILLILITER,
+        )
+
+        coEvery {
+            repository.getAll()
+        } returns flowOf(listOf(expirationDate))
+
+        val result = manager.export()
+
+        assertEquals(
+            OperationResult.State.SUCCESS,
+            result.state,
+        )
+
+        val exportedFile = findExportedCsv()
+        val lines = exportedFile.readLines()
+
+        assertEquals(CSV_HEADER, lines[0])
+
+        assertEquals(
+            "\"Milk\",2026-11-25,null,null,2,500,MILLILITER",
+            lines[1],
+        )
+
+        verify(exactly = 1) {
+            fileExporter.export(
+                source = exportedFile,
+                fileName = exportedFile.name,
+            )
         }
     }
 
+    @Test
+    fun `export creates csv with all entries`() = runTest {
+        val items = listOf(
+            ExpirationDate(
+                id = 1,
+                foodName = "Milk",
+                expirationDate = dateToEpoch("2026-11-25"),
+                openingDate = null,
+                timeSpanDays = null,
+                quantity = 1,
+                contentPerPackage = 1000,
+                measurementUnit = MeasurementUnit.MILLILITER,
+            ),
+            ExpirationDate(
+                id = 2,
+                foodName = "Cheese",
+                expirationDate = dateToEpoch("2026-11-26"),
+                openingDate = null,
+                timeSpanDays = null,
+                quantity = 2,
+                contentPerPackage = 250,
+                measurementUnit = MeasurementUnit.GRAM,
+            ),
+            ExpirationDate(
+                id = 3,
+                foodName = "Eggs",
+                expirationDate = dateToEpoch("2026-11-27"),
+                openingDate = null,
+                timeSpanDays = null,
+                quantity = 6,
+                contentPerPackage = null,
+                measurementUnit = null,
+            ),
+        )
+
+        coEvery {
+            repository.getAll()
+        } returns flowOf(items)
+
+        val result = manager.export()
+
+        assertEquals(
+            OperationResult.State.SUCCESS,
+            result.state,
+        )
+
+        val file = findExportedCsv()
+        val lines = file.readLines()
+
+        assertEquals(items.size + 1, lines.size)
+        assertEquals(CSV_HEADER, lines[0])
+
+        assertTrue(
+            lines.contains(
+                "\"Milk\",2026-11-25,null,null,1,1000,MILLILITER"
+            )
+        )
+
+        assertTrue(
+            lines.contains(
+                "\"Cheese\",2026-11-26,null,null,2,250,GRAM"
+            )
+        )
+
+        assertTrue(
+            lines.contains(
+                "\"Eggs\",2026-11-27,null,null,6,null,null"
+            )
+        )
+
+        verify(exactly = 1) {
+            fileExporter.export(
+                source = file,
+                fileName = file.name,
+            )
+        }
+    }
+
+    @Test
+    fun `export creates csv with only header when repository is empty`() = runTest {
+        coEvery {
+            repository.getAll()
+        } returns flowOf(emptyList())
+
+        val result = manager.export()
+
+        assertEquals(
+            OperationResult.State.SUCCESS,
+            result.state,
+        )
+
+        val file = findExportedCsv()
+        val lines = file.readLines()
+
+        assertEquals(listOf(CSV_HEADER), lines)
+
+        verify(exactly = 1) {
+            fileExporter.export(
+                source = file,
+                fileName = file.name,
+            )
+        }
+    }
 
     @Test
     fun `export writes ISO dates instead of epoch`() = runTest {
@@ -585,7 +897,9 @@ class ExpirationDateImportExportManagerTest {
             expirationDate = dateToEpoch("2026-11-25"),
             openingDate = dateToEpoch("2026-11-19"),
             timeSpanDays = 5,
-            quantity = 2
+            quantity = 2,
+            contentPerPackage = 500,
+            measurementUnit = MeasurementUnit.MILLILITER,
         )
 
         coEvery {
@@ -594,14 +908,18 @@ class ExpirationDateImportExportManagerTest {
 
         val result = manager.export()
 
-        assertEquals(OperationResult.State.SUCCESS, result.state)
+        assertEquals(
+            OperationResult.State.SUCCESS,
+            result.state,
+        )
 
         val lines = findExportedCsv().readLines()
 
         assertEquals(CSV_HEADER, lines[0])
+
         assertEquals(
-            "\"Milk\",2026-11-25,2026-11-19,5,2",
-            lines[1]
+            "\"Milk\",2026-11-25,2026-11-19,5,2,500,MILLILITER",
+            lines[1],
         )
     }
 
@@ -613,7 +931,9 @@ class ExpirationDateImportExportManagerTest {
             expirationDate = dateToEpoch("2027-06-15"),
             openingDate = null,
             timeSpanDays = null,
-            quantity = 4
+            quantity = 4,
+            contentPerPackage = null,
+            measurementUnit = null,
         )
 
         coEvery {
@@ -622,13 +942,16 @@ class ExpirationDateImportExportManagerTest {
 
         val result = manager.export()
 
-        assertEquals(OperationResult.State.SUCCESS, result.state)
+        assertEquals(
+            OperationResult.State.SUCCESS,
+            result.state,
+        )
 
         val lines = findExportedCsv().readLines()
 
         assertEquals(
-            "\"Pasta\",2027-06-15,null,null,4",
-            lines[1]
+            "\"Pasta\",2027-06-15,null,null,4,null,null",
+            lines[1],
         )
     }
 
@@ -640,7 +963,9 @@ class ExpirationDateImportExportManagerTest {
             expirationDate = dateToEpoch("2026-11-25"),
             openingDate = null,
             timeSpanDays = null,
-            quantity = 1
+            quantity = 1,
+            contentPerPackage = null,
+            measurementUnit = null,
         )
 
         coEvery {
@@ -649,16 +974,64 @@ class ExpirationDateImportExportManagerTest {
 
         val result = manager.export()
 
-        assertEquals(OperationResult.State.SUCCESS, result.state)
+        assertEquals(
+            OperationResult.State.SUCCESS,
+            result.state,
+        )
 
         val lines = findExportedCsv().readLines()
 
         assertEquals(
-            "\"Tomatoes, \"\"Cherry\"\"\",2026-11-25,null,null,1",
-            lines[1]
+            "\"Tomatoes, \"\"Cherry\"\"\",2026-11-25,null,null,1,null,null",
+            lines[1],
         )
     }
 
+    @Test
+    fun `export supports all measurement units`() = runTest {
+        val items = MeasurementUnit.entries.mapIndexed { index, unit ->
+            ExpirationDate(
+                id = index + 1,
+                foodName = "Food_${unit.name}",
+                expirationDate = dateToEpoch("2026-11-25"),
+                openingDate = null,
+                timeSpanDays = null,
+                quantity = 2,
+                contentPerPackage = 100,
+                measurementUnit = unit,
+            )
+        }
+
+        coEvery {
+            repository.getAll()
+        } returns flowOf(items)
+
+        val result = manager.export()
+
+        assertEquals(
+            OperationResult.State.SUCCESS,
+            result.state,
+        )
+
+        val lines = findExportedCsv().readLines()
+
+        assertEquals(
+            MeasurementUnit.entries.size + 1,
+            lines.size,
+        )
+
+        MeasurementUnit.entries.forEach { unit ->
+            assertTrue(
+                lines.contains(
+                    "\"Food_${unit.name}\",2026-11-25,null,null,2,100,${unit.name}"
+                )
+            )
+        }
+    }
+
+    // endregion
+
+    // region Round-trip
 
     @Test
     fun `exported CSV can be imported preserving all values`() = runTest {
@@ -668,22 +1041,20 @@ class ExpirationDateImportExportManagerTest {
             expirationDate = dateToEpoch("2026-11-25"),
             openingDate = dateToEpoch("2026-11-19"),
             timeSpanDays = 5,
-            quantity = 3
+            quantity = 3,
+            contentPerPackage = 250,
+            measurementUnit = MeasurementUnit.GRAM,
         )
 
         coEvery {
             repository.getAll()
         } returns flowOf(listOf(original))
 
-        coEvery {
-            repository.addExpirationDate(any())
-        } returns Unit
-
         val exportResult = manager.export()
 
         assertEquals(
             OperationResult.State.SUCCESS,
-            exportResult.state
+            exportResult.state,
         )
 
         mockCsv(findExportedCsv().readText())
@@ -692,19 +1063,131 @@ class ExpirationDateImportExportManagerTest {
 
         assertEquals(
             OperationResult.State.SUCCESS,
-            importResult.state
+            importResult.state,
         )
 
         coVerify(exactly = 1) {
             repository.addExpirationDate(
-                match {
-                    it.foodName == original.foodName &&
-                            it.expirationDate == original.expirationDate &&
-                            it.openingDate == original.openingDate &&
-                            it.timeSpanDays == original.timeSpanDays &&
-                            it.quantity == original.quantity
-                }
+                original.copy(id = 0)
             )
+        }
+    }
+
+    @Test
+    fun `exported CSV preserves missing optional values`() = runTest {
+        val original = ExpirationDate(
+            id = 1,
+            foodName = "Eggs",
+            expirationDate = dateToEpoch("2026-11-25"),
+            openingDate = null,
+            timeSpanDays = null,
+            quantity = 6,
+            contentPerPackage = null,
+            measurementUnit = null,
+        )
+
+        coEvery {
+            repository.getAll()
+        } returns flowOf(listOf(original))
+
+        val exportResult = manager.export()
+
+        assertEquals(
+            OperationResult.State.SUCCESS,
+            exportResult.state,
+        )
+
+        mockCsv(findExportedCsv().readText())
+
+        val importResult = manager.import(contentResolver, uri)
+
+        assertEquals(
+            OperationResult.State.SUCCESS,
+            importResult.state,
+        )
+
+        coVerify(exactly = 1) {
+            repository.addExpirationDate(
+                original.copy(id = 0)
+            )
+        }
+    }
+
+    @Test
+    fun `exported CSV preserves all measurement units`() = runTest {
+        val originals = MeasurementUnit.entries.mapIndexed { index, unit ->
+            ExpirationDate(
+                id = index + 1,
+                foodName = "Food_${unit.name}",
+                expirationDate = dateToEpoch("2026-11-25"),
+                openingDate = null,
+                timeSpanDays = null,
+                quantity = 3,
+                contentPerPackage = 100,
+                measurementUnit = unit,
+            )
+        }
+
+        coEvery {
+            repository.getAll()
+        } returns flowOf(originals)
+
+        val exportResult = manager.export()
+
+        assertEquals(
+            OperationResult.State.SUCCESS,
+            exportResult.state,
+        )
+
+        mockCsv(findExportedCsv().readText())
+
+        val importResult = manager.import(contentResolver, uri)
+
+        assertEquals(
+            OperationResult.State.SUCCESS,
+            importResult.state,
+        )
+
+        coVerify(exactly = originals.size) {
+            repository.addExpirationDate(any())
+        }
+
+        originals.forEach { original ->
+            coVerify(exactly = 1) {
+                repository.addExpirationDate(
+                    original.copy(id = 0)
+                )
+            }
+        }
+    }
+
+    // endregion
+
+    // region Helpers
+
+    private fun mockCsv(content: String) {
+        every {
+            contentResolver.openInputStream(uri)
+        } answers {
+            ByteArrayInputStream(
+                content.toByteArray()
+            )
+        }
+    }
+
+    private fun findExportedCsv(): File {
+        return requireNotNull(
+            temporaryFolder.root
+                .listFiles()
+                ?.singleOrNull {
+                    it.extension == "csv"
+                }
+        )
+    }
+
+    private fun verifyNoInsertions() {
+        coVerify(exactly = 0) {
+            repository.addExpirationDate(any())
         }
     }
 
@@ -713,4 +1196,6 @@ class ExpirationDateImportExportManagerTest {
             .atStartOfDay(ZoneId.systemDefault())
             .toInstant()
             .toEpochMilli()
+
+    // endregion
 }

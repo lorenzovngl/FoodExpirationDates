@@ -3,22 +3,22 @@ package com.lorenzovainigli.foodexpirationdates.feature.foodlist.data.importexpo
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
+import com.lorenzovainigli.foodexpirationdates.model.entity.CONTENT_PER_PACKAGE_INDEX
 import com.lorenzovainigli.foodexpirationdates.model.entity.CSV_HEADER
-import com.lorenzovainigli.foodexpirationdates.model.entity.EXPIRATION_DATE
 import com.lorenzovainigli.foodexpirationdates.model.entity.EXPIRATION_DATE_INDEX
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
-import com.lorenzovainigli.foodexpirationdates.model.entity.FOOD_NAME
 import com.lorenzovainigli.foodexpirationdates.model.entity.FOOD_NAME_INDEX
-import com.lorenzovainigli.foodexpirationdates.model.entity.OPENING_DATE
+import com.lorenzovainigli.foodexpirationdates.model.entity.MEASUREMENT_UNIT_INDEX
+import com.lorenzovainigli.foodexpirationdates.model.entity.MeasurementUnit
 import com.lorenzovainigli.foodexpirationdates.model.entity.OPENING_DATE_INDEX
 import com.lorenzovainigli.foodexpirationdates.model.entity.QUANTITY_INDEX
-import com.lorenzovainigli.foodexpirationdates.model.entity.TIME_SPAN_DAYS
 import com.lorenzovainigli.foodexpirationdates.model.entity.TIME_SPAN_DAYS_INDEX
 import com.lorenzovainigli.foodexpirationdates.model.entity.toCSV
 import com.lorenzovainigli.foodexpirationdates.model.repository.ExpirationDateRepository
 import com.lorenzovainigli.foodexpirationdates.util.OperationResult
 import com.opencsv.CSVReader
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
@@ -92,14 +92,18 @@ class ExpirationDateImportExportManager @Inject constructor(
         }
 
         val csvData = try {
-            contentResolver.openInputStream(uri)?.use { inputStream ->
-                CSVReader(InputStreamReader(inputStream)).use { reader ->
-                    reader.readAll()
+            withContext(Dispatchers.IO) {
+                contentResolver.openInputStream(uri)?.use { inputStream ->
+                    CSVReader(InputStreamReader(inputStream)).use { reader ->
+                        reader.readAll()
+                    }
                 }
             } ?: return OperationResult(
                 OperationResult.State.FAILURE,
                 "Error reading file",
             )
+        } catch (e: CancellationException) {
+            throw e
         } catch (e: Exception) {
             return OperationResult(
                 OperationResult.State.FAILURE,
@@ -135,34 +139,37 @@ class ExpirationDateImportExportManager @Inject constructor(
     }
 
     private fun parseRow(row: Array<String>): ExpirationDate {
+        fun optionalValue(index: Int): String? =
+            row.getOrNull(index)
+                ?.takeUnless {
+                    it.isBlank() || it.equals("null", ignoreCase = true)
+                }
+
         return ExpirationDate(
             id = 0,
             foodName = row[FOOD_NAME_INDEX],
             expirationDate = parseDate(row[EXPIRATION_DATE_INDEX]),
-            openingDate = row[OPENING_DATE_INDEX]
-                .takeUnless { it.isBlank() || it.equals("null", ignoreCase = true) }
+            openingDate = optionalValue(OPENING_DATE_INDEX)
                 ?.let(::parseDate),
-            timeSpanDays = row[TIME_SPAN_DAYS_INDEX]
-                .takeUnless { it == "null" }
+            timeSpanDays = optionalValue(TIME_SPAN_DAYS_INDEX)
                 ?.toInt(),
-            quantity = row[QUANTITY_INDEX].toInt(),
+            quantity = optionalValue(QUANTITY_INDEX)
+                ?.toInt() ?: 1,
+            contentPerPackage = optionalValue(CONTENT_PER_PACKAGE_INDEX)
+                ?.toInt(),
+            measurementUnit = optionalValue(MEASUREMENT_UNIT_INDEX)
+                ?.let(MeasurementUnit::valueOf),
         )
     }
 
     private fun validateCsv(
         csvData: List<Array<String>>
     ): Boolean {
-        if (csvData.isEmpty()) {
-            return false
-        }
+        val header = csvData.firstOrNull() ?: return false
+        val expectedHeader = CSV_HEADER.split(",")
 
-        val header = csvData.first()
-
-        return header.size > TIME_SPAN_DAYS_INDEX &&
-                header[FOOD_NAME_INDEX] == FOOD_NAME &&
-                header[EXPIRATION_DATE_INDEX] == EXPIRATION_DATE &&
-                header[OPENING_DATE_INDEX] == OPENING_DATE &&
-                header[TIME_SPAN_DAYS_INDEX] == TIME_SPAN_DAYS
+        return header.size in 4..expectedHeader.size &&
+                header.toList() == expectedHeader.take(header.size)
     }
 
     private fun parseDate(value: String): Long {

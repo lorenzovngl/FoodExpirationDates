@@ -162,4 +162,19 @@
     <string name="onboarding_ready_title">You\'re all set!</string>
     <string name="onboarding_ready_description">You\'re ready to start keeping track of your food and its expiration dates.\n\nStart by adding a few items from your fridge or pantry. As your list grows, %1$s will help you see what to use first and stay on top of your food.</string>
     <string name="onboarding_ready_hint">You can always adjust your preferences later in Settings.</string>
+
+    <string name="food_quantity_title">Food quantity</string>
+    <string name="food_quantity_package_count">Number of packages</string>
+    <string name="food_quantity_package_count_description">Packages or pieces</string>
+    <string name="food_quantity_content_per_package">Content per package</string>
+    <string name="food_quantity_precision">Precision</string>
+    <string name="food_quantity_unit">Unit</string>
+    <string name="food_quantity_increase">Increase</string>
+    <string name="food_quantity_decrease">Decrease</string>
+    <string name="food_quantity_total">TOTAL QUANTITY</string>
+
+    <plurals name="food_quantity_packages">
+        <item quantity="one">%d package</item>
+        <item quantity="other">%d packages</item>
+    </plurals>
 </resources>

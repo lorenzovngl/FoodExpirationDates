@@ -127,4 +127,19 @@
     <string name="notifications_disabled_message">Bildirimleri kalıcı olarak devre dışı bıraktınız. Son kullanma tarihi yaklaşan gıdalarla ilgili uyarılar almak için, bunları telefonun Ayarlar bölümünden elle etkinleştirmelisiniz.</string>
     <string name="open_settings">Ayarları Aç</string>
     <string name="search">Ara…</string>
+
+    <string name="food_quantity_title">Gıda miktarı</string>
+    <string name="food_quantity_package_count">Paket sayısı</string>
+    <string name="food_quantity_package_count_description">Paket veya adet</string>
+    <string name="food_quantity_content_per_package">Paket başına miktar</string>
+    <string name="food_quantity_precision">Hassasiyet</string>
+    <string name="food_quantity_unit">Birim</string>
+    <string name="food_quantity_increase">Artır</string>
+    <string name="food_quantity_decrease">Azalt</string>
+    <string name="food_quantity_total">TOPLAM MİKTAR</string>
+
+    <plurals name="food_quantity_packages">
+        <item quantity="one">%d paket</item>
+        <item quantity="other">%d paket</item>
+    </plurals>
 </resources>

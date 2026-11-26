@@ -157,4 +157,19 @@
     <string name="onboarding_ready_title">Alles ist bereit!</string>
     <string name="onboarding_ready_description">Jetzt können Sie damit beginnen, Ihre Lebensmittel und deren Haltbarkeitsdaten im Blick zu behalten.\n\nFügen Sie zunächst einige Lebensmittel aus Ihrem Kühlschrank oder Vorratsschrank hinzu. Wenn Ihre Liste wächst, hilft Ihnen %1$s dabei, zu erkennen, was Sie zuerst verbrauchen sollten, und die Haltbarkeitsdaten im Blick zu behalten.</string>
     <string name="onboarding_ready_hint">Sie können Ihre Einstellungen jederzeit später ändern.</string>
+
+    <string name="food_quantity_title">Lebensmittelmenge</string>
+    <string name="food_quantity_package_count">Anzahl der Packungen</string>
+    <string name="food_quantity_package_count_description">Packungen oder Stück</string>
+    <string name="food_quantity_content_per_package">Inhalt pro Packung</string>
+    <string name="food_quantity_precision">Genauigkeit</string>
+    <string name="food_quantity_unit">Einheit</string>
+    <string name="food_quantity_increase">Erhöhen</string>
+    <string name="food_quantity_decrease">Verringern</string>
+    <string name="food_quantity_total">GESAMTMENGE</string>
+
+    <plurals name="food_quantity_packages">
+        <item quantity="one">%d Packung</item>
+        <item quantity="other">%d Packungen</item>
+    </plurals>
 </resources>

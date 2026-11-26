@@ -1,0 +1,70 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 4,
+    "identityHash": "7d3d4a076dd4ccac63b37e1c28660103",
+    "entities": [
+      {
+        "tableName": "expiration_dates",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `food_name` TEXT NOT NULL, `expiration_date` INTEGER NOT NULL, `opening_date` INTEGER, `time_span_days` INTEGER, `quantity` INTEGER NOT NULL DEFAULT 1, `content_per_package` INTEGER, `measurement_unit` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "foodName",
+            "columnName": "food_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "expirationDate",
+            "columnName": "expiration_date",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "openingDate",
+            "columnName": "opening_date",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "timeSpanDays",
+            "columnName": "time_span_days",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "quantity",
+            "columnName": "quantity",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "1"
+          },
+          {
+            "fieldPath": "contentPerPackage",
+            "columnName": "content_per_package",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "measurementUnit",
+            "columnName": "measurement_unit",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7d3d4a076dd4ccac63b37e1c28660103')"
+    ]
+  }
+}

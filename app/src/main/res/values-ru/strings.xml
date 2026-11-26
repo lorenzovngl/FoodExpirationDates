@@ -161,4 +161,21 @@
     <string name="clear_all_items">Удалить все элементы</string>
     <string name="clear_all_items_confirmation">Вы уверены, что хотите удалить все элементы? Это действие нельзя отменить.</string>
     <string name="delete_all">Удалить всё</string>
+
+    <string name="food_quantity_title">Количество продукта</string>
+    <string name="food_quantity_package_count">Количество упаковок</string>
+    <string name="food_quantity_package_count_description">Упаковки или штуки</string>
+    <string name="food_quantity_content_per_package">Содержимое упаковки</string>
+    <string name="food_quantity_precision">Точность</string>
+    <string name="food_quantity_unit">Единица</string>
+    <string name="food_quantity_increase">Увеличить</string>
+    <string name="food_quantity_decrease">Уменьшить</string>
+    <string name="food_quantity_total">ОБЩЕЕ КОЛИЧЕСТВО</string>
+
+    <plurals name="food_quantity_packages">
+        <item quantity="one">%d упаковка</item>
+        <item quantity="few">%d упаковки</item>
+        <item quantity="many">%d упаковок</item>
+        <item quantity="other">%d упаковки</item>
+    </plurals>
 </resources>

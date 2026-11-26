@@ -160,4 +160,19 @@
     <string name="onboarding_ready_description">Ya puedes empezar a llevar un control de tus alimentos y sus fechas de caducidad.\n\nEmpieza añadiendo algunos alimentos de tu frigorífico o despensa. A medida que crezca tu lista, %1$s te ayudará a saber qué consumir primero y a mantener las fechas de caducidad bajo control.</string>
     <string name="onboarding_ready_hint">Puedes cambiar tus preferencias en cualquier momento desde Ajustes.</string>
 
+    <string name="food_quantity_title">Cantidad de alimento</string>
+    <string name="food_quantity_package_count">Número de envases</string>
+    <string name="food_quantity_package_count_description">Envases o unidades</string>
+    <string name="food_quantity_content_per_package">Contenido por envase</string>
+    <string name="food_quantity_precision">Precisión</string>
+    <string name="food_quantity_unit">Unidad</string>
+    <string name="food_quantity_increase">Aumentar</string>
+    <string name="food_quantity_decrease">Disminuir</string>
+    <string name="food_quantity_total">CANTIDAD TOTAL</string>
+
+    <plurals name="food_quantity_packages">
+        <item quantity="one">%d envase</item>
+        <item quantity="many">%d envases</item>
+        <item quantity="other">%d envases</item>
+    </plurals>
 </resources>

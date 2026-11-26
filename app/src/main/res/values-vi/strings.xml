@@ -117,4 +117,18 @@
     <string name="add">Thêm</string>
     <string name="remove">Xóa</string>
     <string name="search">Tìm kiếm…</string>
+
+    <string name="food_quantity_title">Số lượng thực phẩm</string>
+    <string name="food_quantity_package_count">Số lượng gói</string>
+    <string name="food_quantity_package_count_description">Gói hoặc đơn vị</string>
+    <string name="food_quantity_content_per_package">Lượng trong mỗi gói</string>
+    <string name="food_quantity_precision">Độ chính xác</string>
+    <string name="food_quantity_unit">Đơn vị</string>
+    <string name="food_quantity_increase">Tăng</string>
+    <string name="food_quantity_decrease">Giảm</string>
+    <string name="food_quantity_total">TỔNG SỐ LƯỢNG</string>
+
+    <plurals name="food_quantity_packages">
+        <item quantity="other">%d gói</item>
+    </plurals>
 </resources>

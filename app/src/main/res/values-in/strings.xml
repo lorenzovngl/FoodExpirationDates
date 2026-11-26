@@ -100,4 +100,18 @@
     <string name="notification_time_desc">Setiap hari Anda akan menerima notifikasi berisi daftar barang Anda:\n- sudah kalauarsa\n- yang kedaluwarsa pada tanggal saat ini\n- yang masih tersisa sehari hingga tanggal kedaluwarsa.</string>
     <string name="contacts">Kontak</string>
     <string name="privacy">Privasi</string>
+
+    <string name="food_quantity_title">Jumlah makanan</string>
+    <string name="food_quantity_package_count">Jumlah kemasan</string>
+    <string name="food_quantity_package_count_description">Kemasan atau satuan</string>
+    <string name="food_quantity_content_per_package">Isi per kemasan</string>
+    <string name="food_quantity_precision">Presisi</string>
+    <string name="food_quantity_unit">Satuan</string>
+    <string name="food_quantity_increase">Tambah</string>
+    <string name="food_quantity_decrease">Kurangi</string>
+    <string name="food_quantity_total">JUMLAH TOTAL</string>
+
+    <plurals name="food_quantity_packages">
+        <item quantity="other">%d kemasan</item>
+    </plurals>
 </resources>

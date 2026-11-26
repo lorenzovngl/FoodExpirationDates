@@ -22,6 +22,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
@@ -31,12 +33,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.rememberDatePickerState
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -53,24 +57,25 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.lorenzovainigli.foodexpirationdates.BuildConfig
 import com.lorenzovainigli.foodexpirationdates.R
+import com.lorenzovainigli.foodexpirationdates.feature.foodeditor.presentation.component.FoodQuantity
+import com.lorenzovainigli.foodexpirationdates.feature.foodeditor.presentation.component.FoodQuantitySelector
+import com.lorenzovainigli.foodexpirationdates.feature.foodeditor.presentation.component.QuantityUnit
 import com.lorenzovainigli.foodexpirationdates.model.entity.ExpirationDate
+import com.lorenzovainigli.foodexpirationdates.model.entity.MeasurementUnit
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
 import com.lorenzovainigli.foodexpirationdates.view.BarcodeScannerActivity
-import com.lorenzovainigli.foodexpirationdates.view.MainActivity
 import com.lorenzovainigli.foodexpirationdates.view.composable.Dropdown
 import com.lorenzovainigli.foodexpirationdates.view.composable.MyDatePickerDialog
-import com.lorenzovainigli.foodexpirationdates.view.composable.QuantitySelector
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -86,6 +91,25 @@ fun FoodEditorScreen(
     onCancel: () -> Unit,
 ) {
     val context = LocalContext.current
+    var showQuantityBottomSheet by rememberSaveable {
+        mutableStateOf(false)
+    }
+
+    val quantityBottomSheetState = rememberModalBottomSheetState(
+        skipPartiallyExpanded = true
+    )
+
+    var foodQuantity by remember(itemToEdit?.id) {
+        mutableStateOf(
+            FoodQuantity(
+                packageCount = itemToEdit?.quantity ?: 1,
+                contentPerPackage = itemToEdit?.contentPerPackage,
+                unit = itemToEdit?.measurementUnit
+                    ?.let { QuantityUnit.valueOf(it.name) }
+                    ?: QuantityUnit.GRAM,
+            )
+        )
+    }
     var foodNameToEdit = ""
     var expDate: Long? = null
     var openingDate: Long? = null
@@ -173,24 +197,51 @@ fun FoodEditorScreen(
             label = stringResource(id = R.string.expiration_date)
         )
         Spacer(modifier = Modifier.height(16.dp))
-        var quantity by rememberSaveable {
-            mutableIntStateOf(itemToEdit?.quantity ?: 1)
-        }
+        val (quantityTotal, quantityDetails) = foodQuantity.toLocalizedSummary()
+
         Row(
-            modifier = Modifier.fillMaxWidth().padding(start = 16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable {
+                    showQuantityBottomSheet = true
+                }
+                .padding(start = 16.dp, end = 8.dp, top = 8.dp, bottom = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
-                text = stringResource(id = R.string.quantity),
-                style = MaterialTheme.typography.bodyLarge
+                text = stringResource(R.string.quantity),
+                style = MaterialTheme.typography.bodyLarge,
             )
-            QuantitySelector(
-                quantity = quantity,
-                onQuantityChange = { newQuantity ->
-                    quantity = newQuantity
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.End,
+                ) {
+                    Text(
+                        text = quantityTotal,
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+
+                    if (quantityDetails != null) {
+                        Text(
+                            text = quantityDetails,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
                 }
-            )
+
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
         }
         Spacer(modifier = Modifier.height(16.dp))
         Column (
@@ -309,7 +360,11 @@ fun FoodEditorScreen(
                                             }
                                         }
                                     } else null,
-                                    quantity = quantity
+                                    quantity = foodQuantity.packageCount,
+                                    contentPerPackage = foodQuantity.contentPerPackage,
+                                    measurementUnit = foodQuantity.contentPerPackage?.let {
+                                        MeasurementUnit.valueOf(foodQuantity.unit.name)
+                                    }
                                 )
                                 onSave(entry)
                             } else {
@@ -340,6 +395,24 @@ fun FoodEditorScreen(
                 else
                     Text(text = stringResource(id = R.string.insert))
             }
+        }
+    }
+    if (showQuantityBottomSheet) {
+        ModalBottomSheet(
+            onDismissRequest = {
+                showQuantityBottomSheet = false
+            },
+            sheetState = quantityBottomSheetState,
+        ) {
+            FoodQuantitySelector(
+                quantity = foodQuantity,
+                onQuantityChange = { foodQuantity = it },
+                modifier = Modifier.verticalScroll(rememberScrollState()).padding(
+                    start = 16.dp,
+                    end = 16.dp,
+                    bottom = 32.dp,
+                )
+            )
         }
     }
 }
@@ -394,6 +467,53 @@ fun TextFieldDatePicker(
         )
     }
 }
+
+@Composable
+fun FoodQuantity.toLocalizedSummary(): Pair<String, String?> {
+    val packagesText = pluralStringResource(
+        R.plurals.food_quantity_packages,
+        packageCount,
+        packageCount
+    )
+
+    return toSummary { packagesText }
+}
+
+fun FoodQuantity.toSummary(formatPackages: (Int) -> String): Pair<String, String?> {
+    val content = contentPerPackage
+        ?: return formatPackages(packageCount) to null
+
+    val total = content.toLong() * packageCount * unit.factor
+
+    val totalText = when (unit) {
+        QuantityUnit.GRAM,
+        QuantityUnit.KILOGRAM -> {
+            if (total >= 1000L) {
+                "${formatQuantity(total)} kg"
+            } else {
+                "$total g"
+            }
+        }
+
+        QuantityUnit.MILLILITER,
+        QuantityUnit.CENTILITER,
+        QuantityUnit.LITER -> {
+            if (total >= 1000L) {
+                "${formatQuantity(total)} L"
+            } else {
+                "$total ml"
+            }
+        }
+    }
+
+    return totalText to
+            "$packageCount × $content ${unit.symbol}"
+}
+
+private fun formatQuantity(value: Long): String =
+    java.math.BigDecimal.valueOf(value, 3)
+        .stripTrailingZeros()
+        .toPlainString()
 
 @PreviewLightDark
 @Composable

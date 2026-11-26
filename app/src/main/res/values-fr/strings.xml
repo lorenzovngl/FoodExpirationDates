@@ -142,4 +142,19 @@
     <string name="export_data">Exporter les données</string>
     <string name="import_data">Importer les données</string>
 
+    <string name="food_quantity_title">Quantité d\'aliment</string>
+    <string name="food_quantity_package_count">Nombre de paquets</string>
+    <string name="food_quantity_package_count_description">Paquets ou pièces</string>
+    <string name="food_quantity_content_per_package">Contenu par paquet</string>
+    <string name="food_quantity_precision">Précision</string>
+    <string name="food_quantity_unit">Unité</string>
+    <string name="food_quantity_increase">Augmenter</string>
+    <string name="food_quantity_decrease">Diminuer</string>
+    <string name="food_quantity_total">QUANTITÉ TOTALE</string>
+
+    <plurals name="food_quantity_packages">
+        <item quantity="one">%d paquet</item>
+        <item quantity="many">%d paquets</item>
+        <item quantity="other">%d paquets</item>
+    </plurals>
 </resources>
