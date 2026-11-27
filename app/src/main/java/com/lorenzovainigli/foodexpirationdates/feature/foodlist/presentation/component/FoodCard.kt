@@ -59,6 +59,7 @@ import com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.uti
 import com.lorenzovainigli.foodexpirationdates.ui.theme.FoodExpirationDatesTheme
 import com.lorenzovainigli.foodexpirationdates.ui.theme.LocalSpacing
 import com.lorenzovainigli.foodexpirationdates.ui.theme.TonalElevation
+import com.lorenzovainigli.foodexpirationdates.view.preview.LanguagePreviews
 
 const val FOOD_CARD = "FoodCard"
 const val TEST_TAG_DELETE_ITEM = "Delete item"
@@ -266,14 +267,12 @@ fun PackageQuantityRow(
             }
         }
 
-        if (extraCount > 0) {
-            Text(
-                modifier = Modifier.padding(start = 6.dp),
-                text = "+$extraCount",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        }
+        Text(
+            modifier = Modifier.padding(start = if (extraCount > 0) 6.dp else 0.dp),
+            text = if (extraCount > 0) "+$extraCount" else "",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
 
         if (!unitText.isNullOrBlank()) {
             Text(
