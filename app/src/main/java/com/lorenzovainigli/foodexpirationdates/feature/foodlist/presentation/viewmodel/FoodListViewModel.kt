@@ -2,9 +2,6 @@ package com.lorenzovainigli.foodexpirationdates.feature.foodlist.presentation.vi
 
 import android.content.ContentResolver
 import android.net.Uri
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lorenzovainigli.foodexpirationdates.analytics.AnalyticsEvent
@@ -150,9 +147,8 @@ class FoodListViewModel @Inject constructor(
     fun exportData() {
         viewModelScope.launch {
             val result = importExportManager.export()
-
             _exportTaskSuccess.value = result.state == OperationResult.State.SUCCESS
-
+            analyticsTracker.logEvent(AnalyticsEvent.FOOD_LIST_EXPORTED)
             _notifyExportTaskDone.value = true
         }
     }
@@ -170,6 +166,7 @@ class FoodListViewModel @Inject constructor(
                 contentResolver = contentResolver,
                 uri = uri,
             )
+            analyticsTracker.logEvent(AnalyticsEvent.FOOD_LIST_IMPORTED)
         }
     }
 

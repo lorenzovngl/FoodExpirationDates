@@ -3,6 +3,8 @@ package com.lorenzovainigli.foodexpirationdates.analytics
 enum class AnalyticsEvent(val tag: String) {
     FOOD_ADDED("food_added"),
     FOOD_DELETED("food_deleted"),
+    FOOD_LIST_EXPORTED("food_list_exported"),
+    FOOD_LIST_IMPORTED("food_list_imported"),
 
     ONBOARDING_STARTED("onboarding_started"),
     ONBOARDING_PAGE_VIEWED("onboarding_page_viewed"),
